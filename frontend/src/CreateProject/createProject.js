@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './createProjectStyles.scss'
+import Project from './components/project'
+
 class CreateProject extends Component {
     constructor(props) {
         super(props);
@@ -7,9 +9,21 @@ class CreateProject extends Component {
     }
     render() { 
         return ( 
-        <div class='test'>
-         Hola
-        </div> );
+      
+
+    
+<div class='projectWrapper'>
+    <h1>Project List</h1>
+         <Project/>
+         <Project/>
+         <Project/>
+        </div>
+
+
+  
+        
+      
+         );
     }
 }
  
