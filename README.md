@@ -1,5 +1,5 @@
 
-# GEEB
+# GEEB3
 
 A guide to colaborate in the project.
 
@@ -166,4 +166,4 @@ Once you have it you can repeat this steps.
 2. Push your branch
 3. Make a pull request
 
-Node version 12.16.1
+Node version 12.18.4
