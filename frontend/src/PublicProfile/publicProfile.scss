@@ -1,0 +1,8 @@
+@import '../global';
+// does not work with @use for some reason
+
+.editBtn{
+    @extend %gral-blue-button;
+    font-size: 16 px;
+    color: #ffffff;
+}
