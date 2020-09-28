@@ -1,8 +1,76 @@
-@import '../global';
-// does not work with @use for some reason
+@import "../global";
 
-.editBtn{
+
+.edit-btn{
     @extend %gral-blue-button;
     font-size: 16 px;
     color: #ffffff;
+}
+.header-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color:  $dark;
+    margin: 0px;
+    color: #fff;
+}
+.left-side-header{
+    justify-content: center;
+    flex:3;
+}
+.right-side-header{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex:2;
+}
+.logo{
+    margin-left: 10%;
+}
+
+.header-button{
+    font-size: 15px;
+    padding: 0.5em 1em;
+    font-weight: 500;
+    color: #fff;
+    background-color: $dark;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}
+
+.grid-wrapper{
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+}
+.profile-sidebar{
+    display: grid;
+    background: $otherGrey;
+    grid-template-rows: 120px 40px 200px 300px;
+
+}
+.profile-pic{
+    margin:auto; /*centra automáticamente el objeto en su contenedor*/
+    max-height: 80%;
+    border-radius: 50%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.profile-name{
+    margin:auto;
+    font-weight: 700;
+    color: #fff;
+}
+.profile-content{
+    background:$darkGrey;
+}
+.profile-desc{
+    font-size: 15px;
+    margin: 15px;
+    color: #fff;
+}
+.profile-stats{
+    font-size:12px;
+    margin: 10px;
+    color: #fff;
 }
