@@ -1,6 +1,6 @@
 /*  Global styling  */
 /* to use in your own scss, type: @import 'global'*/
-/* then, to access this file's styles: global.$varName*/
+/* then, to access this file's styles: $varName*/
 
 /*COLORS*/
 $orangeAccent: #E66D29;
@@ -8,6 +8,7 @@ $blueAccent: #0091B1;
 $dark: #2C2C34; 
 $darkGrey: #3D3D47;
 $clearGrey: #F0EDED;
+$otherGrey: #62626B;
 
 $buttonBlue: #1D4F60;
 $notificationRed: #ED3434;
@@ -18,7 +19,11 @@ $tagYellow: #E89330;
 $tagRed: #E85130;
 
 /*FONTS*/
-
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+}
 
 /*BUTTON STYLES*/
 /*Styles with % are placeholders, abstract styles that can be extended*/
