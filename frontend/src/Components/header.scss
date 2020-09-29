@@ -1,0 +1,34 @@
+@import '../global';
+
+.header-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color:  $dark;
+    margin: 0px;
+    color: #fff;
+}
+.left-side-header{
+    justify-content: center;
+    flex:3;
+}
+.right-side-header{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    flex:2;
+}
+.logo{
+    margin-left: 10%;
+}
+
+.header-button{
+    font-size: 15px;
+    padding: 0.5em 1em;
+    font-weight: 500;
+    color: #fff;
+    background-color: $dark;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}

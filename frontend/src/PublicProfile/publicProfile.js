@@ -1,14 +1,13 @@
 import React from 'react'
 import './publicProfile.scss'
-import Header from './components/Header.js';
+import TagsBox from './components/TagsBox.js';
 
-export default function publicProfile() {
+function PublicProfile() {
     return (
         <div>
-            <Header/>
 
-            <div class="grid-wrapper">
-                <div class="profile-sidebar">
+            <div className="grid-wrapper">
+                <div className="profile-sidebar">
                     <img className= "profile-pic" src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar"/>
                     <div className="profile-name">Profile name</div>
                     <div className="profile-desc">
@@ -20,9 +19,11 @@ export default function publicProfile() {
                     <div className="profile-stats">Major: ITC | Semester: 5 | Leading: 1 project | Contributing: 2 projects</div>
                 </div>
 
-
-                <div class="profile-content"><h3>Profile content</h3>            
-                    <button class="edit-btn">Edit Info</button>
+                <div className="profile-content">
+                    <TagsBox title={'Mastered'} type={'M'}/>
+                    <TagsBox title={'Learning'} type={'L'}/>
+                    <TagsBox title={'Want to learn'} type={'W'}/>
+                    <button className="edit-btn">Edit Info</button>
                 </div>
 
             </div>
@@ -30,3 +31,5 @@ export default function publicProfile() {
         
     )
 }
+
+export default PublicProfile
