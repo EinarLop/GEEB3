@@ -1,0 +1,144 @@
+$font-stack:    Helvetica, sans-serif;
+$mobileScreen: 900px;
+//Name, photo descrpition
+.ParticipantInfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 5%;
+    color:white;
+    font: 100% $font-stack;
+    
+    .Info{
+        max-width: 50%;
+        margin-left: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        h2{
+            font-weight: bold;
+            font-size: 30px;
+        }
+        p{
+            justify-content: space-between;
+        }
+    }
+    .GitAndLinkedIn{
+        margin-left:5%;
+        max-width: 20%;
+    }
+    img{
+        max-width: 150px;
+        max-height: 150px;
+        border-radius: 50%;
+    }
+    @media only screen and (max-width: $mobileScreen) {
+        flex-direction: column;
+        margin-top:5%;
+        align-self: center;
+        .Info{
+            margin-right:auto;
+            margin-left:auto;
+            max-width: 80%;
+        }
+        .GitAndLinkedIn{ 
+            max-width: 90%;
+        }
+    }
+}
+//Tags of the participant
+.TagsWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    color:white;
+    max-width: 70%;
+    font: 100% $font-stack;
+    div{
+        display: flex;
+        flex-direction: row;
+        padding:5px;
+        flex-wrap: wrap;
+    }
+    p{
+        margin:15px;
+    }
+    .master{
+        color: red;
+    }
+    .learning{
+        color: green;
+    }
+    .wantingToLearn{
+        color:yellow;
+    }
+    @media only screen and (max-width: $mobileScreen) {
+        margin-left:12%;  
+    }
+}
+//The part where the participant describes why he could be useful
+.RequestWrapper{
+    color:white;
+    font: 100% $font-stack;
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    align-items: flex-end;
+    .Request{
+        margin-top: 3%;
+        width:77%;
+        border-style: solid;
+        padding: 2%;
+        border-color: orange;
+    }
+    .Buttons{
+        margin-left: 2%;
+        display: flex;
+        flex-direction: column;
+        max-width: 20%;
+        button{
+            background-color:  orange; 
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            font-size: 70%;
+            margin-top: 10px;
+            width:100%;
+        }
+        .reject{
+            border:orange;
+            border-style: solid;
+            background-color: transparent;
+        }
+    }
+    @media only screen and (max-width: $mobileScreen) {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        .Request{
+            width:70%;
+            margin-right: 10%;
+        }
+        .Buttons{
+            margin-right: auto;
+            margin-left: auto;
+            align-self: center;
+            max-width: 60%;
+        }
+    }
+}
+.FinalState{
+    color:white;
+    font: 100% $font-stack;
+    display: flex;
+    margin-left:40%;
+    margin-top:5%;
+    @media only screen and (max-width: $mobileScreen) {
+        margin-left:15%;
+        margin-top:15%;
+    }
+}
+
