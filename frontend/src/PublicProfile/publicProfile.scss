@@ -1,0 +1,71 @@
+@import "../global";
+
+.grid-wrapper{
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+}
+
+.profile-sidebar{
+    /*vale la pena usar grid adentro de este grid?*/
+    text-align: center;
+    display: grid;
+    background: $otherGrey;
+    grid-template-rows: 140px 30px 120px 300px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+}
+
+.profile-pic{
+    margin:auto; /*centra automáticamente el objeto en su contenedor*/
+    max-height: 80%;
+    border-radius: 50%;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-name{
+    margin:auto;
+    font-weight: 700;
+    color: #fff;
+}
+
+.profile-content{
+    display: flex;
+    justify-content: center;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background:$darkGrey;
+}
+
+.profile-desc{
+    text-align: center;
+    font-size: 14px;
+    margin: 8px;
+    color: #fff;
+}
+
+.profile-stats{
+    font-size:12px;
+    margin: 10px;
+    color: #fff;
+}
+
+.profile-tag{
+    font-size: 12px;
+    color: $clearGrey;
+    text-align: center;
+    border: solid 1px $tagGreen;
+    border-radius: 5px;
+    height: 25px;
+    width: 100px;
+    padding: 10px;
+    margin: 4px;
+}
+
+.edit-btn{
+    @extend %gral-blue-button;
+    font-size: 16 px;
+    color: #ffffff;
+    margin:auto;
+}

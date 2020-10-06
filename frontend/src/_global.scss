@@ -1,0 +1,37 @@
+/*  Global styling  */
+/* to use in your own scss, type: @import 'global'*/
+/* then, to access this file's styles: $varName*/
+
+/*COLORS*/
+$orangeAccent: #E66D29;
+$blueAccent: #0091B1;
+$dark: #2C2C34; 
+$darkGrey: #3D3D47;
+$clearGrey: #F0EDED;
+$otherGrey: #62626B;
+
+$buttonBlue: #1D4F60;
+$notificationRed: #ED3434;
+
+$tagPurple: #CE30E8;
+$tagGreen: #6CC551;
+$tagYellow: #E89330;
+$tagRed: #E85130;
+
+/*FONTS*/
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+/*BUTTON STYLES*/
+/*Styles with % are placeholders, abstract styles that can be extended*/
+/* In your particular scss file, use @extend %className to pull in the properties of the class*/
+%gral-blue-button{
+    border: none;
+    background-color: $buttonBlue;
+    border-radius: 5px;
+    padding: 1em 2em;
+    text-align: center;
+}
