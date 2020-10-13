@@ -1,0 +1,48 @@
+$mobileScreen: 900px;
+.DisqueHeader{
+    min-height: 150px;
+    min-width: 100%;
+    background-color: black;
+    margin-top:-40px;
+    margin-left: -10px; 
+}
+.RequestBackground{
+    background-color: #3D3D47;
+    margin-left: -8px;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    @media only screen and (max-width: 1200px) {
+      @media only screen and (min-width: $mobileScreen) {
+        height: 120%;
+      }
+    }
+    @media only screen and (max-height:800px) {
+      @media only screen and (min-height:600px) {   
+        height: 150%;
+      }
+    }
+    @media only screen and (max-height: 600px) {
+      height: 200%; 
+    }
+    @media only screen and (max-width: $mobileScreen) {
+      height: 280%; 
+    }
+    
+    
+    
+}
+.Wrapper{
+    background-color: #2C2C34;
+    width: 90%;
+    height: 70%;
+    margin: 5% auto auto 5%;
+    position: absolute;
+    @media only screen and (max-width: $mobileScreen) {
+      height: 90%;
+    }
+    @media only screen and (max-width: 1200px) {
+      height: 80%;
+    }
+}
+
