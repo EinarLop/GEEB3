@@ -7,6 +7,7 @@ import CreateProject from './CreateProject/createProject.js'
 import AcceptRequest from './AcceptProjectRequest/acceptProjectRequest.js'
 
 import PublicProfile from './PublicProfile/publicProfile.js'
+
 import Header from './Components/Header'
 
 
@@ -20,6 +21,7 @@ function App() {
     </Router>
 
     </div>
+
   );
 }
 
