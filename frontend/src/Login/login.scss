@@ -1,0 +1,85 @@
+
+@import "../global";
+
+
+body{
+    height: 100%;
+    width: 100%;
+    background-color: $dark;
+}
+div{
+    display: inline;
+}
+
+
+div .Information{
+    padding-top: 5%;
+    float: left;
+    width: 45%;
+    margin-right: 2.5%;
+    //background-color: gray;
+    h1{
+        color: white;
+        font-size: 25px;
+        text-align: left;
+        margin: 5% 10%;
+    }
+
+    p{
+        margin: 0% 10%;
+        font-size: 30px;
+        color: white;
+    }
+
+    ul{
+        color:white;
+        list-style-type: none;
+        font-size: 23px;
+    }
+    
+}
+
+div .Inputs{
+    padding-top: 5%;
+    float: left;
+    width: 45%;
+    margin-left: 2.5%;
+    text-align: center;
+    //background-color: gray;
+    h1{
+        color: white;
+        text-align: center;
+        margin: 2%
+    }
+    input{
+        font-size: 20px;
+        width: 60%;
+        height: 40px;
+        margin: 1% 0%;
+        border: 3px #E66D29 solid;
+        border-radius: 5px;
+        padding-left: 10px;
+    }
+
+    button{
+        display: block;
+        margin: 3% auto;
+        font-size: 20px;
+        background-color: #E66D29;
+        color: white;
+        padding: 2%;
+        border: none;
+    }
+
+    h3{
+        font-size: 25px;
+        margin-top: 50px;
+        color: white;
+    }
+    
+    a{
+        text-decoration: none;
+        color: #E66D29;
+        font-size: 30px;
+    }
+}
