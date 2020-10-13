@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import CreateProject from './CreateProject/createProject.js'
-import PublicProfile from './PublicProfile/publicProfile.js'
+import CreateProject2 from "./CreateProject/createProject2.js";
+//import CreateProject from "./CreateProject/createProject.js";
+import PublicProfile from "./PublicProfile/publicProfile.js";
 
 function App() {
   return (
     <div>
-    <PublicProfile/>
+      <CreateProject2 />
     </div>
   );
 }
