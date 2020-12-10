@@ -22,14 +22,12 @@ function App() {
   return (
 
 
-    <div className={styles.GlobalWrapper} >
-<Header/>
-      <div className={styles.Wrapper}>
+    <div>
+     
+      <Header/>
+      <CreateProject3/>
 
- <CreateProject3/>
 
-
-      </div>
       {/* <div className={styles.InputLabelContainer}>
      <label className={styles.Label}>Project Title</label>
       <input placeholder="Amazing project" className={styles.Input} />

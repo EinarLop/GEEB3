@@ -1,0 +1,18 @@
+@import "../global.scss";
+
+@mixin Select {
+  background-color: $dark;
+  width: 400px;
+  height: 45px;
+  color: white;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-family: $font;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $orangeAccent;
+    //background-color: #545463;
+  }
+}

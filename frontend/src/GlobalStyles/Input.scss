@@ -1,10 +1,11 @@
 @import "../global.scss";
 
 @mixin InputLabelContainer {
+  //Also works with Select
   display: flex;
   flex-direction: column;
   font-family: $font;
-  margin: 40px 0;
+  margin: 20px 0;
 }
 
 //Possible
@@ -12,7 +13,7 @@
 @mixin Label {
   color: $orangeAccent;
   font-family: $font;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   font-size: 22px;
 }
 //Possible backgroun color for input
@@ -25,9 +26,10 @@
   border-radius: 5px;
   background-color: $dark;
   width: 400px;
-  height: 40px;
+  height: 45px;
   color: white;
   font-size: 20px;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
