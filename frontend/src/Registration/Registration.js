@@ -1,7 +1,7 @@
 import React from 'react'
-import './register.scss'
+import styles from './RegistrationStyles.module.scss'
 
-export default function login() {
+ function Registration() {
     return (
         <body>
 
@@ -27,3 +27,5 @@ ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas sem
         </body>
     )
 }
+
+export default Registration;

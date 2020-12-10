@@ -1,0 +1,42 @@
+@import "../global.scss";
+
+@mixin InputLabelContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: $font;
+  margin: 40px 0;
+}
+
+//Possible
+
+@mixin Label {
+  color: $orangeAccent;
+  font-family: $font;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+//Possible backgroun color for input
+//#42424d
+//#4B4B58
+//#545463
+@mixin Input {
+  font-family: $font;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: $dark;
+  width: 400px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $orangeAccent;
+    //background-color: #545463;
+  }
+
+  &::placeholder {
+    color: #ffffff60;
+    font-size: 20px;
+  }
+}

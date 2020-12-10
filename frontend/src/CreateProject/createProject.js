@@ -3,7 +3,7 @@ import "./createProjectStyles.scss";
 function CreateProject() {
   return (
     <div class="wrapper">
-      <header>Header</header>
+      {/* <header>Header</header> */}
       <div class="contentWrapper">
         <h1>Create project</h1>
         <div class="titleAndStausWrapper">

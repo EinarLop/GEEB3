@@ -1,0 +1,18 @@
+@import "../_global.scss", "../GlobalStyles/Wrapper.scss",
+  "../GlobalStyles/Input.scss";
+
+.Wrapper {
+  @include Wrapper;
+  display: flex;
+}
+
+.Test {
+  height: 100px;
+  width: 200px;
+  background-color: red;
+}
+
+.Input {
+  @include Input;
+  margin: 100px;
+}
