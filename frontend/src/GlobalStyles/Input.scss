@@ -15,6 +15,10 @@
   font-family: $font;
   margin-bottom: 7px;
   font-size: 22px;
+
+  &.Invisible {
+    color: transparent;
+  }
 }
 //Possible backgroun color for input
 //#42424d
