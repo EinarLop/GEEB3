@@ -10,6 +10,10 @@
   border-radius: 5px;
   font-family: $font;
 
+  &.Small {
+    width: 150px;
+  }
+
   &:focus {
     outline: none;
     border: 2px solid $orangeAccent;

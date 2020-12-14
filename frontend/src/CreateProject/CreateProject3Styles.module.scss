@@ -1,5 +1,6 @@
 @import "../_global.scss", "../GlobalStyles/Wrapper.scss",
-  "../GlobalStyles/Input.scss", "../GlobalStyles/Select.scss";
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Select.scss",
+  "../GlobalStyles/Button.scss";
 
 .Wrapper {
   display: flex;
@@ -23,14 +24,147 @@
 .Title {
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 50px;
+  font-family: $font;
 }
 
 .TSContainer {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 50px;
   //Responsive --> Flex direction column
 }
 
 .Select {
   @include Select;
+
+  &.Small {
+    margin-left: 50px;
+  }
+}
+
+.Button {
+  @include Button;
+  margin-left: 50px;
+
+  &.Large {
+    margin: 50px 0 0 0;
+  }
+}
+
+.TextArea {
+  @include Input;
+  height: 700px;
+}
+
+// .Parent {
+//   display: grid;
+//   grid-template-columns: repeat(6, 1fr);
+//   grid-template-rows: repeat(4, 1fr);
+//   grid-column-gap: 0px;
+//   grid-row-gap: 0px;
+// }
+
+// .Div1 {
+//   grid-area: 1 / 1 / 5 / 3;
+// }
+// .Div2 {
+//   grid-area: 1 / 3 / 3 / 7;
+//   display: flex;
+//   flex-direction: column;
+// }
+// .Div3 {
+//   grid-area: 3 / 3 / 5 / 7;
+//   display: flex;
+//   justify-content: flex-end;
+// }
+
+.Parent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.Div1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.Div2 {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  justify-content: flex-end;
+}
+.Div3 {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -50px;
+}
+.Div4 {
+  grid-area: 3 / 2 / 4 / 3;
+  display: flex;
+  flex-direction: column;
+  margin-top: -105px;
+
+  align-items: flex-end;
+  //margin-top: -20px;
+}
+.Div5 {
+  grid-area: 4 / 2 / 5 / 3;
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+}
+.Div6 {
+  grid-area: 5 / 2 / 6 / 3;
+
+  display: flex;
+  flex-direction: row;
+  margin-top: -50px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.Div7 {
+  grid-area: 2 / 1 / 6 / 2;
+  margin-top: -50px;
+}
+
+.SubmitContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.HInputsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.HContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+p {
+  font-size: 20px;
+  width: 550px;
+  overflow-wrap: break-word;
+  height: 55px;
+  display: block;
+  justify-content: right;
+}
+
+.Tag {
+  font-size: 20px;
+  border: 2px solid $tagBlue;
+  border-radius: 10px;
+  padding: 10px;
+  color: $tagBlue;
+  margin: 15px 25px 0px 0;
 }
