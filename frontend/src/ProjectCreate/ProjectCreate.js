@@ -5,6 +5,7 @@ import styles from "./ProjectCreateStyles.module.scss";
 function ProjectCreate() {
   return (
     <div className={styles.Global}>
+      <h1 className={styles.Title}>Create Project</h1>
       <div className={styles.Wrapper}>
         <div className={styles.Column1}>
           <div className={styles.InputLabelContainer}>
@@ -72,7 +73,11 @@ function ProjectCreate() {
               <label className={`${styles.Label} ${styles.Invisible}`}>
                 Button
               </label>
-              <input className={styles.Button} type="button" value="Add" />
+              <input
+                className={`${styles.Button} ${styles.Special}`}
+                type="button"
+                value="Add"
+              />
             </div>
           </div>
           <div className={styles.TContainer}>
@@ -86,6 +91,13 @@ function ProjectCreate() {
             <div className={styles.Tag}>SQL</div>
           </div>
         </div>
+      </div>
+      <div>
+        <input
+          className={`${styles.Button} ${styles.Large}`}
+          type="button"
+          value="Submit"
+        />
       </div>
     </div>
   );

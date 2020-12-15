@@ -18,6 +18,9 @@
 
   &.Invisible {
     color: transparent;
+    @media (max-width: 425px) {
+      height: 1px;
+    }
   }
 }
 //Possible backgroun color for input
@@ -44,5 +47,9 @@
   &::placeholder {
     color: #ffffff60;
     font-size: 20px;
+  }
+
+  @media (max-width: 425px) {
+    width: 300px;
   }
 }
