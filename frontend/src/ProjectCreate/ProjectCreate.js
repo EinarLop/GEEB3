@@ -41,7 +41,7 @@ function ProjectCreate() {
             <input className={styles.Button} type="button" value="Add" />
           </div>
           <div className={styles.HContainer}>
-            <p className={styles.Highlight}>
+            {/* <p className={styles.Highlight}>
               Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
               nonummy. Suspendisse ultricies, cong
             </p>
@@ -52,7 +52,7 @@ function ProjectCreate() {
             <p className={styles.Highlight}>
               Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
               nonummy. Suspendisse ultricies, cong
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -81,14 +81,14 @@ function ProjectCreate() {
             </div>
           </div>
           <div className={styles.TContainer}>
-            <div className={styles.Tag}>Javascript</div>
+            {/* <div className={styles.Tag}>Javascript</div>
             <div className={styles.Tag}>Node</div>
             <div className={styles.Tag}>Express</div>
             <div className={styles.Tag}>SQL</div>
             <div className={styles.Tag}>MongoDB</div>
             <div className={styles.Tag}>Development</div>
             <div className={styles.Tag}>Sockets</div>
-            <div className={styles.Tag}>SQL</div>
+            <div className={styles.Tag}>SQL</div> */}
           </div>
         </div>
       </div>

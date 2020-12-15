@@ -18,7 +18,7 @@ import CreateProject3 from "./CreateProject/CreateProject3";
 function App() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <ProjectCreate />
       {/* <Registration/> */}
       {/* <CreateProject/>  */}

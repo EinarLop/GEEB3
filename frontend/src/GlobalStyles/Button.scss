@@ -14,7 +14,10 @@
     width: 400px;
     margin-top: 20px;
     margin-bottom: 20px;
-    @media (max-width: 425px) {
+    @media (max-width: 500px) {
+      width: 300px;
+    }
+    @media (max-width: 1024px) {
       width: 300px;
     }
   }

@@ -6,6 +6,12 @@
   flex-direction: column;
   font-family: $font;
   margin: 20px 0;
+  @media (max-width: 1024px) {
+    @media (min-width: 600px) {
+      //width: 300px;
+      //margin: 0px;
+    }
+  }
 }
 
 //Possible
@@ -18,7 +24,10 @@
 
   &.Invisible {
     color: transparent;
-    @media (max-width: 425px) {
+    @media (max-width: 500px) {
+      height: 1px;
+    }
+    @media (max-width: 1024px) {
       height: 1px;
     }
   }
@@ -49,7 +58,10 @@
     font-size: 20px;
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: 500px) {
+    width: 300px;
+  }
+  @media (max-width: 1024px) {
     width: 300px;
   }
 }
