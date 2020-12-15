@@ -1,0 +1,9 @@
+@import "../global.scss";
+@mixin Tag {
+  font-size: 20px;
+  border: 2px solid $tagBlue;
+  border-radius: 10px;
+  padding: 10px;
+  color: $tagBlue;
+  margin: 15px 25px 0px 0;
+}

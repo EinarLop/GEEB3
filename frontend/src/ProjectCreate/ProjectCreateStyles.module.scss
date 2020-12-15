@@ -1,0 +1,95 @@
+@import "../_global.scss", "../GlobalStyles/Wrapper.scss",
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Select.scss",
+  "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss";
+
+.Global {
+  display: flex;
+  justify-content: center;
+}
+
+.Input {
+  @include Input;
+}
+
+.Label {
+  @include Label;
+}
+
+.InputLabelContainer {
+  @include InputLabelContainer;
+}
+
+.Select {
+  @include Select;
+  margin-right: 50px;
+}
+
+.TextArea {
+  @include Input;
+  height: 700px;
+}
+
+.Button {
+  @include Button;
+}
+
+.Tag {
+  @include Tag;
+}
+
+.TContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+}
+
+.HInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  //justify-content: space-evenly;
+}
+.TInputContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Highlight {
+  font-size: 20px;
+  width: 400px;
+  overflow-wrap: break-word;
+  height: 100px;
+  display: block;
+  justify-content: right;
+  margin: 25px 0 0 0;
+}
+.Wrapper {
+  padding: 25px;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.Column1 {
+  grid-area: 1 / 1 / 2 / 2;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.Column2 {
+  grid-area: 1 / 2 / 2 / 3;
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+}
+.Column3 {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
