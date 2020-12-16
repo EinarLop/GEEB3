@@ -1,9 +1,19 @@
 @import "../global.scss";
 @mixin Tag {
   font-size: 20px;
-  border: 2px solid $tagBlue;
+  border: 2px solid white;
   border-radius: 10px;
   padding: 10px;
-  color: $tagBlue;
+  color: white;
   margin: 15px 25px 0px 0;
+
+  &.Mastered {
+    color: $tagBlue;
+    border: 2px solid $tagBlue;
+  }
+
+  &.Learning {
+    color: $tagPurple;
+    border: 2px solid $tagPurple;
+  }
 }
