@@ -39,6 +39,9 @@
   @include Tag;
 }
 
+.ErrorMsg {
+  color: #f74f39;
+}
 .Title {
   margin: 0 auto;
   font-family: $font;
