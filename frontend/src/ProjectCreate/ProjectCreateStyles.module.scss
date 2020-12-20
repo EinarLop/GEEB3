@@ -71,10 +71,14 @@
   font-size: 20px;
   width: 400px;
   overflow-wrap: break-word;
-  height: 100px;
+  height: 110px;
   display: block;
   justify-content: right;
   margin: 25px 0 0 0;
+
+  &:hover {
+    background-color: #f74f39a6;
+  }
 }
 .Wrapper {
   padding: 25px;

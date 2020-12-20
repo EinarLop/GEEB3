@@ -81,6 +81,7 @@ function ProjectCreate() {
       console.log("Empty H");
       setErrorHighlight("Highlight can not be empty");
     }
+    console.log(highlights);
   };
 
   const handleOnChange = (event) => {
@@ -139,6 +140,13 @@ function ProjectCreate() {
     }
   };
 
+  const onDeleteHighlight = (index) => {
+    setHighlights(highlights.filter((highlight, i) => i !== index));
+  };
+
+  const onDeleteTag = (index) => {
+    setTags(tags.filter((tag, i) => i !== index));
+  };
   return (
     <div className={styles.Global}>
       <h1 className={styles.Title}>Create Project</h1>
@@ -189,6 +197,7 @@ function ProjectCreate() {
                 onChange={handleOnChange}
                 name="currentHighlight"
                 value={project.currentHighlight}
+                autoComplete="off"
               />
             </div>
 
@@ -201,8 +210,13 @@ function ProjectCreate() {
             <p className={styles.ErrorMsg}>{errorHighlight}</p>
           </div>
           <div className={styles.HContainer}>
-            {highlights.map((highlight) => (
-              <p className={styles.Highlight}>- {highlight} </p>
+            {highlights.map((highlight, index) => (
+              <p
+                className={styles.Highlight}
+                onClick={() => onDeleteHighlight(index)}
+              >
+                {index + 1 + "."} {" " + highlight}
+              </p>
             ))}
             {/* <p className={styles.Highlight}>
               Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
@@ -258,8 +272,11 @@ function ProjectCreate() {
           </div>
           <p className={styles.ErrorMsg}>{errorTag}</p>
           <div className={styles.TContainer}>
-            {tags.map((tag) => (
-              <div className={`${styles.Tag} ${styles[tag.type]}`}>
+            {tags.map((tag, index) => (
+              <div
+                className={`${styles.Tag} ${styles[tag.type]}`}
+                onClick={() => onDeleteTag(index)}
+              >
                 {tag.value}
               </div>
             ))}

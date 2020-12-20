@@ -7,6 +7,10 @@
   color: white;
   margin: 15px 25px 0px 0;
 
+  &:hover {
+    background-color: #f74f39a6;
+  }
+
   &.Mastered {
     color: $tagBlue;
     border: 2px solid $tagBlue;
