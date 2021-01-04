@@ -1,0 +1,159 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
+.Global {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.userInputs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Paragraph {
+  text-align: justify;
+  color: white;
+}
+
+.Text {
+  color: white;
+}
+
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2c2c34;
+  margin: 10px;
+  padding: 15px;
+  width: 1000px;
+}
+
+.Highlights {
+  align-items: left;
+  width: 100%;
+  color: red;
+}
+
+.ColumnDivision {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.RequestData {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Data {
+  border: none;
+  height: 20px;
+  border-bottom: 1px solid #e66d29;
+  background-color: #2c2c34;
+}
+
+.ReasonForRequest {
+  background-color: #2c2c34;
+  width: 100%;
+  height: 60px;
+  margin: 10px;
+  border: 1px solid #e66d29;
+}
+
+.TitleSubtitle {
+  color: #e66d29;
+}
+
+.Button {
+  @include Button;
+  width: auto;
+  &.Large {
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+  }
+}
+
+.Card {
+  background-color: #2c2c34;
+  // border: 1px solid white;
+  color: white;
+  width: 1000px;
+  padding: 5px;
+}
+.Knows {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #21d7ff;
+}
+
+.Needs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #ff0080;
+}
+.Column0 {
+  width: 50%;
+}
+
+.Column1 {
+  width: 50%;
+}
+
+@media (max-width: 1380px) {
+  .Wrapper {
+    width: 600px;
+  }
+  .Column0 {
+    width: 45%;
+  }
+
+  .Column1 {
+    width: 45%;
+  }
+}
+
+@media (max-width: 720px) {
+  .RequestData {
+    width: 90%;
+  }
+  .Button {
+    font-size: 12px;
+  }
+  .Data {
+    width: 40%;
+    height: 20px;
+    font-size: 10px;
+  }
+  .Global {
+    font-size: 13px;
+  }
+  .Wrapper {
+    width: 300px;
+  }
+  .Tags {
+    flex-direction: column;
+  }
+  .Column0 {
+    width: 95%;
+  }
+
+  .Column1 {
+    width: 95%;
+  }
+}
