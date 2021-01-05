@@ -24,6 +24,7 @@ div .Information {
     margin: 0% 10%;
     font-size: 30px;
     color: white;
+    text-align: justify;
   }
 }
 
@@ -69,5 +70,35 @@ div .Inputs {
     text-decoration: none;
     color: #e66d29;
     font-size: 30px;
+  }
+  .Global {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 1380px) {
+  div .Information {
+    p {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  div .Information {
+    display: block;
+    flex-direction: column;
+    width: auto;
+  }
+  div .Inputs {
+    width: auto;
+    input {
+      margin: 3% 0%;
+    }
+  }
+
+  .Global {
+    flex-direction: column;
   }
 }

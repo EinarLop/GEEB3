@@ -11,6 +11,8 @@ import Header from "./Components/Header";
 
 import Registration from "./Registration/Registration";
 import ProjectCreate from "./ProjectCreate/ProjectCreate";
+import ProjectFeedDef from "./ProjectFeed/ProjectFeedDef";
+import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 
 //350x34
 //404x44
@@ -18,10 +20,13 @@ function App() {
   return (
     <div>
       {/* <Header /> */}
-      <ProjectCreate />
+      {/*<ProjectCreate />*/}
+      {/*<OpenProject/>*/}
+      {/*<ProjectFeedDef/>*/}
       {/* <Registration/> */}
+      {/*<ProjectMoreInfo/>*/}
       {/* <CreateProject/>  */}
-      {/* <Login/>
+      { /*<Login/> /*
       <AcceptRequest/>
       <Router>
         <Header/>
