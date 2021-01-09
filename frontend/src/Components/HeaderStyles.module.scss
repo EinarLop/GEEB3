@@ -54,3 +54,35 @@
   height: 55px;
   width: 55px;
 }
+.PageWrap {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 50%;
+}
+.Links{
+  color:azure;
+  text-decoration:none;
+  width:100px;
+  margin: 20px 0px 20px 70px;
+  transition: color 0.2s;
+  &:hover{
+    font-weight: 500;
+  }
+}
+.Menu{
+  max-width: 500px;
+  height: 1000px;
+  background-color: $dark;
+  display:flex;
+  flex-direction: column;
+  margin-top: 90px;
+  padding: 5px;
+  z-index: 5;
+}
+.MenuIcon {
+  margin-top:30px;
+  height: 70px;
+  width:  70px;
+  margin-left: 0px;
+}
