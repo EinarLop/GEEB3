@@ -99,7 +99,7 @@ function Registration() {
             placeholder="Confirm password"
           ></input>
           <button onClick={handleOnSubmit}>Register</button>
-          <p>{errorInput}</p>
+          <p className={styles.ErrorMsg}>{errorInput}</p>
 
           <h3>Do you already have an account?</h3>
           <a href="login">Login</a>

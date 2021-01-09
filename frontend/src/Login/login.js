@@ -56,7 +56,7 @@ export default function login() {
             onChange={handleOnChange}
           ></input>
           <button onClick={handleOnSubmit}>Log in</button>
-          <p>{errorInput}</p>
+          <p className={styles.ErrorMsg}>{errorInput}</p>
           <h3>New to GEEB?</h3>
           <a href="Register">Create an account</a>
         </div>
@@ -65,10 +65,10 @@ export default function login() {
           <h1>Some tips for improving your experience at GEEB</h1>
 
           <ul>
-            <li>- Ultricies eget, tempor sit amet</li>
-            <li>- Ultricies eget, tempor sit amet</li>
-            <li>- Ultricies eget, empor sit amet</li>
-            <li>- Ultricies eget, tempor sit amet</li>
+            <li> Ultricies eget, tempor sit amet</li>
+            <li> Ultricies eget, tempor sit amet</li>
+            <li> Ultricies eget, empor sit amet</li>
+            <li> Ultricies eget, tempor sit amet</li>
           </ul>
         </div>
       </div>
