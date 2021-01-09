@@ -20,7 +20,7 @@ import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 function App() {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       {/* <ProjectCreate /> */}
       {/* <OpenProject /> */}
       {/* <ProjectFeedDef /> */}
