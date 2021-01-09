@@ -47,7 +47,7 @@ div .Inputs {
     margin: 2%;
   }
   input {
-    font-size: 20px;
+    //@include Input font-size: 20px;
     width: 60%;
     height: 40px;
     margin: 1% 0%;
@@ -81,6 +81,9 @@ div .Inputs {
 .Global {
   display: flex;
   flex-direction: row;
+}
+.ErrorMsg {
+  color: #f74f39;
 }
 
 @media (max-width: 1380px) {

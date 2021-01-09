@@ -13,8 +13,20 @@ $clearGrey: #f0eded;
 $otherGrey: #62626b;
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap");
 /*COLORS*/
-$font: Poppins, Tahoma, Geneva, Verdana, sans-serif;
+// $font: Poppins, Tahoma, Geneva, Verdana, sans-serif; //1 2.5 2      5.5
+//$font: "Rubik", sans-serif;//2 2 2.5   6.5
+//$font: "Roboto Condensed", sans-serif; //1.5 1.5 2         5
+//$font: "Roboto Slab", serif; //1 1.5 1.81               4.31
+//$font: "Roboto", sans-serif; //2.3 1.5 2.5              6.3
+//$font: "Ubuntu", sans-serif; //2.5 2.5 3               8
+$font: "Mulish", sans-serif; // 3 2.2 3                  8.2
 $orangeAccent: #e66d29;
 $blueAccent: #0091b1;
 $dark: #2c2c34;

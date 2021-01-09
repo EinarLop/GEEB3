@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
-
+import Header from "../Components/Header";
 //TO DO
 //No empty title, description, highlights, tags
 //Title max characters 50
@@ -148,77 +148,79 @@ function ProjectCreate() {
     setTags(tags.filter((tag, i) => i !== index));
   };
   return (
-    <div className={styles.Global}>
-      <h1 className={styles.Title}>Create Project</h1>
-      <div className={styles.Wrapper}>
-        <div className={styles.Column1}>
-          <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Project title</label>
-            <input
-              className={styles.Input}
-              placeholder="Awesome Project"
-              onChange={handleOnChange}
-              name="title"
-              autoComplete="off"
-            />
-            <p className={styles.ErrorMsg}>{errorTitle}</p>
-          </div>
-          <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Project description</label>
-            <textarea
-              className={styles.TextArea}
-              placeholder="ej. This project tries to solve world hunger problem"
-              onChange={handleOnChange}
-              name="description"
-            />
-            <p className={styles.ErrorMsg}>{errorDescription}</p>
-          </div>
-        </div>
-
-        <div className={styles.Column2}>
-          <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Status</label>
-            <select
-              className={styles.Select}
-              onChange={handleOnChange}
-              name="status"
-              value={project.status}
-            >
-              <option className={styles.Option}>Open</option>
-              <option>Closed</option>
-            </select>
-          </div>
-          <div className={styles.HInputContainer}>
+    <>
+      <Header />
+      <div className={styles.Global}>
+        <a className={styles.Title}>Create Project</a>
+        <div className={styles.Wrapper}>
+          <div className={styles.Column1}>
             <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Highlights</label>
+              <label className={styles.Label}>Project title</label>
               <input
-                placeholder="Focused in ending world hunger"
                 className={styles.Input}
+                placeholder="Awesome Project"
                 onChange={handleOnChange}
-                name="currentHighlight"
-                value={project.currentHighlight}
+                name="title"
                 autoComplete="off"
               />
+              <p className={styles.ErrorMsg}>{errorTitle}</p>
             </div>
-
-            <input
-              className={styles.Button}
-              onClick={onAddHighlight}
-              type="button"
-              value="Add"
-            />
-            <p className={styles.ErrorMsg}>{errorHighlight}</p>
+            <div className={styles.InputLabelContainer}>
+              <label className={styles.Label}>Project description</label>
+              <textarea
+                className={styles.TextArea}
+                placeholder="ej. This project tries to solve world hunger problem"
+                onChange={handleOnChange}
+                name="description"
+              />
+              <p className={styles.ErrorMsg}>{errorDescription}</p>
+            </div>
           </div>
-          <div className={styles.HContainer}>
-            {highlights.map((highlight, index) => (
-              <p
-                className={styles.Highlight}
-                onClick={() => onDeleteHighlight(index)}
+
+          <div className={styles.Column2}>
+            <div className={styles.InputLabelContainer}>
+              <label className={styles.Label}>Status</label>
+              <select
+                className={styles.Select}
+                onChange={handleOnChange}
+                name="status"
+                value={project.status}
               >
-                {index + 1 + "."} {" " + highlight}
-              </p>
-            ))}
-            {/* <p className={styles.Highlight}>
+                <option className={styles.Option}>Open</option>
+                <option>Closed</option>
+              </select>
+            </div>
+            <div className={styles.HInputContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Highlights</label>
+                <input
+                  placeholder="Focused in ending world hunger"
+                  className={styles.Input}
+                  onChange={handleOnChange}
+                  name="currentHighlight"
+                  value={project.currentHighlight}
+                  autoComplete="off"
+                />
+              </div>
+
+              <input
+                className={styles.Button}
+                onClick={onAddHighlight}
+                type="button"
+                value="Add"
+              />
+              <p className={styles.ErrorMsg}>{errorHighlight}</p>
+            </div>
+            <div className={styles.HContainer}>
+              {highlights.map((highlight, index) => (
+                <p
+                  className={styles.Highlight}
+                  onClick={() => onDeleteHighlight(index)}
+                >
+                  {index + 1 + "."} {" " + highlight}
+                </p>
+              ))}
+              {/* <p className={styles.Highlight}>
               Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
               nonummy. Suspendisse ultricies, cong
             </p>
@@ -230,75 +232,76 @@ function ProjectCreate() {
               Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
               nonummy. Suspendisse ultricies, cong
             </p> */}
-          </div>
-        </div>
-
-        <div className={styles.Column3}>
-          <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Tags</label>
-            <input
-              className={styles.Input}
-              placeholder="Javascript"
-              onChange={handleOnChange}
-              name="currentTag"
-              value={project.currentTag}
-              autoComplete="off"
-            />
-          </div>
-          <div className={styles.TInputContainer}>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Type</label>
-              <select
-                className={` ${styles.Select} ${styles.Small}`}
-                onChange={handleOnChange}
-                name="currentType"
-                value={project.currentType}
-              >
-                <option className={styles.Option}>Learning</option>
-                <option>Mastered</option>
-              </select>
             </div>
+          </div>
+
+          <div className={styles.Column3}>
             <div className={styles.InputLabelContainer}>
-              <label className={`${styles.Label} ${styles.Invisible}`}>
-                Button
-              </label>
+              <label className={styles.Label}>Tags</label>
               <input
-                className={`${styles.Button} ${styles.Special}`}
-                type="button"
-                value="Add"
-                onClick={onAddTag}
+                className={styles.Input}
+                placeholder="Javascript"
+                onChange={handleOnChange}
+                name="currentTag"
+                value={project.currentTag}
+                autoComplete="off"
               />
             </div>
-          </div>
-          <p className={styles.ErrorMsg}>{errorTag}</p>
-          <div className={styles.TContainer}>
-            {tags.map((tag, index) => (
-              <div
-                className={`${styles.Tag} ${styles[tag.type]}`}
-                onClick={() => onDeleteTag(index)}
-              >
-                {tag.value}
+            <div className={styles.TInputContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Type</label>
+                <select
+                  className={` ${styles.Select} ${styles.Small}`}
+                  onChange={handleOnChange}
+                  name="currentType"
+                  value={project.currentType}
+                >
+                  <option className={styles.Option}>Learning</option>
+                  <option>Mastered</option>
+                </select>
               </div>
-            ))}
-            {/* <div className={styles.Tag}>Node</div>
+              <div className={styles.InputLabelContainer}>
+                <label className={`${styles.Label} ${styles.Invisible}`}>
+                  Button
+                </label>
+                <input
+                  className={`${styles.Button} ${styles.Special}`}
+                  type="button"
+                  value="Add"
+                  onClick={onAddTag}
+                />
+              </div>
+            </div>
+            <p className={styles.ErrorMsg}>{errorTag}</p>
+            <div className={styles.TContainer}>
+              {tags.map((tag, index) => (
+                <div
+                  className={`${styles.Tag} ${styles[tag.type]}`}
+                  onClick={() => onDeleteTag(index)}
+                >
+                  {tag.value}
+                </div>
+              ))}
+              {/* <div className={styles.Tag}>Node</div>
             <div className={styles.Tag}>Express</div>
             <div className={styles.Tag}>SQL</div>
             <div className={styles.Tag}>MongoDB</div>
             <div className={styles.Tag}>Development</div>
             <div className={styles.Tag}>Sockets</div>
             <div className={styles.Tag}>SQL</div> */}
+            </div>
           </div>
         </div>
+        <div>
+          <input
+            className={`${styles.Button} ${styles.Large}`}
+            type="button"
+            value="Submit"
+            onClick={handleOnSubmit}
+          />
+        </div>
       </div>
-      <div>
-        <input
-          className={`${styles.Button} ${styles.Large}`}
-          type="button"
-          value="Submit"
-          onClick={handleOnSubmit}
-        />
-      </div>
-    </div>
+    </>
   );
 }
 

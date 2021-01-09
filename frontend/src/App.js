@@ -16,23 +16,29 @@ import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 
 //350x34
 //404x44
+
 function App() {
   return (
     <div>
       {/* <Header /> */}
-      {/*<ProjectCreate />*/}
-      {/*<OpenProject/>*/}
-      {/*<ProjectFeedDef/>*/}
-      {/* <Registration/> */}
-      {/*<ProjectMoreInfo/>*/}
-      {/* <CreateProject/>  */}
-      { /*<Login/> /*
-      <AcceptRequest/>
-      <Router>
-        <Header/>
-        <Route exact path="/" component={CreateProject}/>
-        <Route path="/profile/:id" component={PublicProfile}/>
-      </Router> */}
+      {/* <ProjectCreate /> */}
+      {/* <OpenProject /> */}
+      {/* <ProjectFeedDef /> */}
+      {/* <Registration /> */}
+      {/* <ProjectMoreInfo /> */}
+      {/* <Login /> */}
+      {
+        /*<Login/> /*
+      <AcceptRequest/>*/
+        <Router>
+          {/* <Header /> */}
+          <Route exact path="/" component={Registration} />
+          <Route path="/login" component={Login} />
+          <Route path="/oprojects" component={ProjectFeedDef} />
+          <Route path="/oproject/:id" component={ProjectMoreInfo} />
+          <Route path="/create" component={ProjectCreate} />
+        </Router>
+      }
     </div>
   );
 }
