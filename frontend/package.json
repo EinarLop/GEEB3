@@ -12,7 +12,8 @@
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-tabs": "^3.1.2"
+    "react-tabs": "^3.1.2",
+    "use-media-size": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
