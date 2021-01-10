@@ -8,7 +8,7 @@
   background-color: $dark;
   margin: 0px;
   justify-content: space-between;
-  width: 100vw;
+  //width: 99.9vw;
 }
 
 .Title {
@@ -60,29 +60,29 @@
   flex-direction: column;
   width: 50%;
 }
-.Links{
-  color:azure;
-  text-decoration:none;
-  width:100px;
+.Links {
+  color: azure;
+  text-decoration: none;
+  width: 100px;
   margin: 20px 0px 20px 70px;
   transition: color 0.2s;
-  &:hover{
+  &:hover {
     font-weight: 500;
   }
 }
-.Menu{
+.Menu {
   max-width: 500px;
   height: 1000px;
   background-color: $dark;
-  display:flex;
+  display: flex;
   flex-direction: column;
   margin-top: 90px;
   padding: 5px;
   z-index: 5;
 }
 .MenuIcon {
-  margin-top:30px;
+  margin-top: 30px;
   height: 70px;
-  width:  70px;
+  width: 70px;
   margin-left: 0px;
 }

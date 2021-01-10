@@ -48,64 +48,70 @@ function Registration() {
     }
   };
   return (
-    <body>
-      <div className={styles.Global}>
-        <div className={styles.Information}>
-          <h1>What is GEEB?</h1>
-          <p>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae
-            ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-            egestas semper. Aenean ultricies mi vitae est. Mauris
-          </p>
-        </div>
-
-        <div className={styles.Inputs}>
-          <h1>Register now</h1>
-          <input
-            name="name"
-            onChange={handleOnChange}
-            stype="text"
-            placeholder="Name/s"
-          ></input>
-          <input
-            name="lastName"
-            onChange={handleOnChange}
-            type="text"
-            placeholder="Last Name"
-          ></input>
-          <input
-            name="email"
-            onChange={handleOnChange}
-            type="email"
-            placeholder="e-mail"
-          ></input>
-          <input
-            name="userName"
-            onChange={handleOnChange}
-            type="text"
-            placeholder="@User"
-          ></input>
-          <input
-            name="password"
-            onChange={handleOnChange}
-            type="password"
-            placeholder="Password"
-          ></input>
-          <input
-            name="confirmPassword"
-            onChange={handleOnChange}
-            type="password"
-            placeholder="Confirm password"
-          ></input>
-          <button onClick={handleOnSubmit}>Register</button>
-          <p className={styles.ErrorMsg}>{errorInput}</p>
-
-          <h3>Do you already have an account?</h3>
-          <a href="login">Login</a>
-        </div>
+    <div className={styles.Global}>
+      <div className={styles.Information}>
+        <h1>What is GEEB?</h1>
+        <p>
+          Pellentesque habitant morbi tristique senectus et netus et malesuada
+          fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae
+          ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+          egestas semper. Aenean ultricies mi vitae est. Mauris
+        </p>
       </div>
-    </body>
+
+      <div className={styles.Inputs}>
+        <h1>Register now</h1>
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Username</label>
+          <input
+            className={styles.Input}
+            //deleted name="name"
+            onChange={handleOnChange}
+            placeholder="PkmMaster69"
+          ></input>
+        </div>
+
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Email</label>
+          <input
+            className={styles.Input}
+            //deleted name="name"
+            onChange={handleOnChange}
+            placeholder="PkmMaster69@gmail.com"
+          ></input>
+        </div>
+
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Password</label>
+          <input
+            className={styles.Input}
+            placeholder="VerySecretPassword"
+            //deleted name="name"
+            onChange={handleOnChange}
+          ></input>
+        </div>
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Confirm Password</label>
+          <input
+            className={styles.Input}
+            //deleted name="name"
+            placeholder="VerySecretPassword"
+            onChange={handleOnChange}
+          ></input>
+        </div>
+
+        <input
+          className={`${styles.Button} ${styles.Large}`}
+          type="button"
+          value="Submit"
+          onClick={handleOnSubmit}
+        />
+        <p className={styles.ErrorMsg}>{errorInput}</p>
+
+        <p className={styles.Msg}>Already have an account?</p>
+        <a href="login">Login</a>
+      </div>
+    </div>
   );
 }
 
