@@ -7,17 +7,28 @@
   color: white;
   margin: 15px 25px 0px 0;
 
-  &:hover {
-    background-color: #f74f39a6;
-  }
 
   &.Mastered {
-    color: $tagBlue;
+    background-color: $tagBlue;
     border: 2px solid $tagBlue;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagBlue;
+    } 
   }
 
   &.Learning {
-    color: $tagPurple;
+    // color: $tagPurple;
+    // background-color: transparent
+    // boder 2px solid $tagPurple
+    background-color: $tagPurple;
     border: 2px solid $tagPurple;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    } 
   }
+  
 }

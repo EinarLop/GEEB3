@@ -107,24 +107,34 @@ function ProjectMoreInfo() {
         {isLogged && (
           <div className={styles.userInputs}>
             <div className={styles.RequestData}>
-              <textarea
+
+            <div className={styles.InputLabelContainer}>
+            <label className={styles.Label}>Highlights</label>
+              <input
                 placeholder={request.userNames}
                 name="userNames"
                 className={styles.Data}
                 onChange={handleOnChange}
               />
-              <textarea
+              </div>
+              <div className={styles.InputLabelContainer}>
+              <label className={styles.Label}>Highlights</label>
+              <input
                 placeholder={request.userEmail}
                 name="userEmail"
                 onChange={handleOnChange}
                 className={styles.Data}
               />
+               </div>
             </div>
+            <div className={styles.InputLabelContainer}>
+            <label className={styles.Label}>Highlights</label>
             <textarea
               className={styles.ReasonForRequest}
               name="requestDescription"
               onChange={handleOnChange}
             ></textarea>
+            </div>
             <p>{errorInput}</p>
             <input
               type="button"

@@ -37,6 +37,10 @@
 
 .Tag {
   @include Tag;
+  &:hover {
+    background-color: #e64949;
+    // No funciona** o agregar un tachecito?
+  }
 }
 
 .ErrorMsg {

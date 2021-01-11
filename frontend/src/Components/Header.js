@@ -16,9 +16,17 @@ import { useMediaSize } from 'use-media-size';
 export default function Header() {
   const { isMd} = useMediaSize();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const handleClick = (event)=>{
     setIsOpen(!isOpen)
   }
+  const onLogButton = (event) => {
+    if(isLogged){
+      location.href = '/oproject/:id'
+    }else{
+      location.href = '/login'
+    }
+  };
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconNameContainer}>
@@ -32,29 +40,49 @@ export default function Header() {
               {isOpen &&
                 <div className={styles.Menu}>
                     <AiOutlineClose onClick={ handleClick}/>
-                    <a className={styles.Links} href="/create">
-                      Create
-                    </a>
-
-                    <a className={styles.Links} href="/oprojects">
-                      Explore
-                    </a>
-
-                    <a className={styles.Links} href="/login">
-                      Log Out
-                    </a>
-
-                    <a className={styles.Links} href="/">
-                      Profile
-                    </a>
+                    {
+                      isLogged ? <div className={styles.Menu}>
+                      <a className={styles.Links} href="/create">
+                        Create
+                      </a>
+                      <a className={styles.Links} href="/oprojects">
+                        Explore
+                      </a>
+                      <a className={styles.Links} href="/login">
+                        Log Out
+                      </a>
+                      <a className={styles.Links} href="/">
+                        Profile
+                      </a>
+                    </div>: <div className={styles.Menu}>
+                      <a className={styles.Links} href="/login">
+                        Create
+                      </a>
+                      <a className={styles.Links} href="/oprojects">
+                        Explore
+                      </a>
+                      <a className={styles.Links} href="/login">
+                        Login
+                      </a>
+                    </div> }
                 </div>
               }
             </div>
-        : <div className={styles.NavContainer}>
-            <a className={styles.NavLink}>Create</a>
-            <a className={styles.NavLink}>Explore</a>
-            <button className={styles.LogOut}>Log Out</button>
-            <CgProfile className={styles.Profile} />
+        : <div className={styles.ConditionalContainerNav}>
+            {
+              isLogged ? <div className={styles.NavContainer}>
+                <a className={styles.NavLink} href="/create">Create</a>
+                <a className={styles.NavLink} href="/oprojects">Explore</a>
+                <button className={styles.LogOut}  onClick={() => onLogButton()}>Log Out</button>
+                <CgProfile className={styles.Profile}  href="/"/>
+              </div>:<div className={styles.NavContainer}>
+                <a className={styles.NavLink}  href="/login">Create</a>
+                <a className={styles.NavLink}  href="/oprojects">Explore</a>
+                <button className={styles.LogOut}  onClick={() => onLogButton()}>Login</button>
+              </div>
+            }
+                      
+          
           </div>
       }
       
