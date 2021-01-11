@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from "./HeaderStyles.module.scss";
 import { MdNaturePeople } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { AiOutlineMenu, AiFillCloseCircle } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from 'use-media-size';
 
 //ProjectFeed own searchbar
@@ -18,7 +18,6 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (event)=>{
     setIsOpen(!isOpen)
-    console.log("Clickeado")
   }
   return (
     <div className={styles.Wrapper}>
@@ -32,7 +31,7 @@ export default function Header() {
               <AiOutlineMenu className={styles.MenuIcon} onClick={ handleClick}/>
               {isOpen &&
                 <div className={styles.Menu}>
-                    <AiFillCloseCircle onClick={ handleClick}/>
+                    <AiOutlineClose onClick={ handleClick}/>
                     <a className={styles.Links} href="/create">
                       Create
                     </a>

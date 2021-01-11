@@ -11,6 +11,7 @@ function ProjectMoreInfo() {
       status: "Closed",
       creator: "@Creador 1",
       tags: ["JS", "Popo", "Test"],
+      skills: ["mssm", "ssksks", "smsms"],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: [
         "Motivated",
@@ -89,16 +90,16 @@ function ProjectMoreInfo() {
             ))}
           </div>
           <div className={styles.Column1}>
-            <h3 className={styles.TitleSubtitle}>The team alredy knows:</h3>
+            <h3 className={styles.TitleSubtitle}>Tags</h3>
             <div className={styles.Knows}>
               {projects[0].tags.map((tag) => (
                 <div className={styles.Tag}>{tag}</div>
               ))}
             </div>
-            <h3 className={styles.TitleSubtitle}>The team needs: </h3>
+            <h3 className={styles.TitleSubtitle}>Skills </h3>
             <div className={styles.Needs}>
-              {projects[0].tags.map(
-                (tag) => tag.type == "Learning" && <p>{tag.tag}</p>
+              {projects[0].skills.map(
+                skill =>    <div className={styles.Tag}>{skill}</div>
               )}
             </div>
           </div>

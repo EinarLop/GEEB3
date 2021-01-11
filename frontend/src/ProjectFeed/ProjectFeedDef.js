@@ -88,7 +88,13 @@ function ProjectFeedDef() {
             <div className={styles.Wrapper}>
               <div className={styles.Column0}>
                 <h1> {project.title}</h1>
-                <p>{project.description}</p>
+                <ul className={styles.Hlist}>
+                {
+                project.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))
+                }
+                </ul>
                 <div className={styles.Info}>
                   <h3>Status: {project.status /* agregar color*/}</h3>
                   <h3>Creator: @{project.creator}</h3>
@@ -117,13 +123,13 @@ function ProjectFeedDef() {
           <TabPanel>
             <div className={styles.Wrapper}>
               <div className={styles.Column0}>
-                <h1>{project.title}</h1>
-                <h3>Highlights: </h3>
-                <h4>
-                  {project.highlights.map((h) => (
-                    <p>-{h}</p>
-                  ))}
-                </h4>
+                <h1>{project.title} </h1>
+                <h3>We are looking for: </h3>
+                <ul>
+                  <li>Time Oriented</li>
+                  <li>Knowledge in one Scripting Language</li>
+                </ul>
+
                 <h3>{project.creator}</h3>
               </div>
               <div className={styles.Column2}>
