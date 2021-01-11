@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
-  const [errorInput, setErrorInput] = useState("");
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorConfPass, setErrorConfPass] = useState("");
   const [user, setUser] = useState({
-    name: "",
-    lastName: "",
-    email: "",
     userName: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -17,34 +18,39 @@ function Registration() {
       [event.target.name]: event.target.value,
     });
   };
+  //comentando ando
   const handleOnSubmit = () => {
-    if (errorInput) {
-      setErrorInput("");
-    }
-    if (user.name === "") {
-      console.log("Name input is empty.");
-      setErrorInput("Name can not be empty");
-    } else if (user.userName === "") {
+    setErrorUsername("");
+    setErrorEmail("");
+    setErrorPassword("");
+    setErrorConfPass("");
+    if (user.userName === "") {
       console.log("Usuario vacío");
-      setErrorInput("Username cannot be empty");
+      setErrorUsername("Username cannot be empty");
     } else if (user.userName.charAt(0) !== "@") {
       console.log("Usuario no valido");
-      setErrorInput("Invalid username");
-    } else if (user.email === "") {
+      setErrorUsername("Invalid username");
+    }
+
+    if (user.email === "") {
       console.log("Email input is empty.");
-      setErrorInput("Email can not be empty");
-    } else if (user.password !== user.confirmPassword) {
-      console.log("Contraseñas diferentes");
-      setErrorInput("Your password and confirm password are different");
-    } else if (user.password === "") {
+      setErrorEmail("Email can not be empty");
+    }
+
+    if (user.password === "") {
       console.log("Password vacío");
-      setErrorInput("Password cannot be empty");
+      setErrorPassword("Password cannot be empty");
     } else if (user.password.length < 10) {
       console.log("Password vacío");
-      setErrorInput("Your password must have at least 10 characters");
-    } else if (user.confirmPassword === "") {
+      setErrorPassword("Your password must have at least 10 characters");
+    }
+
+    if (user.confirmPassword === "") {
       console.log("Conf password vacío");
-      setErrorInput("You must confirm your password");
+      setErrorConfPass("You must confirm your password");
+    } else if (user.password !== user.confirmPassword) {
+      console.log("Contraseñas diferentes");
+      setErrorPassword("Your password and confirm password are different");
     }
   };
   return (
@@ -65,20 +71,22 @@ function Registration() {
           <label className={styles.Label}>Username</label>
           <input
             className={styles.Input}
-            //deleted name="name"
+            name="userName"
             onChange={handleOnChange}
             placeholder="PkmMaster69"
           ></input>
+          <p className={styles.ErrorMsg}>{errorUsername}</p>
         </div>
 
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Email</label>
           <input
             className={styles.Input}
-            //deleted name="name"
+            name="email"
             onChange={handleOnChange}
             placeholder="PkmMaster69@gmail.com"
           ></input>
+          <p className={styles.ErrorMsg}>{errorEmail}</p>
         </div>
 
         <div className={styles.InputLabelContainer}>
@@ -86,18 +94,22 @@ function Registration() {
           <input
             className={styles.Input}
             placeholder="VerySecretPassword"
-            //deleted name="name"
+            name="password"
+            type="password"
             onChange={handleOnChange}
           ></input>
+          <p className={styles.ErrorMsg}>{errorPassword}</p>
         </div>
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Confirm Password</label>
           <input
             className={styles.Input}
-            //deleted name="name"
+            name="confirmPassword"
             placeholder="VerySecretPassword"
+            type="password"
             onChange={handleOnChange}
           ></input>
+          <p className={styles.ErrorMsg}>{errorConfPass}</p>
         </div>
 
         <input
@@ -106,7 +118,6 @@ function Registration() {
           value="Submit"
           onClick={handleOnSubmit}
         />
-        <p className={styles.ErrorMsg}>{errorInput}</p>
 
         <p className={styles.Msg}>Already have an account?</p>
         <a href="login">Login</a>

@@ -10,11 +10,7 @@ function ProjectMoreInfo() {
         "A world with no hunger, no disease, no war, no misery. Humanity has conquered all those things, and has even conquered death. Now scythes are the only ones who can end life—and they are commanded to do so, in order to keep the size of the population under control. Citra and Rowan are chosen to apprentice to a scythe—a role that neither wants. These teens must master the “art” of taking life, knowing that the consequence of failure could mean losing their own.",
       status: "Closed",
       creator: "@Creador 1",
-      tags: [
-        { tag: "Python", type: "mastered" },
-        { tag: "Learning", type: "Learning" },
-        { tag: "non-stop", type: "Learning" },
-      ],
+      tags: ["JS", "Popo", "Test"],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: [
         "Motivated",
@@ -75,10 +71,10 @@ function ProjectMoreInfo() {
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
-        <h1 className={styles.TitleSubtitle}>{projects[0].title}</h1>
+        <p className={styles.Title}>{projects[0].title}</p>
         <p className={styles.Paragraph}>{projects[0].description}</p>
         <div className={styles.Highlights}>
-          <h2 className={styles.TitleSubtitle}>Highlights</h2>
+          <p className={styles.TitleSubtitle}>Highlights</p>
 
           {projects[0].highlights.map((h) => (
             <p className={styles.Text}>-{h}</p>
@@ -95,14 +91,14 @@ function ProjectMoreInfo() {
           <div className={styles.Column1}>
             <h3 className={styles.TitleSubtitle}>The team alredy knows:</h3>
             <div className={styles.Knows}>
-              {projects[0].tags.map(
-                (t) => t.type == "mastered" && <p>{t.tag}</p>
-              )}
+              {projects[0].tags.map((tag) => (
+                <div className={styles.Tag}>{tag}</div>
+              ))}
             </div>
             <h3 className={styles.TitleSubtitle}>The team needs: </h3>
             <div className={styles.Needs}>
               {projects[0].tags.map(
-                (t) => t.type == "Learning" && <p>{t.tag}</p>
+                (tag) => tag.type == "Learning" && <p>{tag.tag}</p>
               )}
             </div>
           </div>

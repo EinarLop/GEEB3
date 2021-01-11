@@ -12,25 +12,30 @@ function ProjectFeedDef() {
   };
   const [projects, setProjects] = useState([
     {
-      title: "Development of something",
+      title: "Development of GEEB",
       description:
         "A world with no hunger, no disease, no war, no misery. Humanity has conquered all those things, and has even conquered death. Now scythes are the only ones who can end life—and they are commanded to do so, in order to keep the size of the population under control. Citra and Rowan are chosen to apprentice to a scythe—a role that neither wants. These teens must master the “art” of taking life, knowing that the consequence of failure could mean losing their own.",
-      status: "Closed",
-      creator: "@Creador 1",
+      status: "Open",
+      creator: "GeebInc",
       tags: [
         { tag: "Python", type: "mastered" },
         { tag: "Learning", type: "Learning" },
         { tag: "non-stop", type: "Learning" },
       ],
-      highlights: ["Wanting someone who can develop", "Learn new habilities"],
+      highlights: [
+        "Promising potential for growth & scaling for thousands of users",
+        "Learn new habilities",
+        "Discover new technologies",
+      ],
       profile: [
-        "Montivated",
+        "Motivated",
         "Time for daily meeting",
         "Experience in working in big projects",
       ],
-      members: "3",
-      views: "20",
-      stars: "22",
+      created: "2020-01-01",
+      //members: "3",
+      //views: "20",
+      //stars: "22",
     },
 
     {
@@ -50,6 +55,7 @@ function ProjectFeedDef() {
         "Time for daily meeting",
         "Experience working in groups",
       ],
+      created: "2020-01-01",
     },
 
     {
@@ -65,16 +71,16 @@ function ProjectFeedDef() {
       ],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: ["Motivated", "Want to learn", "Time for daily meeting"],
+      created: "2020-01-01",
     },
   ]);
   return (
     <div className={styles.Global}>
-
       {projects.map((project) => (
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
           <TabList className={styles.TabsList}>
-            <Tab className={styles.TabsUnselected}>General</Tab>
-            <Tab className={styles.TabsUnselected}>Info</Tab>
+            <Tab className={styles.TabsUnselected}>Overview</Tab>
+            <Tab className={styles.TabsUnselected}>Detail</Tab>
             <Tab className={styles.TabsUnselected}>Tags</Tab>
           </TabList>
 
@@ -84,10 +90,9 @@ function ProjectFeedDef() {
                 <h1> {project.title}</h1>
                 <p>{project.description}</p>
                 <div className={styles.Info}>
-                  <h3>Current members: {project.members}</h3>
-                  <h3>Status: {project.status}</h3>
-                  <h3>Views: {project.views}</h3>
-                  <h3>Stars: {project.stars}</h3>
+                  <h3>Status: {project.status /* agregar color*/}</h3>
+                  <h3>Creator: @{project.creator}</h3>
+                  <h3>Created: {project.created}</h3>
                 </div>
               </div>
               <div className={styles.Column2}>
@@ -95,7 +100,7 @@ function ProjectFeedDef() {
                   onClick={() => onEdit()}
                   className={styles.Button}
                   type="button"
-                  value="Edit"
+                  value="Apply"
                 />
               </div>
             </div>
@@ -104,7 +109,7 @@ function ProjectFeedDef() {
                 onClick={() => onEdit()}
                 className={styles.MobileButton}
                 type="button"
-                value="Edit"
+                value="Apply"
               />
             </div>
           </TabPanel>
@@ -113,6 +118,7 @@ function ProjectFeedDef() {
             <div className={styles.Wrapper}>
               <div className={styles.Column0}>
                 <h1>{project.title}</h1>
+                <h3>Highlights: </h3>
                 <h4>
                   {project.highlights.map((h) => (
                     <p>-{h}</p>
@@ -124,7 +130,7 @@ function ProjectFeedDef() {
                 <input
                   className={`${styles.Button} ${styles.Large}`}
                   type="button"
-                  value="More Information"
+                  value="Apply"
                 />
               </div>
             </div>
@@ -132,7 +138,7 @@ function ProjectFeedDef() {
               <input
                 className={styles.MobileButton}
                 type="button"
-                value="More Information"
+                value="Apply"
               />
             </div>
           </TabPanel>
@@ -142,19 +148,9 @@ function ProjectFeedDef() {
               <div className={styles.Column0}>
                 <h2>The team already knows:</h2>
                 {
-                  // There could be at most 6 tags?
+                  // There could be at most 6 tags? TO DO IN BACKEND
                 }
                 <div className={styles.Knows}>
-                  {/*}
-                  {projects[0].tags[0].type == "mastered" && (
-                    <p>{projects[0].tags[0].tag}</p>
-                  )}
-                  {projects[0].tags[1].type == "mastered" && (
-                    <p>{projects[0].tags[1].tag}</p>
-                  )}
-                  {projects[0].tags[2].type == "mastered" && (
-                    <p>{projects[0].tags[2].tag}</p>
-                  )}*/}
                   {project.tags.map(
                     (t) =>
                       t.type == "mastered" && (
@@ -164,15 +160,6 @@ function ProjectFeedDef() {
                 </div>
                 <h2>The team needs:</h2>
                 <div className={styles.Needs}>
-                  {/*projects[0].tags[0].type == "Learning" && (
-                    <p>{projects[0].tags[0].tag}</p>
-                  )}
-                  {projects[0].tags[1].type == "Learning" && (
-                    <p>{projects[0].tags[1].tag}</p>
-                  )}
-                  {projects[0].tags[2].type == "Learning" && (
-                    <p>{projects[0].tags[2].tag}</p>
-                  )*/}
                   {project.tags.map(
                     (t) =>
                       t.type == "Learning" && (
@@ -196,7 +183,7 @@ function ProjectFeedDef() {
                   className={`${styles.Button} ${styles.Large}`}
                   onClick={() => onMoreInfo()}
                   type="button"
-                  value="More Information"
+                  value="Apply"
                 />
               </div>
             </div>
@@ -204,7 +191,7 @@ function ProjectFeedDef() {
               <input
                 className={styles.MobileButton}
                 type="button"
-                value="More Information"
+                value="Apply"
                 onClick={() => onMoreInfo()}
               />
             </div>
