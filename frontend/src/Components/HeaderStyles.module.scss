@@ -62,15 +62,15 @@
   color: azure;
   text-decoration: none;
   width: 100px;
-  margin: 20px 0px 20px 40px;
-  transition: color 0.2s;
+  margin: 20px auto;
+  font-size:25px;
   &:hover {
     font-weight: 500;
   }
 }
 .Menu {
   position: absolute;
-  max-width: 500px;
+  width: 250px;
   height: 100%;
   background-color: $dark;
   display: flex;
@@ -80,10 +80,11 @@
   z-index: 5;
 }
 .MenuIcon {
-  margin-top: 50px;
+  margin-top: 25px;
   height: 70px;
   width: 70px;
-  margin-left: 0px;
+  margin-left: 20px;
+  margin-bottom: 25px;
 }
 
 @media (max-width: 600px) {
