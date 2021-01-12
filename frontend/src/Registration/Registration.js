@@ -70,6 +70,7 @@ function Registration() {
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Username</label>
           <input
+            autoComplete="off"
             className={styles.Input}
             name="userName"
             onChange={handleOnChange}
@@ -81,6 +82,7 @@ function Registration() {
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Email</label>
           <input
+            autoComplete="off" 
             className={styles.Input}
             name="email"
             onChange={handleOnChange}
