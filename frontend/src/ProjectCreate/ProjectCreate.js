@@ -151,7 +151,7 @@ function ProjectCreate() {
     <>
       <Header />
       <div className={styles.Global}>
-        <a className={styles.Title}>Create Project</a>
+        <h1 className={styles.Title}>Create Project</h1>
         <div className={styles.Wrapper}>
           <div className={styles.Column1}>
             <div className={styles.InputLabelContainer}>

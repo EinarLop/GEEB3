@@ -53,6 +53,7 @@
 
 .Column0 {
   padding: 15px;
+  width:80%;
 }
 
 .Column1 {
@@ -95,10 +96,24 @@
   flex-direction: row;
   justify-content: space-between;
   color: #ff0080;
+  flex-wrap: wrap;
 }
 
 .Tag {
   @include Tag;
+
+}
+
+.Hlist {
+}
+
+.Hlist {
+}
+
+.Hlist {
+}
+
+.Hlist {
 }
 
 .Hlist {

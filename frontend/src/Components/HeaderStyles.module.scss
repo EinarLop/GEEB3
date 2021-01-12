@@ -26,12 +26,20 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 50%;
+  width: 100%;
+  height: 100%;
+}
+.ConditionalContainerNav{
+  width:50%;
 }
 
-.NavLink:hover {
-  font-weight: 700;
-  text-decoration: underline;
+.NavLink {
+  color: azure;
+  text-decoration: none;
+  &:hover {
+    font-weight: 700;
+    text-decoration: underline;
+  }
 }
 
 .LogOut {

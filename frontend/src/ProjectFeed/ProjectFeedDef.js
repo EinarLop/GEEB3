@@ -4,11 +4,16 @@ import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedDefStyles.module.scss";
 
 function ProjectFeedDef() {
-  const onEdit = (event) => {
+  /*const onEdit = (event) => {
     console.log("Click on edit button");
-  };
+  };*/
+  const [isLogged, setIsLogged] = useState(true);
   const onMoreInfo = (event) => {
-    console.log("Click on More Info button");
+    if(isLogged){
+      location.href = '/oproject/:id'
+    }else{
+      location.href = '/login'
+    }
   };
   const [projects, setProjects] = useState([
     {
@@ -22,9 +27,14 @@ function ProjectFeedDef() {
         { tag: "Learning", type: "Learning" },
         { tag: "non-stop", type: "Learning" },
       ],
+      skills: [
+        {name: "Skill1"},
+        {name: "Skill2"},
+        {name: "Skill3"}
+      ],
       highlights: [
         "Promising potential for growth & scaling for thousands of users",
-        "Learn new habilities",
+        "Work on a dynamic platform that connects creative people together",
         "Discover new technologies",
       ],
       profile: [
@@ -49,6 +59,11 @@ function ProjectFeedDef() {
         { tag: "Learning", type: "Learning" },
         { tag: "non-stop", type: "Learning" },
       ],
+      skills: [
+        {name: "Skill1"},
+        {name: "Skill2"},
+        {name: "Skill3"}
+      ],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: [
         "Want to learn",
@@ -65,9 +80,17 @@ function ProjectFeedDef() {
       status: "Open",
       creator: "Creador 3",
       tags: [
-        { tag: "Python", type: "mastered" },
-        { tag: "Learning", type: "Learning" },
-        { tag: "non-stop", type: "Learning" },
+        { tag: "Python"},
+        { tag: "Learning"},
+        { tag: "Tag 3"},
+      ],
+      skills: [
+        {name: "Skill1"},
+        {name: "Skill2"},
+        {name: "Skill3"},
+        {name: "Skill4"},
+        {name: "Skill5"},
+        {name: "Skill6"},
       ],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: ["Motivated", "Want to learn", "Time for daily meeting"],
@@ -103,8 +126,9 @@ function ProjectFeedDef() {
               </div>
               <div className={styles.Column2}>
                 <input
-                  onClick={() => onEdit()}
+                  //onClick={() => onEdit()}
                   className={styles.Button}
+                  onClick={() => onMoreInfo()}
                   type="button"
                   value="Apply"
                 />
@@ -112,8 +136,9 @@ function ProjectFeedDef() {
             </div>
             <div className={styles.MobileWrapper}>
               <input
-                onClick={() => onEdit()}
+                //onClick={() => onEdit()}
                 className={styles.MobileButton}
+                onClick={() => onMoreInfo()}
                 type="button"
                 value="Apply"
               />
@@ -121,20 +146,27 @@ function ProjectFeedDef() {
           </TabPanel>
 
           <TabPanel>
-            <div className={styles.Wrapper}>
+          <div className={styles.Wrapper}>
               <div className={styles.Column0}>
-                <h1>{project.title} </h1>
-                <h3>We are looking for: </h3>
-                <ul>
-                  <li>Time Oriented</li>
-                  <li>Knowledge in one Scripting Language</li>
+                <h1> {project.title}</h1>
+                <ul className={styles.Hlist}>
+                {
+                project.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))
+                }
                 </ul>
-
-                <h3>{project.creator}</h3>
+                <div className={styles.Info}>
+                  <h3>Status: {project.status /* agregar color*/}</h3>
+                  <h3>Creator: @{project.creator}</h3>
+                  <h3>Created: {project.created}</h3>
+                </div>
               </div>
               <div className={styles.Column2}>
                 <input
-                  className={`${styles.Button} ${styles.Large}`}
+                  //onClick={() => onEdit()}
+                  className={styles.Button}
+                  onClick={() => onMoreInfo()}
                   type="button"
                   value="Apply"
                 />
@@ -142,7 +174,9 @@ function ProjectFeedDef() {
             </div>
             <div className={styles.MobileWrapper}>
               <input
+                //onClick={() => onEdit()}
                 className={styles.MobileButton}
+                onClick={() => onMoreInfo()}
                 type="button"
                 value="Apply"
               />
@@ -152,38 +186,27 @@ function ProjectFeedDef() {
           <TabPanel>
             <div className={styles.Wrapper}>
               <div className={styles.Column0}>
-                <h2>The team already knows:</h2>
+                <h2>Project Tags:</h2>
                 {
                   // There could be at most 6 tags? TO DO IN BACKEND
                 }
                 <div className={styles.Knows}>
                   {project.tags.map(
-                    (t) =>
-                      t.type == "mastered" && (
-                        <p className={styles.TagMastered}>{t.tag}</p>
+                    (t) => (
+                        <p className={`${styles.Tag} ${styles["Mastered"]}`}>{t.tag}</p>
                       )
                   )}
                 </div>
-                <h2>The team needs:</h2>
+                <h2>Project Skills:</h2>
                 <div className={styles.Needs}>
-                  {project.tags.map(
-                    (t) =>
-                      t.type == "Learning" && (
-                        <p className={styles.TagMastered}>{t.tag}</p>
+                  {project.skills.map(
+                    (s) => (
+                        <p className={`${styles.Tag} ${styles["Learning"]}`}>{s.name}</p>
                       )
                   )}
                 </div>
               </div>
-              <div className={styles.Column1}>
-                <h2>Profile we are looking for:</h2>
-                <p>
-                  {project.profile.map((pro, index) => (
-                    <p>
-                      {index + 1}.-{pro}
-                    </p>
-                  ))}
-                </p>
-              </div>
+
               <div className={styles.Column2}>
                 <input
                   className={`${styles.Button} ${styles.Large}`}
@@ -196,9 +219,9 @@ function ProjectFeedDef() {
             <div className={styles.MobileWrapper}>
               <input
                 className={styles.MobileButton}
+                onClick={() => onMoreInfo()}
                 type="button"
                 value="Apply"
-                onClick={() => onMoreInfo()}
               />
             </div>
           </TabPanel>
