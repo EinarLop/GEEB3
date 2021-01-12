@@ -80,17 +80,20 @@ function ProjectFeedDef() {
       status: "Open",
       creator: "Creador 3",
       tags: [
-        { tag: "Python"},
-        { tag: "Learning"},
-        { tag: "Tag 3"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
       ],
       skills: [
-        {name: "Skill1"},
-        {name: "Skill2"},
-        {name: "Skill3"},
-        {name: "Skill4"},
-        {name: "Skill5"},
-        {name: "Skill6"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        {name: "ajkfdjasflkjdlsafdjlalksj"},
       ],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: ["Motivated", "Want to learn", "Time for daily meeting"],
@@ -109,7 +112,7 @@ function ProjectFeedDef() {
 
           <TabPanel>
             <div className={styles.Wrapper}>
-              <div className={styles.Column0}>
+              <div className={styles.Row0}>
                 <h1> {project.title}</h1>
                 <ul className={styles.Hlist}>
                 {
@@ -124,7 +127,7 @@ function ProjectFeedDef() {
                   <h3>Created: {project.created}</h3>
                 </div>
               </div>
-              <div className={styles.Column2}>
+              <div className={styles.ButtonDiv}>
                 <input
                   //onClick={() => onEdit()}
                   className={styles.Button}
@@ -147,7 +150,7 @@ function ProjectFeedDef() {
 
           <TabPanel>
           <div className={styles.Wrapper}>
-              <div className={styles.Column0}>
+              <div className={styles.Row0}>
                 <h1> {project.title}</h1>
                 <ul className={styles.Hlist}>
                 {
@@ -162,7 +165,7 @@ function ProjectFeedDef() {
                   <h3>Created: {project.created}</h3>
                 </div>
               </div>
-              <div className={styles.Column2}>
+              <div className={styles.ButtonDiv}>
                 <input
                   //onClick={() => onEdit()}
                   className={styles.Button}
@@ -175,7 +178,7 @@ function ProjectFeedDef() {
             <div className={styles.MobileWrapper}>
               <input
                 //onClick={() => onEdit()}
-                className={styles.MobileButton}
+                className={styles.Button}
                 onClick={() => onMoreInfo()}
                 type="button"
                 value="Apply"
@@ -185,12 +188,12 @@ function ProjectFeedDef() {
 
           <TabPanel>
             <div className={styles.Wrapper}>
-              <div className={styles.Column0}>
+              <div className={styles.Row0}>
                 <h2>Project Tags:</h2>
                 {
                   // There could be at most 6 tags? TO DO IN BACKEND
                 }
-                <div className={styles.Knows}>
+                <div className={styles.TagsWrapper}>
                   {project.tags.map(
                     (t) => (
                         <p className={`${styles.Tag} ${styles["Mastered"]}`}>{t.tag}</p>
@@ -198,7 +201,7 @@ function ProjectFeedDef() {
                   )}
                 </div>
                 <h2>Project Skills:</h2>
-                <div className={styles.Needs}>
+                <div className={styles.SkillsWrapper}>
                   {project.skills.map(
                     (s) => (
                         <p className={`${styles.Tag} ${styles["Learning"]}`}>{s.name}</p>
@@ -207,7 +210,7 @@ function ProjectFeedDef() {
                 </div>
               </div>
 
-              <div className={styles.Column2}>
+              <div className={styles.ButtonDiv}>
                 <input
                   className={`${styles.Button} ${styles.Large}`}
                   onClick={() => onMoreInfo()}

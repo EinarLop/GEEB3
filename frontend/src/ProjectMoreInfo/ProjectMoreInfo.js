@@ -101,7 +101,7 @@ function ProjectMoreInfo() {
               {projects[0].skills.map(
                 skill =>    <div className={styles.Tag}>{skill}</div>
               )}
-            </div>
+            </div> 
           </div>
         </div>
         {isLogged && (
@@ -127,6 +127,7 @@ function ProjectMoreInfo() {
               />
                </div>
             </div>
+            <div className={styles.ApplicationMsg}> 
             <div className={styles.InputLabelContainer}>
             <label className={styles.Label}>Highlights</label>
             <textarea
@@ -134,6 +135,7 @@ function ProjectMoreInfo() {
               name="requestDescription"
               onChange={handleOnChange}
             ></textarea>
+            </div>
             </div>
             <p>{errorInput}</p>
             <input
