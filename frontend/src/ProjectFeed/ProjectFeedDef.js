@@ -137,7 +137,8 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
-            <div className={styles.MobileWrapper}>
+            
+            {/*<div className={styles.MobileWrapper}>
               <input
                 //onClick={() => onEdit()}
                 className={styles.MobileButton}
@@ -145,7 +146,7 @@ function ProjectFeedDef() {
                 type="button"
                 value="Apply"
               />
-            </div>
+              </div>*/}
           </TabPanel>
 
           <TabPanel>
@@ -175,6 +176,7 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
+            {/* 
             <div className={styles.MobileWrapper}>
               <input
                 //onClick={() => onEdit()}
@@ -183,7 +185,7 @@ function ProjectFeedDef() {
                 type="button"
                 value="Apply"
               />
-            </div>
+            </div>*/}
           </TabPanel>
 
           <TabPanel>
@@ -212,13 +214,14 @@ function ProjectFeedDef() {
 
               <div className={styles.ButtonDiv}>
                 <input
-                  className={`${styles.Button} ${styles.Large}`}
+                  className={styles.Button}
                   onClick={() => onMoreInfo()}
                   type="button"
                   value="Apply"
                 />
               </div>
             </div>
+            {/*
             <div className={styles.MobileWrapper}>
               <input
                 className={styles.MobileButton}
@@ -226,7 +229,7 @@ function ProjectFeedDef() {
                 type="button"
                 value="Apply"
               />
-            </div>
+            </div> */}
           </TabPanel>
         </Tabs>
       ))}
