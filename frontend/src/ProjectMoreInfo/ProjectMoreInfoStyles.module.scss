@@ -10,8 +10,10 @@
   box-sizing: border-box;
 }
 
-.Tag{
+.Tag {
   @include Tag;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
 
 .Input {
@@ -20,38 +22,57 @@
 
 .Label {
   @include Label;
+  font-size: 25px;
 }
 
 .InputLabelContainer {
   @include InputLabelContainer;
 }
 .userInputs {
-  
   width: 90%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding:25px;
-  margin-top: 50px;
+  padding: 25px;
+  //margin-top: 15px;
 }
 
-.Paragraph {
-  text-align: justify;
-  color: white;
-  font-size: 25px;
+.TitleDesContainer {
   background-color: $dark;
-  padding:25px;
+  padding: 25px;
   border: 1px solid transparent;
   border-radius: 15px;
   width: 90%;
   margin: 25px 0;
 }
 
+.Title {
+  color: #e66d29;
+  font-size: 45px;
+  font-weight: 601;
+  margin: 10px 0 0 0;
+  width: 100%;
+  //word-break: break-all;
+  text-align: center;
+}
+
+.Paragraph {
+  text-align: justify;
+  color: white;
+  font-size: 22px;
+}
+
+.TitleSubtitle {
+  color: #e66d29;
+  font-size: 35px;
+  font-weight: 501;
+  margin: 0;
+}
+
 .Text {
   color: white;
-  font-size: 25px;
- 
+  font-size: 22px;
 }
 
 .Wrapper {
@@ -68,9 +89,9 @@
 
 .Highlights {
   align-items: left;
- 
+
   color: red;
-  padding:25px;
+  padding: 25px;
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
@@ -90,7 +111,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 
 .Data {
@@ -102,7 +122,6 @@
 }
 
 .ReasonForRequest {
-  
   @include Input;
   height: 200px;
   width: 100%;
@@ -114,36 +133,11 @@
 }
 
 .UserEmail,
-.UserMail{
-  
-}
-
-.TitleSubtitle {
-  color: #e66d29;
-  font-size: 45px;
-  font-weight: 501;
-  margin:0;
-  
-}
-
-.Title {
-  color: #e66d29;
-  font-size: 55px;
-  font-weight: 601;
-  margin: 10px 0 0 0;
-  width:100%;
-  word-break: break-all;
-
+.UserMail {
 }
 
 .Button {
   @include Button;
-  width: auto;
-  &.Large {
-    width: auto;
-    height: auto;
-    padding: 10px 20px;
-  }
 }
 
 .Card {
@@ -169,9 +163,8 @@
   flex-wrap: wrap;
 }
 .Column0 {
- 
   background-color: $dark;
-  padding:25px;
+  padding: 25px;
   border: 1px solid transparent;
   border-radius: 15px;
   width: 90%;
@@ -187,13 +180,13 @@
   padding: 25px;
 }
 
-.ApplicationMsg{
+.ApplicationMsg {
   width: 100%;
 }
 
 @media (max-width: 1380px) {
   .Wrapper {
-  align-items: center;
+    align-items: center;
   }
   .Column0 {
     //width: 45%;
@@ -202,15 +195,13 @@
   .Column1 {
     //width: 45%;
   }
-  
-  .ReasonForRequest {
 
+  .ReasonForRequest {
     width: 100%;
   }
 
   .RequestData {
-    
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
@@ -222,22 +213,37 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  
 }
 @media (max-width: 720px) {
+  .Title {
+    font-size: 25px;
+  }
 
+  .TitleSubtitle {
+    font-size: 20px;
+  }
+
+  .Paragraph {
+    font-size: 15px;
+  }
+  .Text {
+    font-size: 15px;
+  }
+
+  .ApplicationMsg {
+    width: auto;
+  }
   .ReasonForRequest {
-
-    width: 100%;
+    width: 300px;
   }
   .RequestData {
-   // width: auto;
-    display:flex;
+    // width: auto;
+    display: flex;
     flex-direction: column;
     width: auto;
   }
   .Button {
-    font-size: 12px;
+    font-size: 22px;
   }
   .Data {
     // width: 40%;
@@ -248,13 +254,13 @@
     font-size: 13px;
   }
   .Wrapper {
-   // width: 90vw;
+    // width: 90vw;
   }
   .Tags {
     flex-direction: column;
   }
-  .ColumnDivision{
-    flex-direction:column;
+  .ColumnDivision {
+    flex-direction: column;
     align-items: center;
   }
   .Column0 {

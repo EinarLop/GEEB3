@@ -72,8 +72,11 @@ function ProjectMoreInfo() {
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
-        <p className={styles.Title}>{projects[0].title}</p>
-        <p className={styles.Paragraph}>{projects[0].description}</p>
+        <div className={styles.TitleDesContainer}>
+          <p className={styles.Title}>{projects[0].title}</p>
+          <p className={styles.Paragraph}>{projects[0].description}</p>
+        </div>
+
         <div className={styles.Highlights}>
           <p className={styles.TitleSubtitle}>Highlights</p>
 
@@ -93,54 +96,56 @@ function ProjectMoreInfo() {
             <h3 className={styles.TitleSubtitle}>Tags</h3>
             <div className={styles.Knows}>
               {projects[0].tags.map((tag) => (
-                <div className={styles.Tag}>{tag}</div>
+                <div className={`${styles.Tag} ${styles.Mastered}`}>{tag}</div>
               ))}
             </div>
             <h3 className={styles.TitleSubtitle}>Skills </h3>
             <div className={styles.Needs}>
-              {projects[0].skills.map(
-                skill =>    <div className={styles.Tag}>{skill}</div>
-              )}
-            </div> 
+              {projects[0].skills.map((skill) => (
+                <div className={`${styles.Tag} ${styles.Learning}`}>
+                  {skill}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         {isLogged && (
           <div className={styles.userInputs}>
+            <p className={styles.Title}>Send a request</p>
             <div className={styles.RequestData}>
-
-            <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Highlights</label>
-              <input
-                placeholder={request.userNames}
-                name="userNames"
-                className={styles.Data}
-                onChange={handleOnChange}
-              />
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Highlights</label>
+                <input
+                  placeholder={request.userNames}
+                  name="userNames"
+                  className={styles.Data}
+                  onChange={handleOnChange}
+                />
               </div>
               <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Highlights</label>
-              <input
-                placeholder={request.userEmail}
-                name="userEmail"
-                onChange={handleOnChange}
-                className={styles.Data}
-              />
-               </div>
+                <label className={styles.Label}>Highlights</label>
+                <input
+                  placeholder={request.userEmail}
+                  name="userEmail"
+                  onChange={handleOnChange}
+                  className={styles.Data}
+                />
+              </div>
             </div>
-            <div className={styles.ApplicationMsg}> 
-            <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Highlights</label>
-            <textarea
-              className={styles.ReasonForRequest}
-              name="requestDescription"
-              onChange={handleOnChange}
-            ></textarea>
-            </div>
+            <div className={styles.ApplicationMsg}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Highlights</label>
+                <textarea
+                  className={styles.ReasonForRequest}
+                  name="requestDescription"
+                  onChange={handleOnChange}
+                ></textarea>
+              </div>
             </div>
             <p>{errorInput}</p>
             <input
               type="button"
-              className={styles.Button}
+              className={`${styles.Button} ${styles.Large} `}
               value="Send Request"
               onClick={handleOnSubmit}
             />
