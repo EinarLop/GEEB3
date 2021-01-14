@@ -1,18 +1,36 @@
-import React, { useState, Component } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedDefStyles.module.scss";
+import axios from "axios";
 
 function ProjectFeedDef() {
+  const [oprojects, setOprojects] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/oprojects")
+      .then((response) => setOprojects(response.data));
+  }, []);
+
+  //.get("http://localhost:3010/oprojects")
+  //.then((response) => {
+  //  console.log(response.data);
+  //  setOprojects(response.data);
+  //})
+  //.catch((error) => {
+  //  console.log(error);
+  //});
+  //}, []);
   /*const onEdit = (event) => {
     console.log("Click on edit button");
   };*/
   const [isLogged, setIsLogged] = useState(true);
   const onMoreInfo = (event) => {
-    if(isLogged){
-      location.href = '/oproject/:id'
-    }else{
-      location.href = '/login'
+    if (isLogged) {
+      location.href = "/oproject/:id";
+    } else {
+      location.href = "/login";
     }
   };
   const [projects, setProjects] = useState([
@@ -27,11 +45,7 @@ function ProjectFeedDef() {
         { tag: "Learning", type: "Learning" },
         { tag: "non-stop", type: "Learning" },
       ],
-      skills: [
-        {name: "Skill1"},
-        {name: "Skill2"},
-        {name: "Skill3"}
-      ],
+      skills: [{ name: "Skill1" }, { name: "Skill2" }, { name: "Skill3" }],
       highlights: [
         "Promising potential for growth & scaling for thousands of users",
         "Work on a dynamic platform that connects creative people together",
@@ -59,11 +73,7 @@ function ProjectFeedDef() {
         { tag: "Learning", type: "Learning" },
         { tag: "non-stop", type: "Learning" },
       ],
-      skills: [
-        {name: "Skill1"},
-        {name: "Skill2"},
-        {name: "Skill3"}
-      ],
+      skills: [{ name: "Skill1" }, { name: "Skill2" }, { name: "Skill3" }],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: [
         "Want to learn",
@@ -80,20 +90,20 @@ function ProjectFeedDef() {
       status: "Open",
       creator: "Creador 3",
       tags: [
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
-        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA"},
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
+        { tag: "AAAAAAAAAAAAAAAAAAAAAAAAA" },
       ],
       skills: [
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
-        {name: "ajkfdjasflkjdlsafdjlalksj"},
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
+        { name: "ajkfdjasflkjdlsafdjlalksj" },
       ],
       highlights: ["Wanting someone who can develop", "Learn new habilities"],
       profile: ["Motivated", "Want to learn", "Time for daily meeting"],
@@ -102,7 +112,11 @@ function ProjectFeedDef() {
   ]);
   return (
     <div className={styles.Global}>
-      {projects.map((project) => (
+      {oprojects.map((oproject) => (
+        <div> {oproject.title}</div>
+      ))}
+
+      {oprojects.map((project) => (
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
           <TabList className={styles.TabsList}>
             <Tab className={styles.TabsUnselected}>Overview</Tab>
@@ -135,15 +149,13 @@ function ProjectFeedDef() {
           </TabPanel>
 
           <TabPanel>
-          <div className={styles.Wrapper}>
+            <div className={styles.Wrapper}>
               <div className={styles.Row0}>
                 <h1> {project.title}</h1>
                 <ul className={styles.Hlist}>
-                {
-                project.highlights.map((h) => (
+                  {project.highlights.map((h) => (
                     <li>{h}</li>
-                  ))
-                }
+                  ))}
                 </ul>
                 <div className={styles.Info}>
                   <div className={styles[project.status]}>
@@ -172,19 +184,15 @@ function ProjectFeedDef() {
                   // There could be at most 6 tags? TO DO IN BACKEND
                 }
                 <div className={styles.TagsWrapper}>
-                  {project.tags.map(
-                    (t) => (
-                        <p className={`${styles.Tag} ${styles["Mastered"]}`}>{t.tag}</p>
-                      )
-                  )}
+                  {project.tags.map((t) => (
+                    <p className={`${styles.Tag} ${styles["Mastered"]}`}>{t}</p>
+                  ))}
                 </div>
                 <h2>Project Skills:</h2>
                 <div className={styles.SkillsWrapper}>
-                  {project.skills.map(
-                    (s) => (
-                        <p className={`${styles.Tag} ${styles["Learning"]}`}>{s.name}</p>
-                      )
-                  )}
+                  {project.skills.map((s) => (
+                    <p className={`${styles.Tag} ${styles["Learning"]}`}>{s}</p>
+                  ))}
                 </div>
               </div>
 
@@ -197,7 +205,6 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
-            
           </TabPanel>
         </Tabs>
       ))}
