@@ -7,7 +7,6 @@
   color: white;
   margin: 15px 25px 0px 0;
 
-
   &.Mastered {
     background-color: $tagBlue;
     border: 2px solid $tagBlue;
@@ -15,7 +14,7 @@
     &:hover {
       background-color: #fff;
       color: $tagBlue;
-    } 
+    }
   }
 
   &.Learning {
@@ -28,7 +27,6 @@
     &:hover {
       background-color: #fff;
       color: $tagPurple;
-    } 
+    }
   }
-  
 }
