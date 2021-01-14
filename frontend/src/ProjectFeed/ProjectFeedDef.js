@@ -52,7 +52,7 @@ function ProjectFeedDef() {
       title: "My videogame",
       description:
         "Twelve-year-old Percy Jackson is on the most dangerous quest of his life. With the help of a satyr and a daughter of Athena, Percy must journey across the United States to catch a thief who has stolen the original weapon of mass destruction — Zeus’ master bolt. Along the way, he must face a host of mythological enemies determined to stop him. Most of all, he must come to terms with a father he has never known, and an Oracle that has warned him of betrayal by a friend.",
-      status: "Open",
+      status: "Closed",
       creator: "Creador 2",
       tags: [
         { tag: "Python", type: "mastered" },
@@ -114,22 +114,17 @@ function ProjectFeedDef() {
             <div className={styles.Wrapper}>
               <div className={styles.Row0}>
                 <h1> {project.title}</h1>
-                <ul className={styles.Hlist}>
-                {
-                project.highlights.map((h) => (
-                    <li>{h}</li>
-                  ))
-                }
-                </ul>
+                <p>{project.description}</p>
                 <div className={styles.Info}>
-                  <h3>Status: {project.status /* agregar color*/}</h3>
-                  <h3>Creator: @{project.creator}</h3>
-                  <h3>Created: {project.created}</h3>
+                  <div className={styles[project.status]}>
+                    <p>Status: {project.status}</p>
+                  </div>
+                  <p>Creator: @{project.creator}</p>
+                  <p>Created: {project.created}</p>
                 </div>
               </div>
               <div className={styles.ButtonDiv}>
                 <input
-                  //onClick={() => onEdit()}
                   className={styles.Button}
                   onClick={() => onMoreInfo()}
                   type="button"
@@ -137,16 +132,6 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
-            
-            {/*<div className={styles.MobileWrapper}>
-              <input
-                //onClick={() => onEdit()}
-                className={styles.MobileButton}
-                onClick={() => onMoreInfo()}
-                type="button"
-                value="Apply"
-              />
-              </div>*/}
           </TabPanel>
 
           <TabPanel>
@@ -161,14 +146,15 @@ function ProjectFeedDef() {
                 }
                 </ul>
                 <div className={styles.Info}>
-                  <h3>Status: {project.status /* agregar color*/}</h3>
-                  <h3>Creator: @{project.creator}</h3>
-                  <h3>Created: {project.created}</h3>
+                  <div className={styles[project.status]}>
+                    <p>Status: {project.status}</p>
+                  </div>
+                  <p>Creator: @{project.creator}</p>
+                  <p>Created: {project.created}</p>
                 </div>
               </div>
               <div className={styles.ButtonDiv}>
                 <input
-                  //onClick={() => onEdit()}
                   className={styles.Button}
                   onClick={() => onMoreInfo()}
                   type="button"
@@ -176,16 +162,6 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
-            {/* 
-            <div className={styles.MobileWrapper}>
-              <input
-                //onClick={() => onEdit()}
-                className={styles.Button}
-                onClick={() => onMoreInfo()}
-                type="button"
-                value="Apply"
-              />
-            </div>*/}
           </TabPanel>
 
           <TabPanel>
@@ -221,15 +197,7 @@ function ProjectFeedDef() {
                 />
               </div>
             </div>
-            {/*
-            <div className={styles.MobileWrapper}>
-              <input
-                className={styles.MobileButton}
-                onClick={() => onMoreInfo()}
-                type="button"
-                value="Apply"
-              />
-            </div> */}
+            
           </TabPanel>
         </Tabs>
       ))}

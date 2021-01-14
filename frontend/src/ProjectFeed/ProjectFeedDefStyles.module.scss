@@ -2,6 +2,10 @@
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
 
+li {
+    margin: 10px 0px;
+}
+
 .Global {
   display: flex;
   justify-content: center;
@@ -9,9 +13,6 @@
   align-items: center;
 }
 
-.MobileButton {
-  display: none;
-}
 
 .Wrapper {
   display: flex;
@@ -37,7 +38,7 @@
   margin: 0px;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
 }
 .TabSelected {
   background-color: #e66d29;
@@ -51,7 +52,7 @@
   padding: 0px;
   margin: 0;
   list-style-type: none;
-  border-bottom: 1px solid #e66d29;
+  border-bottom: 2px solid #e66d29;
 }
 
 .Row0 {
@@ -65,16 +66,19 @@
 .ButtonDiv {
   padding: 15px;
   display: flex;
-  flex-direction: col;
+  flex-direction: row;
   justify-content: flex-end;
 }
 
 .Info {
+  font-style:italic;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 1em;
   height: 45px;
-  font-weight: 300px;
+  font-weight: 501;
+  font-size: 20px;
 }
 
 .Button {
@@ -108,10 +112,17 @@
   // 
 }
 
+.Open{
+  color: rgb(73, 211, 130);
+}
+
+.Closed{
+  color: rgb(196, 9, 9);
+}
 
 .Hlist {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 @media (max-width: 1380px) {
@@ -124,45 +135,40 @@
   .Card {
     width: 600px;
   }
-  /*
-  .Button {
-    @include Button;
-    font-size: 12px;
-    padding: 6px 8px;
-    width: auto;
-    height: auto;
-    &.Large {
-      padding: 6px 12px;
-      width: auto;
-      height: auto;
-    }
-  }*/
-}
 
+}
 @media (max-width: 720px) {
+  .Info{
+    flex-direction: column;
+    height: auto;
+    font-size:16px;
+    font-weight: 500;
+    
+
+      p {
+        margin: 8px;
+      }
+
+    }
+  
+  .Global {
+    font-size: 16px;
+  }
+  .Card {
+    width: 90%;
+  }
   .Hlist {
     font-size: 16px;
   }
-  .Global {
-    font-size: 8px;
-  }
-  .Card {
-    width: 300px;
-  }
-  .Hlist {
-    font-size: 10px;
-  }
   .TabsUnselected{
-    font-size: 10px;
-  }
-  .MobileWrapper {
-    
+    font-size: 16px;
   }
   .Button{
-    font-size: 12px;
+    font-size: 16px;
     padding: 6px 8px;
-    width: auto;
+    width: 250px;
     height: auto;
+    align-self: center;
   }
   .ButtonDiv{
     display: flex;
@@ -171,28 +177,10 @@
     padding:0 0 15px 0;
     font-size: 10px;
   }
-/*
-  .MobileButton {
-    @include Button;
-    font-size: 12px;
-    padding: 6px 8px;
-    width: auto;
-    height: auto;
-    &.Large {
-      padding: 3px 6px;
-      width: auto;
-      height: auto;
-    }
-    display: inline;
-  }*/
 
-  .Row2 {
-    display: none;
-  }
   .Tag {
-    //max-width: 50px;
-    max-height: 50px;
-    font-size: 10px;
+    height: 15px;
+    font-size: 13px;
   }
 
 }
