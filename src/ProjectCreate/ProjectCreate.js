@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import Header from "../Components/Header";
+import axios from "axios";
 //TO DO
 //No empty title, description, highlights, tags
 //Title max characters 50
@@ -167,7 +168,7 @@ function ProjectCreate() {
     if (tags.length !== 0) {
       setErrorTag("");
     }
-    if (profile.length === 0) {
+    if (profiles.length === 0) {
       setErrorHighlight("You should add at least 1 profile requirement");
     }
     if (skills.length === 0) {
@@ -185,7 +186,13 @@ function ProjectCreate() {
         title: project.title,
         description: project.description,
         status: project.status,
+        tags: project.tags,
+        desirables: project.profiles,
+        skills: project.skills,
       };
+      axios
+        .post("http://localhost:3010/oprojects/create", Project)
+        .then((res) => console.log(res.data));
     }
   };
 
