@@ -7,7 +7,7 @@
   color: white;
   margin: 15px 25px 0px 0;
 
-  &.Mastered {
+  &.TopicTag {
     background-color: $tagBlue;
     border: 2px solid $tagBlue;
 
@@ -17,7 +17,7 @@
     }
   }
 
-  &.Learning {
+  &.SkillTag {
     // color: $tagPurple;
     // background-color: transparent
     // boder 2px solid $tagPurple

@@ -19,7 +19,6 @@ function ProjectCreate() {
     currentHighlight: "",
     currentTag: "",
     currentSkill: "",
-    currentType: "Learning",
     currentProfile: "",
   });
   const [highlights, setHighlights] = useState([]);
@@ -38,11 +37,7 @@ function ProjectCreate() {
     if (project.currentTag != "") {
       if (project.currentTag.length <= 25) {
         if (tags.length < 10) {
-          const tag = {
-            value: project.currentTag,
-            type: "Mastered",
-          };
-          setTags((tags) => [...tags, tag]);
+          setTags((tags) => [...tags, project.currentTag]);
 
           setProject({
             ...project,
@@ -50,7 +45,7 @@ function ProjectCreate() {
           });
           setErrorTag("");
         } else {
-          setErrorTag("You can not have more than 10 tags");
+          setErrorTag("You cannot have more than 10 tags");
         }
       } else {
         setErrorTag("You can only use 25 chars per tag");
@@ -64,18 +59,14 @@ function ProjectCreate() {
     if (project.currentSkill != "") {
       if (project.currentSkill.length <= 25) {
         if (skills.length < 10) {
-          const skill = {
-            value: project.currentSkill,
-            type: "Learning",
-          };
-          setSkills((skill) => [...skills, skill]);
+          setSkills((skills) => [...skills, project.currentSkill]);
           setProject({
             ...project,
             currentSkill: "",
           });
           setErrorSkill("");
         } else {
-          setErrorSkill("You can not have more than 10 skills");
+          setErrorSkill("You cannot have more than 10 skills");
         }
       } else {
         setErrorSkill("You can only use 25 chars per Skill");
@@ -115,7 +106,7 @@ function ProjectCreate() {
     if (project.currentProfile != "") {
       if (project.currentProfile.length <= 100) {
         if (profiles.length < 5) {
-          setHighlights((profiles) => [...profiles, project.currentProfile]);
+          setProfiles((profiles) => [...profiles, project.currentProfile]);
 
           setProject({
             ...project,
@@ -134,6 +125,8 @@ function ProjectCreate() {
   };
 
   const handleOnChange = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
     setProject({
       ...project,
       [event.target.name]: event.target.value,
@@ -174,12 +167,19 @@ function ProjectCreate() {
     if (tags.length !== 0) {
       setErrorTag("");
     }
-
+    if (profile.length === 0) {
+      setErrorHighlight("You should add at least 1 profile requirement");
+    }
+    if (skills.length === 0) {
+      setErrorHighlight("You should add at least 1 skill");
+    }
     if (
       errorDescription === "" &&
       errorTitle === "" &&
       errorTag === "" &&
-      errorHighlight === ""
+      errorHighlight === "" &&
+      errorSkill === "" &&
+      errorProfile === ""
     ) {
       const Project = {
         title: project.title,
@@ -196,6 +196,13 @@ function ProjectCreate() {
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
+  const onDeleteSkill = (index) => {
+    setSkills(skills.filter((skill, i) => i !== index));
+  };
+  const onDeleteProfile = (index) => {
+    setProfiles(profiles.filter((profile, i) => i !== index));
+  };
+
   return (
     <>
       {/* <Header /> */}
@@ -254,6 +261,7 @@ function ProjectCreate() {
                   autoComplete="off"
                 />
               </div>
+              <p className={styles.ErrorMsg}>{errorTag}</p>
               <div className={styles.TInputContainer}>
                 <div className={styles.InputLabelContainer}>
                   <input
@@ -263,15 +271,16 @@ function ProjectCreate() {
                     onClick={onAddTag}
                   />
                 </div>
+                {/*Tags, Skills add button como círculo con '+'*/}
               </div>
-              <p className={styles.ErrorMsg}>{errorTag}</p>
+
               <div className={styles.TContainer}>
                 {tags.map((tag, index) => (
                   <div
-                    className={`${styles.Tag} ${styles[tag.type]}`}
+                    className={`${styles.Tag} ${styles.TopicTag}`}
                     onClick={() => onDeleteTag(index)}
                   >
-                    {tag.value}
+                    {tag}
                   </div>
                 ))}
               </div>
@@ -290,6 +299,7 @@ function ProjectCreate() {
                 />
               </div>
               <div className={styles.TInputContainer}>
+                <p className={styles.ErrorMsg}>{errorSkill}</p>
                 <div className={styles.InputLabelContainer}>
                   <input
                     className={`${styles.Button} ${styles.Special}`}
@@ -299,14 +309,13 @@ function ProjectCreate() {
                   />
                 </div>
               </div>
-              <p className={styles.ErrorMsg}>{errorSkill}</p>
               <div className={styles.TContainer}>
                 {skills.map((skill, index) => (
                   <div
-                    className={`${styles.Tag} ${styles[tag.type]}`}
-                    onClick={() => onDeleteTag(index)}
+                    className={`${styles.Tag} ${styles.SkillTag}`}
+                    onClick={() => onDeleteSkill(index)}
                   >
-                    {tag.value}
+                    {skill}
                   </div>
                 ))}
               </div>
@@ -334,17 +343,18 @@ function ProjectCreate() {
                 value="Add"
               />
               <p className={styles.ErrorMsg}>{errorProfile}</p>
+              <div className={styles.HContainer}>
+                {profiles.map((prof, index) => (
+                  <p
+                    className={styles.Highlight}
+                    onClick={() => onDeleteProfile(index)}
+                  >
+                    {index + 1 + "."} {" " + prof}
+                  </p>
+                ))}
+              </div>
             </div>
-            <div className={styles.HContainer}>
-              {highlights.map((highlight, index) => (
-                <p
-                  className={styles.Highlight}
-                  onClick={() => onDeleteHighlight(index)}
-                >
-                  {index + 1 + "."} {" " + highlight}
-                </p>
-              ))}
-            </div>
+
             <div className={styles.HInputContainer}>
               <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Highlights</label>
@@ -357,24 +367,24 @@ function ProjectCreate() {
                   autoComplete="off"
                 />
               </div>
-
+              <p className={styles.ErrorMsg}>{errorHighlight}</p>
               <input
                 className={styles.Button}
                 onClick={onAddHighlight}
                 type="button"
                 value="Add"
               />
-              <p className={styles.ErrorMsg}>{errorHighlight}</p>
-            </div>
-            <div className={styles.HContainer}>
-              {highlights.map((highlight, index) => (
-                <p
-                  className={styles.Highlight}
-                  onClick={() => onDeleteHighlight(index)}
-                >
-                  {index + 1 + "."} {" " + highlight}
-                </p>
-              ))}
+
+              <div className={styles.HContainer}>
+                {highlights.map((highlight, index) => (
+                  <p
+                    className={styles.Highlight}
+                    onClick={() => onDeleteHighlight(index)}
+                  >
+                    {index + 1 + "."} {" " + highlight}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
