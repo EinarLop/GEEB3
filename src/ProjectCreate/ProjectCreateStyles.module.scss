@@ -2,6 +2,12 @@
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .Global {
   display: flex;
   justify-content: center;
@@ -23,12 +29,11 @@
 
 .Select {
   @include Select;
-  margin-right: 50px;
 }
 
 .TextArea {
   @include Input;
-  height: 465px;
+  height: 200px;
 }
 
 .Button {
@@ -58,6 +63,11 @@
   font-family: $font;
   color: white;
   margin-top: 25px;
+  //margin-bottom: 10px;
+}
+.TitleStatusContainer {
+  display: flex;
+  flex-direction: column;
 }
 .TContainer {
   display: flex;
@@ -82,11 +92,7 @@
   font-size: 20px;
   width: 400px;
   overflow-wrap: break-word;
-  height: 110px;
-  display: block;
-  justify-content: right;
-  margin: 25px 0 0 0;
-
+  height: auto;
   &:hover {
     background-color: #f74f39a6;
   }
@@ -99,6 +105,7 @@
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  width: 100%;
 }
 
 .Column1 {
@@ -119,9 +126,11 @@
   flex-direction: column;
   align-items: flex-start;
 }
-//////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @media (max-width: 1380px) {
+  // de 1380 para abajo (Tablets)
   .Global {
     //   display: flex;
     //   justify-content: center;
@@ -138,37 +147,53 @@
   .Highlight {
     width: 300px;
   }
+
+  .TitleStatusContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
   .Wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    width: 99vw;
-    padding: 0;
+    width: 100%;
+  }
+
+  .Column1 {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    overflow: hidden;
+  }
+  .Column2 {
+    grid-area: 2 / 1 / 3 / 2;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    //flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .Column3 {
+    grid-area: 3 / 1 / 4 / 2;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
   }
   .TInputContainer {
     flex-direction: column;
   }
-  .Column1 {
-    grid-area: 1 / 1 / 3 / 2;
-    max-width: 300px;
-    margin: 0 auto;
-    //align-items: center;
-  }
-  .Column2 {
-    grid-area: 1 / 2 / 2 / 3;
-    max-width: 300px;
-    margin: 0 auto;
-    //align-items: flex-end;
-  }
-  .Column3 {
-    grid-area: 2 / 2 / 3 / 3;
-    max-width: 300px;
-    margin: 0 auto;
+  .HInputContainer {
+    justify-content: space-between;
+    flex-direction: column;
   }
 }
-//////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @media (max-width: 600px) {
   .Global {
     display: flex;
@@ -200,21 +225,23 @@
     grid-area: 1 / 1 / 2 / 2;
     max-width: 100%;
     display: flex;
-
     align-items: center;
+    flex-direction: column;
   }
+
   .Column2 {
     grid-area: 2 / 1 / 3 / 2;
-    max-width: 320px;
+    max-width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
   .Column3 {
     grid-area: 3 / 1 / 4 / 2;
-    max-width: 320px;
-    // margin-top: -215px;
+    max-width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
 
   .Select {
@@ -226,6 +253,9 @@
       margin-top: -25px;
       margin-bottom: 25px;
     }
+    &.Special {
+      margin-top: -25px;
+      margin-bottom: 25px;
+    }
   }
 }
-////////////////////////////////////////////

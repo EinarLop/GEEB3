@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import Header from "../Components/Header";
+import axios from "axios";
 //TO DO
 //No empty title, description, highlights, tags
 //Title max characters 50
@@ -18,42 +19,61 @@ function ProjectCreate() {
     status: "Open",
     currentHighlight: "",
     currentTag: "",
-    currentType: "Learning",
+    currentSkill: "",
+    currentProfile: "",
   });
   const [highlights, setHighlights] = useState([]);
   const [tags, setTags] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [skills, setSkills] = useState([]);
 
   const [errorTitle, setErrorTitle] = useState("");
   const [errorDescription, setErrorDescription] = useState("");
   const [errorHighlight, setErrorHighlight] = useState("");
   const [errorTag, setErrorTag] = useState("");
+  const [errorSkill, setErrorSkill] = useState("");
+  const [errorProfile, setErrorProfile] = useState("");
 
   const onAddTag = (event) => {
     if (project.currentTag != "") {
       if (project.currentTag.length <= 25) {
         if (tags.length < 10) {
-          const tag = {
-            value: project.currentTag,
-            type: project.currentType,
-          };
-          setTags((tags) => [...tags, tag]);
+          setTags((tags) => [...tags, project.currentTag]);
 
           setProject({
             ...project,
             currentTag: "",
           });
           setErrorTag("");
-          //tags.length < 10
         } else {
-          setErrorTag("You can not have more than 10 tags");
+          setErrorTag("You cannot have more than 10 tags");
         }
-        //project.currentTag.length <= 25
       } else {
         setErrorTag("You can only use 25 chars per tag");
       }
-      //project.currentTag != ""
     } else {
       setErrorTag("Tags can not be empty");
+    }
+  };
+
+  const onAddSkill = (event) => {
+    if (project.currentSkill != "") {
+      if (project.currentSkill.length <= 25) {
+        if (skills.length < 10) {
+          setSkills((skills) => [...skills, project.currentSkill]);
+          setProject({
+            ...project,
+            currentSkill: "",
+          });
+          setErrorSkill("");
+        } else {
+          setErrorSkill("You cannot have more than 10 skills");
+        }
+      } else {
+        setErrorSkill("You can only use 25 chars per Skill");
+      }
+    } else {
+      setErrorSkill("Skill can not be empty");
     }
   };
 
@@ -83,8 +103,31 @@ function ProjectCreate() {
     }
     console.log(highlights);
   };
+  const onAddProfile = (event) => {
+    if (project.currentProfile != "") {
+      if (project.currentProfile.length <= 100) {
+        if (profiles.length < 5) {
+          setProfiles((profiles) => [...profiles, project.currentProfile]);
+
+          setProject({
+            ...project,
+            currentProfile: "",
+          });
+          setErrorProfile("");
+        } else {
+          setErrorProfile("You can not have more than 5 profile requirements");
+        }
+      } else {
+        setErrorProfile("Profiles can not have more than 100 char");
+      }
+    } else {
+      setErrorProfile("Profiles can not be empty");
+    }
+  };
 
   const handleOnChange = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
     setProject({
       ...project,
       [event.target.name]: event.target.value,
@@ -125,18 +168,31 @@ function ProjectCreate() {
     if (tags.length !== 0) {
       setErrorTag("");
     }
-
+    if (profiles.length === 0) {
+      setErrorHighlight("You should add at least 1 profile requirement");
+    }
+    if (skills.length === 0) {
+      setErrorHighlight("You should add at least 1 skill");
+    }
     if (
       errorDescription === "" &&
       errorTitle === "" &&
       errorTag === "" &&
-      errorHighlight === ""
+      errorHighlight === "" &&
+      errorSkill === "" &&
+      errorProfile === ""
     ) {
       const Project = {
         title: project.title,
         description: project.description,
         status: project.status,
+        tags: project.tags,
+        desirables: project.profiles,
+        skills: project.skills,
       };
+      axios
+        .post("http://localhost:3010/oprojects/create", Project)
+        .then((res) => console.log(res.data));
     }
   };
 
@@ -147,29 +203,51 @@ function ProjectCreate() {
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
+  const onDeleteSkill = (index) => {
+    setSkills(skills.filter((skill, i) => i !== index));
+  };
+  const onDeleteProfile = (index) => {
+    setProfiles(profiles.filter((profile, i) => i !== index));
+  };
+
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className={styles.Global}>
         <h1 className={styles.Title}>Create Project</h1>
         <div className={styles.Wrapper}>
           <div className={styles.Column1}>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Project title</label>
-              <input
-                className={styles.Input}
-                placeholder="Awesome Project"
-                onChange={handleOnChange}
-                name="title"
-                autoComplete="off"
-              />
-              <p className={styles.ErrorMsg}>{errorTitle}</p>
+            <div className={styles.TitleStatusContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Project title</label>
+                <input
+                  className={styles.Input}
+                  placeholder="Awesome Project"
+                  onChange={handleOnChange}
+                  name="title"
+                  autoComplete="off"
+                />
+                <p className={styles.ErrorMsg}>{errorTitle}</p>
+              </div>
+
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Status</label>
+                <select
+                  className={styles.Select}
+                  onChange={handleOnChange}
+                  name="status"
+                  value={project.status}
+                >
+                  <option className={styles.Option}>Open</option>
+                  <option>Closed</option>
+                </select>
+              </div>
             </div>
             <div className={styles.InputLabelContainer}>
               <label className={styles.Label}>Project description</label>
               <textarea
                 className={styles.TextArea}
-                placeholder="ej. This project tries to solve world hunger problem"
+                placeholder="Describe your project in X characters or less!"
                 onChange={handleOnChange}
                 name="description"
               />
@@ -178,23 +256,117 @@ function ProjectCreate() {
           </div>
 
           <div className={styles.Column2}>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Status</label>
-              <select
-                className={styles.Select}
-                onChange={handleOnChange}
-                name="status"
-                value={project.status}
-              >
-                <option className={styles.Option}>Open</option>
-                <option>Closed</option>
-              </select>
+            <div className={styles.TagsContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Your Project's Tags</label>
+                <input
+                  className={styles.Input}
+                  placeholder="Programming, Marketing, etc..."
+                  onChange={handleOnChange}
+                  name="currentTag"
+                  value={project.currentTag}
+                  autoComplete="off"
+                />
+              </div>
+              <p className={styles.ErrorMsg}>{errorTag}</p>
+              <div className={styles.TInputContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <input
+                    className={`${styles.Button} ${styles.Special}`}
+                    type="button"
+                    value="Add"
+                    onClick={onAddTag}
+                  />
+                </div>
+                {/*Tags, Skills add button como círculo con '+'*/}
+              </div>
+
+              <div className={styles.TContainer}>
+                {tags.map((tag, index) => (
+                  <div
+                    className={`${styles.Tag} ${styles.TopicTag}`}
+                    onClick={() => onDeleteTag(index)}
+                  >
+                    {tag}
+                  </div>
+                ))}
+              </div>
             </div>
+
+            <div className={styles.SkillsContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Skills Desired</label>
+                <input
+                  className={styles.Input}
+                  placeholder="Excel, Photoshop, etc..."
+                  onChange={handleOnChange}
+                  name="currentSkill"
+                  value={project.currentSkill}
+                  autoComplete="off"
+                />
+              </div>
+              <div className={styles.TInputContainer}>
+                <p className={styles.ErrorMsg}>{errorSkill}</p>
+                <div className={styles.InputLabelContainer}>
+                  <input
+                    className={`${styles.Button} ${styles.Special}`}
+                    type="button"
+                    value="Add"
+                    onClick={onAddSkill}
+                  />
+                </div>
+              </div>
+              <div className={styles.TContainer}>
+                {skills.map((skill, index) => (
+                  <div
+                    className={`${styles.Tag} ${styles.SkillTag}`}
+                    onClick={() => onDeleteSkill(index)}
+                  >
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.Column3}>
+            <div className={styles.HInputContainer}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Profile</label>
+                <input
+                  placeholder="Describe the traits of your ideal collaborator..."
+                  className={styles.Input}
+                  onChange={handleOnChange}
+                  name="currentProfile"
+                  value={project.currentProfile}
+                  autoComplete="off"
+                />
+              </div>
+
+              <input
+                className={styles.Button}
+                onClick={onAddProfile}
+                type="button"
+                value="Add"
+              />
+              <p className={styles.ErrorMsg}>{errorProfile}</p>
+              <div className={styles.HContainer}>
+                {profiles.map((prof, index) => (
+                  <p
+                    className={styles.Highlight}
+                    onClick={() => onDeleteProfile(index)}
+                  >
+                    {index + 1 + "."} {" " + prof}
+                  </p>
+                ))}
+              </div>
+            </div>
+
             <div className={styles.HInputContainer}>
               <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Highlights</label>
                 <input
-                  placeholder="Focused in ending world hunger"
+                  placeholder="What makes your project awesome for collaborators?"
                   className={styles.Input}
                   onChange={handleOnChange}
                   name="currentHighlight"
@@ -202,93 +374,24 @@ function ProjectCreate() {
                   autoComplete="off"
                 />
               </div>
-
+              <p className={styles.ErrorMsg}>{errorHighlight}</p>
               <input
                 className={styles.Button}
                 onClick={onAddHighlight}
                 type="button"
                 value="Add"
               />
-              <p className={styles.ErrorMsg}>{errorHighlight}</p>
-            </div>
-            <div className={styles.HContainer}>
-              {highlights.map((highlight, index) => (
-                <p
-                  className={styles.Highlight}
-                  onClick={() => onDeleteHighlight(index)}
-                >
-                  {index + 1 + "."} {" " + highlight}
-                </p>
-              ))}
-              {/* <p className={styles.Highlight}>
-              Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
-              nonummy. Suspendisse ultricies, cong
-            </p>
-            <p className={styles.Highlight}>
-              Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
-              nonummy. Suspendisse ultricies, cong
-            </p>
-            <p className={styles.Highlight}>
-              Lorem ipsum dolor sit amet, nonummy ligula volutpat hac integer
-              nonummy. Suspendisse ultricies, cong
-            </p> */}
-            </div>
-          </div>
 
-          <div className={styles.Column3}>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Tags</label>
-              <input
-                className={styles.Input}
-                placeholder="Javascript"
-                onChange={handleOnChange}
-                name="currentTag"
-                value={project.currentTag}
-                autoComplete="off"
-              />
-            </div>
-            <div className={styles.TInputContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Type</label>
-                <select
-                  className={` ${styles.Select} ${styles.Small}`}
-                  onChange={handleOnChange}
-                  name="currentType"
-                  value={project.currentType}
-                >
-                  <option className={styles.Option}>Learning</option>
-                  <option>Mastered</option>
-                </select>
+              <div className={styles.HContainer}>
+                {highlights.map((highlight, index) => (
+                  <p
+                    className={styles.Highlight}
+                    onClick={() => onDeleteHighlight(index)}
+                  >
+                    {index + 1 + "."} {" " + highlight}
+                  </p>
+                ))}
               </div>
-              <div className={styles.InputLabelContainer}>
-                <label className={`${styles.Label} ${styles.Invisible}`}>
-                  Button
-                </label>
-                <input
-                  className={`${styles.Button} ${styles.Special}`}
-                  type="button"
-                  value="Add"
-                  onClick={onAddTag}
-                />
-              </div>
-            </div>
-            <p className={styles.ErrorMsg}>{errorTag}</p>
-            <div className={styles.TContainer}>
-              {tags.map((tag, index) => (
-                <div
-                  className={`${styles.Tag} ${styles[tag.type]}`}
-                  onClick={() => onDeleteTag(index)}
-                >
-                  {tag.value}
-                </div>
-              ))}
-              {/* <div className={styles.Tag}>Node</div>
-            <div className={styles.Tag}>Express</div>
-            <div className={styles.Tag}>SQL</div>
-            <div className={styles.Tag}>MongoDB</div>
-            <div className={styles.Tag}>Development</div>
-            <div className={styles.Tag}>Sockets</div>
-            <div className={styles.Tag}>SQL</div> */}
             </div>
           </div>
         </div>
@@ -296,7 +399,7 @@ function ProjectCreate() {
           <input
             className={`${styles.Button} ${styles.Large}`}
             type="button"
-            value="Submit"
+            value="Create Project!"
             onClick={handleOnSubmit}
           />
         </div>
