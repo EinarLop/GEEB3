@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
+import axios from "axios";
 
-function ProjectMoreInfo() {
+export default function ProjectMoreInfo(props) {
+  const [project, setProject] = useState({
+  title: "Loading Title...",
+  description: "Loading...",
+  status: "Loading",
+  tags:["X"],
+  skills:["X"],
+  highlights: ["Loading Highlights..."],
+  desirables:["X"],
+  })
+  
+  useEffect( () => {
+    axios
+      .get("http://localhost:3010/oprojects/" + props.match.params.id)
+      .then((response) => setProject(response.data));
+  }, []);
+
   const [isLogged, setIsLogged] = useState(true);
-  const [projects, setProjects] = useState([
-    {
-      title: "Development of something",
-      description:
-        "A world with no hunger, no disease, no war, no misery. Humanity has conquered all those things, and has even conquered death. Now scythes are the only ones who can end life—and they are commanded to do so, in order to keep the size of the population under control. Citra and Rowan are chosen to apprentice to a scythe—a role that neither wants. These teens must master the “art” of taking life, knowing that the consequence of failure could mean losing their own.",
-      status: "Closed",
-      creator: "@Creador 1",
-      tags: ["JS", "Popo", "Test"],
-      skills: ["mssm", "ssksks", "smsms"],
-      highlights: ["Wanting someone who can develop", "Learn new habilities"],
-      profile: [
-        "Motivated",
-        "Time for daily meeting",
-        "Experience in working in big projects",
-      ],
-      members: "3",
-      views: "20",
-      stars: "22",
-    },
-  ]);
+
   const [fakeProfile, setFakeProfile] = useState({
     name: "NombreX",
     lastName: "ApellidoY",
@@ -68,41 +66,44 @@ function ProjectMoreInfo() {
       console.log("Too short description");
       setErrorInput("Description too short");
     }
+    console.log(Array.isArray(project.highlights))
   };
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
         <div className={styles.TitleDesContainer}>
-          <p className={styles.Title}>{projects[0].title}</p>
-          <p className={styles.Paragraph}>{projects[0].description}</p>
+          <p className={styles.Title}>{project.title}</p>
+          <p className={styles.Paragraph}>{project.description}</p>
         </div>
 
         <div className={styles.Highlights}>
           <p className={styles.TitleSubtitle}>Highlights</p>
-
-          {projects[0].highlights.map((h) => (
-            <p className={styles.Text}>-{h}</p>
+          <ul className={styles.HList}>
+          {project.highlights.map((highlight) => (
+            <li className={styles.Text}>{highlight}</li>
           ))}
+          </ul>
+
         </div>
 
         <div className={styles.ColumnDivision}>
           <div className={styles.Column0}>
             <h3 className={styles.TitleSubtitle}>Profile we are looking for</h3>
-            {projects[0].profile.map((t) => (
+            {project.desirables.map((t) => (
               <p className={styles.Text}>{t}</p>
             ))}
           </div>
           <div className={styles.Column1}>
             <h3 className={styles.TitleSubtitle}>Tags</h3>
             <div className={styles.Knows}>
-              {projects[0].tags.map((tag) => (
-                <div className={`${styles.Tag} ${styles.Mastered}`}>{tag}</div>
+              {project.tags.map((tag) => (
+                <div className={`${styles.Tag} ${styles.TopicTag}`}>{tag}</div>
               ))}
             </div>
             <h3 className={styles.TitleSubtitle}>Skills </h3>
             <div className={styles.Needs}>
-              {projects[0].skills.map((skill) => (
-                <div className={`${styles.Tag} ${styles.Learning}`}>
+              {project.skills.map((skill) => (
+                <div className={`${styles.Tag} ${styles.SkillTag}`}>
                   {skill}
                 </div>
               ))}
@@ -114,7 +115,7 @@ function ProjectMoreInfo() {
             <p className={styles.Title}>Send a request</p>
             <div className={styles.RequestData}>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Highlights</label>
+                <label className={styles.Label}>Name</label>
                 <input
                   placeholder={request.userNames}
                   name="userNames"
@@ -123,7 +124,7 @@ function ProjectMoreInfo() {
                 />
               </div>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Highlights</label>
+                <label className={styles.Label}>Mail</label>
                 <input
                   placeholder={request.userEmail}
                   name="userEmail"
@@ -134,7 +135,7 @@ function ProjectMoreInfo() {
             </div>
             <div className={styles.ApplicationMsg}>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Highlights</label>
+                <label className={styles.Label}>Description</label>
                 <textarea
                   className={styles.ReasonForRequest}
                   name="requestDescription"
@@ -156,4 +157,4 @@ function ProjectMoreInfo() {
   );
 }
 
-export default ProjectMoreInfo;
+

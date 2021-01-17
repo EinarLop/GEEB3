@@ -2,16 +2,7 @@ import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import Header from "../Components/Header";
 import axios from "axios";
-//TO DO
-//No empty title, description, highlights, tags
-//Title max characters 50
-//Description max characters 400
-//Highlight max characters 100
-//Tag max character 25
-//Max higlights 3
-//Max tags 10
 
-//H = Highlight
 function ProjectCreate() {
   const [project, setProject] = useState({
     title: "",
@@ -186,9 +177,10 @@ function ProjectCreate() {
         title: project.title,
         description: project.description,
         status: project.status,
-        tags: project.tags,
-        desirables: project.profiles,
-        skills: project.skills,
+        tags: tags,
+        highlights:highlights,
+        desirables: profiles,
+        skills: skills,
       };
       axios
         .post("http://localhost:3010/oprojects/create", Project)
