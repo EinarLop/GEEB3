@@ -123,6 +123,8 @@ li {
 .Hlist {
   font-weight: 500;
   font-size: 20px;
+  list-style: circle;
+  padding-left: 2em;
 }
 
 @media (max-width: 1380px) {

@@ -31,7 +31,7 @@ function App() {
         /*<Login/> /*
       <AcceptRequest/>*/
         <Router>
-          {/* <Header /> */}
+          <Header /> 
           <Route exact path="/" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeedDef} />

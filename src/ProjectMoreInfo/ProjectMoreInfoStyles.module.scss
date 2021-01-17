@@ -99,6 +99,10 @@
   margin: 25px 0;
 }
 
+.HList {
+  padding-left: 2em;
+}
+
 .ColumnDivision {
   //width: 100%;
   display: flex;
@@ -152,6 +156,8 @@
   flex-direction: row;
   justify-content: space-between;
   color: #21d7ff;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .Needs {
