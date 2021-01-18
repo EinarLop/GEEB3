@@ -18,38 +18,47 @@ function Registration() {
       [event.target.name]: event.target.value,
     });
   };
+  const validateEmail = (email) =>{
+    const check =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return check.test(email)
+  }
   //comentando ando
   const handleOnSubmit = () => {
     setErrorUsername("");
     setErrorEmail("");
     setErrorPassword("");
     setErrorConfPass("");
-    if (user.userName === "") {
-      console.log("Usuario vacío");
-      setErrorUsername("Username cannot be empty");
+    if (user.userName < 4) {
+      setErrorUsername("Username must have at least 4 characters");
     } else if (user.userName.charAt(0) !== "@") {
-      console.log("Usuario no valido");
       setErrorUsername("Invalid username");
     }
-
+    if(user.userName.length>20){
+      setErrorUsername("Your username can´t have more than 20 characters")
+    }
     if (user.email === "") {
-      console.log("Email input is empty.");
       setErrorEmail("Email can not be empty");
+    }else if(user.email.length<6){
+      setErrorEmail("not a valid email")
+    }else if(user.email.length>50){
+      setErrorEmail("Not a valid email")
     }
-
+    if(!validateEmail(user.email)){
+      setErrorEmail("You must enter an email")
+    }
     if (user.password === "") {
-      console.log("Password vacío");
       setErrorPassword("Password cannot be empty");
-    } else if (user.password.length < 10) {
-      console.log("Password vacío");
+    } else if (user.password.length < 8) {
       setErrorPassword("Your password must have at least 10 characters");
+    }else if (user.password.length > 40) {
+      setErrorPassword("Your password can not have more than 80 characters");
     }
-
+    if (/\s/.test(user.password)) {
+      setErrorPassword("Spaces are not allowed in passwords")
+    }
     if (user.confirmPassword === "") {
-      console.log("Conf password vacío");
       setErrorConfPass("You must confirm your password");
     } else if (user.password !== user.confirmPassword) {
-      console.log("Contraseñas diferentes");
       setErrorPassword("Your password and confirm password are different");
     }
   };
@@ -75,6 +84,7 @@ function Registration() {
             name="userName"
             onChange={handleOnChange}
             placeholder="PkmMaster69"
+            required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorUsername}</p>
         </div>
@@ -85,8 +95,10 @@ function Registration() {
             autoComplete="off" 
             className={styles.Input}
             name="email"
+            type="email"
             onChange={handleOnChange}
             placeholder="PkmMaster69@gmail.com"
+            required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorEmail}</p>
         </div>
@@ -99,6 +111,7 @@ function Registration() {
             name="password"
             type="password"
             onChange={handleOnChange}
+            required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorPassword}</p>
         </div>
@@ -110,6 +123,7 @@ function Registration() {
             placeholder="VerySecretPassword"
             type="password"
             onChange={handleOnChange}
+            required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorConfPass}</p>
         </div>
