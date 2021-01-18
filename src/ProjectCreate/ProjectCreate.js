@@ -24,33 +24,55 @@ function ProjectCreate() {
   const [errorTag, setErrorTag] = useState("");
   const [errorSkill, setErrorSkill] = useState("");
   const [errorProfile, setErrorProfile] = useState("");
+  const [limits, setLimits]=useState({
+    titleMinChar: 5,
+    titleMaxChar: 50, 
+    
+    descMinChar: 5,
+    descMaxChar:300,
+
+    minTags: 1,
+    maxTags: 6,
+    tagMinChar:1,
+    tagMaxChar:30,
+    
+    profileMinChar:5,
+    profileMaxChar:60,
+    minProfiles:1,
+    maxProfiles:5
+  })
 
   const onAddTag = (event) => {
-    if (project.currentTag != "") {
-      if (project.currentTag.length <= 25) {
-        if (tags.length < 10) {
+    if (project.currentTag.length >= limits.tagMinChar) {
+      if (project.currentTag.length <= limits.tagMaxChar) {
+        if (project.currentTag.trim() == "") {
+          setErrorTag("Tag cannot be empty")
+        } 
+        else if (tags.length < limits.maxTags) {
           setTags((tags) => [...tags, project.currentTag]);
-
           setProject({
             ...project,
             currentTag: "",
           });
           setErrorTag("");
         } else {
-          setErrorTag("You cannot have more than 10 tags");
+          setErrorTag("You cannot have more than 6 tags");
         }
       } else {
-        setErrorTag("You can only use 25 chars per tag");
+        setErrorTag("You can only use 30 chars per tag");
       }
     } else {
-      setErrorTag("Tags can not be empty");
+      setErrorTag("Tags cannot be empty");
     }
   };
 
   const onAddSkill = (event) => {
-    if (project.currentSkill != "") {
-      if (project.currentSkill.length <= 25) {
-        if (skills.length < 10) {
+    if (project.currentSkill.length >= limits.tagMinChar) {
+      if (project.currentSkill.length <= limits.tagMaxChar) {
+        if (project.currentSkill.trim() == "") {
+          setErrorSkill("Skill cannot be empty")
+        }
+        else if (skills.length < limits.maxTags) {
           setSkills((skills) => [...skills, project.currentSkill]);
           setProject({
             ...project,
@@ -58,10 +80,10 @@ function ProjectCreate() {
           });
           setErrorSkill("");
         } else {
-          setErrorSkill("You cannot have more than 10 skills");
+          setErrorSkill("You cannot have more than 6 skills");
         }
       } else {
-        setErrorSkill("You can only use 25 chars per Skill");
+        setErrorSkill("You can only use 30 chars per Skill");
       }
     } else {
       setErrorSkill("Skill can not be empty");
@@ -69,9 +91,12 @@ function ProjectCreate() {
   };
 
   const onAddHighlight = (event) => {
-    if (project.currentHighlight != "") {
-      if (project.currentHighlight.length <= 100) {
-        if (highlights.length < 3) {
+    if (project.currentHighlight.length >=limits.profileMinChar) {
+      if (project.currentHighlight.trim() == "") {
+        setErrorHighlight("Cannot be empty")
+      } 
+      else if (project.currentHighlight.length <= limits.profileMaxChar) {
+        if (highlights.length < limits.maxProfiles) {
           setHighlights((highlights) => [
             ...highlights,
             project.currentHighlight,
@@ -83,21 +108,26 @@ function ProjectCreate() {
           });
           setErrorHighlight("");
         } else {
-          setErrorHighlight("You can not have more than 3 highlights");
+          setErrorHighlight("You can not have more than 5 highlights");
         }
       } else {
-        setErrorHighlight("Highlight can not have more than 100 char");
+        setErrorHighlight("Highlight can not have more than 60 char");
       }
     } else {
       console.log("Empty H");
-      setErrorHighlight("Highlight can not be empty");
+      setErrorHighlight("Highlight must be at least 5 characters long");
     }
     console.log(highlights);
   };
+
+  // refactor Profile name
   const onAddProfile = (event) => {
-    if (project.currentProfile != "") {
-      if (project.currentProfile.length <= 100) {
-        if (profiles.length < 5) {
+    if (project.currentProfile.length >= limits.profileMinChar) {
+      if (project.currentProfile.length <= limits.profileMaxChar) {
+        if (project.currentProfile.trim() == "") {
+          setErrorProfile("Cannot be empty")
+        } 
+        else if (profiles.length < limits.maxProfiles) {
           setProfiles((profiles) => [...profiles, project.currentProfile]);
 
           setProject({
@@ -109,10 +139,10 @@ function ProjectCreate() {
           setErrorProfile("You can not have more than 5 profile requirements");
         }
       } else {
-        setErrorProfile("Profiles can not have more than 100 char");
+        setErrorProfile("Profiles can not have more than 60 char");
       }
     } else {
-      setErrorProfile("Profiles can not be empty");
+      setErrorProfile("Profiles must be at least 5 characters long");
     }
   };
 
@@ -126,44 +156,53 @@ function ProjectCreate() {
   };
 
   const handleOnSubmit = () => {
-    if (project.title == "") {
-      setErrorTitle("Title can not be empty");
-
-      console.log("title");
-    }
-    if (project.title.length > 50) {
+    if (project.title.length < limits.titleMinChar) {
+      setErrorTitle("Title must be at least 5 characters long");
+    } 
+    if (project.title.length > limits.titleMaxChar) {
       setErrorTitle("Title can not have more than 50 char");
+    } 
+    if (project.title.trim() == "") {
+      setErrorTitle("Title cannot be empty.");
     }
-    if (project.title !== "" && project.title.length < 50) {
+    if (project.title.length >= limits.titleMinChar && project.title.length <= limits.titleMaxChar && project.title.trim() != "") {
       setErrorTitle("");
     }
-    if (project.description == "") {
-      setErrorDescription("Description can not be empty");
-      console.log("des");
+    if (project.description.length<limits.descMinChar) {
+      setErrorDescription("Description must be at least 5 characters long");
     }
-    if (project.description.length > 400) {
-      setErrorDescription("Description can not have more than 400 char");
+    if (project.description.length > limits.descMaxChar) {
+      setErrorDescription("Description can't be more than 300 characters long");
     }
-    if (project.description.length < 400 && project.description !== "") {
+    if (project.description.trim() == "") {
+      setErrorDescription("Description cannot be empty.");
+    }
+    if (project.description.length <= limits.descMaxChar && project.description.length >= limits.descMinChar && project.description.trim() !="") {
       setErrorDescription("");
     }
-    if (highlights.length === 0) {
+    if (highlights.length < limits.minProfiles) {
       setErrorHighlight("You should add at least 1 highlight");
     }
     if (highlights.length !== 0) {
       setErrorHighlight("");
     }
-    if (tags.length === 0) {
+    if (tags.length < limits.minTags) {
       setErrorTag("You should add at least 1 tag");
     }
     if (tags.length !== 0) {
       setErrorTag("");
     }
-    if (profiles.length === 0) {
-      setErrorHighlight("You should add at least 1 profile requirement");
+    if (profiles.length < limits.minProfiles) {
+      setErrorProfile("You should add at least 1 profile requirement");
     }
-    if (skills.length === 0) {
-      setErrorHighlight("You should add at least 1 skill");
+    if (profiles.length !== 0) {
+      setErrorProfile("");
+    }
+    if (skills.length < limits.minTags) {
+      setErrorSkill("You should add at least 1 skill");
+    }
+    if (skills.length !== 0) {
+      setErrorSkill("");
     }
     if (
       errorDescription === "" &&
@@ -211,7 +250,7 @@ function ProjectCreate() {
           <div className={styles.Column1}>
             <div className={styles.TitleStatusContainer}>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Project title</label>
+                <label className={styles.Label}>Title</label>
                 <input
                   className={styles.Input}
                   placeholder="Awesome Project"
@@ -236,7 +275,7 @@ function ProjectCreate() {
               </div>
             </div>
             <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Project description</label>
+              <label className={styles.Label}>Description</label>
               <textarea
                 className={styles.TextArea}
                 placeholder="Describe your project in X characters or less!"
@@ -250,7 +289,7 @@ function ProjectCreate() {
           <div className={styles.Column2}>
             <div className={styles.TagsContainer}>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Your Project's Tags</label>
+                <label className={styles.Label}>Tags</label>
                 <input
                   className={styles.Input}
                   placeholder="Programming, Marketing, etc..."
@@ -287,7 +326,7 @@ function ProjectCreate() {
 
             <div className={styles.SkillsContainer}>
               <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Skills Desired</label>
+                <label className={styles.Label}>Skills</label>
                 <input
                   className={styles.Input}
                   placeholder="Excel, Photoshop, etc..."
@@ -334,14 +373,14 @@ function ProjectCreate() {
                   autoComplete="off"
                 />
               </div>
-
+              <p className={styles.ErrorMsg}>{errorProfile}</p>
               <input
                 className={styles.Button}
                 onClick={onAddProfile}
                 type="button"
                 value="Add"
               />
-              <p className={styles.ErrorMsg}>{errorProfile}</p>
+              
               <div className={styles.HContainer}>
                 {profiles.map((prof, index) => (
                   <p
@@ -392,6 +431,7 @@ function ProjectCreate() {
             className={`${styles.Button} ${styles.Large}`}
             type="button"
             value="Create Project!"
+       
             onClick={handleOnSubmit}
           />
         </div>
