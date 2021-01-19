@@ -7,6 +7,7 @@ function Registration() {
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfPass, setErrorConfPass] = useState("");
   const [user, setUser] = useState({
+    // stores the current valus of inputs
     userName: "",
     email: "",
     password: "",
@@ -18,49 +19,98 @@ function Registration() {
       [event.target.name]: event.target.value,
     });
   };
-  const validateEmail = (email) =>{
-    const check =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return check.test(email)
-  }
-  //comentando ando
-  const handleOnSubmit = () => {
-    setErrorUsername("");
-    setErrorEmail("");
-    setErrorPassword("");
-    setErrorConfPass("");
-    if (user.userName < 4) {
+  const [limits, setLimits] = useState({
+    //no white spaces
+    userCharMin: 4,
+    userCharMax: 20,
+    emailCharMin: 6,
+    emailCharMax: 50,
+    //no white spaces
+    passwordCharMin: 8,
+    passwordCharMax: 40,
+  });
+  const validEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    console.log("validateEmail result: " + re.test(email));
+    return re.test(email);
+  };
+  const onlyAlphanumeric = (str) => {
+    const re = /^[a-z0-9]+$/; // only lowercase alphanumeric
+    console.log("alphanumeric result: " + re.test(str));
+    return re.test(str);
+  };
+
+  const hasWhiteSpace = (str) => {
+    const index = str.indexOf(" ");
+    if (index == -1) {
+      return false;
+    }
+    return true;
+  };
+
+  const validateUsername = () => {
+    if (user.userName.length < limits.userCharMin) {
       setErrorUsername("Username must have at least 4 characters");
-    } else if (user.userName.charAt(0) !== "@") {
-      setErrorUsername("Invalid username");
     }
-    if(user.userName.length>20){
-      setErrorUsername("Your username can´t have more than 20 characters")
+    if (user.userName.length > limits.userCharMax) {
+      setErrorUsername("Your username can't have more than 20 characters");
     }
+    if (!onlyAlphanumeric(user.userName)) {
+      setErrorUsername(
+        "Your username can only have lowercase letters and numbers"
+      );
+    }
+    if (hasWhiteSpace(user.userName)) {
+      setErrorUsername("Your username cannot contain any spaces");
+    }
+  };
+
+  const validateEmail = () => {
     if (user.email === "") {
       setErrorEmail("Email can not be empty");
-    }else if(user.email.length<6){
-      setErrorEmail("not a valid email")
-    }else if(user.email.length>50){
-      setErrorEmail("Not a valid email")
     }
-    if(!validateEmail(user.email)){
-      setErrorEmail("You must enter an email")
+    if (!validEmail(user.email)) {
+      setErrorEmail("Not a valid email");
     }
+    if (user.email.length < limits.emailCharMin) {
+      setErrorEmail("not a valid email");
+    }
+    if (user.email.length > limits.emailCharMax) {
+      setErrorEmail("Email is too long");
+    }
+    /*if (noWhiteSpace(user.email)) {
+      setErrorEmail("Your email cannot have white spaces");
+    }*/
+  };
+
+  const validatePassword = () => {
     if (user.password === "") {
       setErrorPassword("Password cannot be empty");
-    } else if (user.password.length < 8) {
-      setErrorPassword("Your password must have at least 10 characters");
-    }else if (user.password.length > 40) {
-      setErrorPassword("Your password can not have more than 80 characters");
+    } else if (user.password.length < limits.passwordCharMin) {
+      setErrorPassword("Your password must have at least 8 characters");
+    } else if (user.password.length > limits.passwordCharMax) {
+      setErrorPassword("Your password cannot have more than 40 characters");
     }
-    if (/\s/.test(user.password)) {
-      setErrorPassword("Spaces are not allowed in passwords")
+    if (hasWhiteSpace(user.password)) {
+      // password cannot contain whitespaces
+      setErrorPassword("Your password cannot contain spaces");
     }
     if (user.confirmPassword === "") {
       setErrorConfPass("You must confirm your password");
     } else if (user.password !== user.confirmPassword) {
       setErrorPassword("Your password and confirm password are different");
     }
+  };
+
+  const handleOnSubmit = () => {
+    setErrorUsername("");
+    setErrorEmail("");
+    setErrorPassword("");
+    setErrorConfPass("");
+    validateUsername();
+    validateEmail();
+    validatePassword();
+    // if every error msg is empty, there are no validation errors. Send request
   };
   return (
     <div className={styles.Global}>
@@ -83,7 +133,7 @@ function Registration() {
             className={styles.Input}
             name="userName"
             onChange={handleOnChange}
-            placeholder="PkmMaster69"
+            placeholder="cooluser21"
             required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorUsername}</p>
@@ -92,12 +142,12 @@ function Registration() {
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Email</label>
           <input
-            autoComplete="off" 
+            autoComplete="off"
             className={styles.Input}
             name="email"
             type="email"
             onChange={handleOnChange}
-            placeholder="PkmMaster69@gmail.com"
+            placeholder="user@cool.com"
             required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorEmail}</p>
@@ -136,7 +186,9 @@ function Registration() {
         />
 
         <p className={styles.Msg}>Already have an account?</p>
-        <a href="login">Login</a>
+        <a href="login" className={styles.LoginLink}>
+          Login
+        </a>
       </div>
     </div>
   );
