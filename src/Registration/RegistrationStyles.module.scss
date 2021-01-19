@@ -30,8 +30,19 @@ div .Information {
     text-align: justify;
   }
 }
+
+.LoginLink {
+  &:hover {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+
 .ErrorMsg {
   color: #f74f39;
+  display: flex;
+  flex-wrap: wrap;
+  width: 45%;
 }
 
 div .Inputs {
