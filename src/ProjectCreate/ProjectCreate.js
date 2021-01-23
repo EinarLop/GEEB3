@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import axios from "axios";
 
 function ProjectCreate() {
+  let galleta = document.cookie.slice(4)
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -238,8 +239,13 @@ function ProjectCreate() {
         desirables: profiles,
         skills: skills,
       };
+
+      console.log(galleta)
       axios
-        .post("http://localhost:3010/oprojects/create", Project)
+        .post("http://localhost:3010/oprojects/create", Project ,  {headers: {
+          "auth-token":
+            galleta,
+        }})
         .then((res) => console.log(res.data));
     }
   };
