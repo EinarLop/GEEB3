@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
+import axios from "axios"
+
+
 
 export default function login() {
   const [errorInput, setErrorInput] = useState("");
@@ -9,7 +12,6 @@ export default function login() {
   });
   const [fakeProfile, setFakeProfile] = useState({
     email: "micorreo@gmail.com",
-    userName: "@miusuario",
     password: "contraseña123",
   });
   const handleOnChange = (event) => {
@@ -18,6 +20,13 @@ export default function login() {
       [event.target.name]: event.target.value,
     });
   };
+  
+  const cookieTesting = () =>{
+    
+    let galleta = document.cookie.slice(4)
+    //console.log(galleta)
+
+  } 
   const handleOnSubmit = () => {
     if (errorInput) {
       setErrorInput("");
@@ -37,6 +46,26 @@ export default function login() {
       console.log("Contraseña incorrecta");
       setErrorInput("Incorrect Password");
     }
+    // Validation OK
+    if(errorInput==""){
+      const User = {
+        username:"12345678" ,  
+        password: "12345678",
+      }
+      // checar que el username existe en base de datos
+
+      // si existe, usarlo para comparar la password con bcrypt ?? 
+    
+      axios.post('http://localhost:3010/users/login',User, {withCredentials: true})
+      .then(result => console.log(result))
+      .catch(err => console.log(err));
+
+
+   
+    }
+      
+       
+
   };
   return (
     <body>
