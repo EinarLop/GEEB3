@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
-import axios from "axios"
-
-
+import axios from "axios";
 
 export default function login() {
   const [errorInput, setErrorInput] = useState("");
@@ -20,13 +18,11 @@ export default function login() {
       [event.target.name]: event.target.value,
     });
   };
-  
-  const cookieTesting = () =>{
-    
-    let galleta = document.cookie.slice(4)
-    //console.log(galleta)
 
-  } 
+  const cookieTesting = () => {
+    let galleta = document.cookie.slice(4);
+    //console.log(galleta)
+  };
   const handleOnSubmit = () => {
     if (errorInput) {
       setErrorInput("");
@@ -47,60 +43,60 @@ export default function login() {
       setErrorInput("Incorrect Password");
     }
     // Validation OK
-    if(errorInput==""){
+    if (errorInput == "") {
       const User = {
-        username:"12345678" ,  
+        username: "12345678",
         password: "12345678",
-      }
+      };
       // checar que el username existe en base de datos
 
-      // si existe, usarlo para comparar la password con bcrypt ?? 
-    
-      axios.post('http://localhost:3010/users/login',User, {withCredentials: true})
-      .then(result => console.log(result))
-      .catch(err => console.log(err));
+      // si existe, usarlo para comparar la password con bcrypt ??
 
-
-   
+      axios
+        .post("http://localhost:3010/users/login", User, {
+          withCredentials: true,
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
     }
-      
-       
-
   };
   return (
-    <body>
-      <div className={styles.Global}>
-        <div className={styles.Inputs}>
-          <h1>Login now</h1>
-          <input
-            type="name"
-            name="emailUserName"
-            placeholder="Username"
-            onChange={handleOnChange}
-          ></input>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleOnChange}
-          ></input>
-          <button onClick={handleOnSubmit}>Log in</button>
-          <p className={styles.ErrorMsg}>{errorInput}</p>
-          <h3>New to GEEB?</h3>
-          <a href="Register">Create an account</a>
+    <div className={styles.Wrapper}>
+      <div className={styles.InfoContainer}>
+        <div className={styles.InfoTitleBox}>
+          <p className={styles.InfoTitle}> Title </p>
         </div>
 
-        <div className={styles.Information}>
-          <h1>Some tips for improving your experience at GEEB</h1>
-
-          <ul>
-            <li> Ultricies eget, tempor sit amet</li>
-            <li> Ultricies eget, tempor sit amet</li>
-            <li> Ultricies eget, empor sit amet</li>
-            <li> Ultricies eget, tempor sit amet</li>
-          </ul>
+        <div className={styles.InfoBullets}>
+          <p className={styles.Bullet}>Bullet 1</p>
+          <p className={styles.Bullet}>Bullet 2</p>
+          <p className={styles.Bullet}>Bullet 3</p>
         </div>
       </div>
-    </body>
+      <div className={styles.InputsContainer}>
+        <div className={styles.InputsTitleBox}>
+          <p className={styles.InputsTitle}> Title </p>
+        </div>
+
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Email</label>
+          <input className={styles.Input}></input>
+        </div>
+
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Password</label>
+          <input className={styles.Input}></input>
+        </div>
+
+        <div className={styles.ButtonContainer}>
+          <input value="Log inh" className={styles.Button} type="button" />
+        </div>
+
+        <div className={styles.NewUserContainer}>
+          <p className={styles.NewUserMessage}>New to GEEB?</p>
+          <a className={styles.NewUserLink}> Create an account </a>
+        </div>
+      </div>
+    </div>
   );
 }
