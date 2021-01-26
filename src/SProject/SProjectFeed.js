@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./SProjectFeedStyles.module.scss";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import InfoTab from "./InfoTab";
+import TagsLinksTab from "./TagsLinksTab";
 
 function SProjectFeed() {
   return (
@@ -12,6 +13,9 @@ function SProjectFeed() {
           <Tab className={styles.TabsUnselected}>Detail</Tab>
           <Tab className={styles.TabsUnselected}>Tags</Tab>
         </TabList>
+        <TabPanel>
+          <TagsLinksTab />
+        </TabPanel>
         <TabPanel>
           <InfoTab />
         </TabPanel>

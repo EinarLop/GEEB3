@@ -1,0 +1,28 @@
+@import "../_global.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Wrapper {
+  display: flex;
+  font-family: $font;
+  max-width: 1024px;
+  height: 400px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: $dark;
+  padding: 25px;
+  flex-wrap: wrap;
+}
+
+.Box1C1 {
+  width: 50%;
+  background-color: orange;
+}
+
+.Box2C1 {
+  width: 50%;
+  background-color: blue;
+}

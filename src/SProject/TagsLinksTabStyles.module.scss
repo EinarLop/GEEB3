@@ -1,0 +1,86 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Wrapper {
+  display: flex;
+  font-family: $font;
+  max-width: 1024px;
+  height: 400px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: $dark;
+  padding: 25px;
+  flex-wrap: wrap;
+}
+
+.TagsContainer {
+  width: 45%;
+}
+
+.TagsTitle,
+.LinksTitle {
+  font-size: 20px;
+  color: $orangeAccent;
+  margin-bottom: 25px;
+}
+
+.LinksContainer {
+  width: 40%;
+}
+
+.ButtonContainer {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.Button {
+  @include Button;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 767px) {
+  .Wrapper {
+    height: auto;
+  }
+
+  .TagsContainer {
+    width: 100%;
+  }
+
+  .TagsTitle {
+    color: $orangeAccent;
+  }
+
+  .LinksContainer {
+    width: 100%;
+  }
+
+  .LinksTitle {
+    color: $orangeAccent;
+    margin-top: 25px;
+  }
+
+  .LinksSpace {
+    font-size: 14px;
+  }
+
+  .ButtonContainer {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .Button {
+    margin-top: 25px;
+  }
+}
