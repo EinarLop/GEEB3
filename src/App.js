@@ -13,13 +13,12 @@ import Registration from "./Registration/Registration";
 import ProjectCreate from "./ProjectCreate/ProjectCreate";
 import ProjectFeedDef from "./ProjectFeed/ProjectFeedDef";
 import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
-
+import SProjectFeed from "./SProject/SProjectFeed.js";
 
 //350x34
 //404x44
 
 function App() {
-
   return (
     <div>
       {/* <Header /> */}
@@ -33,12 +32,13 @@ function App() {
         /*<Login/> /*
       <AcceptRequest/>*/
         <Router>
-          <Header /> 
+          <Header />
           <Route exact path="/" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeedDef} />
           <Route path="/oproject/:id" component={ProjectMoreInfo} />
           <Route path="/create" component={ProjectCreate} />
+          <Route path="/sprojects" component={SProjectFeed} />
         </Router>
       }
     </div>

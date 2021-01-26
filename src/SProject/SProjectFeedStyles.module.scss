@@ -1,0 +1,65 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.Input {
+  @include Input;
+}
+
+.Button {
+  @include Button;
+  margin-bottom: 25px;
+}
+
+.Global {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 25px;
+}
+
+.Title {
+  font-size: 45px;
+  color: $orangeAccent;
+  margin-bottom: 25px;
+}
+
+.Card {
+  background-color: #2c2c34;
+  color: white;
+  width: 70%;
+  width: 100%;
+
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 1024px;
+}
+.TabsUnselected {
+  width: auto;
+  height: auto;
+  font-size: 20px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+.TabSelected {
+  background-color: #e66d29;
+}
+.TabsList {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  margin: 0;
+  list-style-type: none;
+  border-bottom: 2px solid #e66d29;
+}

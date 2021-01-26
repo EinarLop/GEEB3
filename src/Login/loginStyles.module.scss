@@ -1,113 +1,96 @@
-@import "../global", "../GlobalStyles/Input.scss";
-body {
-  height: 100%;
-  width: 100%;
-  background-color: $dark;
-}
-div {
-  display: inline;
+@import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-div .Information {
-  padding-top: 5%;
-  float: left;
-  width: 45%;
-  margin-right: 2.5%;
-  //background-color: gray;
-  h1 {
-    color: white;
-    font-size: 25px;
-    text-align: left;
-    margin: 5% 10%;
-  }
+.Wrapper {
+  padding: 50px;
+  //width: 100%;
 
-  p {
-    margin: 0% 10%;
-    font-size: 30px;
-    color: white;
-  }
-
-  ul {
-    color: white;
-    list-style-type: none;
-    font-size: 23px;
-  }
-}
-
-div .Inputs {
-  padding-top: 5%;
-  float: left;
-  width: 45%;
-  margin-left: 2.5%;
-  text-align: center;
-  //background-color: gray;
-  h1 {
-    color: white;
-    text-align: center;
-    margin: 2%;
-  }
-  input {
-    //@include Input font-size: 20px;
-    width: 60%;
-    height: 40px;
-    margin: 1% 0%;
-    border: 3px #e66d29 solid;
-    border-radius: 5px;
-    padding-left: 10px;
-  }
-
-  button {
-    display: block;
-    margin: 3% auto;
-    font-size: 20px;
-    background-color: #e66d29;
-    color: white;
-    padding: 2%;
-    border: none;
-  }
-
-  h3 {
-    font-size: 25px;
-    margin-top: 50px;
-    color: white;
-  }
-
-  a {
-    text-decoration: none;
-    color: #e66d29;
-    font-size: 30px;
-  }
-}
-.Global {
   display: flex;
-  flex-direction: row;
-}
-.ErrorMsg {
-  color: #f74f39;
+  justify-content: space-between;
+  color: white;
+  font-family: $font;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 1380px) {
-  div .Information {
-    h1,
-    ul {
-      font-size: 20px;
-    }
-  }
+.InfoContainer {
+  width: 50%;
 }
-@media (max-width: 700px) {
-  div .Information {
-    display: block;
-    flex-direction: column;
-    width: auto;
+
+.InputsTitle,
+.InfoTitle {
+  font-size: 35px;
+}
+
+.Bullet {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.InputsContainer {
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.InputLabelContainer {
+  @include InputLabelContainer;
+}
+
+.Label {
+  @include Label;
+}
+
+.Input {
+  @include Input;
+}
+
+.Button {
+  @include Button;
+}
+
+.NewUserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.NewUserMessage {
+  font-size: 20px;
+  margin: 20px 0 0 0;
+}
+
+.NewUserLink {
+  font-size: 25px;
+  margin: 20px 0;
+  color: $orangeAccent;
+}
+
+@media (max-width: 767px) {
+  .Wrapper {
+    padding: 15px;
   }
-  div .Inputs {
-    width: auto;
-    input {
-      margin: 3% 0%;
-    }
+  .InfoContainer {
+    width: 100%;
+  }
+  .InputsContainer {
+    width: 100%;
   }
 
-  .Global {
-    flex-direction: column;
+  .InputsTitle {
+    margin: 20px 0 0 0;
+  }
+
+  .InfoTitle {
+    text-align: center;
+  }
+
+  .Bullet {
+    text-align: center;
   }
 }
