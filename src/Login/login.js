@@ -64,18 +64,24 @@ export default function login() {
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoTitleBox}>
-          <p className={styles.InfoTitle}> Title </p>
+          <p className={styles.InfoTitle}>Our best tips for you</p>
         </div>
 
         <div className={styles.InfoBullets}>
-          <p className={styles.Bullet}>Bullet 1</p>
-          <p className={styles.Bullet}>Bullet 2</p>
-          <p className={styles.Bullet}>Bullet 3</p>
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </p>
         </div>
       </div>
       <div className={styles.InputsContainer}>
         <div className={styles.InputsTitleBox}>
-          <p className={styles.InputsTitle}> Title </p>
+          <p className={styles.InputsTitle}> Login</p>
         </div>
 
         <div className={styles.InputLabelContainer}>
@@ -89,7 +95,7 @@ export default function login() {
         </div>
 
         <div className={styles.ButtonContainer}>
-          <input value="Log inh" className={styles.Button} type="button" />
+          <input value="Log in" className={styles.Button} type="button" />
         </div>
 
         <div className={styles.NewUserContainer}>

@@ -4,7 +4,7 @@ import Header from "../Components/Header";
 import axios from "axios";
 
 function ProjectCreate() {
-  let galleta = document.cookie.slice(4)
+  let galleta = document.cookie.slice(4);
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -240,12 +240,13 @@ function ProjectCreate() {
         skills: skills,
       };
 
-      console.log(galleta)
+      console.log(galleta);
       axios
-        .post("http://localhost:3010/oprojects/create", Project ,  {headers: {
-          "auth-token":
-            galleta,
-        }})
+        .post("http://localhost:3010/oprojects/create", Project, {
+          headers: {
+            "auth-token": galleta,
+          },
+        })
         .then((res) => console.log(res.data));
     }
   };
@@ -454,7 +455,7 @@ function ProjectCreate() {
         </div>
         <div>
           <input
-            className={`${styles.Button} ${styles.Large}`}
+            className={styles.Button}
             type="button"
             value="Create Project!"
             onClick={handleOnSubmit}

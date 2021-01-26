@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Component} from "react";
-import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import React, { useState, useEffect, Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedDefStyles.module.scss";
@@ -27,8 +27,7 @@ function ProjectFeedDef() {
     console.log("Click on edit button");
   };*/
   const [isLogged, setIsLogged] = useState(true);
-  
-  
+
   return (
     <div className={styles.Global}>
       {oprojects.map((project, index) => (
@@ -52,10 +51,11 @@ function ProjectFeedDef() {
                   <p>Created: {project.created}</p>
                 </div>
               </div>
-              <div   className={styles.ButtonDiv}>
-              <Link to={'/oproject/'+project._id} className={styles.Button}>Apply</Link>
+              <div className={styles.ButtonDiv}>
+                <Link to={"/oproject/" + project._id} className={styles.Button}>
+                  Apply
+                </Link>
               </div>
-
             </div>
           </TabPanel>
 
@@ -77,7 +77,9 @@ function ProjectFeedDef() {
                 </div>
               </div>
               <div className={styles.ButtonDiv}>
-              <Link to={'/oproject/'+project._id} className={styles.Button}>Apply</Link>
+                <Link to={"/oproject/" + project._id} className={styles.Button}>
+                  Apply
+                </Link>
               </div>
             </div>
           </TabPanel>
@@ -102,7 +104,9 @@ function ProjectFeedDef() {
                 </div>
               </div>
               <div className={styles.ButtonDiv}>
-              <Link to={'/oproject/'+project._id} className={styles.Button}>Apply</Link>
+                <Link to={"/oproject/" + project._id} className={styles.Button}>
+                  Apply
+                </Link>
               </div>
             </div>
           </TabPanel>
@@ -113,4 +117,4 @@ function ProjectFeedDef() {
 }
 
 export default ProjectFeedDef;
-     //<Link to={"/edit/" + watch._id}>Retirar Stock</Link>
+//<Link to={"/edit/" + watch._id}>Retirar Stock</Link>

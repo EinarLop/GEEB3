@@ -7,23 +7,23 @@
 }
 
 .Wrapper {
-  padding: 75px;
-  width: 100%;
-  border: 1px solid yellow;
+  padding: 50px;
+  //width: 100%;
+
   display: flex;
   justify-content: space-between;
   color: white;
   font-family: $font;
+  flex-wrap: wrap;
 }
 
 .InfoContainer {
-  width: 45%;
-  border: 1px solid black;
+  width: 50%;
 }
 
 .InputsTitle,
 .InfoTitle {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .Bullet {
@@ -32,8 +32,8 @@
 }
 
 .InputsContainer {
-  width: 45%;
-  border: 1px solid black;
+  width: 50%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,10 +62,35 @@
 }
 .NewUserMessage {
   font-size: 20px;
-  margin: 40px 0 20px 0;
+  margin: 20px 0 0 0;
 }
 
 .NewUserLink {
-  font-size: 20px;
+  font-size: 25px;
   margin: 20px 0;
+  color: $orangeAccent;
+}
+
+@media (max-width: 767px) {
+  .Wrapper {
+    padding: 15px;
+  }
+  .InfoContainer {
+    width: 100%;
+  }
+  .InputsContainer {
+    width: 100%;
+  }
+
+  .InputsTitle {
+    margin: 20px 0 0 0;
+  }
+
+  .InfoTitle {
+    text-align: center;
+  }
+
+  .Bullet {
+    text-align: center;
+  }
 }

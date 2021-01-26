@@ -29,12 +29,12 @@
   @include InputLabelContainer;
 }
 .userInputs {
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 25px;
+  // padding: 25px;
   //margin-top: 15px;
 }
 
@@ -43,7 +43,7 @@
   padding: 25px;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   margin: 25px 0;
 }
 
@@ -95,7 +95,7 @@
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   margin: 25px 0;
 }
 
@@ -173,7 +173,7 @@
   padding: 25px;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   margin: 25px 0;
 }
 
@@ -181,7 +181,7 @@
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   margin: 25px 0;
   padding: 25px;
 }
@@ -270,10 +270,10 @@
     align-items: center;
   }
   .Column0 {
-    width: 90%;
+    width: 100%;
   }
 
   .Column1 {
-    width: 90%;
+    width: 100%;
   }
 }
