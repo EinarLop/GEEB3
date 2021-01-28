@@ -34,7 +34,9 @@
 
 .Button {
   @include Button;
+  margin-left: 15px;
 }
+
 .Box1,
 .Box2,
 .Box3,
@@ -45,15 +47,20 @@
 }
 
 .Box1 {
-  border: 1px solid #f72585;
+  //border: 1px solid #f72585;
   display: flex;
   flex-direction: column;
 }
-
-.Box2 {
-  border: 1px solid #7209b7;
+.Input{
+  width: 300px;
 }
 
+
+.Box2 {
+  //border: 1px solid #7209b7;
+  flex-direction: column;
+  display: flex;
+}
 .TextArea {
   @include Input;
   height: 225px;
@@ -62,15 +69,15 @@
 }
 
 .Box3 {
-  border: 1px solid #3a0ca3;
+  //border: 1px solid #3a0ca3;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  padding-right: 20px;
 }
 .TagButtonContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 .TagInput {
   @include Input;
@@ -78,14 +85,16 @@
 }
 
 .Box4 {
-  border: 1px solid #4361ee;
+  //border: 1px solid #4361ee;
+  display: flex;
+  flex-direction: column;
 }
 
 .Box5 {
-  border: 1px solid #4cc9f0;
+  //border: 1px solid #4cc9f0;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .LinkButtonContainer {
@@ -98,4 +107,52 @@
 .InputLabelContainer {
   display: flex;
   flex-direction: column;
+}
+
+@media(max-width:1200px){
+  .Input,
+  .TextArea,
+  .TagInput,
+  .InputLabelContainer{
+    width:90%;
+  }
+
+  .Button{
+    margin-left: 0;
+  }
+
+  .Label{
+    &.Transparent{
+      display:none;
+    }
+  }
+}
+
+@media(max-width:767px){
+  .Box1,
+  .Box2,
+  .Box3,
+  .Box4,
+  .TextArea,
+  .Input,
+  .TagInput,
+  .InputLabelContainer{
+  width: 100%;
+  }
+
+  .TagButtonContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .Button{
+    margin-left: 0;
+  }
+  .Label{
+    &.Transparent{
+      display:none;
+    }
+  }
+  
 }

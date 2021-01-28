@@ -1,2 +1,29 @@
 [1209/213220.518:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
 [1215/231209.764:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[0123/120525.319:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/121525.320:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/121525.320:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[0123/121525.320:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/121525.321:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/122025.320:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/123525.588:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/125025.641:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/130339.806:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/130525.643:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/224556.827:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/230056.900:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/231557.103:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/233057.103:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0123/234557.104:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0124/000057.104:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0124/001557.106:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/183655.733:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/184655.731:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/184655.731:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[0127/184655.732:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/184655.732:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/185155.769:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/190655.770:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/192155.771:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/193655.773:ERROR:crash_report_database_win.cc(455)] unexpected header
+[0127/195155.774:ERROR:crash_report_database_win.cc(455)] unexpected header
