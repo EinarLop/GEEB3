@@ -23,6 +23,22 @@ export default function login() {
     let galleta = document.cookie.slice(4);
     //console.log(galleta)
   };
+  const handleOnSubmit2 = () => {
+    const User = {
+      username: "12345678",
+      password: "12345678",       // change to non hardcoded
+    };
+
+    axios
+        .post("https://geeb.herokuapp.com/users/login", User, {     // http://localhost:3010
+          withCredentials: true,
+        })
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+    }
+
+  };
+
   const handleOnSubmit = () => {
     if (errorInput) {
       setErrorInput("");
@@ -46,14 +62,14 @@ export default function login() {
     if (errorInput == "") {
       const User = {
         username: "12345678",
-        password: "12345678",
+        password: "12345678",       // change to non hardcoded
       };
       // checar que el username existe en base de datos
 
       // si existe, usarlo para comparar la password con bcrypt ??
 
       axios
-        .post("http://localhost:3010/users/login", User, {
+        .post("https://geeb.herokuapp.com/users/login", User, {     // http://localhost:3010
           withCredentials: true,
         })
         .then((result) => console.log(result))
@@ -95,7 +111,7 @@ export default function login() {
         </div>
 
         <div className={styles.ButtonContainer}>
-          <input value="Log in" className={styles.Button} type="button" />
+          <input value="Log in" className={styles.Button} type="button" onClick={handleOnSubmit2} />
         </div>
 
         <div className={styles.NewUserContainer}>

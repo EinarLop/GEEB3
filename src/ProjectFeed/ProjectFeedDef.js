@@ -10,7 +10,7 @@ function ProjectFeedDef() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects")
+      .get("https://geeb.herokuapp.com/oprojects")         ///"http://localhost:3010/oprojects")
       .then((response) => setOprojects(response.data));
   }, []);
 
