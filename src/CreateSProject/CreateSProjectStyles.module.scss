@@ -1,4 +1,7 @@
-@import "../_global.scss";
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
 * {
   margin: 0;
   padding: 0;
@@ -9,20 +12,90 @@
   display: flex;
   font-family: $font;
   max-width: 1024px;
-  height: 400px;
+
   width: 100%;
   margin: 0 auto;
-  background-color: $dark;
+
   padding: 25px;
   flex-wrap: wrap;
 }
 
-.Box1C1 {
-  width: 50%;
-  background-color: orange;
+.Input {
+  @include Input;
 }
 
-.Box2C1 {
+.Label {
+  @include Label;
+
+  &.Transparent {
+    color: transparent;
+  }
+}
+
+.Button {
+  @include Button;
+}
+.Box1,
+.Box2,
+.Box3,
+.Box4,
+.Box5 {
+  height: 300px;
   width: 50%;
-  background-color: blue;
+}
+
+.Box1 {
+  border: 1px solid #f72585;
+  display: flex;
+  flex-direction: column;
+}
+
+.Box2 {
+  border: 1px solid #7209b7;
+}
+
+.TextArea {
+  @include Input;
+  height: 225px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Box3 {
+  border: 1px solid #3a0ca3;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.TagButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.TagInput {
+  @include Input;
+  width: 300px;
+}
+
+.Box4 {
+  border: 1px solid #4361ee;
+}
+
+.Box5 {
+  border: 1px solid #4cc9f0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.LinkButtonContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.InputLabelContainer {
+  display: flex;
+  flex-direction: column;
 }
