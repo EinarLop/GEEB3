@@ -19,10 +19,16 @@
 
 .InfoContainer {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.InputsTitle,
-.InfoTitle {
+.InfoTitle{
+  font-size: 56px;
+}
+
+.InputsTitle {
   font-size: 35px;
 }
 
@@ -69,6 +75,10 @@
   font-size: 25px;
   margin: 20px 0;
   color: $orangeAccent;
+  &:hover {
+    font-weight: 700;
+    text-decoration: underline;
+  }
 }
 
 @media (max-width: 767px) {
@@ -78,6 +88,7 @@
   .InfoContainer {
     width: 100%;
   }
+
   .InputsContainer {
     width: 100%;
   }
@@ -88,6 +99,7 @@
 
   .InfoTitle {
     text-align: center;
+    font-size: 35px;
   }
 
   .Bullet {
