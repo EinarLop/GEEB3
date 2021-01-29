@@ -28,17 +28,18 @@ export default function login() {
       username: "12345678",
       password: "12345678",       // change to non hardcoded
     };
-
     axios
-        .post("https://geeb.herokuapp.com/users/login", User, {     // http://localhost:3010
+        .post("http://localhost:3010/users/login", User, {     // https://geeb.herokuapp.com/users/login
           withCredentials: true,
+        }) 
+        .then((response) => {
+          
+          window.localStorage.setItem('auth-token', response.headers["auth-token"])
+          
+          
         })
-        .then((result) => console.log(result))
         .catch((err) => console.log(err));
-    }
-
   };
-
   const handleOnSubmit = () => {
     if (errorInput) {
       setErrorInput("");

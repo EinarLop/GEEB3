@@ -244,7 +244,7 @@ function ProjectCreate() {
       axios
         .post("http://localhost:3010/oprojects/create", Project, {
           headers: {
-            "auth-token": galleta,
+            "auth-token": window.localStorage.getItem("auth-token")
           },
         })
         .then((res) => console.log(res.data));
