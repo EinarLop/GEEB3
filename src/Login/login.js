@@ -67,18 +67,19 @@ export default function login() {
           <p className={styles.InfoTitle}>Our best tips for you</p>
         </div>
 
-        <div className={styles.InfoBullets}>
-          <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        <div className={styles.InfoBullets}>
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
-          <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
-          <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          <p className={styles.Bullet}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
         </div>
       </div>
+      
       <div className={styles.InputsContainer}>
         <div className={styles.InputsTitleBox}>
           <p className={styles.InputsTitle}> Login</p>
@@ -100,7 +101,7 @@ export default function login() {
 
         <div className={styles.NewUserContainer}>
           <p className={styles.NewUserMessage}>New to GEEB?</p>
-          <a className={styles.NewUserLink}> Create an account </a>
+          <a href="/"className={styles.NewUserLink}> Create an account </a>
         </div>
       </div>
     </div>
