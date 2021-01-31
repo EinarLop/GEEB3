@@ -116,12 +116,17 @@ function Registration() {
     <div className={styles.Global}>
       <div className={styles.Information}>
         <h1>What is GEEB?</h1>
+        <div>
         <p>
-          Karen habitant morbi tristique senectus et netus et malesuada fames ac
-          turpis egestas. Vestibulum tortor quam, feugiat vitae ultricies eget,
-          tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-          Aenean ultricies mi vitae est. Mauris
-        </p>
+          GEEB is a platform dedicated to all kinds of creators, leaders and entrepreneurs.</p>
+          <ul>
+            <li>Explore open projects and apply to work with interdisciplinary groups of people.</li>
+            <li>Find collaborators and build the ideal team for your own ventures.</li>
+            <li>Show off your past work and skills with your own online Portfolio.</li>
+          </ul>          
+          <p><b>Ready to accelerate your career, make valuable connections and make your project ideas come to life?</b></p>
+        </div>
+
       </div>
 
       <div className={styles.Inputs}>

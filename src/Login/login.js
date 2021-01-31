@@ -83,20 +83,20 @@ export default function login() {
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
-          <p className={styles.InfoSubtitle}>TO IMPROVE</p>
+          <p className={styles.InfoSubtitle}>OUR TIPS FOR YOU</p>
         </div>
         <div className={styles.InfoTitleBox}>
-          <p className={styles.InfoTitle}>Our best tips for you.</p>
+          <p className={styles.InfoTitle}>Make the most out of GEEB.</p>
         </div>
         <div className={styles.InfoBullets}>
           <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            Be sure to explore all sorts of projects. You will surely find something exciting!
           </p>
           <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            Include in your portfolio as much of your work as you can. Make others interested in you!
           </p>
           <p className={styles.Bullet}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+            Your skillset is very valuable. Don't be afraid to apply to a project!
           </p>
         </div>
       </div>

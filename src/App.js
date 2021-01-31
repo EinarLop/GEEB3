@@ -38,11 +38,11 @@ function App() {
           <Route exact path="/" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeedDef} />
-          <Route path="/oproject/:id" component={ProjectMoreInfo} />
+          <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
           <Route path="/create" component={ProjectCreate} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo}/>
+          <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
         </Router>
       }
     </div>

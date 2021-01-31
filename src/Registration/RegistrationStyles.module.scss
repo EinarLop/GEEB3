@@ -26,8 +26,19 @@ div .Information {
   p {
     margin: 0% 10%;
     font-size: 30px;
-    color: white;
+    color: $clearGrey;
     text-align: justify;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0% 10%;
+  }
+  b {
+    color: $clearGrey;
+  }
+  li {
+    color: white;
   }
 }
 
