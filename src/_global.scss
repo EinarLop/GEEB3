@@ -4,14 +4,6 @@ Global styling
 /* to use in your own scss, type: @import 'global'*/
 /* then, to access this file's styles: $varName*/
 
-/*COLORS*/
-$orangeAccent: #e66d29;
-$blueAccent: #0091b1;
-$dark: #2c2c34;
-$darkGrey: #3d3d47;
-$clearGrey: #f0eded;
-$otherGrey: #62626b;
-
 // @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
@@ -26,12 +18,15 @@ $otherGrey: #62626b;
 //$font: "Roboto Slab", serif; //1 1.5 1.81               4.31
 //$font: "Roboto", sans-serif; //2.3 1.5 2.5              6.3
 //$font: "Ubuntu", sans-serif; //2.5 2.5 3               8
-$font: "Mulish", sans-serif; // 3 2.2 3                  8.2
+
+/* COLORS */
+$font: "Mulish", sans-serif;
 $orangeAccent: #e66d29;
 $blueAccent: #0091b1;
 $dark: #2c2c34;
 $darkGrey: #3d3d47;
 $clearGrey: #f0eded;
+$otherGrey: #62626b;
 
 $buttonBlue: #1d4f60;
 $notificationRed: #ed3434;
@@ -49,6 +44,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
   background-color: $darkGrey;
   // background-image: url("./background6.png");
 }

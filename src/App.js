@@ -15,6 +15,7 @@ import ProjectFeedDef from "./ProjectFeed/ProjectFeedDef";
 import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 import SProjectFeed from "./SProject/SProjectFeed.js";
 import CreateSProject from "./CreateSProject/CreateSProject.js";
+import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
 
 //350x34
 //404x44
@@ -41,6 +42,7 @@ function App() {
           <Route path="/create" component={ProjectCreate} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
+          <Route path="/sproject/:id" component={SProjectMoreInfo}/>
         </Router>
       }
     </div>
