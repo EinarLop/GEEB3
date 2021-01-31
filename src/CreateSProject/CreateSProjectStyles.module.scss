@@ -18,6 +18,18 @@
   padding: 25px;
   flex-wrap: wrap;
 }
+.WrapperTitle {
+  height: auto;
+  width: 100%;
+}
+.Title{
+  color: white;
+  text-align: center;
+  font-family: $font;
+  margin: 25px;
+  font-size: 38px;
+  font-weight: bold;
+}
 
 .Input {
   @include Input;
@@ -81,6 +93,19 @@
   @include Input;
   width: 300px;
 }
+.Tag {
+  @include Tag;
+  &:hover {
+    background-color: #e64949;
+    // No funciona** o agregar un tachecito?
+  }
+}
+.TContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+}
 
 .Box4 {
   //border: 1px solid #4361ee;
@@ -107,12 +132,28 @@
   flex-direction: column;
 }
 
+.CreateButtonBox {
+  flex-direction: column;
+  display:flex;
+  align-items:center;
+}
+.CreateButton {
+  @include Button;
+}
+.ErrorMsg {
+  color: #f74f39;
+  margin-top: 10px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 1200px) {
   .Input,
   .TextArea,
   .TagInput,
   .InputLabelContainer {
-    width: 90%;
+    width: 80%;
   }
 
   .Button {
