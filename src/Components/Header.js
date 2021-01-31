@@ -42,25 +42,22 @@ export default function Header() {
               {isLogged ? (
                 <div className={styles.Menu}>
                   <a className={styles.Links} href="/create">
-                    Create
+                    S Projects
                   </a>
                   <a className={styles.Links} href="/oprojects">
-                    Explore
+                    O Projects
                   </a>
                   <a className={styles.Links} href="/login">
                     Log Out
-                  </a>
-                  <a className={styles.Links} href="/">
-                    Profile
                   </a>
                 </div>
               ) : (
                 <div className={styles.Menu}>
                   <a className={styles.Links} href="/login">
-                    Create2
+                    O Project
                   </a>
                   <a className={styles.Links} href="/oprojects">
-                    Explore
+                    S Project
                   </a>
                   <a className={styles.Links} href="/login">
                     Login
@@ -75,7 +72,7 @@ export default function Header() {
           {isLogged ? (
             <div className={styles.NavContainer}>
               <a className={styles.NavLink} href="/create">
-                Create
+                SProjects
               </a>
               <a className={styles.NavLink} href="/oprojects">
                 Explore
@@ -87,11 +84,11 @@ export default function Header() {
             </div>
           ) : (
             <div className={styles.NavContainer}>
-              <a className={styles.NavLink} href="/login">
-                Create
-              </a>
               <a className={styles.NavLink} href="/oprojects">
-                Explore
+                O Projects
+              </a>
+              <a className={styles.NavLink} href="/sprojects">
+                S Projects
               </a>
               <button className={styles.LogOut} onClick={() => onLogButton()}>
                 Login

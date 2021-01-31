@@ -1,6 +1,9 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
+* {
+  font-size: 18px;
+}
 
 .Global {
   display: flex;
@@ -60,7 +63,6 @@
 .Paragraph {
   text-align: justify;
   color: white;
-  font-size: 22px;
 }
 
 .TitleSubtitle {
@@ -72,7 +74,6 @@
 
 .Text {
   color: white;
-  font-size: 22px;
 }
 
 .Wrapper {
