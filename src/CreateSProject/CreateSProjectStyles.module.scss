@@ -6,16 +6,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 18px;
 }
 
 .Wrapper {
   display: flex;
   font-family: $font;
   max-width: 1024px;
-
   width: 100%;
   margin: 0 auto;
-
   padding: 25px;
   flex-wrap: wrap;
 }
@@ -51,10 +50,9 @@
   display: flex;
   flex-direction: column;
 }
-.Input{
+.Input {
   width: 300px;
 }
-
 
 .Box2 {
   //border: 1px solid #7209b7;
@@ -109,26 +107,26 @@
   flex-direction: column;
 }
 
-@media(max-width:1200px){
+@media (max-width: 1200px) {
   .Input,
   .TextArea,
   .TagInput,
-  .InputLabelContainer{
-    width:90%;
+  .InputLabelContainer {
+    width: 90%;
   }
 
-  .Button{
+  .Button {
     margin-left: 0;
   }
 
-  .Label{
-    &.Transparent{
-      display:none;
+  .Label {
+    &.Transparent {
+      display: none;
     }
   }
 }
 
-@media(max-width:767px){
+@media (max-width: 767px) {
   .Box1,
   .Box2,
   .Box3,
@@ -136,23 +134,22 @@
   .TextArea,
   .Input,
   .TagInput,
-  .InputLabelContainer{
-  width: 100%;
+  .InputLabelContainer {
+    width: 100%;
   }
 
-  .TagButtonContainer{
+  .TagButtonContainer {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
   }
-  .Button{
+  .Button {
     margin-left: 0;
   }
-  .Label{
-    &.Transparent{
-      display:none;
+  .Label {
+    &.Transparent {
+      display: none;
     }
   }
-  
 }

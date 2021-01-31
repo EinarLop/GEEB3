@@ -10,10 +10,20 @@ function ProjectFeedDef() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects")         ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      .get("https://geeb.herokuapp.com/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
   }, []);
 
+  const [oprojectsMock, setOprojectsMock] = useState([
+    {
+      title: "Test OProject2",
+      description: "Description OProject2",
+      status: "Open",
+      highlights: ["h12", "h22"],
+      tags: ["tag12", "tag22", "tag32"],
+      skills: ["skill12", "skill22"],
+    },
+  ]);
   //.get("http://localhost:3010/oprojects")
   //.then((response) => {
   //  console.log(response.data);
@@ -30,18 +40,17 @@ function ProjectFeedDef() {
 
   return (
     <div className={styles.Global}>
-      {oprojects.map((project, index) => (
+      {oprojectsMock.map((project, index) => (
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
           <TabList className={styles.TabsList}>
             <Tab className={styles.TabsUnselected}>Overview</Tab>
             <Tab className={styles.TabsUnselected}>Detail</Tab>
             <Tab className={styles.TabsUnselected}>Tags</Tab>
           </TabList>
-
           <TabPanel>
             <div className={styles.Wrapper}>
               <div className={styles.Row0}>
-                <h1> {project.title}</h1>
+                <p className={styles.TitleCard}> {project.title}</p>
                 <p>{project.description}</p>
                 <div className={styles.Info}>
                   <div className={styles[project.status]}>
@@ -62,7 +71,7 @@ function ProjectFeedDef() {
           <TabPanel>
             <div className={styles.Wrapper}>
               <div className={styles.Row0}>
-                <h1> {project.title}</h1>
+                <p className={styles.TitleCard}> {project.title}</p>
                 <ul className={styles.Hlist}>
                   {project.highlights.map((h) => (
                     <li>{h}</li>
@@ -87,7 +96,7 @@ function ProjectFeedDef() {
           <TabPanel>
             <div className={styles.Wrapper}>
               <div className={styles.Row0}>
-                <h2>Project Tags:</h2>
+                <p className={styles.TagsSubtitle}>Project Tags:</p>
                 {
                   // There could be at most 6 tags? TO DO IN BACKEND
                 }
@@ -96,7 +105,7 @@ function ProjectFeedDef() {
                     <p className={`${styles.Tag} ${styles["Mastered"]}`}>{t}</p>
                   ))}
                 </div>
-                <h2>Project Skills:</h2>
+                <p className={styles.TagsSubtitle}>Project Skills:</p>
                 <div className={styles.SkillsWrapper}>
                   {project.skills.map((s) => (
                     <p className={`${styles.Tag} ${styles["Learning"]}`}>{s}</p>

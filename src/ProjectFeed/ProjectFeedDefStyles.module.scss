@@ -1,9 +1,12 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
+* {
+  font-size: 18px;
+}
 
 li {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
 
 .Global {
@@ -12,8 +15,13 @@ li {
   flex-direction: column;
   align-items: center;
 }
-
-
+.TitleCard {
+  font-size: 38px;
+  color: #e66d29;
+}
+.TagsSubtitle {
+  font-size: 25px;
+}
 .Wrapper {
   display: flex;
   flex-direction: column;
@@ -25,16 +33,16 @@ li {
   background-color: #2c2c34;
   // border: 1px solid white;
   color: white;
-  width: 1000px;
+  max-width: 1024px;
   //padding: 5px;
   //padding-top: 0px;
   margin-top: 10px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 .TabsUnselected {
   width: auto;
   height: auto;
-  font-size:20px;
+  font-size: 20px;
   margin: 0px;
   display: flex;
   align-items: center;
@@ -71,7 +79,7 @@ li {
 }
 
 .Info {
-  font-style:italic;
+  font-style: italic;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -109,14 +117,14 @@ li {
 
 .Tag {
   @include Tag;
-  // 
+  //
 }
 
-.Open{
+.Open {
   color: rgb(73, 211, 130);
 }
 
-.Closed{
+.Closed {
   color: rgb(196, 9, 9);
 }
 
@@ -128,7 +136,7 @@ li {
 }
 
 @media (max-width: 1380px) {
-  .ButtonDiv{
+  .ButtonDiv {
     padding: 5px 15px 15px 15px;
   }
   .Global {
@@ -137,22 +145,19 @@ li {
   .Card {
     width: 600px;
   }
-
 }
 @media (max-width: 720px) {
-  .Info{
+  .Info {
     flex-direction: column;
     height: auto;
-    font-size:16px;
+    font-size: 16px;
     font-weight: 500;
-    
 
-      p {
-        margin: 8px;
-      }
-
+    p {
+      margin: 8px;
     }
-  
+  }
+
   .Global {
     font-size: 16px;
   }
@@ -162,21 +167,21 @@ li {
   .Hlist {
     font-size: 16px;
   }
-  .TabsUnselected{
+  .TabsUnselected {
     font-size: 16px;
   }
-  .Button{
+  .Button {
     font-size: 16px;
     padding: 6px 8px;
     width: 250px;
     height: auto;
     align-self: center;
   }
-  .ButtonDiv{
+  .ButtonDiv {
     display: flex;
     justify-content: center;
-    height:auto;
-    padding:0 0 15px 0;
+    height: auto;
+    padding: 0 0 15px 0;
     font-size: 10px;
   }
 
@@ -184,5 +189,4 @@ li {
     height: 15px;
     font-size: 13px;
   }
-
 }

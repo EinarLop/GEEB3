@@ -26,19 +26,20 @@ export default function login() {
   const handleOnSubmit2 = () => {
     const User = {
       username: "12345678",
-      password: "12345678",       // change to non hardcoded
+      password: "12345678", // change to non hardcoded
     };
     axios
-        .post("http://localhost:3010/users/login", User, {     // https://geeb.herokuapp.com/users/login
-          withCredentials: true,
-        }) 
-        .then((response) => {
-          
-          window.localStorage.setItem('auth-token', response.headers["auth-token"])
-          
-          
-        })
-        .catch((err) => console.log(err));
+      .post("http://localhost:3010/users/login", User, {
+        // https://geeb.herokuapp.com/users/login
+        withCredentials: true,
+      })
+      .then((response) => {
+        window.localStorage.setItem(
+          "auth-token",
+          response.headers["auth-token"]
+        );
+      })
+      .catch((err) => console.log(err));
   };
   const handleOnSubmit = () => {
     if (errorInput) {
@@ -63,14 +64,15 @@ export default function login() {
     if (errorInput == "") {
       const User = {
         username: "12345678",
-        password: "12345678",       // change to non hardcoded
+        password: "12345678", // change to non hardcoded
       };
       // checar que el username existe en base de datos
 
       // si existe, usarlo para comparar la password con bcrypt ??
 
       axios
-        .post("https://geeb.herokuapp.com/users/login", User, {     // http://localhost:3010
+        .post("https://geeb.herokuapp.com/users/login", User, {
+          // http://localhost:3010
           withCredentials: true,
         })
         .then((result) => console.log(result))
@@ -80,45 +82,56 @@ export default function login() {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
-        <div className={styles.InfoTitleBox}>
-          <p className={styles.InfoTitle}>Our best tips for you</p>
+        <div className={styles.InfoSubtitleBox}>
+          <p className={styles.InfoSubtitle}>TO IMPROVE</p>
         </div>
-
-        <div className={styles.InfoBullets}>
-          <p className={styles.Bullet}>
+        <div className={styles.InfoTitleBox}>
+          <p className={styles.InfoTitle}>Our best tips for you.</p>
+        </div>
+        <div className={styles.InfoBullets}>
+          <p className={styles.Bullet}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
-          <p className={styles.Bullet}>
+          <p className={styles.Bullet}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
-          <p className={styles.Bullet}>
+          <p className={styles.Bullet}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </p>
         </div>
       </div>
-      
+
       <div className={styles.InputsContainer}>
-        <div className={styles.InputsTitleBox}>
-          <p className={styles.InputsTitle}> Login</p>
-        </div>
+        <div className={styles.InputsLogin}>
+          <div className={styles.InputsTitleBox}>
+            <p className={styles.InputsTitle}> Login</p>
+          </div>
 
-        <div className={styles.InputLabelContainer}>
-          <label className={styles.Label}>Email</label>
-          <input className={styles.Input}></input>
-        </div>
+          <div className={styles.InputLabelContainer}>
+            <label className={styles.Label}>Email</label>
+            <input className={styles.Input}></input>
+          </div>
 
-        <div className={styles.InputLabelContainer}>
-          <label className={styles.Label}>Password</label>
-          <input className={styles.Input}></input>
-        </div>
+          <div className={styles.InputLabelContainer}>
+            <label className={styles.Label}>Password</label>
+            <input className={styles.Input}></input>
+          </div>
 
-        <div className={styles.ButtonContainer}>
-          <input value="Log in" className={styles.Button} type="button" onClick={handleOnSubmit2} />
+          <div className={styles.ButtonContainer}>
+            <input
+              value="Log in"
+              className={styles.Button}
+              type="button"
+              onClick={handleOnSubmit2}
+            />
+          </div>
         </div>
-
         <div className={styles.NewUserContainer}>
           <p className={styles.NewUserMessage}>New to GEEB?</p>
-          <a href="/"className={styles.NewUserLink}> Create an account </a>
+          <a href="/" className={styles.NewUserLink}>
+            {" "}
+            Create an account{" "}
+          </a>
         </div>
       </div>
     </div>
