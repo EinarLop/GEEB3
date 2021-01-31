@@ -38,63 +38,39 @@ export default function Header() {
           <AiOutlineMenu className={styles.MenuIcon} onClick={handleClick} />
           {isOpen && (
             <div className={styles.Menu}>
-              <AiOutlineClose onClick={handleClick} />
-              {isLogged ? (
-                <div className={styles.Menu}>
-                  <a className={styles.Links} href="/create">
-                    S Projects
-                  </a>
-                  <a className={styles.Links} href="/oprojects">
-                    O Projects
-                  </a>
-                  <a className={styles.Links} href="/login">
-                    Log Out
-                  </a>
-                </div>
-              ) : (
-                <div className={styles.Menu}>
-                  <a className={styles.Links} href="/login">
-                    O Project
-                  </a>
-                  <a className={styles.Links} href="/oprojects">
-                    S Project
-                  </a>
-                  <a className={styles.Links} href="/login">
-                    Login
-                  </a>
-                </div>
-              )}
+              <div className={styles.Menu}>
+                <AiOutlineClose
+                  className={styles.ClosingIcon}
+                  onClick={handleClick}
+                />
+                <a className={`${styles.Links} ${styles.Title}`}> GEEB </a>
+                <a className={styles.Links} href="/oprojects">
+                  O Project
+                </a>
+                <a className={styles.Links} href="/sprojects">
+                  S Project
+                </a>
+                <a className={styles.Links} href="/login">
+                  Logout
+                </a>
+              </div>
             </div>
           )}
         </div>
       ) : (
         <div className={styles.ConditionalContainerNav}>
-          {isLogged ? (
-            <div className={styles.NavContainer}>
-              <a className={styles.NavLink} href="/create">
-                SProjects
-              </a>
-              <a className={styles.NavLink} href="/oprojects">
-                Explore
-              </a>
-              <button className={styles.LogOut} onClick={() => onLogButton()}>
-                Log Out
-              </button>
-              <CgProfile className={styles.Profile} href="/" />
-            </div>
-          ) : (
-            <div className={styles.NavContainer}>
-              <a className={styles.NavLink} href="/oprojects">
-                O Projects
-              </a>
-              <a className={styles.NavLink} href="/sprojects">
-                S Projects
-              </a>
-              <button className={styles.LogOut} onClick={() => onLogButton()}>
-                Login
-              </button>
-            </div>
-          )}
+          <div className={styles.NavContainer}>
+            <a className={styles.NavLink} href="/oprojects">
+              O Projects
+            </a>
+            <a className={styles.NavLink} href="/sprojects">
+              S Projects
+            </a>
+            <CgProfile className={styles.Profile} href="/" />
+            <button className={styles.LogOut} onClick={() => onLogButton()}>
+              Log Out
+            </button>
+          </div>
         </div>
       )}
     </div>
