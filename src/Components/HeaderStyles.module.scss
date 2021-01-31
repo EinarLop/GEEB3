@@ -69,24 +69,33 @@
 .Links {
   color: azure;
   text-decoration: none;
-  width: 100px;
-  margin: 20px auto;
+  width: 100vw;
+  margin-bottom: 25px;
+
   font-size: 25px;
+  text-align: center;
   &:hover {
+    font-weight: 500;
+  }
+
+  &.Title {
+    color: $orangeAccent;
+    font-size: 38px;
     font-weight: 500;
   }
 }
 .Menu {
   position: absolute;
-  width: 250px;
-  height: 100%;
+  width: 100%;
+  height: auto;
   background-color: $dark;
   display: flex;
   flex-direction: column;
-  margin-top: 120px;
+
   //padding: 5px;
   z-index: 5;
 }
+
 .MenuIcon {
   //margin-top: 25px;
   height: 70px;
@@ -94,6 +103,12 @@
   //margin-left: 20px;
   //margin-bottom: 25px;
   margin: 25px 35px 25px 20px;
+}
+
+.ClosingIcon {
+  margin: 25px 0 0 25px;
+  width: 30px;
+  height: 30px;
 }
 
 @media (max-width: 600px) {

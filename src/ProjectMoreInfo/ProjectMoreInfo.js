@@ -4,16 +4,16 @@ import axios from "axios";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
-  title: "Loading Title...",
-  description: "Loading...",
-  status: "Loading",
-  tags:["X"],
-  skills:["X"],
-  highlights: ["Loading Highlights..."],
-  desirables:["X"],
-  })
-  
-  useEffect( () => {
+    title: "Loading Title...",
+    description: "Loading...",
+    status: "Loading",
+    tags: ["X"],
+    skills: ["X"],
+    highlights: ["Loading Highlights..."],
+    desirables: ["X"],
+  });
+
+  useEffect(() => {
     axios
       .get("http://localhost:3010/oprojects/" + props.match.params.id)
       .then((response) => setProject(response.data));
@@ -66,7 +66,7 @@ export default function ProjectMoreInfo(props) {
       console.log("Too short description");
       setErrorInput("Description too short");
     }
-    console.log(Array.isArray(project.highlights))
+    console.log(Array.isArray(project.highlights));
   };
   return (
     <div className={styles.Global}>
@@ -79,11 +79,10 @@ export default function ProjectMoreInfo(props) {
         <div className={styles.Highlights}>
           <p className={styles.TitleSubtitle}>Highlights</p>
           <ul className={styles.HList}>
-          {project.highlights.map((highlight) => (
-            <li className={styles.Text}>{highlight}</li>
-          ))}
+            {project.highlights.map((highlight) => (
+              <li className={styles.Text}>{highlight}</li>
+            ))}
           </ul>
-
         </div>
 
         <div className={styles.ColumnDivision}>
@@ -112,9 +111,9 @@ export default function ProjectMoreInfo(props) {
         </div>
         {isLogged && (
           <div className={styles.userInputs}>
-            <p className={styles.Title}>Send a request</p>
+            <p className={styles.TitleSubtitle}>Send a request</p>
             <div className={styles.RequestData}>
-              <div className={styles.InputLabelContainer}>
+              {/* <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Name</label>
                 <input
                   placeholder={request.userNames}
@@ -122,8 +121,8 @@ export default function ProjectMoreInfo(props) {
                   className={styles.Data}
                   onChange={handleOnChange}
                 />
-              </div>
-              <div className={styles.InputLabelContainer}>
+              </div> */}
+              {/* <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Mail</label>
                 <input
                   placeholder={request.userEmail}
@@ -131,7 +130,7 @@ export default function ProjectMoreInfo(props) {
                   onChange={handleOnChange}
                   className={styles.Data}
                 />
-              </div>
+              </div> */}
             </div>
             <div className={styles.ApplicationMsg}>
               <div className={styles.InputLabelContainer}>
@@ -156,5 +155,3 @@ export default function ProjectMoreInfo(props) {
     </div>
   );
 }
-
-
