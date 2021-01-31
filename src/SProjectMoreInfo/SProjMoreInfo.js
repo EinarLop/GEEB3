@@ -4,7 +4,7 @@ import styles from './SProjMoreInfoStyles.module.scss';
 export default function SProjectMoreInfo() {
     return (
         <div className={styles.Wrapper}>
-            <div className={styles.MainCard}>
+            <div className={styles.ContentContainer}>
                 <div className={styles.TitleDesc}>
                     <p className={styles.Heading}>Title of Project</p>
                     <p className={styles.Description}> 
@@ -16,9 +16,29 @@ export default function SProjectMoreInfo() {
                     This is the description. This project's leader will probably write something cool here.
                     </p>
                 </div>
+                <div className={styles.TagsSection}>
+                    <label className={styles.Label}>Tags:</label>
+                    <div className={styles.TagsContainer}>
+                            {/*mapping of tags, randomly colorized*/}
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                            <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
+                    </div>
+                </div>
+                <div className={styles.LinksContainer}>
+                    <label className={styles.Label}>Project Links:</label>
+                    <ul className={styles.LinkList}>
+                        {/*Mapping of projects.links*/}
+                        <li><a href="https://github.com/EinarLop/GEEB3" target="_blank">Github</a></li>
+                        <li><a href="https://www.google.com/" target="_blank">Name of Link</a></li>
+                    </ul>
+                </div>
                 <div className={styles.Collaborators}>
                         <label className={styles.Label}>Collaborators:</label>
-                        <div style={{display: 'flex', padding: '10px'}}>
+                        <div /*style={{display:'flex', padding:'10px'}}*/className={styles.NamesContainer}>
                             {/* Mapping of project.collaborators here, with Link to their profile id*/}
                             <p>@Einar</p>
                             <p>@Gina</p>
@@ -26,15 +46,8 @@ export default function SProjectMoreInfo() {
                             <p>@Karen</p>
                         </div>
                 </div>
-                <div className={styles.TagsContainer}>
-                        {/*mapping of tags*/}
-                        <div className={`${styles.Tag} ${styles.TopicTag}`}>Example Tag!</div>
-                </div>
-                <div className={styles.LinksContainer}>
-                        Box 4
-                </div>
-                <div className={styles.ImagesContainer}>
-                        Box 5
+                <div className={styles.ImagesSection}>
+                    <h1>Images Menu Component Here</h1>
                 </div>
             </div>
         </div>
