@@ -1,0 +1,97 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
+.Wrapper {
+  background-color: black;
+}
+
+.MainCard {
+  display: flex;
+  font-family: $font;
+  max-width: 1024px;
+  width:100%;
+  height: auto;
+  margin: 0 auto;
+  padding:30px 40px;
+  flex-wrap: wrap;
+}
+
+.Heading {
+  font-family: $font;
+  color: $orangeAccent;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.Description {
+  font-size: 16px;
+  color: $clearGrey;
+}
+
+.TitleDesc,
+.Collaborators,
+.LinksContainer,
+.TagsContainer,
+.ImagesContainer {
+  border: 1px solid $orangeAccent;
+  height: auto;
+}
+
+.TitleDesc{
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.Collaborators{
+  padding:5px;
+  width: 100%;
+}
+
+.Collaborators p {
+  color:$blueAccent;
+  display: inline;
+  margin: 0 10px;
+  font-size: 14px;
+  &:hover {
+    text-decoration: underline;
+    font-weight: 800;
+  }
+}
+
+.TagsContainer{
+  width: 50%;
+  padding:10px;
+}
+
+.LinksContainer{
+  width: 50%;
+}
+
+.ImagesContainer{
+  width: 100%;
+}
+
+.Label {
+  @include Label;
+  margin-bottom: 10px;
+}
+
+.Tag {
+  @include Tag;
+}
+
+@media (max-width: 767px) {
+  .LinksContainer,
+  .TagsContainer
+  {
+    width: 100%;
+  }
+  
+}
+
+
+
+
