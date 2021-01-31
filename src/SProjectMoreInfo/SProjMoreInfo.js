@@ -7,13 +7,16 @@ export default function SProjectMoreInfo() {
             <div className={styles.ContentContainer}>
                 <div className={styles.TitleDesc}>
                     <p className={styles.Heading}>Title of Project</p>
+                    <p className={styles.Author}><a>Paty Escamilla</a>'s portfolio</p>
                     <p className={styles.Description}> 
-                    This is the description. This project's leader will probably write something cool here.
-                    This is the description. This project's leader will probably write something cool here.
-                    This is the description. This project's leader will probably write something cool here.
-                    This is the description. This project's leader will probably write something cool here.
-                    This is the description. This project's leader will probably write something cool here.
-                    This is the description. This project's leader will probably write something cool here.
+                    This is the description of portfolio project. The portfolio owner will probably write what his role was
+                    and his/her contribution to the project.
+                    This is the description of portfolio project. The portfolio owner will probably write what his role was
+                    and his/her contribution to the project.
+                    This is the description of portfolio project. The portfolio owner will probably write what his role was
+                    and his/her contribution to the project.
+                    This is the description of portfolio project. The portfolio owner will probably write what his role was
+                    and his/her contribution to the project.
                     </p>
                 </div>
                 <div className={styles.TagsSection}>

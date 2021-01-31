@@ -26,6 +26,16 @@
   font-weight: 600;
   margin-bottom: 10px;
 }
+.Author {
+  color: $otherGrey;
+  margin-bottom: 10px;
+}
+.Author a {
+  &:hover {
+    text-decoration: underline;
+    font-weight: 700;
+  }
+}
 
 .Description {
   font-size: 18px;
