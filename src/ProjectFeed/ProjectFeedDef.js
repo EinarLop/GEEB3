@@ -10,7 +10,7 @@ function ProjectFeedDef() {
 
   useEffect(() => {
     axios
-      .get("https://geeb.herokuapp.com/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
   }, []);
 
@@ -38,9 +38,24 @@ function ProjectFeedDef() {
   };*/
   const [isLogged, setIsLogged] = useState(true);
 
+  const myProjects = () => {
+    axios
+      .get("http://localhost:3010/oprojects/mine" ,{
+        headers: {
+          "auth-token": window.localStorage.getItem("auth-token"),
+      }}) //http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      .then((response) => {
+        
+        setOprojects(response.data) 
+        console.log(response.data);
+      }
+      )}
+
+
   return (
     <div className={styles.Global}>
-      {oprojectsMock.map((project, index) => (
+      <input type="button" value="Mine" className={styles.Button} onClick={myProjects}/>
+      {oprojects.map((project, index) => (
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
           <TabList className={styles.TabsList}>
             <Tab className={styles.TabsUnselected}>Overview</Tab>

@@ -11,6 +11,7 @@ export default function ProjectMoreInfo(props) {
     skills: ["X"],
     highlights: ["Loading Highlights..."],
     desirables: ["X"],
+    
   });
 
   useEffect(() => {
