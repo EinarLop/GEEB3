@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import axios from "axios" 
 import styles from "./RegistrationStyles.module.scss";
+import {Redirect} from 'react-router-dom';
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
   const [errorUsername, setErrorUsername] = useState("");
+  const [redirect, setRedirect] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfPass, setErrorConfPass] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [errorLastName, setErrorLastName] = useState("");
   const [user, setUser] = useState({
     // stores the current valus of inputs
+    name:"",
+    lastName:"",
     userName: "",
     email: "",
     password: "",
@@ -21,6 +28,10 @@ function Registration() {
   };
   const [limits, setLimits] = useState({
     //no white spaces
+    nameCharMin:2,
+    nameCharMax:15,
+    lastNameCharMin:2,
+    lastNameCharMax:15,
     userCharMin: 4,
     userCharMax: 20,
     emailCharMin: 6,
@@ -46,6 +57,38 @@ function Registration() {
       return false;
     }
     return true;
+  };
+  const validateName = () => {
+    if (user.name.length < limits.nameCharMin) {
+      setErrorUsername("Name must have at least 2 characters");
+    }
+    if (user.name.length > limits.nameCharMax) {
+      setErrorUsername("Your username can't have more than 15 characters");
+    }
+    if (!onlyAlphanumeric(user.name)) {
+      setErrorUsername(
+        "Your username can only have lowercase letters and numbers"
+      );
+    }
+    if (hasWhiteSpace(user.name)) {
+      setErrorUsername("Your username cannot contain any spaces");
+    }
+  };
+  const validateLastName = () => {
+    if (user.lastName.length < limits.lastNameCharMin) {
+      setErrorUsername("Name must have at least 2 characters");
+    }
+    if (user.lastName.length > limits.lastNameCharMax) {
+      setErrorUsername("Your username can't have more than 15 characters");
+    }
+    if (!onlyAlphanumeric(user.lastName)) {
+      setErrorUsername(
+        "Your username can only have lowercase letters and numbers"
+      );
+    }
+    if (hasWhiteSpace(user.lastName)) {
+      setErrorUsername("Your username cannot contain any spaces");
+    }
   };
 
   const validateUsername = () => {
@@ -107,12 +150,40 @@ function Registration() {
     setErrorEmail("");
     setErrorPassword("");
     setErrorConfPass("");
+    setErrorName("");
+    setErrorLastName("");
+    validateName();
+    validateLastName();
     validateUsername();
     validateEmail();
     validatePassword();
+
+    if(errorUsername === "" && errorEmail === "" && errorPassword === "" &&
+     errorConfPass === "" && errorName==="" && errorLastName===""){
+      const User = {
+      username: user.userName,
+      email: user.email,
+      password: user.password,
+      fullname: user.name + ' ' + user.lastName,
+      }
+      axios.post("http://localhost:3010/users/register", User, {
+        withCredentials: true,
+      })
+      .then(RegisteredUser=>{
+        console.log(RegisteredUser);
+        setRedirect(true);
+        // to redirect to /oprojects
+      })
+      .catch(err => {
+        // Set error message: "something went wrong"
+        console.log(err);
+      })
+  }
     // if every error msg is empty, there are no validation errors. Send request
+    
   };
   return (
+    redirect ? <Redirect to="/oprojects"/> :
     <div className={styles.Global}>
       <div className={styles.Information}>
         <h1>What is GEEB?</h1>
@@ -131,6 +202,30 @@ function Registration() {
 
       <div className={styles.Inputs}>
         <h1>Register now</h1>
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Name</label>
+          <input
+            autoComplete="off"
+            className={styles.Input}
+            name="name"
+            onChange={handleOnChange}
+            placeholder="Name"
+            required="True"
+          ></input>
+          <p className={styles.ErrorMsg}>{errorName}</p>
+        </div>
+        <div className={styles.InputLabelContainer}>
+          <label className={styles.Label}>Last Name</label>
+          <input
+            autoComplete="off"
+            className={styles.Input}
+            name="lastName"
+            onChange={handleOnChange}
+            placeholder="LastName"
+            required="True"
+          ></input>
+          <p className={styles.ErrorMsg}>{errorLastName}</p>
+        </div>
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Username</label>
           <input

@@ -5,13 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
 
-//ProjectFeed own searchbar
-//Porjects titulo === tags
-
-//Profile
-//@
-
-//Header Icon   Name Create Explore Logout
+/* Header layout:  Icon, Logo, 'Create', 'Explore', Header is visible to anyone who is logged in.*/
 
 export default function Header() {
   const { isMd } = useMediaSize();
@@ -21,6 +15,7 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
   const onLogButton = (event) => {
+    /*How to delete a session using LocalStorage? */
     if (isLogged) {
       location.href = "/oproject/:id";
     } else {
@@ -30,7 +25,7 @@ export default function Header() {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconNameContainer}>
-        <MdNaturePeople className={styles.Icon} />
+        <MdNaturePeople className={styles.Icon}/>
         <h2 className={styles.Logo}>Intecreate</h2>
       </div>
       {isMd ? (
@@ -44,15 +39,25 @@ export default function Header() {
                   onClick={handleClick}
                 />
                 <a className={`${styles.Links} ${styles.Title}`}> GEEB </a>
+
+                {/* <a className={styles.Links} href="/register">
+                  Register
+                </a> */}
                 <a className={styles.Links} href="/oprojects">
-                  O Project
+                  Team Projects
                 </a>
                 <a className={styles.Links} href="/sprojects">
-                  S Project
+                  Portfolio Projects 
                 </a>
-                <a className={styles.Links} href="/login">
+                <a className={styles.Links} href="/create">
+                  Looking for a team?
+                </a>
+                <a className={styles.Links} href="/createsprojects">
+                  Add to your portfolio
+                </a>
+                {/* <a className={styles.Links} href="/login">
                   Logout
-                </a>
+                </a> */}
               </div>
             </div>
           )}
@@ -61,15 +66,21 @@ export default function Header() {
         <div className={styles.ConditionalContainerNav}>
           <div className={styles.NavContainer}>
             <a className={styles.NavLink} href="/oprojects">
-              O Projects
+              Team Projects
             </a>
             <a className={styles.NavLink} href="/sprojects">
-              S Projects
+              Portfolio Projects
             </a>
-            <CgProfile className={styles.Profile} href="/" />
-            <button className={styles.LogOut} onClick={() => onLogButton()}>
+            <a className={styles.NavLink} href="/create">
+              Looking for a team 
+            </a>
+            <a className={styles.NavLink} href="/createsprojects">
+              Add to your Portfolio
+            </a>
+            {/* <CgProfile className={styles.Profile} href="/" /> */}
+            {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
-            </button>
+            </button> */}
           </div>
         </div>
       )}

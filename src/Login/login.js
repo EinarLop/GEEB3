@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
+import {Redirect} from 'react-router-dom';
 
 export default function login() {
   const [errorInput, setErrorInput] = useState("");
+  const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
-    emailUserName: "",
+    username: "",
     password: "",
   });
-  const [fakeProfile, setFakeProfile] = useState({
-    email: "micorreo@gmail.com",
-    password: "contraseña123",
-  });
+
   const handleOnChange = (event) => {
     setUser({
       ...user,
@@ -19,16 +18,26 @@ export default function login() {
     });
   };
 
-  const cookieTesting = () => {
-    let galleta = document.cookie.slice(4);
-    //console.log(galleta)
-  };
   const handleOnSubmit2 = () => {
-    const User = {
-      username: "12345678",
-      password: "12345678", // change to non hardcoded
-    };
-    axios
+    if (errorInput) {
+      setErrorInput("");
+    } else if (user.username === "") {
+      console.log("Input username is empty");
+      setErrorInput("username can not be empty");
+    } else if (user.password === "") {
+      console.log("Input password is empty");
+      setErrorInput("Password can not be empty");
+    } 
+    if (errorInput == "") {
+      const User = {
+        username: user.username,
+        password: user.password, 
+      };
+      // checar que el username existe en base de datos
+
+      // si existe, usarlo para comparar la password con bcrypt ??
+
+      axios
       .post("http://localhost:3010/users/login", User, {
         // https://geeb.herokuapp.com/users/login
         withCredentials: true,
@@ -38,15 +47,17 @@ export default function login() {
           "auth-token",
           response.headers["auth-token"]
         );
+        setRedirect(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setErrorInput("Password or username incorrect"));
+    } 
   };
-  const handleOnSubmit = () => {
+  {/**const handleOnSubmit = () => {
     if (errorInput) {
       setErrorInput("");
-    } else if (user.emailUserName === "") {
-      console.log("Input username/email is empty");
-      setErrorInput("Username can not be empty");
+    } else if (user.email === "") {
+      console.log("Input email is empty");
+      setErrorInput("Email can not be empty");
     } else if (user.password === "") {
       console.log("Input password is empty");
       setErrorInput("Password can not be empty");
@@ -78,8 +89,10 @@ export default function login() {
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
     }
-  };
+  }; */}
+  
   return (
+    redirect ? <Redirect to="/oprojects"/> :
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
@@ -108,13 +121,28 @@ export default function login() {
           </div>
 
           <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Email</label>
-            <input className={styles.Input}></input>
+            <label className={styles.Label}>Username</label>
+            <input 
+              autoComplete="off"
+              className={styles.Input} 
+              name="username"
+              placeholder="user@cool"
+              onChange={handleOnChange}
+              required="True"
+            ></input>
           </div>
 
           <div className={styles.InputLabelContainer}>
             <label className={styles.Label}>Password</label>
-            <input className={styles.Input}></input>
+            <input 
+              autoComplete="off"
+              className={styles.Input} 
+              name="password" 
+              type="password"
+              placeholder="VerySecretPassword"
+              onChange={handleOnChange}
+              required="True"
+            ></input>
           </div>
 
           <div className={styles.ButtonContainer}>
