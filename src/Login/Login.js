@@ -38,11 +38,11 @@ export default function login() {
       // si existe, usarlo para comparar la password con bcrypt ??
 
       axios
-      .post("http://localhost:3010/users/login", User, {
-        // https://geeb.herokuapp.com/users/login
+      .post("http://localhost:3010/users/login", User, {  // https://geeb.herokuapp.com/users/login
         withCredentials: true,
       })
       .then((response) => {
+        // SET THE JWT IN LOCALSTORAGE
         window.localStorage.setItem(
           "auth-token",
           response.headers["auth-token"]
@@ -52,44 +52,6 @@ export default function login() {
       .catch((err) => setErrorInput("Password or username incorrect"));
     } 
   };
-  {/**const handleOnSubmit = () => {
-    if (errorInput) {
-      setErrorInput("");
-    } else if (user.email === "") {
-      console.log("Input email is empty");
-      setErrorInput("Email can not be empty");
-    } else if (user.password === "") {
-      console.log("Input password is empty");
-      setErrorInput("Password can not be empty");
-    } else if (
-      user.emailUserName !== fakeProfile.email &&
-      user.emailUserName !== fakeProfile.userName
-    ) {
-      console.log("Usuario no valido");
-      setErrorInput("Unregistered user");
-    } else if (user.password !== fakeProfile.password) {
-      console.log("Contraseña incorrecta");
-      setErrorInput("Incorrect Password");
-    }
-    // Validation OK
-    if (errorInput == "") {
-      const User = {
-        username: "12345678",
-        password: "12345678", // change to non hardcoded
-      };
-      // checar que el username existe en base de datos
-
-      // si existe, usarlo para comparar la password con bcrypt ??
-
-      axios
-        .post("https://geeb.herokuapp.com/users/login", User, {
-          // http://localhost:3010
-          withCredentials: true,
-        })
-        .then((result) => console.log(result))
-        .catch((err) => console.log(err));
-    }
-  }; */}
   
   return (
     redirect ? <Redirect to="/oprojects"/> :

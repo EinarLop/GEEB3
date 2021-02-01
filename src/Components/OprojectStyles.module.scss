@@ -1,0 +1,213 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+* {
+  font-size: 18px;
+}
+
+li {
+  margin: 10px 0px;
+}
+
+.Global {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 25px;
+}
+.TitleCard {
+  font-size: 25px;
+  color: #e66d29;
+  margin-bottom: 25px;
+}
+.TagsSubtitle {
+  font-size: 25px;
+}
+.Wrapper {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+}
+
+.Card {
+  width: 100%;
+  background-color: #2c2c34;
+  // border: 1px solid white;
+  color: white;
+  max-width: 1024px;
+  //padding: 5px;
+  //padding-top: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.TabsUnselected {
+  width: auto;
+  height: auto;
+  font-size: 20px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+.TabSelected {
+  background-color: #e66d29;
+  &:focus {
+    outline: none;
+  }
+}
+
+.TabsList {
+  display: flex;
+  flex-direction: row;
+  //height: 20px;
+  //margin-left: -35px;
+  padding: 0px;
+  margin: 0;
+  list-style-type: none;
+  border-bottom: 2px solid #e66d29;
+}
+
+.Row0 {
+  padding: 15px 15px 0px 15px;
+  width: auto;
+}
+
+.Color {
+  background-color: #2c2c34;
+}
+.ButtonDiv {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.Info {
+  font-style: italic;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  height: 45px;
+  font-weight: 501;
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+.Button {
+  @include Button;
+  &.Large {
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+  }
+}
+
+.TagsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: #21d7ff;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 25px 0 10px 0;
+}
+
+.SkillsWrapper {
+  margin: 25px 0 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: #ff0080;
+  flex-wrap: wrap;
+}
+
+.Tag {
+  @include Tag;
+  margin-top: 0;
+  width: auto;
+  height: 50px;
+  margin-bottom: 15px;
+  //
+}
+
+.Open {
+  color: rgb(73, 211, 130);
+}
+
+.Closed {
+  color: rgb(196, 9, 9);
+}
+
+.Hlist {
+  font-weight: 500;
+  font-size: 20px;
+  list-style: circle;
+  padding-left: 2em;
+}
+
+@media (max-width: 1380px) {
+  .ButtonDiv {
+    padding: 5px 15px 15px 15px;
+  }
+  .Global {
+    font-size: 13px;
+  }
+  .Card {
+    width: 100%;
+  }
+}
+@media (max-width: 720px) {
+  .Info {
+    flex-direction: column;
+    height: auto;
+    font-size: 16px;
+    font-weight: 500;
+
+    p {
+      margin: 8px;
+    }
+  }
+
+  .Global {
+    font-size: 16px;
+  }
+  .Card {
+    width: 100%;
+  }
+  .Hlist {
+    font-size: 16px;
+  }
+
+  .TabsUnselected {
+    font-size: 16px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .Button {
+    font-size: 16px;
+    padding: 6px 8px;
+    width: 250px;
+    height: auto;
+    align-self: center;
+    margin-top: 25px;
+  }
+  .ButtonDiv {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    padding: 0 0 15px 0;
+    font-size: 10px;
+  }
+
+  // .Tag {
+  //   height: 15px;
+  //   font-size: 13px;
+  // }
+}
