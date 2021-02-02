@@ -7,20 +7,15 @@ export default function ProjectMoreInfo(props) {
     title: "Loading Title...",
     description: "Loading...",
     status: "Loading",
-    tags: ["X"],
-    skills: ["X"],
+    tags: ["Tag"],
+    skills: ["Skill"],
     highlights: ["Loading Highlights..."],
-    desirables: ["X"],
+    desirables: ["Loading Preferences..."],
     
   });
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3010/oprojects/" + props.match.params.id)
-      .then((response) => setProject(response.data));
-  }, []);
-
   const [isLogged, setIsLogged] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
 
   const [fakeProfile, setFakeProfile] = useState({
     name: "NombreX",
@@ -35,6 +30,19 @@ export default function ProjectMoreInfo(props) {
     userEmail: fakeProfile.email,
     requestDescription: "",
   });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/oprojects/" + props.match.params.id, {
+        headers: {
+          "auth-token": window.localStorage.getItem("auth-token"),
+      }})
+      .then((response) => {
+        setIsOwner(response.data.isOwner);
+        setProject(response.data.project);
+      });
+  }, []);
+
   const handleOnChange = (event) => {
     setRequest({
       ...request,
@@ -73,6 +81,7 @@ export default function ProjectMoreInfo(props) {
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
         <div className={styles.TitleDesContainer}>
+        <h1>Is Owner: {isOwner.toString()}</h1>
           <p className={styles.Title}>{project.title}</p>
           <p className={styles.Paragraph}>{project.description}</p>
         </div>
