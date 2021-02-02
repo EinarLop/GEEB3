@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
-import Header from "../Components/Header";
-import axios from "axios";
 import {Redirect} from 'react-router-dom';
-
+import {validateAll, validateHighlight, validateProfile, validateSkill} from '../ValidationsFiles/ProjectCreateValidation.js';
+import {validateTag} from '../ValidationsFiles/GeneralValidation'
 
 function ProjectCreate() {
   let galleta = document.cookie.slice(4);
@@ -15,257 +14,73 @@ function ProjectCreate() {
     currentTag: "",
     currentSkill: "",
     currentProfile: "",
+    success:""
   });
   const [highlights, setHighlights] = useState([]);
   const [tags, setTags] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [message, setMessage] = useState("");
-  const [redirect, setRedirect] = useState(false);
-
-  const [errorTitle, setErrorTitle] = useState("");
-  const [errorDescription, setErrorDescription] = useState("");
-  const [errorHighlight, setErrorHighlight] = useState("");
-  const [errorTag, setErrorTag] = useState("");
-  const [errorSkill, setErrorSkill] = useState("");
-  const [errorProfile, setErrorProfile] = useState("");
-  const [limits, setLimits] = useState({
-    titleMinChar: 5,
-    titleMaxChar: 50,
-
-    descMinChar: 5,
-    descMaxChar: 300,
-
-    minTags: 1,
-    maxTags: 6,
-    tagMinChar: 1,
-    tagMaxChar: 30,
-
-    profileMinChar: 5,
-    profileMaxChar: 60,
-    minProfiles: 1,
-    maxProfiles: 5,
-  });
-
-  const onAddTag = (event) => {
-    if (project.currentTag.length >= limits.tagMinChar) {
-      if (project.currentTag.length <= limits.tagMaxChar) {
-        if (project.currentTag.trim() == "") {
-          setErrorTag("Tag cannot be empty");
-        } else if (tags.length < limits.maxTags) {
-          setTags((tags) => [...tags, project.currentTag]);
-          setProject({
-            ...project,
-            currentTag: "",
-          });
-          setErrorTag("");
-        } else {
-          setErrorTag("You cannot have more than 6 tags");
-        }
-      } else {
-        setErrorTag("You can only use 30 chars per tag");
-      }
-    } else {
-      setErrorTag("Tags cannot be empty");
-    }
-  };
-
-  const onAddSkill = (event) => {
-    if (project.currentSkill.length >= limits.tagMinChar) {
-      if (project.currentSkill.length <= limits.tagMaxChar) {
-        if (project.currentSkill.trim() == "") {
-          setErrorSkill("Skill cannot be empty");
-        } else if (skills.length < limits.maxTags) {
-          setSkills((skills) => [...skills, project.currentSkill]);
-          setProject({
-            ...project,
-            currentSkill: "",
-          });
-          setErrorSkill("");
-        } else {
-          setErrorSkill("You cannot have more than 6 skills");
-        }
-      } else {
-        setErrorSkill("You can only use 30 chars per Skill");
-      }
-    } else {
-      setErrorSkill("Skill can not be empty");
-    }
-  };
-
-  const onAddHighlight = (event) => {
-    if (project.currentHighlight.length >= limits.profileMinChar) {
-      if (project.currentHighlight.trim() == "") {
-        setErrorHighlight("Cannot be empty");
-      } else if (project.currentHighlight.length <= limits.profileMaxChar) {
-        if (highlights.length < limits.maxProfiles) {
-          setHighlights((highlights) => [
-            ...highlights,
-            project.currentHighlight,
-          ]);
-
-          setProject({
-            ...project,
-            currentHighlight: "",
-          });
-          setErrorHighlight("");
-        } else {
-          setErrorHighlight("You can not have more than 5 highlights");
-        }
-      } else {
-        setErrorHighlight("Highlight can not have more than 60 char");
-      }
-    } else {
-      console.log("Empty H");
-      setErrorHighlight("Highlight must be at least 5 characters long");
-    }
-    console.log(highlights);
-  };
-
-  // refactor Profile name
-  const onAddProfile = (event) => {
-    if (project.currentProfile.length >= limits.profileMinChar) {
-      if (project.currentProfile.length <= limits.profileMaxChar) {
-        if (project.currentProfile.trim() == "") {
-          setErrorProfile("Cannot be empty");
-        } else if (profiles.length < limits.maxProfiles) {
-          setProfiles((profiles) => [...profiles, project.currentProfile]);
-
-          setProject({
-            ...project,
-            currentProfile: "",
-          });
-          setErrorProfile("");
-        } else {
-          setErrorProfile("You should add at least 1 profile");
-        }
-      } else {
-        setErrorProfile("Profiles can not have more than 60 char");
-      }
-    } else {
-      setErrorProfile("Profiles must be at least 5 characters long");
-    }
-  };
+  const [message, setMessage] = useState({
+    errorTitle : "",
+    errorDescription:"",
+    errorHighlight:"",
+    errorTag:"",
+    errorSkill:"",
+    errorProfile:"",
+    redirect: false
+    });
 
   const handleOnChange = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
     setProject({
       ...project,
       [event.target.name]: event.target.value,
     });
   };
-  const validateTitle = () => {
-    if (project.title.length < limits.titleMinChar) {
-      setErrorTitle("Title must be at least 5 characters long");
-    }
-    if (project.title.length > limits.titleMaxChar) {
-      setErrorTitle("Title can not have more than 50 char");
-    }
-    if (project.title.trim() == "") {
-      setErrorTitle("Title cannot be empty.");
-    }
-    if (
-      project.title.length >= limits.titleMinChar &&
-      project.title.length <= limits.titleMaxChar &&
-      project.title.trim() != ""
-    ) {
-      setErrorTitle("");
+  //onAdd ******************************************************************************************************************************
+  const onAddTag = (event) => {
+    setMessage({...message, errorTag: validateTag(tags, project.currentTag,)})
+    if(message.errorTag===""){
+      setTags((t) => [...t, project.currentTag]);
+      setProject({
+        ...project,
+        currentTag: "",
+      });
     }
   };
-  const validateDescription = () => {
-    if (project.description.length < limits.descMinChar) {
-      setErrorDescription("Description must be at least 5 characters long");
-    }
-    if (project.description.length > limits.descMaxChar) {
-      setErrorDescription("Description can't be more than 300 characters long");
-    }
-    if (project.description.trim() == "") {
-      setErrorDescription("Description cannot be empty.");
-    }
-    if (
-      project.description.length <= limits.descMaxChar &&
-      project.description.length >= limits.descMinChar &&
-      project.description.trim() != ""
-    ) {
-      setErrorDescription("");
+  const onAddSkill = (event) => {
+    setMessage({...message, errorSkill: validateSkill(skills, project.currentSkill,)})
+    if(message.errorSkill===""){
+      setSkills((t) => [...t, project.currentSkill]);
+      setProject({
+        ...project,
+        currentSkill: "",
+      });
     }
   };
-  const validateTagSkills = () => {
-    if (tags.length < limits.minTags) {
-      setErrorTag("You should add at least 1 tag");
-    }
-    if (tags.length !== 0) {
-      setErrorTag("");
-    }
-    if (skills.length < limits.minTags) {
-      setErrorSkill("You should add at least 1 skill");
-    }
-    if (skills.length !== 0) {
-      setErrorSkill("");
+  const onAddHighlight = (event) => {
+    setMessage({...message, errorHighlight: validateHighlight(tags, project.currentHighlight,)})
+    if(message.errorHighlight===""){
+      setHighlights((t) => [...t, project.currentHighlight]);
+      setProject({
+        ...project,
+        currentHighlight: "",
+      });
     }
   };
-  const validateHighlightProfile = () => {
-    if (highlights.length < limits.minProfiles) {
-      setErrorHighlight("You should add at least 1 highlight");
-    }
-    if (highlights.length !== 0) {
-      setErrorHighlight("");
-    }
-
-    if (profiles.length < limits.minProfiles) {
-      setErrorProfile("You should add at least 1 profile requirement");
-    }
-    if (profiles.length !== 0) {
-      setErrorProfile("");
+  const onAddProfile = (event) => {
+    setMessage({...message, errorProfile: validateProfile(tags, project.currentProfile,)})
+    if(message.errorProfile===""){
+      setProfiles((t) => [...t, project.currentProfile]);
+      setProject({
+        ...project,
+        currentProfile: "",
+      });
     }
   };
-  const handleOnSubmit = () => {
-    validateTitle();
-    validateDescription();
-    validateTagSkills();
-    validateHighlightProfile();
-
-    if (
-      errorDescription === "" &&
-      errorTitle === "" &&
-      errorTag === "" &&
-      errorHighlight === "" &&
-      errorSkill === "" &&
-      errorProfile === ""
-    ) {
-      const Project = {
-        title: project.title,
-        description: project.description,
-        status: project.status,
-        tags: tags,
-        highlights: highlights,
-        desirables: profiles,
-        skills: skills,
-      };
-
-      axios
-        .post("http://localhost:3010/oprojects/create", Project, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          let msg = <p style={{color:'#00FA9A'}}>Project created succesfully!</p>
-          setMessage(msg);
-          setTimeout(()=>{
-            setRedirect(true);
-          }, 2000);
-        });
-    }
-  };
-
+  //onDelete ******************************************************************************************************************************
   const onDeleteHighlight = (index) => {
     setHighlights(highlights.filter((highlight, i) => i !== index));
   };
-
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
@@ -275,9 +90,23 @@ function ProjectCreate() {
   const onDeleteProfile = (index) => {
     setProfiles(profiles.filter((profile, i) => i !== index));
   };
+  //onSubmit ******************************************************************************************************************************
+  const handleOnSubmit = (event) => {
+    let finalmessages = validateAll(project, tags, skills, highlights, profiles)
+    setMessage({
+      errorTitle : finalmessages.errorTitle,
+      errorDescription: finalmessages.errorDescription,
+      errorHighlight: finalmessages.errorHighlight,
+      errorTag: finalmessages.errorTag,
+      errorSkill: finalmessages.errorSkill,
+      errorProfile: finalmessages.errorProfile,
+      redirect:finalmessages.redirect,
+      success : finalmessages.success
+    })
+  }
 
   return (
-    redirect ? <Redirect to="/oprojects"/> :
+    message.redirect ? <Redirect to="/oprojects"/> :
     <div>
       {/* <Header /> */}
       <div className={styles.Global}>
@@ -294,7 +123,7 @@ function ProjectCreate() {
                   name="title"
                   autoComplete="off"
                 />
-                <p className={styles.ErrorMsg}>{errorTitle}</p>
+                <p className={styles.ErrorMsg}>{message.errorTitle}</p>
               </div>
 
               <div className={styles.InputLabelContainer}>
@@ -318,7 +147,7 @@ function ProjectCreate() {
                 onChange={handleOnChange}
                 name="description"
               />
-              <p className={styles.ErrorMsg}>{errorDescription}</p>
+              <p className={styles.ErrorMsg}>{message.errorDescription}</p>
             </div>
           </div>
 
@@ -342,7 +171,7 @@ function ProjectCreate() {
                     onClick={onAddTag}
                   />
                 </div>
-                <p className={styles.ErrorMsg}>{errorTag}</p>
+                <p className={styles.ErrorMsg}>{message.errorTag}</p>
               </div>
 
               <div className={styles.TContainer}>
@@ -376,7 +205,7 @@ function ProjectCreate() {
                     onClick={onAddSkill}
                   />
                 </div>
-                <p className={styles.ErrorMsg}>{errorSkill}</p>
+                <p className={styles.ErrorMsg}>{message.errorSkill}</p>
               </div>
 
               <div className={styles.TContainer}>
@@ -404,7 +233,7 @@ function ProjectCreate() {
                   value={project.currentProfile}
                   autoComplete="off"
                 />
-                <p className={styles.ErrorMsg}>{errorProfile}</p>
+                <p className={styles.ErrorMsg}>{message.errorProfile}</p>
                 <input
                   className={styles.Button}
                   onClick={onAddProfile}
@@ -436,7 +265,7 @@ function ProjectCreate() {
                   value={project.currentHighlight}
                   autoComplete="off"
                 />
-                <p className={styles.ErrorMsg}>{errorHighlight}</p>
+                <p className={styles.ErrorMsg}>{message.errorHighlight}</p>
                 <input
                   className={styles.Button}
                   onClick={onAddHighlight}
@@ -458,7 +287,7 @@ function ProjectCreate() {
             </div>
           </div>
         </div>
-        {message}
+          <p style={{color:'#00FA9A'}}>{message.success}</p>
         <div>
           <input
             className={styles.Button}

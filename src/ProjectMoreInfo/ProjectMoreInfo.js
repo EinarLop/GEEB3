@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
+import { validateRequest } from "../ValidationsFiles/ProjectMoreInfoValidation";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -50,31 +51,7 @@ export default function ProjectMoreInfo(props) {
     });
   };
   const handleOnSubmit = () => {
-    if (errorInput) {
-      setErrorInput("");
-    } else if (request.requestDescription === "") {
-      console.log("You must have a description of your request");
-      setErrorInput("You must have a description of your request");
-    } else if (request.userEmail === "") {
-      console.log(
-        "You must enter a email so the owner of the proyect can contact"
-      );
-      setErrorInput(
-        "You must enter a email so the owner of the project can contact you"
-      );
-    } else if (request.userNames === "") {
-      console.log("You must enter your name");
-      setErrorInput("You must enter your name");
-    } else if (request.userNames.length < 10) {
-      console.log("Too short");
-      setErrorInput("User too short");
-    } else if (request.userEmail.length < 12) {
-      console.log("Too short email");
-      setErrorInput("Your email is not valid");
-    } else if (request.requestDescription.length < 15) {
-      console.log("Too short description");
-      setErrorInput("Description too short");
-    }
+    setErrorInput(validateRequest(request))
     console.log(Array.isArray(project.highlights));
   };
   return (
