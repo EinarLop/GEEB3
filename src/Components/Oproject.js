@@ -25,8 +25,8 @@ export default function Oproject(props) {
                   <div className={styles[project.status]}>
                     <p>Status: {project.status}</p>
                   </div>
-                  <p>Creator: @{project.creator}</p>
-                  <p>Created: {project.created}</p>
+                  <p>Creator: @{project.userid.username}</p>
+                  <p>Created: {project.created.slice(0,10)}</p>
                 </div>
               </div>
               <div className={styles.ButtonDiv}>
@@ -50,8 +50,8 @@ export default function Oproject(props) {
                   <div className={styles[project.status]}>
                     <p>Status: {project.status}</p>
                   </div>
-                  <p>Creator: @{project.creator}</p>
-                  <p>Created: {project.created}</p>
+                  <p>Creator: @{project.userid.username}</p>
+                  <p>Created: {project.created.slice(0,10)}</p>
                 </div>
               </div>
               <div className={styles.ButtonDiv}>

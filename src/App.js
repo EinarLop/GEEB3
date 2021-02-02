@@ -5,7 +5,7 @@ import AcceptRequest from "./AcceptProjectRequest/acceptProjectRequest.js";
 
 import PublicProfile from "./PublicProfile/publicProfile.js";
 
-import Login from "./Login/login";
+import Login from "./Login/Login";
 
 import Header from "./Components/Header";
 

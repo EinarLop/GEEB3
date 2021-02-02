@@ -50,10 +50,10 @@ export default function Header() {
                   Portfolio Projects 
                 </a>
                 <a className={styles.Links} href="/create">
-                  Looking for a team?
+                  Create a Project
                 </a>
                 <a className={styles.Links} href="/createsprojects">
-                  Add to your portfolio
+                  Add to portfolio
                 </a>
                 {/* <a className={styles.Links} href="/login">
                   Logout
@@ -72,10 +72,10 @@ export default function Header() {
               Portfolio Projects
             </a>
             <a className={styles.NavLink} href="/create">
-              Looking for a team 
+              Create a Project
             </a>
             <a className={styles.NavLink} href="/createsprojects">
-              Add to your Portfolio
+              Add to Portfolio
             </a>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>

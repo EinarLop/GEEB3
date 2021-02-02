@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import Header from "../Components/Header";
 import axios from "axios";
+import {Redirect} from 'react-router-dom';
+
 
 function ProjectCreate() {
   let galleta = document.cookie.slice(4);
@@ -18,6 +20,8 @@ function ProjectCreate() {
   const [tags, setTags] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [message, setMessage] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const [errorTitle, setErrorTitle] = useState("");
   const [errorDescription, setErrorDescription] = useState("");
@@ -240,14 +244,21 @@ function ProjectCreate() {
         skills: skills,
       };
 
-      console.log(galleta);
       axios
         .post("http://localhost:3010/oprojects/create", Project, {
           headers: {
+            // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          console.log(res.data);
+          let msg = <p style={{color:'#00FA9A'}}>Project created succesfully!</p>
+          setMessage(msg);
+          setTimeout(()=>{
+            setRedirect(true);
+          }, 2000);
+        });
     }
   };
 
@@ -266,7 +277,8 @@ function ProjectCreate() {
   };
 
   return (
-    <>
+    redirect ? <Redirect to="/oprojects"/> :
+    <div>
       {/* <Header /> */}
       <div className={styles.Global}>
         <h1 className={styles.Title}>Create Project</h1>
@@ -332,13 +344,6 @@ function ProjectCreate() {
                 </div>
                 <p className={styles.ErrorMsg}>{errorTag}</p>
               </div>
-
-              {/* <div className={styles.TInputContainer}> */}
-              {/* <div className={styles.InputLabelContainer}> */}
-
-              {/* </div> */}
-              {/*Tags, Skills add button como círculo con '+'*/}
-              {/* </div> */}
 
               <div className={styles.TContainer}>
                 {tags.map((tag, index) => (
@@ -453,6 +458,7 @@ function ProjectCreate() {
             </div>
           </div>
         </div>
+        {message}
         <div>
           <input
             className={styles.Button}
@@ -462,7 +468,7 @@ function ProjectCreate() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
