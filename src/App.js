@@ -17,7 +17,7 @@ import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 import SProjectFeed from "./SProject/SProjectFeed.js";
 import CreateSProject from "./CreateSProject/CreateSProject.js";
 import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
-
+import Profile from "./Profile/Profile";
 //350x34
 //404x44
 
@@ -40,11 +40,14 @@ function App() {
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeedDef} />
-          <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
+          <Route path="/oproject/:id" component={ProjectMoreInfo} />{" "}
+          {/*change route to /project/:id*/}
           <Route path="/create" component={ProjectCreate} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
+          <Route path="/sproject/:id" component={SProjectMoreInfo} />{" "}
+          {/*change route to /portfolio/:id*/}
+          <Route path="/profile" component={Profile} />
         </Router>
       }
     </div>
