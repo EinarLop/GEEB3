@@ -52,7 +52,7 @@ export default function Header() {
                 <a className={styles.Links} href="/create">
                   Create a Project
                 </a>
-                <a className={styles.Links} href="/createsprojects">
+                <a className={styles.Links} href="/createsproject">
                   Add to portfolio
                 </a>
                 {/* <a className={styles.Links} href="/login">

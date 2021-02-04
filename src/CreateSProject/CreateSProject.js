@@ -332,21 +332,15 @@ function CreateSProject() {
               <label className={styles.Label}>Images</label>
               <input
                 className={styles.TagInput}
-                placeholder="Programming, Marketing, etc..."
                 name="currentImage"
-                autoComplete="off"
                 onChange={handleOnChange}
               />
             </div>
-
             <div className={styles.InputLabelContainer}>
-              <label className={`${styles.Label} ${styles.Transparent}`}>
-                Hey
-              </label>
               <input 
                 className={styles.Button} 
                 type="button" 
-                value="Add" 
+                value="Add image" 
                 onClick={onAddImage}
               />
             </div>

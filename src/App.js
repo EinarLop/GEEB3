@@ -16,6 +16,7 @@ import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 import SProjectFeed from "./SProject/SProjectFeed.js";
 import CreateSProject from "./CreateSProject/CreateSProject.js";
 import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
+import Uploader from './Components/Uploader';
 
 //350x34
 //404x44
@@ -43,6 +44,7 @@ function App() {
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
           <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
+          <Route path="/upload" component={Uploader}/>
         </Router>
       }
     </div>

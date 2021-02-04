@@ -1,0 +1,17 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss",
+  "../GlobalStyles/Button.scss";
+
+img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Label {
+    @include Label;
+}
