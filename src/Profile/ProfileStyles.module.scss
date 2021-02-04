@@ -82,7 +82,7 @@
   width: 33%;
   height: auto;
   padding: 0 50px 0 0;
-  //border: 1px solid blue;
+  // border: 1px solid blue;
 }
 
 .LinksContent {
@@ -98,14 +98,14 @@
   width: 34%;
   height: auto;
   max-width: 230px;
-  //border: 1px solid greenyellow;
+  // border: 1px solid greenyellow;
 }
 .ProjectsContainer {
   margin-top: 50px;
   width: 33%;
   height: auto;
   padding: 0px;
-  //border: 1px solid aqua;
+  // border: 1px solid aqua;
 }
 
 .PortfolioContent {
@@ -133,7 +133,7 @@
   display: flex;
   width: 100%;
   height: auto;
-  //border: 1px solid cadetblue;
+  // border: 1px solid cadetblue;
   align-items: center;
 }
 
@@ -172,4 +172,71 @@
 .Tag {
   @include Tag;
   margin: 10px 15px;
+}
+
+@media (max-width: 767px) {
+  .ImageOneContainer {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+  .Name {
+    text-align: center;
+  }
+
+  .ImageOne {
+    max-width: 300px;
+  }
+
+  .AboutMeContainer {
+    width: 100%;
+    margin: 25px 0 0 0;
+  }
+
+  .EducationContainer {
+    padding: 0;
+    margin-top: 25px;
+  }
+
+  .EducationContainer {
+    width: 100%;
+  }
+
+  .LinksContainer {
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .ProjectsContainer {
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .ImageTwoContainer {
+    width: 100%;
+    padding: 0;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+  .ImageTwo {
+    max-width: 300px;
+  }
+
+  .StackContainer {
+    margin-top: 25px;
+  }
+  .MasterdContainer,
+  .LearningContainer,
+  .WantContainer {
+    width: 100%;
+  }
+
+  .LearningTitle,
+  .WantTitle {
+    margin: 25px 0;
+  }
 }
