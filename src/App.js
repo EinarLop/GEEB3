@@ -9,6 +9,7 @@ import Login from "./Login/Login";
 
 import Header from "./Components/Header";
 
+import Home from "./Home/Home";
 import Registration from "./Registration/Registration";
 import ProjectCreate from "./ProjectCreate/ProjectCreate";
 import ProjectFeedDef from "./ProjectFeed/ProjectFeedDef";
@@ -35,7 +36,8 @@ function App() {
       <AcceptRequest/>*/
         <Router>
           <Header />
-          <Route exact path="/" component={Registration} />
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeedDef} />
           <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
