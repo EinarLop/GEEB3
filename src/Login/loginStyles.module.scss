@@ -115,6 +115,12 @@
     text-decoration: underline;
   }
 }
+.ErrorMsg {
+  color: #f74f39;
+  display: flex;
+  flex-wrap: wrap;
+  width: 45%;
+}
 
 @media (max-width: 767px) {
   .Wrapper {

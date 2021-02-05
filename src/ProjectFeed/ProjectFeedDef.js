@@ -1,6 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React, { useState, useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedDefStyles.module.scss";
 import axios from "axios";
@@ -14,18 +12,7 @@ function ProjectFeedDef() {
     axios
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
-  }, []);
-
-  const [oprojectsMock, setOprojectsMock] = useState([
-    {
-      title: "Test OProject2",
-      description: "Description OProject2",
-      status: "Open",
-      highlights: ["h12", "h22"],
-      tags: ["tag12", "tag22", "tag32"],
-      skills: ["skill12", "skill22"],
-    },
-  ]);
+  }, [])
 
   const [isLogged, setIsLogged] = useState(true);
 
