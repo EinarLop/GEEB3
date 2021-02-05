@@ -1,10 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import AcceptRequest from "./AcceptProjectRequest/acceptProjectRequest.js";
-
-import PublicProfile from "./PublicProfile/publicProfile.js";
-
 import Login from "./Login/Login";
 
 import Header from "./Components/Header";
@@ -18,6 +14,7 @@ import SProjectFeed from "./SProject/SProjectFeed.js";
 import CreateSProject from "./CreateSProject/CreateSProject.js";
 import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
 import Profile from "./Profile/Profile";
+import EditProfile from "./EditProfile/EditProfile.js";
 //350x34
 //404x44
 
@@ -49,6 +46,7 @@ function App() {
           <Route path="/sproject/:id" component={SProjectMoreInfo} />{" "}
           {/*change route to /portfolio/:id*/}
           <Route path="/profile" component={Profile} />
+          <Route path="/editprofile" component={EditProfile} />
         </Router>
       }
     </div>
