@@ -14,22 +14,13 @@ export default function ProjectMoreInfo(props) {
     desirables: ["Loading Preferences..."],
     
   });
-
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
 
-  const [fakeProfile, setFakeProfile] = useState({
-    name: "NombreX",
-    lastName: "ApellidoY",
-    email: "micorreo@gmail.com",
-    userName: "@miusuario",
-    password: "contraseña123",
-  });
   const [errorInput, setErrorInput] = useState("");
   const [request, setRequest] = useState({
-    userNames: fakeProfile.name + " " + fakeProfile.lastName,
-    userEmail: fakeProfile.email,
-    requestDescription: "",
+    user: "",
+    motive: "",
   });
 
   useEffect(() => {
@@ -41,7 +32,9 @@ export default function ProjectMoreInfo(props) {
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
+        setRequest({...request, user: response.data.visitor});
       });
+      
   }, []);
 
   const handleOnChange = (event) => {
@@ -52,7 +45,17 @@ export default function ProjectMoreInfo(props) {
   };
   const handleOnSubmit = () => {
     setErrorInput(validateRequest(request))
-    console.log(Array.isArray(project.highlights));
+    if(errorInput===""){
+      const applicant = {
+        userid : request.user,
+        oprojectid : props.match.params.id,
+        motive : request.motive
+      }
+      console.log(Array.isArray(project.highlights));
+      axios
+      .post("http://localhost:3010/applicants/create", applicant)
+      .then((res) => console.log("You Apply to this project!"));
+    }
   };
   return (
     <div className={styles.Global}>
@@ -99,32 +102,12 @@ export default function ProjectMoreInfo(props) {
         {isLogged && (
           <div className={styles.userInputs}>
             <p className={styles.TitleSubtitle}>Send a request</p>
-            <div className={styles.RequestData}>
-              {/* <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Name</label>
-                <input
-                  placeholder={request.userNames}
-                  name="userNames"
-                  className={styles.Data}
-                  onChange={handleOnChange}
-                />
-              </div> */}
-              {/* <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Mail</label>
-                <input
-                  placeholder={request.userEmail}
-                  name="userEmail"
-                  onChange={handleOnChange}
-                  className={styles.Data}
-                />
-              </div> */}
-            </div>
             <div className={styles.ApplicationMsg}>
               <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Description</label>
                 <textarea
                   className={styles.ReasonForRequest}
-                  name="requestDescription"
+                  name="motive"
                   onChange={handleOnChange}
                 ></textarea>
               </div>

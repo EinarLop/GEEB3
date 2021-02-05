@@ -38,18 +38,20 @@ function ProjectCreate() {
   };
   //onAdd ******************************************************************************************************************************
   const onAddTag = (event) => {
-    setMessage({...message, errorTag: validateTag(tags, project.currentTag,)})
-    if(message.errorTag===""){
-      setTags((t) => [...t, project.currentTag]);
-      setProject({
-        ...project,
-        currentTag: "",
-      });
-    }
+      setMessage({...message, errorTag: validateTag(tags, project.currentTag,)})
+      if(validateTag(tags, project.currentTag,) == "" ){
+        setTags((t) => [...t, project.currentTag]);
+        setProject({
+          ...project,
+          currentTag: "",
+        });
+      }
+    
+    
   };
   const onAddSkill = (event) => {
     setMessage({...message, errorSkill: validateSkill(skills, project.currentSkill,)})
-    if(message.errorSkill===""){
+    if(validateSkill(skills, project.currentSkill,)===""){
       setSkills((t) => [...t, project.currentSkill]);
       setProject({
         ...project,
@@ -59,7 +61,7 @@ function ProjectCreate() {
   };
   const onAddHighlight = (event) => {
     setMessage({...message, errorHighlight: validateHighlight(tags, project.currentHighlight,)})
-    if(message.errorHighlight===""){
+    if(validateHighlight(tags, project.currentHighlight,)===""){
       setHighlights((t) => [...t, project.currentHighlight]);
       setProject({
         ...project,
@@ -69,7 +71,7 @@ function ProjectCreate() {
   };
   const onAddProfile = (event) => {
     setMessage({...message, errorProfile: validateProfile(tags, project.currentProfile,)})
-    if(message.errorProfile===""){
+    if(validateProfile(tags, project.currentProfile,)===""){
       setProfiles((t) => [...t, project.currentProfile]);
       setProject({
         ...project,
