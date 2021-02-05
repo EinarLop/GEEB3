@@ -46,7 +46,6 @@ function App() {
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
           <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
-          <Route path="/upload" component={Uploader}/>
           <Route path="/sproject/:id" component={SProjectMoreInfo} />{" "}
           {/*change route to /portfolio/:id*/}
           <Route path="/profile" component={Profile} />
