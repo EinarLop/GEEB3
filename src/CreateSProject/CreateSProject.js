@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./CreateSProjectStyles.module.scss";
 import { validateAll, validateImage, validateLink} from '../ValidationsFiles/CreateSProjectValidation'
 import {validateTag} from '../ValidationsFiles/GeneralValidation'
+import {base} from '../base';
 
 
 function CreateSProject() {
@@ -14,7 +15,22 @@ function CreateSProject() {
   });
   const [links, setLinks] = useState([]);
   const [tags, setTags] = useState([]);
-  const [imageurls, setImages] = useState([]);
+  const [files, setFiles] = useState([]);     // array of file objects for uploading
+  const [previews, setPreviews] = useState([]);   // array for local URL Objects for previewing an image
+  const [images, setImages] = useState([]);   // array of image URLs obtained to render as source and save to DB
+  const [uploadMsg, setUploadMsg] = useState();
+  const onFileSubmit = (e) => {
+    // adds the selected file to the files array for preloading
+    e.preventDefault();
+    let f = e.target.file.files[0];
+    let fpreview = URL.createObjectURL(f)
+    setPreviews(previews => [...previews, fpreview]);
+    console.log("Added", f);
+    setFiles(files => [...files, f]);
+    setUploadMsg(<p style={{color:"green"}}>Added file: {f.name}</p>)
+    e.target.file.value = null;    // reset the input
+  }
+
   const [message, setMessage] = useState({
       errorTitle : "",
       errorDescription: "",
@@ -41,17 +57,17 @@ function CreateSProject() {
       });
     }
   };
-  const onAddImage = (event) => {
-    setMessage({...message, errorImage: validateImage(imageurls, project.currentImage)})
+  const onAddImage = (e) => {
+    setMessage({...message, errorImage: validateImage(previews, project.currentImage)})
     if(message.errorImage===""){
-      setImages((i) => [...i, project.currentImage]);
+      setPreviews((i) => [...i, project.currentImage]);
       setProject({
         ...project,
         currentImage: "",
       });
     }
   };
-  const onAddLink = (event) => {
+  const onAddLink = (e) => {
     setMessage({...message, errorLink: validateLink(links, project.currentLink)})
     if(message.errorLink===""){
       setLinks((l) => [...l, project.currentLink]);
@@ -66,14 +82,14 @@ function CreateSProject() {
     setTags(tags.filter((tag, i) => i !== index));
   };
   const onDeleteImage = (index) => {
-    setImages(images.filter((image, i) => i !== index));
+    setPreviews(images.filter((image, i) => i !== index));
   };
   const onDeleteLink = (index) => {
     setLinks(links.filter((link, i) => i !== index));
   };
   //On submit ******************************************************************************************************************************
   const handleOnSubmit = () =>{
-    let finalmessages = validateAll(project, tags, links, imageurls)
+    let finalmessages = validateAll(project, tags, links, previews)
     setMessage({
       errorTitle : finalmessages.errorTitle,
       errorDescription: finalmessages.errorDescription,
@@ -189,13 +205,21 @@ function CreateSProject() {
                 onClick={onAddImage}
               />
             </div>
+            <div> {/* Image Uploader starts here */}
+              <p style={{color:"white"}}>File Uploader</p>
+              <form onSubmit={onFileSubmit}>
+                <input type="file" name="file"/>
+                <input type="submit" value="Add image"/>
+              </form>
+              {uploadMsg}
+            </div>
             <div className={styles.TContainer}>
-            {imageurls.map((image, index) => (
+            {previews.map((url, index) => (
               <div
                 className={`${styles.Tag} ${styles.TopicTag}`}
                 onClick={() => onDeleteImage(index)}
               >
-                {image}
+                <img src={url}/>
               </div>
             ))}
           </div>

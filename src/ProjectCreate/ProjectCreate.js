@@ -5,7 +5,6 @@ import {validateAll, validateHighlight, validateProfile, validateSkill} from '..
 import {validateTag} from '../ValidationsFiles/GeneralValidation'
 
 function ProjectCreate() {
-  let galleta = document.cookie.slice(4);
   const [project, setProject] = useState({
     title: "",
     description: "",
