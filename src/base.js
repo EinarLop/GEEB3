@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import 'firebase/storage';
 
 // export firebase connection 
-const base = firebase.initializeApp({
+export const base = firebase.initializeApp({
     "projectId": "geebimages",
     "appId": "1:305287803489:web:1b61c7400a51983347f020",
     "storageBucket": "geebimages.appspot.com",

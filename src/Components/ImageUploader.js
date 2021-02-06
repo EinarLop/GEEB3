@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {base} from '../base';
 
 // Migrate this logic to parent component CreateSProject
@@ -6,21 +6,23 @@ import {base} from '../base';
 
 export default function ImageUploader() {
     const [file, setFile] = useState(null);
-    const [fileURL, setFileURL] = useState(null);
+    const[fileURLs, setFileURLs] = useState(Array());
     const onFileChange = (e) => {
         setFile(e.target.files[0])
-        console.log("Added file", file.name);
+        console.log("Added file", e.target.files[0].name);
     }
-
     const onSubmit = async (e) => {
+        console.log("Submitting");
         e.preventDefault();
         if (file) {
-            const storageRef = app.storage().ref();
+            const storageRef = base.storage().ref();
             const fileRef = storageRef.child(file.name);
             await fileRef.put(file);
-            setFileURL(await fileRef.getDownloadURL());
-
-            // We stored the image. Then what? The project must have been created before we can actually
+            console.log("Saved image to storage")
+            console.log("Now setting url...")
+            const newUrl = await fileRef.getDownloadURL()
+            setFileURLs((fileURLs) => [...fileURLs, newUrl]);
+            // We stored the image and pushed the new Url to array. Then what? The project must have been created before we can actually
             // save the image url to that project's images array.
         } else {
             // show an error
@@ -30,11 +32,19 @@ export default function ImageUploader() {
     }
 
     return (
-        <>
-            <form>
-                <input type="file" onChange={onFileChane}/>
+        <div>
+            <form onSubmit={onSubmit}>
+                <input type="file" onChange={onFileChange}/>
                 <input type="submit"/>
             </form>
-        </>
+            <p>{JSON.stringify(fileURLs)}</p>
+            <div>
+                {
+                fileURLs.map((url, index) => (
+                    <img src={url} key={index}/>
+                ))
+                }
+            </div>
+        </div>
     )
 }
