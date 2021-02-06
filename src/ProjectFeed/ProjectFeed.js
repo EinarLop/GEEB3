@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
-import styles from "./ProjectFeedDefStyles.module.scss";
+import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
 
 import Oproject from '../Components/Oproject';
 
-function ProjectFeedDef() {
+function ProjectFeed() {
   const [oprojects, setOprojects] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
-  }, [])
-
+  }, []);
   const [isLogged, setIsLogged] = useState(true);
 
   const myProjects = () => {
@@ -41,5 +40,5 @@ function ProjectFeedDef() {
   );
 }
 
-export default ProjectFeedDef;
+export default ProjectFeed;
 //<Link to={"/edit/" + watch._id}>Retirar Stock</Link>

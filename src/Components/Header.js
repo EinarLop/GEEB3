@@ -29,7 +29,7 @@ export default function Header() {
         <h2 className={styles.Logo}>Intecreate</h2>
       </div>
       {isMd ? (
-        <div right className={styles.PageWrap}>
+        <div className={styles.PageWrap}>
           <AiOutlineMenu className={styles.MenuIcon} onClick={handleClick} />
           {isOpen && (
             <div className={styles.Menu}>
