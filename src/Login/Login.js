@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import {Redirect} from 'react-router-dom';
+import {loginValidation} from '../ValidationsFiles/LoginValidation';
 
 export default function login() {
-  const [errorInput, setErrorInput] = useState("");
-  const [redirect, setRedirect] = useState(false);
+  const [loginMessage,setErrorMessage] = useState({
+    errorInput : "",
+    redirect : false,
+  });
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -17,44 +20,13 @@ export default function login() {
       [event.target.name]: event.target.value,
     });
   };
-
+  
   const handleOnSubmit2 = () => {
-    if (errorInput) {
-      setErrorInput("");
-    } else if (user.username === "") {
-      console.log("Input username is empty");
-      setErrorInput("username can not be empty");
-    } else if (user.password === "") {
-      console.log("Input password is empty");
-      setErrorInput("Password can not be empty");
-    } 
-    if (errorInput == "") {
-      const User = {
-        username: user.username,
-        password: user.password, 
-      };
-      // checar que el username existe en base de datos
-
-      // si existe, usarlo para comparar la password con bcrypt ??
-
-      axios
-      .post("http://localhost:3010/users/login", User, {  // https://geeb.herokuapp.com/users/login
-        withCredentials: true,
-      })
-      .then((response) => {
-        // SET THE JWT IN LOCALSTORAGE
-        window.localStorage.setItem(
-          "auth-token",
-          response.headers["auth-token"]
-        );
-        setRedirect(true);
-      })
-      .catch((err) => setErrorInput("Password or username incorrect"));
-    } 
+    setErrorMessage(loginValidation(user))
   };
   
   return (
-    redirect ? <Redirect to="/oprojects"/> :
+    loginMessage.redirect ? <Redirect to="/oprojects"/> :
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
@@ -106,7 +78,7 @@ export default function login() {
               required="True"
             ></input>
           </div>
-
+          <p className={styles.ErrorMsg}>{loginMessage.errorInput}</p>
           <div className={styles.ButtonContainer}>
             <input
               value="Log in"

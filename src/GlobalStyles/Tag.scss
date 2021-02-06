@@ -26,4 +26,34 @@
       color: $tagPurple;
     }
   }
+
+  &.Masterd {
+    background-color: #5db6ea;
+    border: 2px solid #5db6ea;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+
+  &.Learning {
+    background-color: #ff479a;
+    border: 2px solid #ff479a;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+
+  &.Want {
+    background-color: #03cea4;
+    border: 2px solid #03cea4;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
 }

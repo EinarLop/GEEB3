@@ -1,6 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React, { useState, useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
@@ -15,7 +13,6 @@ function ProjectFeed() {
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
   }, []);
-
   const [isLogged, setIsLogged] = useState(true);
 
   const myProjects = () => {
