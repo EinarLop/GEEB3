@@ -155,6 +155,7 @@ img {
 }
 .CreateButton {
   @include Button;
+  margin-bottom: 20px;
 }
 .ErrorMsg {
   color: #f74f39;

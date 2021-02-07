@@ -1,5 +1,4 @@
 import {validateTitle, validateDescription, validateTags} from './GeneralValidation';
-import axios from "axios";
 var redirect =false
 var errorHighlight=""
 var errorTag=""
@@ -107,38 +106,6 @@ export const validateAll = (project, tags, skills, highlights, profiles) => {
   validateSkills(skills);
   validateHighlightProfile(highlights, profiles);
 
-  if (
-    validateDescription(project.description) === "" &&
-    validateTitle(project.title) === "" &&
-    errorTag === "" &&
-    errorHighlight === "" &&
-    errorSkill === "" &&
-    errorProfile === ""
-  ) {
-        const Project = {
-        title: project.title,
-        description: project.description,
-        status: project.status,
-        tags: tags,
-        highlights: highlights,
-        desirables: profiles,
-        skills: skills,
-        };
-
-        axios
-        .post("http://localhost:3010/oprojects/create", Project, {
-            headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-            },
-        })
-        .then((newDoc) => {
-            success = "Project created succesfully!"
-            setTimeout(()=>{
-                redirect=true
-            }, 2000);
-        });
-    }
     var message = {
         errorTitle: validateDescription(project.description),
         errorDescription:validateTitle(project.title), 

@@ -53,7 +53,7 @@ div .Information {
   color: #f74f39;
   display: flex;
   flex-wrap: wrap;
-  width: 45%;
+  width: 85%;
 }
 
 div .Inputs {
@@ -88,6 +88,7 @@ div .Inputs {
   .Label {
     @include Label;
     display: flex;
+    width: 100%;
   }
 
   .InputLabelContainer {
