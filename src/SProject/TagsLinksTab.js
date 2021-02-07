@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import styles from "./TagsLinksTabStyles.module.scss";
-
+import {Redirect} from 'react-router-dom';
 function TagsLinksTab(props) {
   const project = props.project;
+  const [redirect, setRedirect]=useState(false);
+  const onClickInfo=()=>{
+    setRedirect(true);
+  }
   return (
+    redirect ? <Redirect to={"/sproject/"+project._id}/> :
     <div className={styles.Wrapper}>
       <div className={styles.TagsContainer}>
-        <p className={styles.TagsTitle}>The team already knows:</p>
+        <p className={styles.TagsTitle}>Tags:</p>
         <div className={styles.TagsSpace}>
-          <p>HTML</p>
           {project.tags.map((tag)=>(
             <p>{tag}</p>
           ))}
@@ -29,6 +33,7 @@ function TagsLinksTab(props) {
           value="More info"
           className={styles.Button}
           type="Button"
+          onClick={onClickInfo}
         ></input>
       </div>
     </div>

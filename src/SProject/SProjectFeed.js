@@ -3,6 +3,7 @@ import styles from "./SProjectFeedStyles.module.scss";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import InfoTab from "./InfoTab";
 import TagsLinksTab from "./TagsLinksTab";
+import ImagesTab from "./ImagesTab";
 import axios from "axios";
 
 function SProjectFeed() {
@@ -11,7 +12,7 @@ function SProjectFeed() {
   useEffect(() => {
     axios
       .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" https://geeb.herokuapp.com/sprojects
-      .then((response) => console.log(response.data));
+      .then((response) => setProjects(response.data));
   }, []);
   {/*
   const myProjects = () => {
@@ -44,7 +45,7 @@ function SProjectFeed() {
             <InfoTab project={project}/>
           </TabPanel>
           <TabPanel>
-            <Images project={project}/>
+            <ImagesTab project={project}/>
           </TabPanel>
         </Tabs>
       ))}

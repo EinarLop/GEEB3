@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import styles from "./InfoTabStyles.module.scss";
-
+import styles from "./ImagesTabStyles.module.scss";
+import {Redirect} from 'react-router-dom';
 function ImagesTab(props) {
+  
 const project = props.project;
+const [redirect, setRedirect]=useState(false);
+const onClickInfo=()=>{
+  setRedirect(true);
+}
   return (
+    redirect ? <Redirect to={"/sproject/"+project._id}/> :
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <p className={styles.Title}>{project.title}</p>
@@ -15,7 +21,8 @@ const project = props.project;
         <input
           value="More info"
           className={styles.Button}
-          type="Button "
+          type="Button"
+          onClick={onClickInfo}
         ></input>
       </div>
     </div>
