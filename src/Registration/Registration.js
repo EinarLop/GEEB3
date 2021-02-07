@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 import {Redirect} from 'react-router-dom';
-import {checkLast} from '../ValidationsFiles/RegisterValidation';
+import {checkLast} from '../Validation/RegisterValidation';
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
   const [user, setUser] = useState({
