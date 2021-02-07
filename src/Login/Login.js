@@ -13,6 +13,7 @@ export default function login() {
     username: "",
     password: "",
   });
+  const [status, setStatus] = useState();
 
   const handleOnChange = (event) => {
     setUser({
@@ -21,8 +22,9 @@ export default function login() {
     });
   };
   
-  const handleOnSubmit2 = () => {
-    setErrorMessage(loginValidation(user))
+  const handleOnSubmit = () => {
+    let validation = loginValidation(user);
+    setErrorMessage(validation);
   };
   
   return (
@@ -84,7 +86,7 @@ export default function login() {
               value="Log in"
               className={styles.Button}
               type="button"
-              onClick={handleOnSubmit2}
+              onClick={handleOnSubmit}
             />
           </div>
         </div>

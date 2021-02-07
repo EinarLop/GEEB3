@@ -27,7 +27,6 @@ export const loginValidation = (user) => {
         errorInput="Login Correct!"
       })
       .catch((err) => errorInput="Password or username incorrect"); 
-      
     } 
     var errorMessage = {
         errorInput,
