@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./CreateSProjectStyles.module.scss";
-import { validateAll, validateImage, validateLink} from '../ValidationsFiles/CreateSProjectValidation'
-import {validateTag} from '../ValidationsFiles/GeneralValidation'
+import { validateAll, validateLink} from '../Validation/CreateSProjectValidation'
+import {validateTag} from '../Validation/GeneralValidation';
+import axios from 'axios';
 import {base} from '../base';
-
 
 function CreateSProject() {
   const [project, setProject] = useState({
@@ -16,14 +16,14 @@ function CreateSProject() {
   const [links, setLinks] = useState([]);
   const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]);     // array of file objects for uploading
-  const [previews, setPreviews] = useState([]);   // array for local URL Objects for previewing an image
+  const [previews, setPreviews] = useState([]);   // array for local URL Objects for previewing an image 
   const [images, setImages] = useState([]);   // array of image URLs obtained to render as source and save to DB
   const [uploadMsg, setUploadMsg] = useState();
   const onFileSubmit = (e) => {
     // adds the selected file to the files array for preloading
     e.preventDefault();
     let f = e.target.file.files[0];
-    let fpreview = URL.createObjectURL(f)
+    let fpreview = URL.createObjectURL(f);
     setPreviews(previews => [...previews, fpreview]);
     console.log("Added", f);
     setFiles(files => [...files, f]);
@@ -57,6 +57,7 @@ function CreateSProject() {
       });
     }
   };
+  /*    Images are not validated
   const onAddImage = (e) => {
     setMessage({...message, errorImage: validateImage(previews, project.currentImage)})
     if(message.errorImage===""){
@@ -66,7 +67,7 @@ function CreateSProject() {
         currentImage: "",
       });
     }
-  };
+  };*/
   const onAddLink = (e) => {
     setMessage({...message, errorLink: validateLink(links, project.currentLink)})
     if(message.errorLink===""){
@@ -88,16 +89,52 @@ function CreateSProject() {
     setLinks(links.filter((link, i) => i !== index));
   };
   //On submit ******************************************************************************************************************************
-  const handleOnSubmit = () =>{
-    let finalmessages = validateAll(project, tags, links, previews)
+  const handleOnSubmit = async () =>{
+    console.log("Creating an Sproject...");
+    let validation = validateAll(project, tags, links, previews)
     setMessage({
-      errorTitle : finalmessages.errorTitle,
-      errorDescription: finalmessages.errorDescription,
-      errorTag: finalmessages.errorTag,
-      errorLink: finalmessages.errorLink,
-      errorImage: finalmessages.errorImage,
-      success : finalmessages.success
-    })
+      errorTitle : validation.errorTitle,
+      errorDescription: validation.errorDescription,
+      errorTag: validation.errorTag,
+      errorLink: validation.errorLink,
+      success : validation.success
+    });
+    if (success==="") {
+      // No errors. Create Sproject and post to DB, then post process images to Store and link to db object
+      const Project = {
+        title,
+        description,
+        // collaborators:[],
+        tags,
+        links,
+      }
+      axios
+        .post("http://localhost:3010/sprojects/create", Project, {
+            headers: {
+            // Send the JWT along in the request header
+            "auth-token": window.localStorage.getItem("auth-token"),
+            },
+        })
+        .then(async (newDoc) => {
+            success = "Project created succesfully!";
+            console.log(JSON.stringify(newDoc));
+            console.log("Processing images...")
+            await processImages();
+            newDoc.imageUrls = images;
+            await newDoc.save();
+            console.log("Saved oproject and images succesfully");
+        }).catch(err => {
+          console.log("Could not save sproject")
+          console.log(err);
+        })
+    }
+  }
+
+  const processImages = async () => {
+      // save images to Firebase Storage and retrieve Download URLs of each
+      for (let i=0; i<images.length; i++) {
+        console.log(images[i]);
+      }
   }
 
   return (
@@ -182,12 +219,13 @@ function CreateSProject() {
                 className={`${styles.Tag} ${styles.TopicTag}`}
                 onClick={() => onDeleteLink(index)}
               >
-                {link}
+              {link}
               </div>
             ))}
           </div>
         </div>
         <div className={styles.Box5}>
+          {/*
           <div className={styles.LinkButtonContainer}>
             <div className={styles.InputLabelContainer}>
               <label className={styles.Label}>Images</label>
@@ -205,26 +243,25 @@ function CreateSProject() {
                 onClick={onAddImage}
               />
             </div>
-            <div> {/* Image Uploader starts here */}
-              <p style={{color:"white"}}>File Uploader</p>
-              <form onSubmit={onFileSubmit}>
-                <input type="file" name="file"/>
-                <input type="submit" value="Add image"/>
-              </form>
-              {uploadMsg}
-            </div>
+          </div>*/}
+          <div> {/* Image Uploader starts here */}
+            <p style={{color:"white"}}>File Uploader</p>
+            <form onSubmit={onFileSubmit}>
+              <input type="file" name="file"/>
+              <input type="submit" value="Add image"/>
+            </form>
+            {uploadMsg}
+          </div>
             <div className={styles.TContainer}>
             {previews.map((url, index) => (
               <div
-                className={`${styles.Tag} ${styles.TopicTag}`}
+                className={styles.Preview}
                 onClick={() => onDeleteImage(index)}
               >
                 <img src={url}/>
               </div>
             ))}
           </div>
-          </div>
-          <p className={styles.ErrorMsg}>{message.errorImage}</p>
         </div>
       </div>
       <div className={styles.CreateButtonBox}>

@@ -77,9 +77,6 @@
   display: flex;
   flex-direction: column;
 }
-img {
-  width:100px;
-}
 
 .Box3 {
   //border: 1px solid #3a0ca3;
@@ -108,6 +105,22 @@ img {
   flex-direction: row;
   flex-wrap: wrap;
   width: 400px;
+}
+
+.Preview {
+  border: 2px solid $blueAccent;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 15px 25px 0px 0;
+  background-color: none;
+
+  &:hover {
+    background-color: $otherGrey;
+    border: none;
+  }
+}
+img {
+  width:100px;
 }
 
 .Box4 {

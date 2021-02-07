@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import {Redirect} from 'react-router-dom';
-import {validateAll, validateHighlight, validateProfile, validateSkill} from '../ValidationsFiles/ProjectCreateValidation.js';
-import {validateTag} from '../ValidationsFiles/GeneralValidation'
+import {validateAll, validateHighlight, validateProfile, validateSkill} from '../Validation/ProjectCreateValidation.js';
+import {validateTag} from '../Validation/GeneralValidation'
 
 function ProjectCreate() {
   const [project, setProject] = useState({

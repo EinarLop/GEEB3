@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
-import { validateRequest } from "../ValidationsFiles/ProjectMoreInfoValidation";
+import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
