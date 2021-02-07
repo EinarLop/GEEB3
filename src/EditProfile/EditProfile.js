@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import styles from "./EditProfileStyles.module.scss";
-import { validate } from "../ValidationsFiles/EditProfileValidation";
-import pic1 from "./Images/pic3.svg";
+
+import styles from './EditProfileStyles.module.scss';
+import {validate} from '../Validation/EditProfileValidation';
+import  pic1  from './Images/pic1.svg';
+
+
 
 export default function EditProfile() {
   const [bio, setBio] = useState("");

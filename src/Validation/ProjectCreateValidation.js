@@ -132,7 +132,7 @@ export const validateAll = (project, tags, skills, highlights, profiles) => {
             "auth-token": window.localStorage.getItem("auth-token"),
             },
         })
-        .then((res) => {
+        .then((newDoc) => {
             success = "Project created succesfully!"
             setTimeout(()=>{
                 redirect=true

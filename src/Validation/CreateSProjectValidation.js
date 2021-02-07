@@ -1,16 +1,14 @@
 import {validateTitle, validateDescription, validateTags} from './GeneralValidation';
-import axios from "axios";
-var errorLink=""
-var errorImage=""
-var success = ""
+let errorLink=""
+let errorImage=""
+let success = ""
 const limits = {
   linkMinChar: 15,
   linkMaxChar: 30,
   minLink: 1,
   maxLink: 5,
-
-  imageMinChar: 5,
-  imageMaxChar: 30,
+  //imageMinChar: 5,
+  //imageMaxChar: 30,
   minImage: 1,
   maxImage: 5,
 }
@@ -32,6 +30,7 @@ export const validateLink = (links, currentLink) => {
   }
   return errorLink
 };
+
 export const validateImage = (imageurls, currentImage) => {
   if (currentImage.length >= limits.imageMinChar) {
     if (currentImage.length <= limits.imageMaxChar) {
@@ -49,75 +48,43 @@ export const validateImage = (imageurls, currentImage) => {
   return errorImage
 };
 
-
-//validate Title, description, tags, link, collaborator
-
-
 const validateLinks = (links) => {
-  if (links.length < limits.minLink) {
+  // TODO: Remove lower limit? Sprojects may have 0 links
+  /*if (links.length < limits.minLink) {
     errorLink="You should add at least 1 link"
-  }
+  }*/
   if (links.length > limits.maxLink) {
-    errorLink="You can not add more than 5 links"
-  }
-  if (links.length !== 0) {
-    errorLink=""
+    errorLink="Maximum number of links is 5";
   }
 };
 
 const validateImages = (imageurls) => {
+  /*
   if (imageurls.length < limits.minImage) {
-    errorImage="You should add at least 1 Image"
-  }
+    errorImage="You should add at least 1 image"
+  }*/
   if (imageurls.length > limits.maxImage) {
-    errorImage="You can not add more than 5 Image"
-  }
-  if (imageurls.length !== 0) {
-    errorImage=""
+    errorImage="You can not add more than 5 images"
   }
 };
 
-
-//Handle on 
-export const validateAll = (project, tags, links, imageurls) => {
+// Check before Submit: Title, Description, Tags, Links
+export const validateAll = (project, tags, links) => {
     validateLinks(links);
-    validateImages(imageurls);
-
     if (
-        validateDescription(project.description) === "" &&
-        validateTitle(project.title) === "" &&
-        validateTags(tags)=== "" &&
-        errorLink === "" &&
-        errorImage === "" 
-    ) {
-        
-        const Project = {
-        title: project.title,
-        description: project.description,
-        tags: tags,
-        links: links,
-        imageurls: imageurls,
-        };
+        validateDescription(project.description) !== "" &&
+        validateTitle(project.title) !== "" &&
+        validateTags(tags) !== "" &&
+        errorLink !== ""
+    ) {  // One or more errors
+        success="Please check your inputs!";
+    };
 
-        //console.log(galleta);
-        {/*
-        axios
-        .post("http://localhost:3010/sprojects/create", Project, {
-            headers: {
-            "auth-token": window.localStorage.getItem("auth-token"),
-            },
-        })
-        .then((res) => success="Your project was submit!");*/ }
-        
-    }else{
-        success="The project was not created"
-    }
-    var messages={
+    let messages={
         errorTitle: validateTitle(project.description),
         errorDescription:validateDescription(project.title), 
         errorTag:validateTags(tags),
         errorLink, 
-        errorImage,
         success,
     }
     return messages

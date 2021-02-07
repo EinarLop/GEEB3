@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import {Redirect} from 'react-router-dom';
-import {loginValidation} from '../ValidationsFiles/LoginValidation';
+import {loginValidation} from '../Validation/LoginValidation';
 
 export default function login() {
   const [loginMessage,setErrorMessage] = useState({
