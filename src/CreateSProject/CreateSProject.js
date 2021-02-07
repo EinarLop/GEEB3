@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CreateSProjectStyles.module.scss";
-import { validateAll, validateLink} from '../Validation/CreateSProjectValidation'
+import {Redirect} from 'react-router-dom';
+import { sprojectValidation, validateLink} from '../Validation/CreateSProjectValidation';
 import {validateTag} from '../Validation/GeneralValidation';
 import axios from 'axios';
 import {base} from '../base';
@@ -17,8 +18,18 @@ function CreateSProject() {
   const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]);     // array of file objects for uploading
   const [previews, setPreviews] = useState([]);   // array for local URL Objects for previewing an image 
-  const [imageurls, setImageurls] = useState([]);   // array of image URLs obtained to render as source and save to DB
-  const [uploadMsg, setUploadMsg] = useState();
+  const [uploadMsg, setUploadMsg] = useState();     // feedback for image uploader input
+  const [status, setStatus] = useState();
+  const [redirect, setRedirect] = useState(false);
+  const [newId, setNewId] = useState("");
+
+  const [messages, setMessages] = useState({
+    errorTitle : "",
+    errorDescription: "",
+    errorTags: "",
+    errorLinks: "",
+});
+
   const onFileSubmit = (e) => {
     // adds the selected file to the files array for preloading
     e.preventDefault();
@@ -31,15 +42,6 @@ function CreateSProject() {
     e.target.file.value = null;    // reset the input
   }
 
-  const [message, setMessage] = useState({
-      errorTitle : "",
-      errorDescription: "",
-      errorTag: "",
-      errorLink: "",
-      errorImage: "",
-      success : ""
-    });
-
   const handleOnChange = (event) => {
     setProject({
       ...project,
@@ -47,9 +49,10 @@ function CreateSProject() {
     });
   };
   //onADD ******************************************************************************************************************************
-  const onAddTag = (event) => {
-    setMessage({...message, errorTag: validateTag(tags, project.currentTag)})
-    if(message.errorTag===""){
+  const onAddTag = (e) => {
+    let validTag = validateTag(tags, project.currentTag)
+    setMessages({...messages, errorTags: validTag});
+    if (validTag == ""){
       setTags((t) => [...t, project.currentTag]);
       setProject({
         ...project,
@@ -59,8 +62,9 @@ function CreateSProject() {
   };
 
   const onAddLink = (e) => {
-    setMessage({...message, errorLink: validateLink(links, project.currentLink)})
-    if(message.errorLink===""){
+    let validLinks = validateLink(links, project.currentLink);
+    setMessages({...messages, errorLinks: validLinks})
+    if(validLinks===""){
       setLinks((l) => [...l, project.currentLink]);
       setProject({
         ...project,
@@ -81,17 +85,13 @@ function CreateSProject() {
   //On submit ******************************************************************************************************************************
   const handleOnSubmit = async () =>{
     console.log("Creating an Sproject...");
-    let validation = validateAll(project, tags, links, previews)
-    setMessage({
-      errorTitle : validation.errorTitle,
-      errorDescription: validation.errorDescription,
-      errorTag: validation.errorTag,
-      errorLink: validation.errorLink,
-      success : validation.success
-    });
-    if (message.success==="") {
-      // No errors. Create Sproject and post to DB, then post process images to Store and link to db object
-      await processFiles();
+    let validation = sprojectValidation(project, tags, links)
+
+    if (validation.ok) {
+      // No validation errors. Process files, then send create Sproject post request
+      let imageurls = await processFiles(); // returns array of image URLs obtained to render as source and save to DB
+      if (imageurls.length==0) imageurls = undefined;
+      
       const Project = {
         title: project.title,
         description: project.description,
@@ -109,32 +109,50 @@ function CreateSProject() {
             "auth-token": window.localStorage.getItem("auth-token"),
             },
         })
-        .then((newDoc) => {
-            success = "Project created succesfully!";
-            console.log("Saved oproject and images succesfully");
+        .then((resp) => {
+            let msg = <p>Project created succesfully!</p>
+            setStatus(msg);
+            console.log("Saved oproject and images succesfully", resp);
+            //setNewId(newDoc._id);
+            setTimeout(()=> setRedirect(true), 2000);
+
         }).catch(err => {
+          let msg = <p>Something went wrong. Please try again</p>
+          setStatus(msg);
           console.log("Could not save sproject")
           console.log(err);
         })
+    // else there are Errors in Validation
+    } else {
+      setMessages({
+        errorTitle : validation.errorTitle,
+        errorDescription: validation.errorDescription,
+        errorTags: validation.errorTags,
+        errorLinks: validation.errorLinks,
+      });
+      let msg = <p>Please check your inputs!</p>
+      setStatus(msg);
     }
   }
 
   const processFiles = async () => {
       // save images to Firebase Storage and retrieve Download URLs of each
-      let imageurls = Array();
+      console.log("Processing files:");
+      let aux = Array();
       const storageRef = base.storage().ref();
       for (let i=0; i<files.length; i++) {
         console.log(files[i].name);
         let fileRef = storageRef.child(files[i].name);
         await fileRef.put(files[i]);
         let url = await fileRef.getDownloadURL();
-        imageurls.push(url);
+        aux.push(url);
       }
-      console.log(imageurls);
-      setImageurls(imageurls);
+      console.log(aux);
+      return aux;
   }
 
   return (
+    redirect ? <Redirect to={`/sprojects/${newId}`}/> : 
     <div>
       <div className={styles.WrapperTitle}>
           <p className={styles.Title}>Create SProject</p>
@@ -149,7 +167,7 @@ function CreateSProject() {
             autoComplete="off"
             onChange={handleOnChange}
           />
-          <p className={styles.ErrorMsg}>{message.errorTitle}</p>
+          <p className={styles.ErrorMsg}>{messages.errorTitle}</p>
         </div>
 
         <div className={styles.Box2}>
@@ -161,7 +179,7 @@ function CreateSProject() {
             autoComplete="off"
             onChange={handleOnChange}
           />
-          <p className={styles.ErrorMsg}>{message.errorDescription}</p>
+          <p className={styles.ErrorMsg}>{messages.errorDescription}</p>
         </div>
         <div className={styles.Box3}>
           <label className={styles.Label}>Tags</label>
@@ -180,7 +198,7 @@ function CreateSProject() {
               onClick={onAddTag}
             />
             
-          <p className={styles.ErrorMsg}>{message.errorTag}</p>
+          <p className={styles.ErrorMsg}>{messages.errorTags}</p>
           </div>
           <div className={styles.TContainer}>
             {tags.map((tag, index) => (
@@ -209,7 +227,7 @@ function CreateSProject() {
               value="Add" 
               onClick={onAddLink}/>
           </div>
-          <p className={styles.ErrorMsg}>{message.errorLink}</p>
+          <p className={styles.ErrorMsg}>{messages.errorLinks}</p>
           <div className={styles.TContainer}>
             {links.map((link, index) => (
               <div
@@ -222,25 +240,6 @@ function CreateSProject() {
           </div>
         </div>
         <div className={styles.Box5}>
-          {/*
-          <div className={styles.LinkButtonContainer}>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Images</label>
-              <input
-                className={styles.TagInput}
-                name="currentImage"
-                onChange={handleOnChange}
-              />
-            </div>
-            <div className={styles.InputLabelContainer}>
-              <input 
-                className={styles.Button} 
-                type="button" 
-                value="Add image" 
-                onClick={onAddImage}
-              />
-            </div>
-          </div>*/}
           <div> {/* Image Uploader starts here */}
             <p style={{color:"white"}}>File Uploader</p>
             <form onSubmit={onFileSubmit}>
@@ -249,20 +248,21 @@ function CreateSProject() {
             </form>
             {uploadMsg}
           </div>
-            <div className={styles.TContainer}>
-            {previews.map((url, index) => (
-              <div
-                className={styles.Preview}
-                onClick={() => onDeleteImage(index)}
-              >
-                <img src={url}/>
-              </div>
-            ))}
+
+          <div className={styles.TContainer}>
+          {previews.map((url, index) => (
+            <div
+              className={styles.Preview}
+              onClick={() => onDeleteImage(index)}
+            >
+              <img src={url}/>
+            </div>
+          ))}
           </div>
         </div>
       </div>
       <div className={styles.CreateButtonBox}>
-      <p className={styles.ErrorMsg}>{message.success}</p>
+      {status}
         <input
           className={styles.CreateButton}
           type="button"
