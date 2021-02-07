@@ -1,88 +1,88 @@
-@import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss","../GlobalStyles/Input.scss","../GlobalStyles/Button.scss";;
+@import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss";
 
 .Wrapper {
-    display: flex;
-    padding: 25px;
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    color: white;
-    font-family: $font;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    //border: 1px solid lavender;
-  }
-  .Titles{
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    color: $orangeAccent;
-  }
+  display: flex;
+  padding: 25px;
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  color: white;
+  font-family: $font;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  //border: 1px solid lavender;
+}
+.Titles {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: $orangeAccent;
+}
 
-  .MasteredContainer{
-    width: 33%;
-    height: 250px;
-    border: 1px solid orange;
+.MasteredContainer {
+  width: 33%;
+  height: 250px;
+  border: 1px solid orange;
+}
 
-  }
-  
+.LearningContainer {
+  width: 33%;
+  height: 250px;
+  border: 1px solid blue;
+}
 
-  .LearningContainer{
-    width: 33%;
-    height: 250px;
-    border: 1px solid blue;
-  }
+.WantContainer {
+  width: 33%;
+  height: 250px;
+  border: 1px solid blue;
+}
+.AboutWrapper {
+  width: 100%;
+  // border: 1px solid white;
+}
+.EducationWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.LinksWrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
 
-  .WantContainer{
-    width: 33%;
-    height: 250px;
-    border: 1px solid blue;
-  }
-  .AboutWrapper{
-    width:100%;
-    border:1px solid white;
-  }
-  .EducationWrapper{
-    display: flex;
-    flex-direction:column;
-    width: 50%;
-  }
-  .LinksWrapper{
-    width: 50%;
-  }
+.Input {
+  @include Input;
+}
+.InputSmall {
+  @include Input;
+  width: 250px;
+  max-width: 250px;
+  margin: 15px 0;
+}
+.Label {
+  @include Label;
+  font-size: 18px;
+}
 
-  .Input {
-    @include Input;
-  }
-  .InputSmall {
-    @include Input;
-    width: 250px;
-    max-width: 250px;
-    margin: 15px 0;
-  }
-  .Label{
-      @include Label;
-      font-size: 18px;
-     
-  }
+.Button {
+  @include Button;
+}
+.TextArea {
+  @include Input;
+  height: 200px;
+  width: 100%;
+  max-width: 500px;
+}
 
-  .Button{
-      @include Button;
-  }
-  .TextArea {
-    @include Input;
-    height: 200px;
-    width: 100%;
-    margin-right: 20px;
-  }
+.AboutImg {
+  width: 350px;
+}
 
-  .AboutImg {
-    width: 350px;
-  }
-
-  .ErrorMsg {
-    color: #f74f39;
-    margin-top: 10px;
-    width: 400px;
-    display: flex;
-    flex-wrap: wrap;
-  }
+.ErrorMsg {
+  color: #f74f39;
+  margin-top: 10px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+}
