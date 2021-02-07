@@ -6,11 +6,11 @@ export default function SProjectMoreInfo(props) {
     const [project, setProject] = useState({
         title: "Loading Title...",
         description: "Loading...",
-        author:"Loading Author...",
+        userid:{username:"Loading..."},
         collaborators: ["Loading Collaborators..."],
         tags: ["Tag"],
         links: ["Link"],
-        imagesurls: ["Loading Images..."],
+        imageurls: ["Loading Images..."],
         
     });
     const [isOwner, setIsOwner] = useState(false);
@@ -28,12 +28,12 @@ export default function SProjectMoreInfo(props) {
     }, []);
     
     
-    return (
+    return ( 
         <div className={styles.Wrapper}>
             <div className={styles.ContentContainer}>
                 <div className={styles.TitleDesc}>
                     <p className={styles.Heading}>{project.title}</p>
-                    <p className={styles.Author}><a>{project.author}</a>'s portfolio</p>
+                    <p className={styles.Author}><a>{project.userid.username}</a>'s portfolio</p>
                     <p className={styles.Description}> 
                         {project.description}
                     </p>
@@ -57,22 +57,20 @@ export default function SProjectMoreInfo(props) {
                     </ul>
                 </div>
                 <div className={styles.Collaborators}>
-                        <label className={styles.Label}>Collaborators:</label>
-                        <div /*style={{display:'flex', padding:'10px'}}*/className={styles.NamesContainer}>
-                            {/* Mapping of project.collaborators here, with Link to their profile id*/}
-                            {project.collaborators.map((collaborator) => (
-                                <p>{collaborator}</p>
-                            ))}
-                        </div>
-                </div>
-                {/** 
-                 * <div className={styles.ImagesSection}>
-                    {project.imageurls.map((img)=>(
-                        <h1>{img}</h1>
-                    ))}
+                    <label className={styles.Label}>Collaborators:</label>
+                    <div /*style={{display:'flex', padding:'10px'}}*/className={styles.NamesContainer}>
+                        {/* Mapping of project.collaborators here, with Link to their profile id*/}
+                        {project.collaborators.map((collaborator) => (
+                            <p>{collaborator}</p>
+                        ))}
                     </div>
-                */}
-                
+                </div>
+                <label className={styles.Label}>Images:</label>
+                <div className={styles.ImagesSection}>
+                    {project.imageurls.map((img)=>(
+                        <img src={img}/>
+                    ))}
+                </div>
             </div>
         </div>
 

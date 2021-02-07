@@ -32,7 +32,7 @@ const onlyAlphanumeric = (str) => {
 };
 const onlyAlphabetic = (str) => {
   const re = /^[A-Za-z]+$/;
-  console.log("Alphabetic(",str,") ?", re.test(str))
+  console.log("Alphabetic(",str.toLowerCase(),") ?", re.test(str))
   return re.test(str);
 }
 
@@ -68,10 +68,7 @@ const validateLastName = (lastName) => {
     errorLastName = "Your last name can't have more than 15 characters"
   }
   if (!onlyAlphabetic(lastName)) {
-    errorUsername="Your name can only have lowercase letters"
-  }
-  if (hasWhiteSpace(lastName)) {
-    errorLastName ="Your last name cannot contain any spaces"
+    errorLastName="Your name can only have lowercase letters"
   }
   if(errorLastName != ""){
     success = false;

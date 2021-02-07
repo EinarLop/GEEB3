@@ -14,20 +14,6 @@ function SProjectFeed() {
       .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" https://geeb.herokuapp.com/sprojects
       .then((response) => setProjects(response.data));
   }, []);
-  {/*
-  const myProjects = () => {
-    axios
-      .get("http://localhost:3010/sprojects/mine" ,{
-        headers: {
-          "auth-token": window.localStorage.getItem("auth-token"),
-      }}) //http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
-      .then((response) => {
-        
-        setOprojects(response.data) 
-        console.log(response.data);
-      }
-      )}  
-  */}
   
   return (
     <div className={styles.Global}>
