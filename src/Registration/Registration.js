@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 import {Redirect} from 'react-router-dom';
-import {checkLast} from '../Validation/RegisterValidation';
+import {validateRegister} from '../Validation/RegisterValidation';
+import axios from "axios";
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
-  const [user, setUser] = useState({
-    // stores the current valus of inputs
+  const [user, setUser] = useState({      // stores current inputs values
     name:"",
     lastName:"",
     userName: "",
@@ -15,6 +15,7 @@ function Registration() {
   });
   const [errorsMessage, setErrors] = useState({});
   const [redirect, setRedirect] = useState(false);
+  const [status, setStatus] = useState();     // final success message
 //onChange ******************************************************************************************************************************
   const handleOnChange = (event) => {
     setUser({
@@ -24,12 +25,43 @@ function Registration() {
   };
 //onSubmit ******************************************************************************************************************************
   const handleOnSubmit = () => {
-    setErrors(checkLast(user))
-    setRedirect(errorsMessage.redirect)
+    console.log("Current inputs:");
+    console.log(JSON.stringify(user));
+    let validation = validateRegister(user);
+    setErrors(validation);
+    console.log("Validation returned:");
+    console.log(JSON.stringify(validation));
+    if(validation.success){
+      const User = {
+      username: user.userName,
+      email: user.email,
+      password: user.password,
+      fullname: user.name + ' ' + user.lastName,
+      }
+      axios.post("http://localhost:3010/users/register", User, {
+        withCredentials: true,
+      })
+      .then(RegisteredUser=>{
+        let msg = <p style={{color: "green"}}>You are now registered! <br/> Redirecting you to Login...</p>
+        setStatus(msg)
+        console.log(RegisteredUser);
+        setTimeout(()=>setRedirect(true), 2000);
+        // to redirect to /login
+      })
+      .catch(err => {
+        // Set error message: "something went wrong"
+        console.log("Server error", err);
+        let msg = <p style={{color: "red"}}>Something went wrong. Please try again.</p>
+        setStatus(msg);
+      })
+    } else {
+      let msg = <p style={{color: "red"}}>Please check your inputs!</p>
+      setStatus(msg);
+    }
   };
 
   return (
-    redirect ? <Redirect to="/oprojects"/> :
+    redirect ? <Redirect to="/login"/> :
     <div className={styles.Global}>
       <div className={styles.Information}>
         <h1>What is GEEB?</h1>
@@ -122,9 +154,8 @@ function Registration() {
             required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorsMessage.errorConfPass}</p>
-          <p className={styles.ErrorMsg}>{errorsMessage.success}</p>
         </div>
-
+        {status}
         <input
           className={`${styles.Button} ${styles.Large}`}
           type="button"

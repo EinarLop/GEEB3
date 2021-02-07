@@ -17,7 +17,7 @@ function CreateSProject() {
   const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]);     // array of file objects for uploading
   const [previews, setPreviews] = useState([]);   // array for local URL Objects for previewing an image 
-  const [images, setImages] = useState([]);   // array of image URLs obtained to render as source and save to DB
+  const [imageurls, setImageurls] = useState([]);   // array of image URLs obtained to render as source and save to DB
   const [uploadMsg, setUploadMsg] = useState();
   const onFileSubmit = (e) => {
     // adds the selected file to the files array for preloading
@@ -57,17 +57,7 @@ function CreateSProject() {
       });
     }
   };
-  /*    Images are not validated
-  const onAddImage = (e) => {
-    setMessage({...message, errorImage: validateImage(previews, project.currentImage)})
-    if(message.errorImage===""){
-      setPreviews((i) => [...i, project.currentImage]);
-      setProject({
-        ...project,
-        currentImage: "",
-      });
-    }
-  };*/
+
   const onAddLink = (e) => {
     setMessage({...message, errorLink: validateLink(links, project.currentLink)})
     if(message.errorLink===""){
@@ -99,15 +89,19 @@ function CreateSProject() {
       errorLink: validation.errorLink,
       success : validation.success
     });
-    if (success==="") {
+    if (message.success==="") {
       // No errors. Create Sproject and post to DB, then post process images to Store and link to db object
+      await processFiles();
       const Project = {
-        title,
-        description,
+        title: project.title,
+        description: project.description,
         // collaborators:[],
         tags,
         links,
+        imageurls
       }
+      console.log("Attempt to save sproject:")
+      console.log(JSON.stringify(Project));
       axios
         .post("http://localhost:3010/sprojects/create", Project, {
             headers: {
@@ -115,13 +109,8 @@ function CreateSProject() {
             "auth-token": window.localStorage.getItem("auth-token"),
             },
         })
-        .then(async (newDoc) => {
+        .then((newDoc) => {
             success = "Project created succesfully!";
-            console.log(JSON.stringify(newDoc));
-            console.log("Processing images...")
-            await processImages();
-            newDoc.imageUrls = images;
-            await newDoc.save();
             console.log("Saved oproject and images succesfully");
         }).catch(err => {
           console.log("Could not save sproject")
@@ -130,11 +119,19 @@ function CreateSProject() {
     }
   }
 
-  const processImages = async () => {
+  const processFiles = async () => {
       // save images to Firebase Storage and retrieve Download URLs of each
-      for (let i=0; i<images.length; i++) {
-        console.log(images[i]);
+      let imageurls = Array();
+      const storageRef = base.storage().ref();
+      for (let i=0; i<files.length; i++) {
+        console.log(files[i].name);
+        let fileRef = storageRef.child(files[i].name);
+        await fileRef.put(files[i]);
+        let url = await fileRef.getDownloadURL();
+        imageurls.push(url);
       }
+      console.log(imageurls);
+      setImageurls(imageurls);
   }
 
   return (

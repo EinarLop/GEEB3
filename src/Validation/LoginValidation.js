@@ -16,9 +16,7 @@ export const loginValidation = (user) => {
 
       // si existe, usarlo para comparar la password con bcrypt ??
       axios
-      .post("http://localhost:3010/users/login", User, {  // https://geeb.herokuapp.com/users/login
-        withCredentials: true,
-      })
+      .post("http://localhost:3010/users/login", User)
       .then((response) => {
         // SET THE JWT IN LOCALSTORAGE
         window.localStorage.setItem(
