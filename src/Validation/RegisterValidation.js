@@ -1,13 +1,10 @@
-import axios from "axios";
-
 var errorUsername = ""
-var redirect = false
 var errorEmail = ""
 var errorPassword = ""
 var errorConfPass = ""
 var errorName = ""
 var errorLastName = ""
-var success = ""
+var success = true
 
 var limits = {
   //no white spaces
@@ -33,6 +30,11 @@ const onlyAlphanumeric = (str) => {
   console.log("alphanumeric result: " + re.test(str));
   return re.test(str);
 };
+const onlyAlphabetic = (str) => {
+  const re = /^[A-Za-z]+$/;
+  console.log("Alphabetic(",str,") ?", re.test(str))
+  return re.test(str);
+}
 
 const hasWhiteSpace = (str) => {
   const index = str.indexOf(" ");
@@ -43,19 +45,19 @@ const hasWhiteSpace = (str) => {
 };
 const validateName = (name) => {
   if (name.length < limits.nameCharMin) {
-    errorUsername="Name must have at least 2 characters"
+    errorName="Name must have at least 2 characters"
   }
   if (name.length > limits.nameCharMax) {
-    errorUsername="Your name can't have more than 15 characters"
+    errorName="Your name must be 15 characters long or less"
   }
-  if (!onlyAlphanumeric(name)) {
-    errorUsername="Your name can only have lowercase letters"
+  if (!onlyAlphabetic(name)) {
+    errorName="Your name can only have alphabetic characters"
   }
   if (hasWhiteSpace(name)) {
-    errorUsername="Your name cannot contain any spaces"
+    errorName="Your name cannot contain any spaces"
   }
-  if(errorUsername != ""){
-    success = "Something went wrong with your registration"
+  if(errorName != ""){
+    success = false;
   }
 };
 const validateLastName = (lastName) => {
@@ -65,14 +67,14 @@ const validateLastName = (lastName) => {
   if (lastName.length > limits.lastNameCharMax) {
     errorLastName = "Your last name can't have more than 15 characters"
   }
-  if (!onlyAlphanumeric(lastName)) {
+  if (!onlyAlphabetic(lastName)) {
     errorUsername="Your name can only have lowercase letters"
   }
   if (hasWhiteSpace(lastName)) {
     errorLastName ="Your last name cannot contain any spaces"
   }
   if(errorLastName != ""){
-    success = "Something went wrong with your registration"
+    success = false;
   }
 };
 
@@ -81,16 +83,16 @@ const validateUsername = (userName) => {
     errorUsername = "Username must have at least 4 characters"
   }
   if (userName.length > limits.userCharMax) {
-    errorUsername = "Your username can't have more than 20 characters"
+    errorUsername = "Username must be 20 characters or less"
   }
   if (!onlyAlphanumeric(userName)) {
-    errorUsername ="Your username can only have lowercase letters and numbers"
+    errorUsername ="Username can only have lowercase letters and numbers"
   }
   if (hasWhiteSpace(userName)) {
-    errorUsername ="Your username cannot contain any spaces"
+    errorUsername ="Username cannot contain any spaces"
   }
   if(errorUsername != ""){
-    success = "Something went wrong with your registration"
+    success = false;
   }
 };
 
@@ -111,7 +113,7 @@ const validateEmail = (email) => {
     setErrorEmail("Your email cannot have white spaces");
   }*/
   if(errorEmail != ""){
-    success = "Something went wrong with your registration"
+    success = false;
   }
 };
 
@@ -134,47 +136,24 @@ const validatePassword = (password, confirmPassword) => {
   }
 
   if(errorPassword != ""){
-    success = "Something went wrong with your registration"
+    success = false;
   }
 };
 
-export const checkLast = (user) => {
-  success = ""
-  errorUsername = ""
-  errorEmail = ""
-  errorPassword = ""
-  errorConfPass = ""
-  errorName = ""
-  errorLastName = ""
+export const validateRegister = (user) => {
+  success = true;
+  errorUsername = "";
+  errorEmail = "";
+  errorPassword = "";
+  errorConfPass = "";
+  errorName = "";
+  errorLastName = "";
   validateName(user.name);
   validateLastName(user.lastName);
   validateUsername(user.userName);
   validateEmail(user.email);
   validatePassword(user.password, user.confirmPassword);
 
-  if(success===""){
-    const User = {
-    username: user.userName,
-    email: user.email,
-    password: user.password,
-    fullname: user.name + ' ' + user.lastName,
-    }
-    axios.post("http://localhost:3010/users/register", User, {
-      withCredentials: true,
-    })
-    .then(RegisteredUser=>{
-      console.log(RegisteredUser);
-      setRedirect(true);
-      setSuccess("You are now registered!")
-      // to redirect to /oprojects
-    })
-    .catch(err => {
-      // Set error message: "something went wrong"
-      setSuccess("Something went wrong with your registration");
-    })
-  // if every error msg is empty, there are no validation errors. Send request
-    
-  }
   var errorsMessage = {
     success,
     errorUsername,
@@ -183,9 +162,7 @@ export const checkLast = (user) => {
     errorConfPass,
     errorName,
     errorLastName,
-    redirect
   }
   return errorsMessage
-    
   
 };

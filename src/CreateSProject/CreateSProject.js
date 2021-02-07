@@ -57,17 +57,7 @@ function CreateSProject() {
       });
     }
   };
-  /*    Images are not validated
-  const onAddImage = (e) => {
-    setMessage({...message, errorImage: validateImage(previews, project.currentImage)})
-    if(message.errorImage===""){
-      setPreviews((i) => [...i, project.currentImage]);
-      setProject({
-        ...project,
-        currentImage: "",
-      });
-    }
-  };*/
+
   const onAddLink = (e) => {
     setMessage({...message, errorLink: validateLink(links, project.currentLink)})
     if(message.errorLink===""){
