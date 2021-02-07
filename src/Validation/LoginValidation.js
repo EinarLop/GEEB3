@@ -1,37 +1,17 @@
-import axios from "axios";
 export const loginValidation = (user) => {
-    var errorInput = ""
-    var redirect = false
+    let msg = "";
+    let ok = false;
     if (user.username === "") {
-      errorInput = "username can not be empty"
+      msg = "Username can't be empty"
     } else if (user.password === "") {
-      errorInput = "Password can not be empty"
-    } 
-    if (errorInput == "") {
-      const User = {
-        username: user.username,
-        password: user.password, 
-      };
-      // checar que el username existe en base de datos
-
-      // si existe, usarlo para comparar la password con bcrypt ??
-      axios
-      .post("http://localhost:3010/users/login", User)
-      .then((response) => {
-        // SET THE JWT IN LOCALSTORAGE
-        window.localStorage.setItem(
-          "auth-token",
-          response.headers["auth-token"]
-        );
-        redirect = true;
-        errorInput="Login Correct!"
-      })
-      .catch((err) => errorInput="Password or username incorrect"); 
-      
-    } 
-    var errorMessage = {
-        errorInput,
-        redirect
+      msg = "Password can't be empty"
+    } else {
+      ok = true;
     }
-    return errorMessage
+    
+    const validation = {
+        msg,
+        ok
+    }
+    return validation;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 import {Redirect} from 'react-router-dom';
-import {validateRegister} from '../Validation/RegisterValidation';
+import {registerValidation} from '../Validation/RegisterValidation';
 import axios from "axios";
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
@@ -27,7 +27,7 @@ function Registration() {
   const handleOnSubmit = () => {
     console.log("Current inputs:");
     console.log(JSON.stringify(user));
-    let validation = validateRegister(user);
+    let validation = registerValidation(user);
     setErrors(validation);
     console.log("Validation returned:");
     console.log(JSON.stringify(validation));

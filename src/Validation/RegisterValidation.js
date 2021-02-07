@@ -140,7 +140,7 @@ const validatePassword = (password, confirmPassword) => {
   }
 };
 
-export const validateRegister = (user) => {
+export const registerValidation = (user) => {
   success = true;
   errorUsername = "";
   errorEmail = "";
