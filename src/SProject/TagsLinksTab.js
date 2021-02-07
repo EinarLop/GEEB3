@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import styles from "./TagsLinksTabStyles.module.scss";
 
-function TagsLinksTab() {
+function TagsLinksTab(props) {
+  const project = props.project;
   return (
     <div className={styles.Wrapper}>
       <div className={styles.TagsContainer}>
         <p className={styles.TagsTitle}>The team already knows:</p>
         <div className={styles.TagsSpace}>
           <p>HTML</p>
+          {project.tags.map((tag)=>(
+            <p>{tag}</p>
+          ))}
         </div>
       </div>
 
       <div className={styles.LinksContainer}>
         <p className={styles.LinksTitle}>Links</p>
         <div className={styles.LinksSpace}>
-          <li>Github: https://github.com/</li>
-          <li>Page: www.pagina.com</li>
-          <li>Linkedin: https://www.linkedin.com/in/usuario</li>
-          <li>Youtube: https://www.youtube.com/channel</li>
+          {project.links.map((link)=>(
+            <li>{link}</li>
+          ))}
         </div>
       </div>
 

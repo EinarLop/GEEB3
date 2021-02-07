@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styles from "./InfoTabStyles.module.scss";
 
-function InfoTab(props) {
-  const project = props.project;
+function ImagesTab(props) {
+const project = props.project;
   return (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <p className={styles.Title}>{project.title}</p>
         <p className={styles.Description}>
-          {project.description}
+          {project.imagesurls}
         </p>
       </div>
       <div className={styles.ButtonContainer}>
@@ -22,4 +22,4 @@ function InfoTab(props) {
   );
 }
 
-export default InfoTab;
+export default ImagesTab;

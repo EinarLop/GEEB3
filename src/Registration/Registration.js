@@ -105,7 +105,7 @@ function Registration() {
           <p className={styles.ErrorMsg}>{errorsMessage.errorLastName}</p>
         </div>
         <div className={styles.InputLabelContainer}>
-          <label className={styles.Label}>Username</label>
+          <label className={styles.Label} style={{width:'85%'}}>Username</label>
           <input
             autoComplete="off"
             className={styles.Input}
@@ -114,7 +114,7 @@ function Registration() {
             placeholder="cooluser21"
             required="True"
           ></input>
-          <p className={styles.ErrorMsg}>{errorsMessage.errorUsername}</p>
+          <p className={styles.ErrorMsg} style={{width:'85%'}}>{errorsMessage.errorUsername}</p>
         </div>
 
         <div className={styles.InputLabelContainer}>

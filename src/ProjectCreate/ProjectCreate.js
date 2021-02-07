@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import {Redirect} from 'react-router-dom';
 import {validateAll, validateHighlight, validateProfile, validateSkill} from '../Validation/ProjectCreateValidation.js';
-import {validateTag} from '../Validation/GeneralValidation'
+import {validateTag} from '../Validation/GeneralValidation';
+import axios from "axios";
 
 function ProjectCreate() {
   const [project, setProject] = useState({
@@ -13,12 +14,12 @@ function ProjectCreate() {
     currentTag: "",
     currentSkill: "",
     currentProfile: "",
-    success:""
   });
   const [highlights, setHighlights] = useState([]);
   const [tags, setTags] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [redirect, setRedirect] = useState(false);
   const [message, setMessage] = useState({
     errorTitle : "",
     errorDescription:"",
@@ -26,6 +27,7 @@ function ProjectCreate() {
     errorTag:"",
     errorSkill:"",
     errorProfile:"",
+    success:"",
     redirect: false
     });
 
@@ -104,10 +106,36 @@ function ProjectCreate() {
       redirect:finalmessages.redirect,
       success : finalmessages.success
     })
+    
+  if (message.success==="") {
+        const Project = {
+        title: project.title,
+        description: project.description,
+        status: project.status,
+        tags: tags,
+        highlights: highlights,
+        desirables: profiles,
+        skills: skills,
+        };
+
+        axios
+        .post("http://localhost:3010/oprojects/create", Project, {
+            headers: {
+            // Send the JWT along in the request header
+            "auth-token": window.localStorage.getItem("auth-token"),
+            },
+        })
+        .then((newDoc) => {
+            setMessage({...message, success: "Project created succesfully!"}) 
+            setTimeout(()=>setRedirect(true), 2000)
+        });
+    }else{
+      setMessage({...message, success: "Something went wrong with your registration"}) 
+    }
   }
 
   return (
-    message.redirect ? <Redirect to="/oprojects"/> :
+    redirect ? <Redirect to="/oprojects"/> :
     <div>
       {/* <Header /> */}
       <div className={styles.Global}>

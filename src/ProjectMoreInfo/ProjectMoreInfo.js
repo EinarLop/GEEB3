@@ -14,7 +14,6 @@ export default function ProjectMoreInfo(props) {
     desirables: ["Loading Preferences..."],
     
   });
-  const [isLogged, setIsLogged] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
 
   const [errorInput, setErrorInput] = useState("");
@@ -32,7 +31,6 @@ export default function ProjectMoreInfo(props) {
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
-        setRequest({...request, user: response.data.visitor});
       });
       
   }, []);
@@ -99,28 +97,29 @@ export default function ProjectMoreInfo(props) {
             </div>
           </div>
         </div>
-        {isLogged && (
-          <div className={styles.userInputs}>
-            <p className={styles.TitleSubtitle}>Send a request</p>
-            <div className={styles.ApplicationMsg}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Description</label>
-                <textarea
-                  className={styles.ReasonForRequest}
-                  name="motive"
-                  onChange={handleOnChange}
-                ></textarea>
+          {!isOwner && (
+            <div className={styles.userInputs}>
+              <p className={styles.TitleSubtitle}>Send a request</p>
+              <div className={styles.ApplicationMsg}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Description</label>
+                  <textarea
+                    className={styles.ReasonForRequest}
+                    name="motive"
+                    onChange={handleOnChange}
+                  ></textarea>
+                </div>
               </div>
+              <p>{errorInput}</p>
+              <input
+                type="button"
+                className={`${styles.Button} ${styles.Large} `}
+                value="Send Request"
+                onClick={handleOnSubmit}
+              />
             </div>
-            <p>{errorInput}</p>
-            <input
-              type="button"
-              className={`${styles.Button} ${styles.Large} `}
-              value="Send Request"
-              onClick={handleOnSubmit}
-            />
-          </div>
-        )}
+          ) }
+          
       </div>
     </div>
   );
