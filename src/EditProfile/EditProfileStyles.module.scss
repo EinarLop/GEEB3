@@ -14,59 +14,84 @@
   //border: 1px solid lavender;
 }
 .Titles {
-  font-size: 2.5rem;
-  margin-bottom: 25px;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
   color: $orangeAccent;
 }
 
 .MasteredContainer {
   width: 33%;
   height: 250px;
-  border: 1px solid orange;
+  // border: 1px solid orange;
 }
 
 .LearningContainer {
   width: 33%;
   height: 250px;
-  border: 1px solid blue;
+  // border: 1px solid blue;
 }
-
+.MasteredTagContainer,
+.WantTagContainer,
+.LearningTagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
 .WantContainer {
   width: 33%;
   height: 250px;
-  border: 1px solid blue;
+  // border: 1px solid blue;
 }
 .AboutWrapper {
-  width: 100%;
+  width: 50%;
+  margin-bottom: 50px;
   // border: 1px solid white;
 }
 .EducationWrapper {
   display: flex;
   flex-direction: column;
   width: 50%;
+  margin-bottom: 50px;
 }
 .LinksWrapper {
   width: 50%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
+  padding-left: 14%;
+}
+.LinkListContainer {
+  display: flex;
+  flex-direction: column;
+}
+.Link {
+  margin: 15px 0;
 }
 
 .Input {
   @include Input;
+  margin: 15px 0;
+  max-width: 250px;
 }
 .InputSmall {
   @include Input;
   width: 250px;
-  max-width: 250px;
-  margin: 15px 0;
+  max-width: 200px;
+  margin: 15px 15px 15px 0;
 }
 .Label {
   @include Label;
   font-size: 18px;
+  margin-bottom: 0;
 }
 
 .Button {
   @include Button;
+}
+
+.ButtonTags {
+  @include Button;
+  width: 75px;
 }
 .TextArea {
   @include Input;
@@ -75,8 +100,16 @@
   max-width: 500px;
 }
 
-.AboutImg {
-  width: 350px;
+.Tag {
+  @include Tag;
+}
+.ImgOneContainer {
+  width: 50%;
+  padding-top: 38px;
+  margin-bottom: 50px;
+}
+.ImgOne {
+  width: 100%;
 }
 
 .ErrorMsg {
@@ -85,4 +118,68 @@
   width: 400px;
   display: flex;
   flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .Wrapper {
+    justify-content: center;
+  }
+  .AboutWrapper {
+    width: 100%;
+  }
+
+  .TextArea {
+    width: 100%;
+    max-width: 717px;
+  }
+  .ImgOneContainer {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ImgOne {
+    max-width: 500px;
+  }
+
+  .EducationWrapper {
+    width: 100%;
+  }
+
+  .LinksWrapper {
+    width: 100%;
+    padding: 0;
+  }
+
+  .MasteredContainer,
+  .LearningContainer,
+  .WantContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Input {
+    margin: 15px auto;
+  }
+
+  .Label {
+    width: 250px;
+    align-self: center;
+  }
+  .Button {
+    align-self: center;
+    width: 250px;
+  }
+
+  .InputSmall {
+    margin: 15px auto;
+    max-width: 250px;
+  }
+
+  .ButtonTags {
+    width: 250px;
+    align-self: center;
+  }
 }

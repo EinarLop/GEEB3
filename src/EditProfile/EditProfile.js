@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
-import styles from './EditProfileStyles.module.scss';
-import {validate} from '../Validation/EditProfileValidation';
-import  pic1  from './Images/pic1.svg';
-
-
+import styles from "./EditProfileStyles.module.scss";
+import { validate } from "../Validation/EditProfileValidation";
+import pic1 from "./Images/pic3.svg";
 
 export default function EditProfile() {
   const [bio, setBio] = useState("");
@@ -20,6 +18,7 @@ export default function EditProfile() {
     mastered: "",
     want: "",
     linkInput: "",
+    currentLink: "",
   });
   const [message, setMessage] = useState({
     errorBio: "",
@@ -51,7 +50,7 @@ export default function EditProfile() {
     setMastered(mastered.filter((m, i) => i !== index));
   };
   const onDeleteWant = (index) => {
-    setWants(wants.filter((w, i) => i !== index));
+    setWant(want.filter((w, i) => i !== index));
   };
   const onDeleteLearning = (index) => {
     setLearning(learning.filter((l, i) => i !== index));
@@ -68,7 +67,7 @@ export default function EditProfile() {
     setWant((tag) => [...tag, profile.want]);
   };
   const onAddLink = (event) => {
-    setLinks((link) => [...link, profile.linkInput]);
+    setLinks((link) => [...link, profile.currentLink]);
   };
 
   //onChange ***************************************************************************************************************************
@@ -85,22 +84,17 @@ export default function EditProfile() {
     <div className={styles.Wrapper}>
       <div className={styles.AboutWrapper}>
         <p className={styles.Titles}>About me</p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "row",
-          }}
-        >
-          <textarea
-            className={styles.TextArea}
-            placeholder=" Tell us a little about yourself!"
-            onChange={handleOnChange}
-            name="bio"
-            autoComplete="off"
-          />
-          <img className={styles.AboutImg} src={pic1} />
-        </div>
+        <textarea
+          className={styles.TextArea}
+          placeholder=" Tell us a little about yourself!"
+          onChange={handleOnChange}
+          name="bio"
+          autoComplete="off"
+        />
+      </div>
+
+      <div className={styles.ImgOneContainer}>
+        <img className={styles.ImgOne} src={pic1} />
       </div>
       <div className={styles.EducationWrapper}>
         <label className={styles.Label}>College:</label>
@@ -111,7 +105,7 @@ export default function EditProfile() {
         </select>
         <label className={styles.Label}>Major:</label>
         <input
-          className={styles.InputSmall}
+          className={styles.Input}
           type=""
           placeholder=" e.g. Computer Science"
         />
@@ -121,17 +115,24 @@ export default function EditProfile() {
 
         <input
           placeholder="Programming, Marketing, etc..."
-          name="currentTag"
+          name="currentLink"
           autoComplete="off"
-          className={styles.InputSmall}
+          className={styles.Input}
           onChange={handleOnChange}
         />
-        <input className={styles.Button} type="button" value="Add" />
+        <input
+          className={styles.Button}
+          type="button"
+          value="Add"
+          onClick={onAddLink}
+        />
 
         <p className={styles.ErrorMsg}>{message.errorLinks}</p>
-        <div>
+        <div className={styles.LinkListContainer}>
           {links.map((link, index) => (
-            <div onClick={() => onDeleteLink(index)}>{link}</div>
+            <div className={styles.Link} onClick={() => onDeleteLink(index)}>
+              {link}
+            </div>
           ))}
         </div>
       </div>
@@ -146,13 +147,18 @@ export default function EditProfile() {
         <input
           type="button"
           value="Adds"
-          className={styles.Button}
+          className={styles.ButtonTags}
           onClick={onAddTagMastered}
         />
 
         <div className={styles.MasteredTagContainer}>
-          {mastered.map((masteredTag) => (
-            <div>{masteredTag}</div>
+          {mastered.map((masteredTag, index) => (
+            <div
+              onClick={() => onDeleteMastered(index)}
+              className={`${styles.Tag} ${styles.Mastered}`}
+            >
+              {masteredTag}
+            </div>
           ))}
         </div>
       </div>
@@ -167,12 +173,17 @@ export default function EditProfile() {
         <input
           type="button"
           value="Adds"
-          className={styles.Button}
+          className={styles.ButtonTags}
           onClick={onAddTagLearning}
         />
         <div className={styles.LearningTagContainer}>
-          {learning.map((learningTag) => (
-            <div>{learningTag}</div>
+          {learning.map((learningTag, index) => (
+            <div
+              onClick={() => onDeleteLearning(index)}
+              className={`${styles.Tag} ${styles.Learning}`}
+            >
+              {learningTag}
+            </div>
           ))}
         </div>
       </div>
@@ -186,12 +197,19 @@ export default function EditProfile() {
         <input
           type="button"
           value="Adds"
-          className={styles.Button}
+          className={styles.ButtonTags}
           onClick={onAddTagWant}
         />
-        {want.map((wantTag) => (
-          <div>{wantTag}</div>
-        ))}
+        <div className={styles.WantTagContainer}>
+          {want.map((wantTag, index) => (
+            <div
+              onClick={() => onDeleteWant(index)}
+              className={`${styles.Tag} ${styles.Want}`}
+            >
+              {wantTag}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
