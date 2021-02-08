@@ -4,7 +4,7 @@ import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
 import ImageTwo from "./Images/ImageTwo.svg";
 
-function Profile() {
+function Profile(props) {
   const [user, setUser] = useState({
     links: ["loading..."],
     mastered: ["loading..."],
@@ -14,10 +14,16 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/users/601f40783bd24a0e924dc0fc") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      .get("http://localhost:3010/users/" + props.match.params.id, {
+        headers: {
+          // Send the JWT along in the request header
+          "auth-token": window.localStorage.getItem("auth-token"),
+        },
+      }) ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => {
         setUser(response.data.user);
         console.log(response.data);
+        console.log(props.match.params.id);
       });
   }, []);
 
@@ -66,7 +72,7 @@ function Profile() {
         <p className={styles.MasterdTitle}>Masterd</p>
         <div className={styles.MasterdTagsContanier}>
           {user.mastered.map((tag) => (
-            <div className={`${styles.Tag} ${styles.Masterd}`}> {tag}</div>
+            <div className={`${styles.Tag} ${styles.Mastered}`}> {tag}</div>
           ))}
         </div>
       </div>

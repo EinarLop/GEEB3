@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
-import {Redirect} from 'react-router-dom';
-import {loginValidation} from '../Validation/LoginValidation';
+import { Redirect } from "react-router-dom";
+import { loginValidation } from "../Validation/LoginValidation";
 
 export default function login() {
-  const [loginMessage,setErrorMessage] = useState({
-    errorInput : "",
-    redirect : false,
+  const [loginMessage, setErrorMessage] = useState({
+    errorInput: "",
+    redirect: false,
   });
   const [user, setUser] = useState({
     username: "",
@@ -22,36 +22,40 @@ export default function login() {
       [event.target.name]: event.target.value,
     });
   };
-  
+
   const handleOnSubmit = () => {
-    let validation = loginValidation(user);   // returns message and ok flag
+    let validation = loginValidation(user); // returns message and ok flag
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
     if (validation.ok) {
-      axios.post("http://localhost:3010/users/login", user)
-      .then((response)=> {
-        console.log("Succesful login POST")
-        let msg = <p style={{color:'green'}}>Logging in...</p>;
-        setStatus(msg);
-        window.localStorage.setItem(
-          "auth-token",
-          response.headers["auth-token"]
-        );
-        setTimeout(() => setRedirect(true), 2000);
-      }).catch(err => {
-        console.log("Login POST failed");
-        let msg = <p>Username/Password is wrong</p>
-        setStatus(msg);
-      })
+      axios
+        .post("http://localhost:3010/users/login", user)
+        .then((response) => {
+          console.log("Succesful login POST");
+          let msg = <p style={{ color: "green" }}>Logging in...</p>;
+          setStatus(msg);
+          window.localStorage.setItem(
+            "auth-token",
+            response.headers["auth-token"]
+          );
+          console.log("Login response is:", response.data);
+          window.localStorage.setItem("geebId", response.data.userId); // save the user's _id to localstorage
+          setTimeout(() => setRedirect(true), 2000);
+        })
+        .catch((err) => {
+          console.log("Login POST failed");
+          let msg = <p>Username/Password is wrong</p>;
+          setStatus(msg);
+        });
     } else {
-      let msg = <p>{validation.msg}</p>
+      let msg = <p>{validation.msg}</p>;
       setStatus(msg);
     }
   };
-  
-  
-  return (
-    redirect ? <Redirect to="/oprojects"/> :
+
+  return redirect ? (
+    <Redirect to="/oprojects" />
+  ) : (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
@@ -62,13 +66,16 @@ export default function login() {
         </div>
         <div className={styles.InfoBullets}>
           <p className={styles.Bullet}>
-            Be sure to explore all sorts of projects. You will surely find something exciting!
+            Be sure to explore all sorts of projects. You will surely find
+            something exciting!
           </p>
           <p className={styles.Bullet}>
-            Include in your portfolio as much of your work as you can. Make others interested in you!
+            Include in your portfolio as much of your work as you can. Make
+            others interested in you!
           </p>
           <p className={styles.Bullet}>
-            Your skillset is very valuable. Don't be afraid to apply to a project!
+            Your skillset is very valuable. Don't be afraid to apply to a
+            project!
           </p>
         </div>
       </div>
@@ -81,9 +88,9 @@ export default function login() {
 
           <div className={styles.InputLabelContainer}>
             <label className={styles.Label}>Username</label>
-            <input 
+            <input
               autoComplete="off"
-              className={styles.Input} 
+              className={styles.Input}
               name="username"
               placeholder="user@cool"
               onChange={handleOnChange}
@@ -93,10 +100,10 @@ export default function login() {
 
           <div className={styles.InputLabelContainer}>
             <label className={styles.Label}>Password</label>
-            <input 
+            <input
               autoComplete="off"
-              className={styles.Input} 
-              name="password" 
+              className={styles.Input}
+              name="password"
               type="password"
               placeholder="VerySecretPassword"
               onChange={handleOnChange}

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./HeaderStyles.module.scss";
 import { MdNaturePeople } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { VscPerson } from "react-icons/vsc";
+import { GiBurningTree } from "react-icons/gi";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
 
@@ -11,9 +13,15 @@ export default function Header() {
   const { isMd } = useMediaSize();
   const [isOpen, setIsOpen] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [visitor, setVisitor] = useState("");
   const handleClick = (event) => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    let geebId = localStorage.getItem("geebId");
+    setVisitor(geebId);
+  });
+
   const onLogButton = (event) => {
     /*How to delete a session using LocalStorage? */
     if (isLogged) {
@@ -25,7 +33,7 @@ export default function Header() {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconNameContainer}>
-        <MdNaturePeople className={styles.Icon}/>
+        <GiBurningTree className={styles.Icon} />
         <h2 className={styles.Logo}>Intecreate</h2>
       </div>
       {isMd ? (
@@ -39,7 +47,6 @@ export default function Header() {
                   onClick={handleClick}
                 />
                 <a className={`${styles.Links} ${styles.Title}`}> GEEB </a>
-
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
@@ -47,13 +54,17 @@ export default function Header() {
                   Team Projects
                 </a>
                 <a className={styles.Links} href="/sprojects">
-                  Portfolio Projects 
+                  Portfolio Projects
                 </a>
                 <a className={styles.Links} href="/create">
                   Create a Project
                 </a>
                 <a className={styles.Links} href="/createsproject">
                   Add to portfolio
+                </a>
+
+                <a className={styles.Links} href={`/profile/${visitor}`}>
+                  Profile
                 </a>
                 {/* <a className={styles.Links} href="/login">
                   Logout
@@ -76,6 +87,10 @@ export default function Header() {
             </a>
             <a className={styles.NavLink} href="/createsproject">
               Add to Portfolio
+            </a>
+
+            <a className={styles.NavLink} href={`/profile/${visitor}`}>
+              <VscPerson className={styles.NavLinkIcon} />
             </a>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
