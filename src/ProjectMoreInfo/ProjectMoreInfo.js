@@ -12,7 +12,6 @@ export default function ProjectMoreInfo(props) {
     skills: ["Skill"],
     highlights: ["Loading Highlights..."],
     desirables: ["Loading Preferences..."],
-    
   });
   const [isOwner, setIsOwner] = useState(false);
 
@@ -27,12 +26,12 @@ export default function ProjectMoreInfo(props) {
       .get("http://localhost:3010/oprojects/" + props.match.params.id, {
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
-      }})
+        },
+      })
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
       });
-      
   }, []);
 
   const handleOnChange = (event) => {
@@ -42,24 +41,24 @@ export default function ProjectMoreInfo(props) {
     });
   };
   const handleOnSubmit = () => {
-    setErrorInput(validateRequest(request))
-    if(errorInput===""){
+    setErrorInput(validateRequest(request));
+    if (errorInput === "") {
       const applicant = {
-        userid : request.user,
-        oprojectid : props.match.params.id,
-        motive : request.motive
-      }
+        userid: request.user,
+        oprojectid: props.match.params.id,
+        motive: request.motive,
+      };
       console.log(Array.isArray(project.highlights));
       axios
-      .post("http://localhost:3010/applicants/create", applicant)
-      .then((res) => console.log("You Apply to this project!"));
+        .post("http://localhost:3010/applicants/create", applicant)
+        .then((res) => console.log("You Apply to this project!"));
     }
   };
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
         <div className={styles.TitleDesContainer}>
-        <h1>Is Owner: {isOwner.toString()}</h1>
+          <h1>Is Owner: {isOwner.toString()}</h1>
           <p className={styles.Title}>{project.title}</p>
           <p className={styles.Paragraph}>{project.description}</p>
         </div>
@@ -97,29 +96,28 @@ export default function ProjectMoreInfo(props) {
             </div>
           </div>
         </div>
-          {!isOwner && (
-            <div className={styles.userInputs}>
-              <p className={styles.TitleSubtitle}>Send a request</p>
-              <div className={styles.ApplicationMsg}>
-                <div className={styles.InputLabelContainer}>
-                  <label className={styles.Label}>Description</label>
-                  <textarea
-                    className={styles.ReasonForRequest}
-                    name="motive"
-                    onChange={handleOnChange}
-                  ></textarea>
-                </div>
+        {!isOwner && (
+          <div className={styles.userInputs}>
+            <p className={styles.TitleSubtitle}>Send a request</p>
+            <div className={styles.ApplicationMsg}>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Description</label>
+                <textarea
+                  className={styles.ReasonForRequest}
+                  name="motive"
+                  onChange={handleOnChange}
+                ></textarea>
               </div>
-              <p>{errorInput}</p>
-              <input
-                type="button"
-                className={`${styles.Button} ${styles.Large} `}
-                value="Send Request"
-                onClick={handleOnSubmit}
-              />
             </div>
-          ) }
-          
+            <p>{errorInput}</p>
+            <input
+              type="button"
+              className={`${styles.Button} ${styles.Large} `}
+              value="Send Request"
+              onClick={handleOnSubmit}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -42,6 +42,11 @@
   }
 }
 
+.NavLinkIcon {
+  width: 45px;
+  height: 45px;
+}
+
 .LogOut {
   @include Button;
   color: black;
