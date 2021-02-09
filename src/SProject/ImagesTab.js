@@ -13,8 +13,12 @@ const onClickInfo=()=>{
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <p className={styles.Title}>{project.title}</p>
-        <p className={styles.Description}>
-          {project.imagesurls}
+        <p className={styles.ImagesWrapper}>
+          {project.imageurls.map((img)=>(
+            <div className={styles.Images}>
+              <img  src={img}/>
+            </div>
+          ))}
         </p>
       </div>
       <div className={styles.ButtonContainer}>
