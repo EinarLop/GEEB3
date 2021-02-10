@@ -1,4 +1,4 @@
-@import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss";
+@import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
 
 * {
   margin: 0;
@@ -72,18 +72,6 @@
   @include InputLabelContainer;
 }
 
-.InputLabelContainer {
-  @include InputLabelContainer;
-}
-
-.InputLabelContainer {
-  @include InputLabelContainer;
-}
-
-.InputLabelContainer {
-  @include InputLabelContainer;
-}
-
 .Label {
   @include Label;
 }
@@ -121,6 +109,11 @@
   flex-wrap: wrap;
   width: 45%;
 }
+
+.StatusMsg {
+  @include StatusMsg;
+}
+
 
 @media (max-width: 767px) {
   .Wrapper {
