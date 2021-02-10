@@ -13,6 +13,7 @@ function Profile(props) {
   });
 
   useEffect(() => {
+    console.log("Getting user with id:", props.match.params.id);
     axios
       .get("http://localhost:3010/users/" + props.match.params.id, {
         headers: {
@@ -26,6 +27,7 @@ function Profile(props) {
         console.log(props.match.params.id);
       });
   }, []);
+    /* If the user is not logged in, visitor will be undefined. Redirect to Login?*/
 
   return (
     <div className={styles.Wrapper}>
@@ -69,7 +71,7 @@ function Profile(props) {
         <p className={styles.StackTitle}>My stack</p>
       </div>
       <div className={styles.MasterdContainer}>
-        <p className={styles.MasterdTitle}>Masterd</p>
+        <p className={styles.MasterdTitle}>Mastered:</p>
         <div className={styles.MasterdTagsContanier}>
           {user.mastered.map((tag) => (
             <div className={`${styles.Tag} ${styles.Mastered}`}> {tag}</div>
@@ -77,7 +79,7 @@ function Profile(props) {
         </div>
       </div>
       <div className={styles.LearningContainer}>
-        <p className={styles.LearningTitle}>Learning</p>
+        <p className={styles.LearningTitle}>Learning:</p>
         <div className={styles.LearningTagsContanier}>
           {user.learning.map((tag) => (
             <div className={`${styles.Tag} ${styles.Learning}`}> {tag}</div>
@@ -85,7 +87,7 @@ function Profile(props) {
         </div>
       </div>
       <div className={styles.WantContainer}>
-        <p className={styles.WantTitle}>Want to learn</p>
+        <p className={styles.WantTitle}>Want to learn:</p>
         <div className={styles.MasterdTagsContanier}>
           {user.want.map((tag) => (
             <div className={`${styles.Tag} ${styles.Want}`}> {tag}</div>

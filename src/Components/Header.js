@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./HeaderStyles.module.scss";
 import { MdNaturePeople } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { VscPerson } from "react-icons/vsc";
+import {IoPersonCircleOutline} from 'react-icons/io5';
 import { GiBurningTree } from "react-icons/gi";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
+import {Link} from 'react-router-dom';
 
 /* Header layout:  Icon, Logo, 'Create', 'Explore', Header is visible to anyone who is logged in.*/
 
@@ -19,6 +20,7 @@ export default function Header() {
   };
   useEffect(() => {
     let geebId = localStorage.getItem("geebId");
+    console.log("geebId:", geebId);
     setVisitor(geebId);
   });
 
@@ -50,22 +52,11 @@ export default function Header() {
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
-                <a className={styles.Links} href="/oprojects">
-                  Team Projects
-                </a>
-                <a className={styles.Links} href="/sprojects">
-                  Portfolio Projects
-                </a>
-                <a className={styles.Links} href="/create">
-                  Create a Project
-                </a>
-                <a className={styles.Links} href="/createsproject">
-                  Add to portfolio
-                </a>
-
-                <a className={styles.Links} href={`/profile/${visitor}`}>
-                  Profile
-                </a>
+                <Link to="/oprojects" className={styles.Links}>Team Projects</Link>
+                <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
+                <Link to="/create" className={styles.Links}></Link>
+                <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+                <Link to={`/profile/${visitor}`} className={styles.Links}>My profile</Link>
                 {/* <a className={styles.Links} href="/login">
                   Logout
                 </a> */}
@@ -76,22 +67,13 @@ export default function Header() {
       ) : (
         <div className={styles.ConditionalContainerNav}>
           <div className={styles.NavContainer}>
-            <a className={styles.NavLink} href="/oprojects">
-              Team Projects
-            </a>
-            <a className={styles.NavLink} href="/sprojects">
-              Portfolio Projects
-            </a>
-            <a className={styles.NavLink} href="/create">
-              Create a Project
-            </a>
-            <a className={styles.NavLink} href="/createsproject">
-              Add to Portfolio
-            </a>
-
-            <a className={styles.NavLink} href={`/profile/${visitor}`}>
-              <VscPerson className={styles.NavLinkIcon} />
-            </a>
+            <Link to="/oprojects" className={styles.Links}>Team Projects</Link>
+            <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
+            <Link to="/create" className={styles.Links}>Create a Project</Link>
+            <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+            <Link to={`/profile/${visitor}`} className={styles.Links}>
+              <IoPersonCircleOutline className={styles.NavLinkIcon} />
+            </Link>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
