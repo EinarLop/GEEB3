@@ -24,6 +24,7 @@ export default function login() {
   };
 
   const handleOnSubmit = () => {
+    setStatus("");
     let validation = loginValidation(user); // returns message and ok flag
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
@@ -32,7 +33,7 @@ export default function login() {
         .post("http://localhost:3010/users/login", user)
         .then((response) => {
           console.log("Succesful login POST");
-          let msg = <p style={{ color: "green" }}>Logging in...</p>;
+          let msg = <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>;
           setStatus(msg);
           window.localStorage.setItem(
             "auth-token",
@@ -44,11 +45,11 @@ export default function login() {
         })
         .catch((err) => {
           console.log("Login POST failed");
-          let msg = <p>Username/Password is wrong</p>;
+          let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>Username/Password is wrong</p>;
           setStatus(msg);
         });
     } else {
-      let msg = <p>{validation.msg}</p>;
+      let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>{validation.msg}</p>;
       setStatus(msg);
     }
   };
@@ -110,8 +111,10 @@ export default function login() {
               required="True"
             ></input>
           </div>
-          <p className={styles.ErrorMsg}>{loginMessage.errorInput}</p>
+          {/*<p className={styles.ErrorMsg}>{loginMessage.errorInput}</p>*/}
+
           {status}
+
           <div className={styles.ButtonContainer}>
             <input
               value="Log in"
