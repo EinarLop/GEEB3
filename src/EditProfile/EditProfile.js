@@ -12,6 +12,7 @@ export default function EditProfile() {
   const [major, setMajor] = useState(""); // placeholder ComputerSci
   const [college, setCollege] = useState(""); // placeholder ITESM
   const [links, setLinks] = useState([]);
+  const [status, setStatus] = useState();   // for validation status msg
   const [profile, setProfile] = useState({
     bio: "",
     learning: "",

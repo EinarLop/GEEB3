@@ -5,10 +5,7 @@ import { Redirect, Link } from "react-router-dom";
 import { loginValidation } from "../Validation/LoginValidation";
 
 export default function login() {
-  const [loginMessage, setErrorMessage] = useState({
-    errorInput: "",
-    redirect: false,
-  });
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -111,7 +108,6 @@ export default function login() {
               required="True"
             ></input>
           </div>
-          {/*<p className={styles.ErrorMsg}>{loginMessage.errorInput}</p>*/}
 
           {status}
 
@@ -126,7 +122,7 @@ export default function login() {
         </div>
         <div className={styles.NewUserContainer}>
           <p className={styles.NewUserMessage}>New to GEEB?</p>
-          <Link to="/" className={styles.NewUserLink}>Create an Account</Link>
+          <Link to="/register" className={styles.NewUserLink}>Create an Account</Link>
         </div>
       </div>
     </div>
