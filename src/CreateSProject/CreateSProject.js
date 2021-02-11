@@ -110,16 +110,16 @@ function CreateSProject() {
             },
         })
         .then((resp) => {
-            let msg = <p>Project created succesfully!</p>
+            let msg = <p className={`${styles.StatusMsg} ${styles.Ok}`}>Project created succesfully!</p>
             setStatus(msg);
             console.log("Saved oproject and images succesfully", resp);
             //setNewId(newDoc._id);
             setTimeout(()=> setRedirect(true), 2000);
 
         }).catch(err => {
-          let msg = <p>Something went wrong. Please try again</p>
+          let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>Something went wrong. Please try again</p>
           setStatus(msg);
-          console.log("Could not save sproject")
+          console.log("Could not save sproject");
           console.log(err);
         })
     // else there are Errors in Validation
@@ -130,7 +130,7 @@ function CreateSProject() {
         errorTags: validation.errorTags,
         errorLinks: validation.errorLinks,
       });
-      let msg = <p>Please check your inputs!</p>
+      let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>Please check your inputs!</p>
       setStatus(msg);
     }
   }

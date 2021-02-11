@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {registerValidation} from '../Validation/RegisterValidation';
 import axios from "axios";
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
@@ -164,9 +164,9 @@ function Registration() {
         />
 
         <p className={styles.Msg}>Already have an account?</p>
-        <a href="login" className={styles.LoginLink}>
+        <Link to="/login" className={styles.LoginLink}>
           Login
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ function ProjectCreate() {
   const [profiles, setProfiles] = useState([]);
   const [skills, setSkills] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [newId, setNewId] = useState("");
   const [message, setMessage] = useState({
     errorTitle : "",
     errorDescription:"",
@@ -107,7 +108,7 @@ function ProjectCreate() {
       success : finalmessages.success
     })
     
-  if (message.success==="") {
+  if (message.success=="") {
         const Project = {
         title: project.title,
         description: project.description,
@@ -125,7 +126,8 @@ function ProjectCreate() {
             "auth-token": window.localStorage.getItem("auth-token"),
             },
         })
-        .then((newDoc) => {
+        .then((resp) => {     // the backend responds with the new project's _id
+            setNewId(resp.data);
             setMessage({...message, success: "Project created succesfully!"}) 
             setTimeout(()=>setRedirect(true), 2000)
         });
@@ -135,7 +137,7 @@ function ProjectCreate() {
   }
 
   return (
-    redirect ? <Redirect to="/oprojects"/> :
+    redirect ? <Redirect to={`/oproject/${newId}`}/> :
     <div>
       {/* <Header /> */}
       <div className={styles.Global}>
