@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { loginValidation } from "../Validation/LoginValidation";
 
 export default function login() {
@@ -126,10 +126,7 @@ export default function login() {
         </div>
         <div className={styles.NewUserContainer}>
           <p className={styles.NewUserMessage}>New to GEEB?</p>
-          <a href="/" className={styles.NewUserLink}>
-            {" "}
-            Create an account{" "}
-          </a>
+          <Link to="/" className={styles.NewUserLink}>Create an Account</Link>
         </div>
       </div>
     </div>
