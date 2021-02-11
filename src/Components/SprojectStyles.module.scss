@@ -24,6 +24,7 @@
   width: 45%;
 }
 
+.Title,
 .TagsTitle,
 .LinksTitle {
   font-size: 25px;
@@ -45,15 +46,34 @@
 
 .Button {
   @include Button;
+  width: auto;
   margin-bottom: 25px;
 }
+
+.InfoContainer {
+  width: 80%;
+  //   border: 1px solid red;
+}
+
+.Description {
+  color: white;
+  font-size: 18px;
+}
+
+.ImagesWrapper{
+width: 100%;
+}
+
+.Images{
+margin:20px;
+}
+
 
 @media (max-width: 767px) {
   .Wrapper {
     height: auto;
   }
-
-  .TagsContainer {
+  .InfoContainer, .TagsContainer {
     width: 100%;
   }
 
@@ -85,136 +105,3 @@
   }
 }
 
-// Then InfoTab Styles. Find and delete duplicate styles.
-* {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-  }
-  
-  .Wrapper {
-    font-family: $font;
-    max-width: 1024px;
-    height: 400px;
-    width: 100%;
-    display: flex;
-    margin: 0 auto;
-    background-color: $dark;
-    padding: 25px;
-    flex-wrap: wrap;
-  }
-  
-  .Button {
-    @include Button;
-    margin-bottom: 25px;
-  }
-  .InfoContainer {
-    width: 80%;
-    //   border: 1px solid red;
-  }
-  
-  .Title {
-    font-size: 25px;
-    color: $orangeAccent;
-    margin-bottom: 25px;
-  }
-  
-  .Description {
-    color: white;
-    font-size: 18px;
-  }
-  .ButtonContainer {
-    width: 20%;
-    //   border: 1px solid orange;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  
-  @media (max-width: 767px) {
-    .Wrapper {
-      height: auto;
-    }
-    .InfoContainer {
-      width: 100%;
-    }
-  
-    .ButtonContainer {
-      width: 100%;
-      height: auto;
-      justify-content: flex-start;
-    }
-  
-    .Button {
-      margin-top: 25px;
-    }
-  }
-  
-// IMAGES TAB STYLES. DELETE DUPLICATES
-* {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-  }
-  
-  .Wrapper {
-    font-family: $font;
-    max-width: 1024px;
-    height: 400px;
-    width: 100%;
-    display: flex;
-    margin: 0 auto;
-    background-color: $dark;
-    padding: 25px;
-    flex-wrap: wrap;
-  }
-  
-  .Button {
-    @include Button;
-    margin-bottom: 25px;
-  }
-  .InfoContainer {
-    width: 80%;
-    //   border: 1px solid red;
-  }
-  
-  .Title {
-    font-size: 25px;
-    color: $orangeAccent;
-    margin-bottom: 25px;
-  }
-  
-  .ImagesWrapper{
-    width: 100%;
-  }
-  .ButtonContainer {
-    width: 20%;
-    //   border: 1px solid orange;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .Images{
-    margin:20px;
-  }
-  
-  @media (max-width: 767px) {
-    .Wrapper {
-      height: auto;
-    }
-    .InfoContainer {
-      width: 100%;
-    }
-  
-    .ButtonContainer {
-      width: 100%;
-      height: auto;
-      justify-content: flex-start;
-    }
-  
-    .Button {
-      margin-top: 25px;
-    }
-  }

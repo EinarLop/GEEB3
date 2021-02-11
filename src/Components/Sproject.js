@@ -1,12 +1,17 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, {useState} from 'react';
+import { Link, Redirect } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./SprojectStyles.module.scss";
 
 export default function Sproject(props) {
     const project = props.project;
+    const [redirect, setRedirect] = useState(false);
+    const onClickInfo = () => {
+        setRedirect(true);
+    }
     return (
+        redirect ? <Redirect to={`/sproject/${project._id}`}/> :
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
         <TabList className={styles.TabsList}>
           <Tab className={styles.TabsUnselected}>Overview</Tab>

@@ -5,6 +5,7 @@ import InfoTab from "./InfoTab";
 import TagsLinksTab from "./TagsLinksTab";
 import ImagesTab from "./ImagesTab";
 import axios from "axios";
+import Sproject from "../Components/Sproject";
 
 function SProjectFeed() {
   const [projects, setProjects] = useState([]);
@@ -18,22 +19,23 @@ function SProjectFeed() {
   return (
     <div className={styles.Global}>
       {projects.map((project, index) => (
+        //<Sproject project={project}/>
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
-          <TabList className={styles.TabsList}>
-            <Tab className={styles.TabsUnselected}>Overview</Tab>
-            <Tab className={styles.TabsUnselected}>Detail</Tab>
-            <Tab className={styles.TabsUnselected}>Tags</Tab>
-          </TabList>
-          <TabPanel>
-            <TagsLinksTab project={project}/>
-          </TabPanel>
-          <TabPanel>
-            <InfoTab project={project}/>
-          </TabPanel>
-          <TabPanel>
-            <ImagesTab project={project}/>
-          </TabPanel>
-        </Tabs>
+        <TabList className={styles.TabsList}>
+          <Tab className={styles.TabsUnselected}>Overview</Tab>
+          <Tab className={styles.TabsUnselected}>Detail</Tab>
+          <Tab className={styles.TabsUnselected}>Tags</Tab>
+        </TabList>
+        <TabPanel>
+          <TagsLinksTab project={project}/>
+        </TabPanel>
+        <TabPanel>
+          <InfoTab project={project}/>
+        </TabPanel>
+        <TabPanel>
+          <ImagesTab project={project}/>
+        </TabPanel>
+      </Tabs>
       ))}
       
     </div>
