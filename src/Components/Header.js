@@ -56,7 +56,7 @@ export default function Header() {
                 <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
                 <Link to="/create" className={styles.Links}></Link>
                 <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
-                <Link to={`/profile/${visitor}`} className={styles.Links}>My profile</Link>
+                <a href={`/profile/${visitor}`} className={styles.Links}>My profile</a>
                 {/* <a className={styles.Links} href="/login">
                   Logout
                 </a> */}
@@ -71,9 +71,9 @@ export default function Header() {
             <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
             <Link to="/create" className={styles.Links}>Create a Project</Link>
             <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
-            <Link to={`/profile/${visitor}`} className={styles.Links}>
+            <a href={`/profile/${visitor}`} className={styles.Links}>
               <IoPersonCircleOutline className={styles.NavLinkIcon} />
-            </Link>
+            </a>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out

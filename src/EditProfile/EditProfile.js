@@ -1,26 +1,32 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import styles from "./EditProfileStyles.module.scss";
+import { Link, Redirect } from "react-router-dom";
 import { validate } from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 
 export default function EditProfile() {
-  const [bio, setBio] = useState("");
+  const [redirect, setRedirect] = useState(false);   // if user is not owner or user cannot edit, we redirect
   const [learning, setLearning] = useState([]);
   const [mastered, setMastered] = useState([]);
   const [want, setWant] = useState([]);
+  const [links, setLinks] = useState([]);
   const [major, setMajor] = useState(""); // placeholder ComputerSci
   const [college, setCollege] = useState(""); // placeholder ITESM
-  const [links, setLinks] = useState([]);
+  const [semester, setSemester] = useState("#");
   const [status, setStatus] = useState();   // for validation status msg
-  const [profile, setProfile] = useState({
+  const [form, setForm] = useState({
     bio: "",
-    learning: "",
-    mastered: "",
-    want: "",
+    name: "",
+    lastname: "",
+    email: "",
+    tag_master: "",
+    tag_learn: "",
+    tag_want: "",
     linkInput: "",
     currentLink: "",
   });
+
   const [message, setMessage] = useState({
     errorBio: "",
     errorLinks: "",
@@ -29,6 +35,7 @@ export default function EditProfile() {
     errorMastered: "",
     errorWants: "",
   });
+  
   const [colleges, setColleges] = useState([
     // retrieve from database "colleges" collection
     "ITESM",
@@ -39,10 +46,53 @@ export default function EditProfile() {
     "ANÁHUAC",
     "UAM",
     "UDLAP",
-    "UDG",
-    "UDEM",
     "LA SALLE",
   ]);
+
+  useEffect(() => {
+    // GET THE LOGGED IN USER'S INFO
+    let geebId = localStorage.getItem("geebId");
+    console.log("geebId:", geebId);
+    if (geebId) {
+      console.log("Getting user with id:", geebId);
+      axios
+        .get("http://localhost:3010/users/" + geebId, {
+          headers: {
+            // Send the JWT along in the request header
+            "auth-token": window.localStorage.getItem("auth-token"),
+          },
+        })
+        .then((response) => {
+          console.log("Retrieved!");
+          if (!response.data.isOwner) {
+            setRedirect(false);
+          }
+          console.log(response.data);
+
+          const User = response.data.user;
+          let fullname = User.fullname.split(" ");
+          setForm( {
+            ...form,
+            name: fullname[0],
+            lastname: fullname[1],
+            bio: User.bio,
+            email: User.email
+          })
+          setMastered(User.mastered);
+          setLearning(User.learning);
+          setWant(User.want);
+          setLinks(User.links);
+          console.log("Setting form... Form set.")
+        }).catch(err => {
+          console.log("Error in Profile:", err);
+      });
+
+    } else {
+      console.log("No user logged in");
+      setRedirect(false);
+    }
+  }, [])    // empty array so it is only called on mount
+
   //onDelete ******************************************************************************************************************************
   const onDeleteLink = (index) => {
     setLinks(links.filter((link, i) => i !== index));
@@ -59,30 +109,49 @@ export default function EditProfile() {
 
   //onADD ******************************************************************************************************************************
   const onAddTagMastered = (event) => {
-    setMastered((tag) => [...tag, profile.mastered]);
+    setMastered((mastered) => [...mastered, form.tag_master]);
   };
   const onAddTagLearning = (event) => {
-    setLearning((tag) => [...tag, profile.learning]);
+    setLearning((learning) => [...learning, form.tag_learn]);
   };
   const onAddTagWant = (event) => {
-    setWant((tag) => [...tag, profile.want]);
+    setWant((want) => [...want, form.tag_want]);
   };
   const onAddLink = (event) => {
-    setLinks((link) => [...link, profile.currentLink]);
+    setLinks((links) => [...links, form.currentLink]);
   };
 
   //onChange ***************************************************************************************************************************
   const handleOnChange = (e) => {
     // generic handler for our inputs
-    setProfile({
-      ...profile,
+    setForm({
+      ...form,
       [e.target.name]: e.target.value,
     });
     console.log(e.target.value);
   };
 
+  // onSubmit ********************************************************
+  // do a POST request?
+
   return (
+    redirect ? <Redirect to="/login" /> :
     <div className={styles.Wrapper}>
+      <div className={styles.NamesWrapper}>
+        <div className={styles.InputandLabelContainer}>
+          <label className={styles.Label}>Name</label>
+          <input className={styles.Input} type="text" value={form.name} onChange={handleOnChange}/>
+        </div>
+        <div className={styles.InputandLabelContainer}>
+          <label className={styles.Label}>Last name</label>
+          <input className={styles.Input} type="text" value={form.lastname} onChange={handleOnChange}/>
+        </div>
+        <div className={styles.InputandLabelContainer}>
+          <label className={styles.Label}>My email</label>
+          <input className={styles.Input} type="email" value={form.email} onChange={handleOnChange}/>
+        </div>
+
+      </div>
       <div className={styles.AboutWrapper}>
         <p className={styles.Titles}>About me</p>
         <textarea
@@ -91,17 +160,18 @@ export default function EditProfile() {
           onChange={handleOnChange}
           name="bio"
           autoComplete="off"
+          value={form.bio}
         />
       </div>
-
-      <div className={styles.ImgOneContainer}>
+      {/*      <div className={styles.ImgOneContainer}>
         <img className={styles.ImgOne} src={pic1} />
-      </div>
+      </div> */}
+
       <div className={styles.EducationWrapper}>
         <label className={styles.Label}>College:</label>
         <select className={styles.Input}>
-          {colleges.map((c, idx) => {
-            return <option value={idx}>{c}</option>; // we can use the index as logical key for db collection
+          {colleges.map((name, index) => {
+            return <option key={index} value={index}>{name}</option>; // we can use the index as logical key for db collection
           })}
         </select>
         <label className={styles.Label}>Major:</label>
@@ -115,7 +185,7 @@ export default function EditProfile() {
         <label className={styles.Label}>Links:</label>
 
         <input
-          placeholder="Programming, Marketing, etc..."
+          placeholder=" Links to my other sites..."
           name="currentLink"
           autoComplete="off"
           className={styles.Input}
@@ -131,7 +201,7 @@ export default function EditProfile() {
         <p className={styles.ErrorMsg}>{message.errorLinks}</p>
         <div className={styles.LinkListContainer}>
           {links.map((link, index) => (
-            <div className={styles.Link} onClick={() => onDeleteLink(index)}>
+            <div key={index} className={styles.Link} onClick={() => onDeleteLink(index)}>
               {link}
             </div>
           ))}
@@ -143,18 +213,20 @@ export default function EditProfile() {
         <input
           className={styles.InputSmall}
           onChange={handleOnChange}
-          name="mastered"
+          name="tag_master"
+          placeholder=" e.g. Editing, HTML..."
         />
         <input
           type="button"
-          value="Adds"
+          value="Add"
           className={styles.ButtonTags}
           onClick={onAddTagMastered}
         />
 
         <div className={styles.MasteredTagContainer}>
           {mastered.map((masteredTag, index) => (
-            <div
+            <div 
+              key={index}
               onClick={() => onDeleteMastered(index)}
               className={`${styles.Tag} ${styles.Mastered}`}
             >
@@ -169,17 +241,19 @@ export default function EditProfile() {
         <input
           className={styles.InputSmall}
           onChange={handleOnChange}
-          name="learning"
+          name="tag_learn"
+          placeholder=" e.g. Editing, HTML..."
         />
         <input
           type="button"
-          value="Adds"
+          value="Add"
           className={styles.ButtonTags}
           onClick={onAddTagLearning}
         />
         <div className={styles.LearningTagContainer}>
           {learning.map((learningTag, index) => (
             <div
+              key={index}
               onClick={() => onDeleteLearning(index)}
               className={`${styles.Tag} ${styles.Learning}`}
             >
@@ -193,17 +267,19 @@ export default function EditProfile() {
         <input
           className={styles.InputSmall}
           onChange={handleOnChange}
-          name="want"
+          name="tag_want"
+          placeholder=" e.g. Editing, HTML..."
         />
         <input
           type="button"
-          value="Adds"
+          value="Add"
           className={styles.ButtonTags}
           onClick={onAddTagWant}
         />
         <div className={styles.WantTagContainer}>
           {want.map((wantTag, index) => (
             <div
+              key={index}
               onClick={() => onDeleteWant(index)}
               className={`${styles.Tag} ${styles.Want}`}
             >
