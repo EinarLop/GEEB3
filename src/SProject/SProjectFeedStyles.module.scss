@@ -53,13 +53,15 @@
   padding: 15px;
 }
 .TabSelected {
-  background-color: #e66d29;
+  background-color: $pCardSp;
+  color: $pCardSpT;
 }
 .TabsList {
+  background-color: $cardBgSp;
   display: flex;
   flex-direction: row;
   padding: 0px;
   margin: 0;
   list-style-type: none;
-  border-bottom: 2px solid #e66d29;
+  border-bottom: 2px solid $pCardSp;
 }
