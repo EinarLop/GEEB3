@@ -15,7 +15,7 @@
   height: 400px;
   width: 100%;
   margin: 0 auto;
-  background-color: $dark;
+  background-color: $cardBgSp;
   padding: 25px;
   flex-wrap: wrap;
 }
@@ -27,7 +27,7 @@
 .TagsTitle,
 .LinksTitle {
   font-size: 25px;
-  color: $orangeAccent;
+  color: $pCardSp;
   margin-bottom: 25px;
 }
 
@@ -46,6 +46,8 @@
 .Button {
   @include Button;
   margin-bottom: 25px;
+  background-color: $sCardSp;
+  color: $sCardSpT;
 }
 
 @media (max-width: 767px) {
@@ -57,16 +59,12 @@
     width: 100%;
   }
 
-  .TagsTitle {
-    color: $orangeAccent;
-  }
-
   .LinksContainer {
     width: 100%;
   }
 
   .LinksTitle {
-    color: $orangeAccent;
+    color: $pCardSp;
     margin-top: 25px;
   }
 
