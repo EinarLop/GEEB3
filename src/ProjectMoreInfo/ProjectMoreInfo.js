@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
 import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
+import {Link} from 'react-router-dom';
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -14,12 +15,14 @@ export default function ProjectMoreInfo(props) {
     desirables: ["Loading Preferences..."],
   });
   const [isOwner, setIsOwner] = useState(false);
-
+  const [applications, setApplications] = useState([]);
   const [errorInput, setErrorInput] = useState("");
+  const [visitor, setVisitor]= useState("");
   const [request, setRequest] = useState({
     user: "",
     motive: "",
   });
+  const [alreadySend, setAlreadySend] = useState(false);
 
   useEffect(() => {
     axios
@@ -31,7 +34,14 @@ export default function ProjectMoreInfo(props) {
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
-      });
+      })
+    axios
+      .get("http://localhost:3010/applicants/project/" + props.match.params.id)
+      .then((response) => {
+        setApplications(response.data);
+        hasARequest(response.data);
+      })
+
   }, []);
 
   const handleOnChange = (event) => {
@@ -50,10 +60,22 @@ export default function ProjectMoreInfo(props) {
       };
       console.log(Array.isArray(project.highlights));
       axios
-        .post("http://localhost:3010/applicants/create", applicant)
+        .post("http://localhost:3010/applicants/create", applicant, {
+          headers: {
+            "auth-token": window.localStorage.getItem("auth-token"),
+          },
+        })
         .then((res) => console.log("You Apply to this project!"));
     }
   };
+  const hasARequest = (applications) =>{
+    for(var a in applications){
+      if (applications[a].userid == localStorage.getItem("geebId")){
+        setAlreadySend(true);
+      }
+    }
+  }
+
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
@@ -96,9 +118,10 @@ export default function ProjectMoreInfo(props) {
             </div>
           </div>
         </div>
-        {!isOwner && (
-          <div className={styles.userInputs}>
+        {!isOwner? (
+          !alreadySend && <div className={styles.userInputs}>
             <p className={styles.TitleSubtitle}>Send a request</p>
+            <p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>
             <div className={styles.ApplicationMsg}>
               <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Description</label>
@@ -116,6 +139,45 @@ export default function ProjectMoreInfo(props) {
               value="Send Request"
               onClick={handleOnSubmit}
             />
+          </div>
+        ):(
+          <div className={styles.Applications}> 
+            <p className={styles.TitleSubtitle}>Applications</p>
+            {applications.map((applicant)=>
+              (applicant.status !== "Unaccepted") && 
+                <div className={styles.Application}>
+                  <Link to= {`/profile/${applicant.userid}`} className={styles.TitleSubtitle}>{applicant.userid}</Link>
+                  <p className={styles.Text}>{applicant.motive}</p>
+                  <p className={styles.Text}>Status: {applicant.status}</p>
+                  <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>
+                  {(applicant.status === "Pending") && (
+                    <div className={styles.ButtonWrapper}>
+                      <input
+                        type="button"
+                        className={`${styles.Button} ${styles.Reject} `}
+                        value="Reject"
+                        name="Unaccepted"
+                        onClick={()=>axios
+                          .patch("http://localhost:3010/applicants/update/status/"+ applicant._id,{
+                            status:"Unaccepted"
+                          })
+                          .then((res) => location.reload())}
+                      />
+                      <input
+                        type="button"
+                        className={styles.Button} 
+                        value="Accept"
+                        name="Accepted"
+                        onClick={()=>axios
+                          .patch("http://localhost:3010/applicants/update/status/"+ applicant._id,{
+                            status:"Accepted"
+                          })
+                          .then((res) => location.reload())}
+                      />
+                    </div>
+                  )}
+                </div>     
+            )}
           </div>
         )}
       </div>
