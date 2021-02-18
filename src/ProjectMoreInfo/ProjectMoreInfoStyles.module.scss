@@ -92,7 +92,6 @@
 
 .Highlights {
   align-items: left;
-
   color: red;
   padding: 25px;
   background-color: $dark;
@@ -141,12 +140,13 @@
   // border: 1px solid #e66d29;
 }
 
-.UserEmail,
-.UserMail {
-}
+
 
 .Button {
   @include Button;
+  &.Reject {
+    background-color: #2c2c34;
+  }
 }
 
 .Card {
@@ -195,6 +195,23 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+.Applications{
+  background-color: $dark;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  width: 100%;
+  margin: 25px 0;
+  padding: 25px;
+}
+.Application{
+  width: 100%;
+  margin: 10px;
+}
+.ButtonWrapper{
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
 }
 
 @media (max-width: 1380px) {
