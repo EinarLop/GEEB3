@@ -20,7 +20,7 @@ export default function EditProfile() {
     email: "",
     major: "test",
     college:"",
-    semester: 0,
+    semester: 1,
     tag_master: "",
     tag_learn: "",
     tag_want: "",
@@ -197,16 +197,20 @@ export default function EditProfile() {
         <label className={styles.Label}>Major:</label>
         <input
           className={styles.Input}
+          name="major"
           placeholder=" e.g. Computer Science"
           value={form.major}
+          onChange={handleOnChange}
         />
         <label className={styles.Label}>Semester:</label>
         <input
           className={styles.Input}
+          name="semester"
           type="number"
           min="1"
           max="14"
           value={form.semester}
+          onChange={handleOnChange}
         />
       </div>
       <div className={styles.LinksWrapper}>
