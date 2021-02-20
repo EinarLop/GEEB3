@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
-import {Redirect, Link} from 'react-router-dom';
-import {registerValidation} from '../Validation/RegisterValidation';
+import { Redirect, Link } from "react-router-dom";
+import { registerValidation } from "../Validation/RegisterValidation";
 import axios from "axios";
 // TODO ERIC&EINAR configurar boton para visualizar las passwords
 function Registration() {
-  const [user, setUser] = useState({      // stores current inputs values
-    name:"",
-    lastName:"",
+  const [user, setUser] = useState({
+    // stores current inputs values
+    name: "",
+    lastName: "",
     userName: "",
     email: "",
     password: "",
@@ -15,15 +16,15 @@ function Registration() {
   });
   const [errorsMessage, setErrors] = useState({});
   const [redirect, setRedirect] = useState(false);
-  const [status, setStatus] = useState();     // final success message
-//onChange ******************************************************************************************************************************
+  const [status, setStatus] = useState(); // final success message
+  //onChange ******************************************************************************************************************************
   const handleOnChange = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   };
-//onSubmit ******************************************************************************************************************************
+  //onSubmit ******************************************************************************************************************************
   const handleOnSubmit = () => {
     console.log("Current inputs:");
     console.log(JSON.stringify(user));
@@ -31,56 +32,78 @@ function Registration() {
     setErrors(validation);
     console.log("Validation returned:");
     console.log(JSON.stringify(validation));
-    if(validation.success){
+    if (validation.success) {
       const User = {
-      username: user.userName,
-      email: user.email,
-      password: user.password,
-      fullname: user.name + ' ' + user.lastName,
-      }
-      axios.post("http://localhost:3010/users/register", User, {
-        withCredentials: true,
-      })
-      .then(RegisteredUser=>{
-        let msg = <p style={{color: "green"}}>You are now registered! <br/> Redirecting you to Login...</p>
-        setStatus(msg)
-        console.log(RegisteredUser);
-        setTimeout(()=>setRedirect(true), 2000);
-        // to redirect to /login
-      })
-      .catch(err => {
-        // Set error message: "something went wrong"
-        console.log("Server error", err);
-        let msg = <p style={{color: "red"}}>Something went wrong. Please try again.</p>
-        setStatus(msg);
-      })
+        username: user.userName,
+        email: user.email,
+        password: user.password,
+        fullname: user.name + " " + user.lastName,
+      };
+      axios
+        .post("http://localhost:3010/users/register", User, {
+          withCredentials: true,
+        })
+        .then((RegisteredUser) => {
+          let msg = (
+            <p style={{ color: "green" }}>
+              You are now registered! <br /> Redirecting you to Login...
+            </p>
+          );
+          setStatus(msg);
+          console.log(RegisteredUser);
+          setTimeout(() => setRedirect(true), 2000);
+          // to redirect to /login
+        })
+        .catch((err) => {
+          // Set error message: "something went wrong"
+          console.log("Server error", err);
+          let msg = (
+            <p style={{ color: "red" }}>
+              Something went wrong. Please try again.
+            </p>
+          );
+          setStatus(msg);
+        });
     } else {
-      let msg = <p style={{color: "red"}}>Please check your inputs!</p>
+      let msg = <p style={{ color: "red" }}>Please check your inputs!</p>;
       setStatus(msg);
     }
   };
 
-  return (
-    redirect ? <Redirect to="/login"/> :
+  return redirect ? (
+    <Redirect to="/login" />
+  ) : (
     <div className={styles.Global}>
       <div className={styles.Information}>
-        <h1>What is GEEB?</h1>
+        <p id={styles.Title}>What is GEEB?</p>
         <div>
-        <p>
-          GEEB is a platform dedicated to all kinds of creators, leaders and entrepreneurs.</p>
+          <p id={styles.WhatIs}>
+            GEEB is a platform dedicated to all kinds of creators, leaders and
+            entrepreneurs.
+          </p>
           <ul>
-            <li>Explore open projects and apply to work with interdisciplinary groups of people.</li>
-            <li>Find collaborators and build the ideal team for your own ventures.</li>
-            <li>Show off your past work and skills with your own online Portfolio.</li>
-          </ul>          
-          <p><b>Ready to accelerate your career, make valuable connections and make your project ideas come to life?</b></p>
-        </div>
+            <li>
+              Explore open projects and apply to work with interdisciplinary
+              groups of people.
+            </li>
+            <li>
+              Find collaborators and build the ideal team for your own ventures.
+            </li>
+            <li>
+              Show off your past work and skills with your own online Portfolio.
+            </li>
+          </ul>
 
+          <p id={styles.Msg}>
+            Ready to accelerate your career, make valuable connections and make
+            your project ideas come to life?
+          </p>
+        </div>
       </div>
 
       <div className={styles.Inputs}>
-        <h1>Register now</h1>
-        <div className={styles.InputLabelContainer}>
+        <p id={styles.InputMsg}>Register now</p>
+        {/* <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Name</label>
           <input
             autoComplete="off"
@@ -91,10 +114,10 @@ function Registration() {
             required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorsMessage.errorName}</p>
-        </div>
-        <div className={styles.InputLabelContainer}>
+        </div> */}
+        {/* <div className={styles.InputLabelContainer}>
           <label className={styles.Label}>Last Name</label>
-          <input
+          <input  
             autoComplete="off"
             className={styles.Input}
             name="lastName"
@@ -103,9 +126,11 @@ function Registration() {
             required="True"
           ></input>
           <p className={styles.ErrorMsg}>{errorsMessage.errorLastName}</p>
-        </div>
+        </div> */}
         <div className={styles.InputLabelContainer}>
-          <label className={styles.Label} style={{width:'85%'}}>Username</label>
+          <label className={styles.Label} style={{ width: "85%" }}>
+            Username
+          </label>
           <input
             autoComplete="off"
             className={styles.Input}
@@ -114,7 +139,9 @@ function Registration() {
             placeholder="cooluser21"
             required="True"
           ></input>
-          <p className={styles.ErrorMsg} style={{width:'85%'}}>{errorsMessage.errorUsername}</p>
+          <p className={styles.ErrorMsg} style={{ width: "85%" }}>
+            {errorsMessage.errorUsername}
+          </p>
         </div>
 
         <div className={styles.InputLabelContainer}>

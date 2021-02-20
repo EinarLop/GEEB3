@@ -12,7 +12,8 @@
   display: flex;
   font-family: $font;
   max-width: 1024px;
-  height: 400px;
+  height: auto;
+  min-height: 300px;
   width: 100%;
   margin: 0 auto;
   background-color: $cardBgSp;

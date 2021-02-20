@@ -5,7 +5,6 @@ import { Redirect, Link } from "react-router-dom";
 import { loginValidation } from "../Validation/LoginValidation";
 
 export default function login() {
-
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -30,7 +29,9 @@ export default function login() {
         .post("http://localhost:3010/users/login", user)
         .then((response) => {
           console.log("Succesful login POST");
-          let msg = <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>;
+          let msg = (
+            <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>
+          );
           setStatus(msg);
           window.localStorage.setItem(
             "auth-token",
@@ -42,11 +43,17 @@ export default function login() {
         })
         .catch((err) => {
           console.log("Login POST failed");
-          let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>Username/Password is wrong</p>;
+          let msg = (
+            <p className={`${styles.StatusMsg} ${styles.Err}`}>
+              Username/Password is wrong
+            </p>
+          );
           setStatus(msg);
         });
     } else {
-      let msg = <p className={`${styles.StatusMsg} ${styles.Err}`}>{validation.msg}</p>;
+      let msg = (
+        <p className={`${styles.StatusMsg} ${styles.Err}`}>{validation.msg}</p>
+      );
       setStatus(msg);
     }
   };
@@ -111,18 +118,18 @@ export default function login() {
 
           {status}
 
-          <div className={styles.ButtonContainer}>
-            <input
-              value="Log in"
-              className={styles.Button}
-              type="button"
-              onClick={handleOnSubmit}
-            />
-          </div>
+          <input
+            value="Log in"
+            className={styles.Button}
+            type="button"
+            onClick={handleOnSubmit}
+          />
         </div>
         <div className={styles.NewUserContainer}>
           <p className={styles.NewUserMessage}>New to GEEB?</p>
-          <Link to="/register" className={styles.NewUserLink}>Create an Account</Link>
+          <Link to="/register" className={styles.NewUserLink}>
+            Create an Account
+          </Link>
         </div>
       </div>
     </div>

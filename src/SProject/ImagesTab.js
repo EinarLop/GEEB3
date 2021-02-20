@@ -1,33 +1,24 @@
 import React, { useState } from "react";
 import styles from "./ImagesTabStyles.module.scss";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 function ImagesTab(props) {
-  
-const project = props.project;
-const [redirect, setRedirect]=useState(false);
-const onClickInfo=()=>{
-  setRedirect(true);
-}
-  return (
-    redirect ? <Redirect to={"/sproject/"+project._id}/> :
+  const project = props.project;
+  const [redirect, setRedirect] = useState(false);
+  const onClickInfo = () => {
+    setRedirect(true);
+  };
+  return redirect ? (
+    <Redirect to={"/sproject/" + project._id} />
+  ) : (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
-        <p className={styles.Title}>{project.title}</p>
         <p className={styles.ImagesWrapper}>
-          {project.imageurls.map((img)=>(
+          {project.imageurls.map((img) => (
             <div className={styles.Images}>
-              <img  src={img}/>
+              <img src={img} />
             </div>
           ))}
         </p>
-      </div>
-      <div className={styles.ButtonContainer}>
-        <input
-          value="More info"
-          className={styles.Button}
-          type="Button"
-          onClick={onClickInfo}
-        ></input>
       </div>
     </div>
   );

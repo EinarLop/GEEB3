@@ -45,12 +45,12 @@
 }
 .TabsUnselected {
   width: auto;
-  height: auto;
+  height: 60px;
   font-size: 20px;
   margin: 0px;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
 }
 .TabSelected {
   background-color: $pCardSp;
