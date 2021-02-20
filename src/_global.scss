@@ -54,11 +54,13 @@ $cardBgSp: #2c2c2c;
 //S Labels Input Button (Tags, Skills)
 $inputBg: #2c2c2c;
 $pCardSp: #80cbc4;
-$pCardSpT: #00796b;
+$pCardSpT: #004d40; //Changed to 900
 $sCardSp: #90caf9;
-$sCardSpT: #1976d2;
+$sCardSpT: #0d47a1; //Changed to 900
 
-/*FONTS*/
+$pLogin: #90caf9;
+$sLogin: #7fdeea;
+$sLoginT: #006064; /*FONTS*/
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
