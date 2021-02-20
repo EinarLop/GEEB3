@@ -6,6 +6,7 @@
   box-sizing: border-box;  
 }
 
+
 .Wrapper {
   padding: 50px;
   //width: 100%;
@@ -18,12 +19,14 @@
   margin: 0 auto;
 }
 
+
 .InfoContainer {
   //border: solid red;
   width: 100%;
 }
 .Title {
-  color: $orangeAccent;
+  //color: #ff5e5b; //#e8645c
+  color: #ff5e5b;
   font-size: 80px;
   text-align: center;
   margin: 25px;
@@ -42,6 +45,16 @@
 }
 .Button {
   @include Button;
+  background-color: #ff5e5b;
+  height: 60px;
+  width: 150px;
+  font-size: 25px;
+}
+.Button:hover{
+  background-color: transparent;
+  color: #ff5e5b;
+  font-weight: bold;
+  border: 2px solid #ff5e5b;
 }
 .InfoImage{
   height: auto;
@@ -51,8 +64,72 @@
   //border: solid pink;
 }
 .Image{
-    width: 100%;
+  width: 100%;
 }
+
+
+.DescriptionContainer {
+  width: 100%;
+  //border: solid white;
+}
+.TitleDescription {
+  font-size: 51px;
+  text-align: center;
+  margin: 30px;
+  font-weight: bold;
+  color: #ff5e5b;
+}
+.SprojectContainer,
+.OprojectContainer {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 350px;
+  margin: 25px;
+}
+.Subtitle {
+  font-size: 38px;
+  font-weight: bold;
+  //margin-top: 25px;
+  margin-bottom: 25px;
+  color: #4bc0d9;
+}
+.Left {
+  width:55%;
+}
+.SmallSubtitle {
+  font-size: 25px;
+  //color: rgb(31, 30, 30); //;
+  font-weight: bold;
+}
+.Bold {
+  color: #00cc66;
+}
+.Information {
+  //color: rgb(31, 30, 30);
+  font-weight: bold;
+}
+.Right{
+  width: 35%;
+}
+.Image1 {
+  width: 320px; //1694
+  //height: 250px; //2500
+  //border-radius: 10px;
+  //object-fit: cover;
+}
+.Right1 {
+  width:35%;
+}
+.Left1 {
+  width: 55%;
+}
+.Image2 {
+  width: 400px;
+}
+
 
 .FeaturesContainer {
   //border: solid blue;
@@ -61,16 +138,16 @@
 .FeaturesTitle {
   font-size: 51px;
   text-align: center;
-  margin: 25px;
+  margin: 30px;
   font-weight: bold;
+  color: #ff5e5b;
 }
-.FeaturesSubtitleOne,
-.FeaturesSubtitleTwo {
+.Subtitle1 {
   font-size: 38px;
   font-weight: bold;
   margin-top: 25px;
   margin-bottom: 25px;
-  color: #e8645c;
+  color: #4bc0d9;
 }
 .FeaturesContainerOne,
 .FeaturesContainerTwo {
@@ -78,10 +155,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  :hover{
-    background-color: rgb(56, 55, 55);
-    border: 2px solid #4e21c9;
-  }
 }
 .Box1,
 .Box2,
@@ -89,11 +162,7 @@
 .Box4 {
   width:22%;
   height: 220px;
-  //border: 2px solid #4e21c9;
-  border: 2px solid #ebebeb;
-  //border: 2px solid #857574;
-  //border: 2px solid#9479db;
-  //border: 2px solid #5d576f;
+  border: 2px solid #fff8f0; //#ebebeb
   border-radius: 5px;
   padding: 10px;
 }
@@ -104,8 +173,132 @@
 .BoxTitle {
   font-size: 25px;
   font-weight: bold;
-  color: $orangeAccent;
+  color: #00cc66;
 }
 .BoxDescription {
   font-size: 18px;
+}
+
+
+@media (max-width: 768px) {
+  .Image1 {
+    width: 240px;
+  }
+  .Image2 {
+    width: 300px;
+    padding-right: 20px;
+  }
+  .FeaturesContainerOne,
+  .FeaturesContainerTwo {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .Subtitle1 {
+    text-align: center;
+  }
+  .Box1,
+  .Box2,
+  .Box3,
+  .Box4 {
+    width:60%;
+    margin: 10px;
+    text-align: center;
+  }
+  .BoxTitle {
+    margin: 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .Title {
+    font-size: 51px;
+  }
+  .Button {
+    font-size: 18px;
+    height: 45px;
+    width: 100px;
+  }
+  .Image{
+    width: 320px; //244
+  }
+  .TitleDescription {
+    font-size: 38px;
+  }
+  .Subtitle {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+  .SmallSubtitle {
+    font-size: 20px;
+  }
+  .SprojectContainer,
+  .OprojectContainer {
+    flex-direction: column;
+    height: auto;
+  }
+  .Left {
+    width: 100%;
+    margin: 30px;
+  }
+  .Right {
+    width: 100%;
+  }
+  .Bold {
+    font-size: 16px;
+  }
+  .Information {
+    font-size: 16px;
+  }
+  .Image1 {
+    width: 240px;
+  }
+  .Left1 {
+    width: 100%;
+    order: 1;
+    margin: 30px;
+    text-align: left;
+  }
+  .Right1 {
+    width: 100%;
+    order: 2;
+  }
+  .Image2 {
+    width: 260px;
+    margin-right: 20px;
+  }
+  .FeaturesContainerOne,
+  .FeaturesContainerTwo {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .FeaturesTitle {
+    font-size: 38px;
+  }
+  .Subtitle1 {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 10px;
+  margin-bottom: 10px;
+  }
+  .Box1,
+  .Box2,
+  .Box3,
+  .Box4 {
+    width: 90%;
+    margin: 10px;
+    text-align: center;
+  }
+  .BoxTitle {
+    font-size: 20px;
+    margin: 0;
+  }
+  .BoxDescription {
+    font-size: 16px;
+  }
 }

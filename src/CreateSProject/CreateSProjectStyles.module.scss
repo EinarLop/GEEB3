@@ -1,6 +1,7 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
+  "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss",
+  "../GlobalStyles/NewInput.scss";
 
 * {
   margin: 0;
@@ -22,22 +23,24 @@
   height: auto;
   width: 100%;
 }
-.Title{
+.Title {
   color: white;
   text-align: center;
   font-family: $font;
   margin: 25px;
   font-size: 38px;
   font-weight: bold;
+  color: $pCardSp;
 }
 
 .Input {
-  @include Input;
+  @include NewInput;
 }
 
 .Label {
   @include Label;
-
+  color: $sCardSp;
+  width: 100%;
   &.Transparent {
     color: transparent;
   }
@@ -45,7 +48,10 @@
 
 .Button {
   @include Button;
+  color: $sCardSp;
   margin-left: 15px;
+  background-color: transparent;
+  border: 2px solid $sCardSp;
 }
 
 .Box1,
@@ -53,8 +59,9 @@
 .Box3,
 .Box4,
 .Box5 {
-  height: 300px;
+  height: auto;
   width: 50%;
+  margin-bottom: 50px;
 }
 
 .Box1 {
@@ -83,7 +90,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding-right: 20px;
+  //padding-right: 20px;
 }
 .TagButtonContainer {
   display: flex;
@@ -120,7 +127,7 @@
   }
 }
 img {
-  width:100px;
+  width: 100px;
 }
 
 .Box4 {
@@ -150,12 +157,15 @@ img {
 
 .CreateButtonBox {
   flex-direction: column;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
 }
 .CreateButton {
   @include Button;
   margin-bottom: 20px;
+  background-color: $pCardSp;
+  color: $pCardSpT;
+  width: 300px;
 }
 .ErrorMsg {
   color: #f74f39;
@@ -175,6 +185,7 @@ img {
 
   .Button {
     margin-left: 0;
+    margin-top: 15px;
   }
 
   .Label {
@@ -204,6 +215,7 @@ img {
   }
   .Button {
     margin-left: 0;
+    margin-top: 15px;
   }
   .Label {
     &.Transparent {

@@ -1,11 +1,26 @@
-@import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss";
-body {
-  height: 100%;
-  width: 100%;
-  background-color: $dark;
-}
+@import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss",
+  "../GlobalStyles/NewInput.scss", "../GlobalStyles/NewButton.scss";
+
 div {
   display: inline;
+}
+#Title {
+  color: $pLogin;
+  font-size: 56px;
+  text-align: left;
+}
+#Msg,
+#WhatIs {
+  font-size: 2.5rem;
+  //margin: 0;
+  margin-top: 15px;
+  text-align: left;
+  //text-decoration: underline;
+}
+
+#InputMsg {
+  color: white;
+  font-size: 3.5rem;
 }
 
 div .Information {
@@ -24,7 +39,7 @@ div .Information {
   }
 
   p {
-    margin: 0% 10%;
+    margin: 0% 5%;
     font-size: 30px;
     color: $clearGrey;
     text-align: justify;
@@ -32,17 +47,29 @@ div .Information {
 
   ul {
     list-style: none;
-    margin: 0% 10%;
+    margin: 25px 10%;
   }
   b {
     color: $clearGrey;
   }
   li {
     color: white;
+    font-size: 20px;
+    //list-style: disc;
+  }
+
+  li::before {
+    content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: $sLogin; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
   }
 }
 
 .LoginLink {
+  font-size: 2.5rem;
   &:hover {
     font-weight: 700;
     text-decoration: underline;
@@ -57,6 +84,7 @@ div .Information {
 }
 
 div .Inputs {
+  max-width: 700px;
   font-family: $font;
   padding-top: 5%;
   float: left;
@@ -71,6 +99,7 @@ div .Inputs {
     color: white;
     text-align: center;
     margin: 2%;
+    font-size: 38px;
   }
   input {
     font-size: 20px;
@@ -82,21 +111,26 @@ div .Inputs {
     padding-left: 10px;
   }
   .Input {
-    @include Input;
+    @include NewInput;
   }
 
   .Label {
     @include Label;
+    color: $pLogin;
     display: flex;
     width: 100%;
   }
 
   .InputLabelContainer {
     @include InputLabelContainer;
+    width: 100%;
   }
 
   .Button {
-    @include Button;
+    @include NewButton;
+    background-color: $sLogin;
+    color: $sLoginT;
+    margin-top: 25px;
   }
 
   button {
@@ -109,14 +143,14 @@ div .Inputs {
     border: none;
   }
   .Msg {
-    font-size: 25px;
-    margin: 0 0 25px 0;
+    font-size: 2rem;
+    margin: 50px 0 25px 0;
     color: white;
   }
   a {
-    text-decoration: none;
-    color: #e66d29;
-    font-size: 30px;
+    text-decoration: underline;
+    color: $pLogin;
+    font-size: 2.5rem;
     margin-bottom: 50px;
   }
   .Global {
@@ -126,14 +160,15 @@ div .Inputs {
 }
 
 @media (max-width: 1380px) {
-  div .Information {
-    p {
-      font-size: 20px;
-    }
-  }
 }
 
 @media (max-width: 600px) {
+  #Title {
+    text-align: center;
+  }
+  #InputMsg {
+    margin-top: 50px;
+  }
   div .Information {
     display: block;
     flex-direction: column;
@@ -144,7 +179,7 @@ div .Inputs {
   div .Inputs {
     width: 100%;
     margin: 0;
-
+    padding: 15px;
     input {
       margin: 3% 0%;
     }

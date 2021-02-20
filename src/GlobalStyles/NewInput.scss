@@ -1,0 +1,11 @@
+@import "../global.scss";
+
+@mixin NewInput {
+  width: 100%;
+  max-width: 700px;
+  min-width: 250px;
+  height: 45px;
+  background-color: $inputBg;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}

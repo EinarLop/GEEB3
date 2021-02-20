@@ -1,6 +1,7 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
-  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
+  "../GlobalStyles/NewInput.scss", "../GlobalStyles/Select.scss",
+  "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
+  "../GlobalStyles/StatusMsg.scss";
 
 * {
   margin: 0;
@@ -14,14 +15,15 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  //padding: 25px;
 }
 
 .Input {
-  @include Input;
+  @include NewInput;
 }
 
 .TagsInput {
-  @include Input;
+  @include NewInput;
   width: 300px;
 }
 
@@ -82,6 +84,7 @@
 .TitleStatusContainer {
   display: flex;
   flex-direction: column;
+  //width: 100%;
 }
 .TContainer {
   display: flex;

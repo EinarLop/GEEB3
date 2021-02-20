@@ -1,0 +1,109 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+* {
+  font-size: 18px;
+}
+
+.Global {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+
+.TitleDesContainer {
+  background-color: $dark;
+  padding: 25px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  width: 100%;
+  margin: 25px 0;
+}
+
+.Title {
+  color: #e66d29;
+  font-size: 38px;
+  font-weight: 601;
+  margin: 10px 0 0 0;
+  width: 100%;
+  //word-break: break-all;
+  text-align: center;
+}
+
+.Paragraph {
+  text-align: justify;
+  color: white;
+}
+
+.TitleSubtitle {
+  color: #e66d29;
+  font-size: 25px;
+  font-weight: 501;
+  margin: 0;
+}
+
+.Text {
+  color: white;
+}
+
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1024px;
+}
+
+.RequestData {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Applications{
+  background-color: $dark;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  display:flex;
+  flex-direction:column;
+  width: 100%;
+  margin: 25px 0;
+  padding: 25px;
+}
+.Application{
+  width: 100%;
+  margin: 10px;
+}
+
+
+@media (max-width: 1380px) {
+  .Wrapper {
+    align-items: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .Title {
+    font-size: 25px;
+  }
+
+  .TitleSubtitle {
+    font-size: 20px;
+  }
+
+  .Text {
+    font-size: 15px;
+  }
+
+  .Global {
+    font-size: 13px;
+  }
+}

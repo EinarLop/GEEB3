@@ -47,6 +47,45 @@
     }
   }
 
+  &.Test {
+    background-color: #ee0290;
+    border: 2px solid transparent;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+  &.Test2 {
+    background-color: #d602ee;
+    border: 2px solid transparent;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+
+  &.Test3 {
+    background-color: #90ee02;
+    border: 2px solid transparent;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+
+  &.Test4 {
+    background-color: #ff9e22;
+    border: 2px solid transparent;
+
+    &:hover {
+      background-color: #fff;
+      color: $tagPurple;
+    }
+  }
+
   &.Want {
     background-color: #03cea4;
     border: 2px solid #03cea4;

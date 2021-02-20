@@ -15,29 +15,30 @@ function SProjectFeed() {
       .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" https://geeb.herokuapp.com/sprojects
       .then((response) => setProjects(response.data));
   }, []);
-  
+
   return (
     <div className={styles.Global}>
       {projects.map((project, index) => (
         //<Sproject project={project}/>
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
-        <TabList className={styles.TabsList}>
-          <Tab className={styles.TabsUnselected}>Overview</Tab>
-          <Tab className={styles.TabsUnselected}>Detail</Tab>
-          <Tab className={styles.TabsUnselected}>Tags</Tab>
-        </TabList>
-        <TabPanel>
-          <TagsLinksTab project={project}/>
-        </TabPanel>
-        <TabPanel>
-          <InfoTab project={project}/>
-        </TabPanel>
-        <TabPanel>
-          <ImagesTab project={project}/>
-        </TabPanel>
-      </Tabs>
+
+          <TabList className={styles.TabsList}>
+            <Tab className={styles.TabsUnselected}>Overview</Tab>
+            <Tab className={styles.TabsUnselected}>Tags & Links</Tab>
+            <Tab className={styles.TabsUnselected}>Images</Tab>
+          </TabList>
+          <TabPanel>
+            <InfoTab project={project} />
+          </TabPanel>
+          <TabPanel>
+            <TagsLinksTab project={project} />
+          </TabPanel>
+          <TabPanel>
+            <ImagesTab project={project} />
+          </TabPanel>
+        </Tabs>
+
       ))}
-      
     </div>
   );
 }

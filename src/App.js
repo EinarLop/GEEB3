@@ -16,6 +16,7 @@ import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
 import ImageUploader from "./Components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
+import MyApplication from "./Components/MyApplications.js";
 //350x34
 //404x44
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/upload" component={ImageUploader}/>
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
+          <Route path="/myapplication/:id" component={MyApplication} />
         </Router>
       }
     </div>
