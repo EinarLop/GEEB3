@@ -12,6 +12,13 @@
   //border: 1px solid lavender;
 }
 
+.EditBtnContainer {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .NameContainer {
   width: 100%;
   height: 100px;
@@ -176,6 +183,10 @@
 .Tag {
   @include Tag;
   margin: 10px 15px;
+}
+
+.Button {
+  @include Button;
 }
 
 @media (max-width: 767px) {

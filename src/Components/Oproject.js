@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./OprojectStyles.module.scss";
-import axios from "axios";
 
 /*Component for an Oproject Card*/
 
