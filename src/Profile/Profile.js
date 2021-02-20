@@ -3,7 +3,7 @@ import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
 import ImageTwo from "./Images/ImageTwo.svg";
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 function Profile(props) {
   const [user, setUser] = useState({
@@ -18,31 +18,39 @@ function Profile(props) {
     // semester:
     // major:
   });
+  const [isOwner, setIsOwner] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     console.log("Getting user with id:", props.match.params.id);
-    axios
+    if (props.match.params.id !== "null") {
+      axios
       .get("http://localhost:3010/users/" + props.match.params.id, {
         headers: {
           // Send the JWT along in the request header
           "auth-token": window.localStorage.getItem("auth-token"),
         },
-      }) ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      }) //  https://geeb.herokuapp.com/oprojects
       .then((response) => {
         setUser(response.data.user);
-        console.log(response.data);
-        console.log(props.match.params.id);
+        setIsOwner(response.data.isOwner);
+
       }).catch(err => {
         console.log("Error in Profile:", err);
       });
+    } else {
+      console.log("Warning: /:id is null");
+      setTimeout(()=>{setRedirect(true)}, 1000);
+    }
   }, []);
-    /* If the user is not logged in, visitor will be undefined. Redirect to Login?*/
 
   return (
+    redirect ? <Redirect to="/login"/> :
     <div className={styles.Wrapper}>
+      {isOwner ?       
       <div className={styles.EditBtnContainer}>
         <Link to="/editprofile" className={styles.Button}>Edit Profile</Link>
-      </div>
+      </div> : <></>}
       <div className={styles.NameContainer}>
         <p className={styles.Name}>{user.fullname}</p>
         <p className={styles.Username}>@{user.username}</p>

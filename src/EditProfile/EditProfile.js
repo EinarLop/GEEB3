@@ -6,20 +6,21 @@ import { validate } from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 
 export default function EditProfile() {
+  const [userId, setUserId] = useState(null);
   const [redirect, setRedirect] = useState(false);   // if user is not owner or user cannot edit, we redirect
   const [learning, setLearning] = useState([]);
   const [mastered, setMastered] = useState([]);
   const [want, setWant] = useState([]);
   const [links, setLinks] = useState([]);
-  const [major, setMajor] = useState(""); // placeholder ComputerSci
-  const [college, setCollege] = useState(""); // placeholder ITESM
-  const [semester, setSemester] = useState("#");
   const [status, setStatus] = useState();   // for validation status msg
   const [form, setForm] = useState({
     bio: "",
     name: "",
     lastname: "",
     email: "",
+    major: "test",
+    college:"",
+    semester: 0,
     tag_master: "",
     tag_learn: "",
     tag_want: "",
@@ -49,10 +50,11 @@ export default function EditProfile() {
     "LA SALLE",
   ]);
 
-  useEffect(() => {
-    // GET THE LOGGED IN USER'S INFO
+  useEffect(() => {   
+    // get information of logged in user
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
+    setUserId(geebId);
     if (geebId) {
       console.log("Getting user with id:", geebId);
       axios
@@ -89,7 +91,7 @@ export default function EditProfile() {
 
     } else {
       console.log("No user logged in");
-      setRedirect(false);
+      setRedirect(true);
     }
   }, [])    // empty array so it is only called on mount
 
@@ -132,7 +134,25 @@ export default function EditProfile() {
   };
 
   // onSubmit ********************************************************
-  // do a POST request?
+  const onSubmit = (e) => {
+    // Validation
+    console.log("Submitting:");
+    const User = {
+      fullname: form.name + " " + form.lastname,
+      email: form.email,
+      bio: form.bio,
+      college: form.college,
+      major: form.major,
+      semester: form.semester,
+      links,
+      mastered,
+      learning,
+      want,
+    }
+    console.dir(User);
+    console.log("With id:",userId);
+    /*axios.put(`/update/${userId}`)*/
+  }
 
   return (
     redirect ? <Redirect to="/login" /> :
@@ -177,8 +197,16 @@ export default function EditProfile() {
         <label className={styles.Label}>Major:</label>
         <input
           className={styles.Input}
-          type=""
           placeholder=" e.g. Computer Science"
+          value={form.major}
+        />
+        <label className={styles.Label}>Semester:</label>
+        <input
+          className={styles.Input}
+          type="number"
+          min="1"
+          max="14"
+          value={form.semester}
         />
       </div>
       <div className={styles.LinksWrapper}>
@@ -287,6 +315,12 @@ export default function EditProfile() {
             </div>
           ))}
         </div>
+        <input
+          className={`${styles.Button} ${styles.Large}`}
+          type="button"
+          value="Update"
+          onClick={onSubmit}
+        />
       </div>
     </div>
   );
