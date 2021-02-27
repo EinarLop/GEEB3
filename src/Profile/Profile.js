@@ -25,7 +25,7 @@ function Profile(props) {
     console.log("Getting user with id:", props.match.params.id);
     if (props.match.params.id !== "null") {
       axios
-      .get("http://localhost:3010/users/" + props.match.params.id, {
+      .get("https://geeb.herokuapp.com/users/" + props.match.params.id, {
         headers: {
           // Send the JWT along in the request header
           "auth-token": window.localStorage.getItem("auth-token"),

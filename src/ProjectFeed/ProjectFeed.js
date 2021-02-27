@@ -10,17 +10,17 @@ function ProjectFeed() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      .get("https://geeb.herokuapp.com/oprojects") ///"https://geeb.herokuapp.com/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => setOprojects(response.data));
   }, []);
   const [isLogged, setIsLogged] = useState(true);
 
   const myProjects = () => {
     axios
-      .get("http://localhost:3010/oprojects/mine" ,{
+      .get("https://geeb.herokuapp.com/oprojects/mine" ,{
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
-      }}) //http://localhost:3010/oprojects" https://geeb.herokuapp.com/oprojects
+      }}) //https://geeb.herokuapp.com/oprojects" https://geeb.herokuapp.com/oprojects
       .then((response) => {
         
         setOprojects(response.data) 

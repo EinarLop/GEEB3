@@ -26,7 +26,7 @@ export default function ProjectMoreInfo(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects/" + props.match.params.id, {
+      .get("https://geeb.herokuapp.com/oprojects/" + props.match.params.id, {
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
         },
@@ -36,7 +36,7 @@ export default function ProjectMoreInfo(props) {
         setProject(response.data.project);
       })
     axios
-      .get("http://localhost:3010/applicants/project/" + props.match.params.id)
+      .get("https://geeb.herokuapp.com/applicants/project/" + props.match.params.id)
       .then((response) => {
         setApplications(response.data);
         hasARequest(response.data);
@@ -60,7 +60,7 @@ export default function ProjectMoreInfo(props) {
       };
       console.log(Array.isArray(project.highlights));
       axios
-        .post("http://localhost:3010/applicants/create", applicant, {
+        .post("https://geeb.herokuapp.com/applicants/create", applicant, {
           headers: {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
@@ -158,7 +158,7 @@ export default function ProjectMoreInfo(props) {
                         value="Reject"
                         name="Unaccepted"
                         onClick={()=>axios
-                          .patch("http://localhost:3010/applicants/update/status/"+ applicant._id,{
+                          .patch("https://geeb.herokuapp.com/applicants/update/status/"+ applicant._id,{
                             status:"Unaccepted"
                           })
                           .then((res) => location.reload())}
@@ -169,7 +169,7 @@ export default function ProjectMoreInfo(props) {
                         value="Accept"
                         name="Accepted"
                         onClick={()=>axios
-                          .patch("http://localhost:3010/applicants/update/status/"+ applicant._id,{
+                          .patch("https://geeb.herokuapp.com/applicants/update/status/"+ applicant._id,{
                             status:"Accepted"
                           })
                           .then((res) => location.reload())}

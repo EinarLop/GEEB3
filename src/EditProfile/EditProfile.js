@@ -58,7 +58,7 @@ export default function EditProfile() {
     if (geebId) {
       console.log("Getting user with id:", geebId);
       axios
-        .get("http://localhost:3010/users/" + geebId, {
+        .get("https://geeb.herokuapp.com/users/" + geebId, {
           headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
