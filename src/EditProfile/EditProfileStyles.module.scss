@@ -132,6 +132,14 @@
   flex-wrap: wrap;
 }
 
+.SuccessMsg {
+  color: $mediumSpringGreen;
+  margin-top: 10px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 767px) {
   .Wrapper {
     justify-content: center;
