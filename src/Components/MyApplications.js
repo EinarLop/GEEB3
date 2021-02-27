@@ -18,46 +18,52 @@ export default function MyApplication(props) {
         },
       })
         .then((response) => {
-          setApplications(response.data);
-          checkProfile(response.data);
+          setApplications(response.data.applications);
+          setIsOwner(response.data.isOwner);
         });
     }, []);
-    
-    const checkProfile=(appl)=>{
-      if(appl[0].userid===props.match.params.id){
-        setIsOwner(true);
-      }
-    }
+
   
     return (
       <div className={styles.Global}>
         <div className={styles.Wrapper}>
-          {!isOwner? (
-            <div className={styles.Application}> 
-              <p className={styles.Title}>Applications</p>
-              {applications.map((applicant)=>
-                applicant.status === "Accepted" &&
-                <div className={styles.Applications}>
-                  <Link to= {`/oproject/${applicant.oprojectid}`} className={styles.TitleSubtitle}>{applicant.oprojectid}</Link>
-                  <p className={styles.Text}>{applicant.motive}</p>
-                  <p className={styles.Text}>Status: {applicant.status}</p>
-                  <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>
-                </div>  
-              )}
-            </div>
+          {/*<p>Owner:{isOwner.toString()}</p>*/}
+          {applications!=undefined?(
+            !isOwner? (
+              <div className={styles.Application}> 
+                <p className={styles.Title}>Applications</p>
+                {applications.map((applicant)=>
+                  applicant.status === "Accepted" &&
+                  <div className={styles.Applications}>
+                    <p>{applicant.oprojectid.toString()}</p>
+                    <Link to= {`/oproject/${applicant.oprojectid._id}`} className={styles.TitleSubtitle}>{applicant.oprojectid.title}</Link>
+                    <p className={styles.Text}>{applicant.motive}</p>
+                    <p className={styles.Text}>Status: {applicant.status}</p>
+                    <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>
+                  </div>  
+                )}
+              </div>
+            ):(
+              (applications.length!=0)?(
+                <div className={styles.Application}> 
+                  <p className={styles.Title}>Applications</p>
+                  {applications.map((applicant)=>
+                    <div className={styles.Applications}>
+                      <Link to= {`/oproject/${applicant.oprojectid._id}`} className={styles.TitleSubtitle}>{applicant.oprojectid.title}</Link>
+                      <p className={styles.Text}>{applicant.motive}</p>
+                      <p className={styles.Text}>Status: {applicant.status}</p>
+                      <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>
+                    </div>  
+                  )}
+                </div>
+              ):(
+                <p className={styles.Title}>You haven´t apply to any project</p>
+              ) 
+            )
           ):(
-            <div className={styles.Application}> 
-              <p className={styles.Title}>Applications</p>
-              {applications.map((applicant)=>
-                <div className={styles.Applications}>
-                  <Link to= {`/oproject/${applicant.oprojectid}`} className={styles.TitleSubtitle}>{applicant.oprojectid}</Link>
-                  <p className={styles.Text}>{applicant.motive}</p>
-                  <p className={styles.Text}>Status: {applicant.status}</p>
-                  <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>
-                </div>  
-              )}
-            </div>
+              <div className={styles.Title}><p>You don´t have applications</p></div>
           )}
+          
         </div>
       </div>
     );

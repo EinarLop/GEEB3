@@ -33,7 +33,7 @@ export const validateSkill = (skills,currentSkill) => {
             errorSkill = "You can only use 30 chars per Skill"
         }
     } else {
-    errorSkill = "Skill can not be empty"
+    errorSkill = "Skill can't be empty"
     }
     return errorSkill
 };
@@ -46,10 +46,10 @@ export const validateHighlight = (highlights,currentHighlight) => {
             if (highlights.length < limits.maxProfiles) {
                 errorHighlight=""
             } else {
-                errorHighlight = "You can not have more than 5 highlights"
+                errorHighlight = "You can't have more than 5 highlights"
             }
         } else {
-            errorHighlight = "Highlight can not have more than 60 char"
+            errorHighlight = "Highlight can't have more than 60 char"
         }
     } else {
         errorHighlight = "Highlight must be at least 5 characters long"
@@ -69,7 +69,7 @@ export const validateProfile = (profiles, currentProfile) => {
                 errorProfile = "You should add at least 1 profile"
             }
         } else {
-            errorProfile = "Profiles can not have more than 60 char"
+            errorProfile = "Profiles can't have more than 60 char"
         }
     } else {
         errorProfile = "Profiles must be at least 5 characters long"

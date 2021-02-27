@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styles from "./EditProfileStyles.module.scss";
 import { Link, Redirect } from "react-router-dom";
-import { validate } from "../Validation/EditProfileValidation";
+import {validateTag} from '../Validation/GeneralValidation';
+import { validateProfile, validateTags } from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 
 export default function EditProfile() {
@@ -29,6 +30,8 @@ export default function EditProfile() {
   });
 
   const [message, setMessage] = useState({
+    errorName: "",
+    errorEmail:"",
     errorBio: "",
     errorLinks: "",
     errorMajor: "",
@@ -150,8 +153,10 @@ export default function EditProfile() {
       want,
     }
     console.dir(User);
-    console.log("With id:",userId);
+    const validation = validateProfile(User);
+    console.dir(validation);
     /*axios.put(`/update/${userId}`)*/
+
   }
 
   return (
@@ -160,18 +165,19 @@ export default function EditProfile() {
       <div className={styles.NamesWrapper}>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Name</label>
-          <input className={styles.Input} type="text" value={form.name} onChange={handleOnChange}/>
+          <input className={styles.Input} name="name" type="text" value={form.name} onChange={handleOnChange}/>
         </div>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Last name</label>
-          <input className={styles.Input} type="text" value={form.lastname} onChange={handleOnChange}/>
+          <input className={styles.Input} name="lastname" type="text" value={form.lastname} onChange={handleOnChange}/>
         </div>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>My email</label>
-          <input className={styles.Input} type="email" value={form.email} onChange={handleOnChange}/>
+          <input className={styles.Input} name="email" type="email" value={form.email} onChange={handleOnChange}/>
+          <p className={styles.ErrorMsg}>{message.errorEmail}</p>
         </div>
-
       </div>
+      <p className={styles.ErrorMsg}>{message.errorName}</p>
       <div className={styles.AboutWrapper}>
         <p className={styles.Titles}>About me</p>
         <textarea
@@ -183,9 +189,6 @@ export default function EditProfile() {
           value={form.bio}
         />
       </div>
-      {/*      <div className={styles.ImgOneContainer}>
-        <img className={styles.ImgOne} src={pic1} />
-      </div> */}
 
       <div className={styles.EducationWrapper}>
         <label className={styles.Label}>College:</label>
@@ -198,7 +201,7 @@ export default function EditProfile() {
         <input
           className={styles.Input}
           name="major"
-          placeholder=" e.g. Computer Science"
+          placeholder=" e.g. Psychology"
           value={form.major}
           onChange={handleOnChange}
         />

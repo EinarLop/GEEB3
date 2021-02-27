@@ -52,6 +52,7 @@ export default function Header() {
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
+
                 <Link to="/oprojects" className={styles.Links}>
                   Team Projects
                 </Link>
@@ -70,6 +71,7 @@ export default function Header() {
                   My profile
                 </Link>
 
+
                 {/* <a className={styles.Links} href="/login">
                   Logout
                 </a> */}
@@ -80,6 +82,7 @@ export default function Header() {
       ) : (
         <div className={styles.ConditionalContainerNav}>
           <div className={styles.NavContainer}>
+
             <Link to="/oprojects" className={styles.Links}>
               Team Projects
             </Link>
@@ -93,8 +96,8 @@ export default function Header() {
               Add to Portfolio
             </Link>
             <a href={`/profile/${visitor}`}>
+
               <IoPersonCircleOutline className={styles.NavLinkIcon} />
-            </a>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
