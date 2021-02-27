@@ -2,12 +2,6 @@
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .Wrapper {
   display: flex;
   font-family: $font;
@@ -60,20 +54,20 @@
   font-size: 18px;
 }
 
-.ImagesWrapper{
-width: 100%;
+.ImagesWrapper {
+  width: 100%;
 }
 
-.Images{
-margin:20px;
+.Images {
+  margin: 20px;
 }
-
 
 @media (max-width: 767px) {
   .Wrapper {
     height: auto;
   }
-  .InfoContainer, .TagsContainer {
+  .InfoContainer,
+  .TagsContainer {
     width: 100%;
   }
 
@@ -104,4 +98,3 @@ margin:20px;
     margin-top: 25px;
   }
 }
-

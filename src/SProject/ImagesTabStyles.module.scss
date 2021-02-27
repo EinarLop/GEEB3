@@ -2,12 +2,6 @@
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
 
-* {
-  margin: 0;
-  box-sizing: border-box;
-  padding: 0;
-}
-
 .Wrapper {
   font-family: $font;
   max-width: 1024px;

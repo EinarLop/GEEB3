@@ -2,12 +2,6 @@
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
 
-* {
-  margin: 0;
-  box-sizing: border-box;
-  padding: 0;
-}
-
 .Input {
   @include Input;
 }
@@ -45,7 +39,7 @@
 }
 .TabsUnselected {
   width: auto;
-  height: 60px;
+  height: 75px;
   font-size: 20px;
   margin: 0px;
   display: flex;

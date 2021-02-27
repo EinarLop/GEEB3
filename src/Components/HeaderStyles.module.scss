@@ -5,7 +5,7 @@
   flex-direction: row;
   height: 120px;
   color: #fff;
-  background-color: $newHeader;
+  background-color: $box;
   margin: 0px;
   justify-content: space-between;
 
@@ -85,7 +85,7 @@
   }
 
   &.Title {
-    color: $orangeAccent;
+    color: $primary;
     font-size: 38px;
     font-weight: 500;
   }
@@ -94,7 +94,7 @@
   position: absolute;
   width: 100%;
   height: auto;
-  background-color: $dark;
+  background-color: $box;
   display: flex;
   flex-direction: column;
 

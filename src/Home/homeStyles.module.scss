@@ -1,12 +1,5 @@
 @import "../global", "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;  
-}
-
-
 .Wrapper {
   padding: 50px;
   //width: 100%;
@@ -18,7 +11,6 @@
   flex-wrap: wrap;
   margin: 0 auto;
 }
-
 
 .InfoContainer {
   //border: solid red;
@@ -50,23 +42,22 @@
   width: 150px;
   font-size: 25px;
 }
-.Button:hover{
+.Button:hover {
   background-color: transparent;
   color: #ff5e5b;
   font-weight: bold;
   border: 2px solid #ff5e5b;
 }
-.InfoImage{
+.InfoImage {
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   //border: solid pink;
 }
-.Image{
+.Image {
   width: 100%;
 }
-
 
 .DescriptionContainer {
   width: 100%;
@@ -81,7 +72,7 @@
 }
 .SprojectContainer,
 .OprojectContainer {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -97,7 +88,7 @@
   color: #4bc0d9;
 }
 .Left {
-  width:55%;
+  width: 55%;
 }
 .SmallSubtitle {
   font-size: 25px;
@@ -111,7 +102,7 @@
   //color: rgb(31, 30, 30);
   font-weight: bold;
 }
-.Right{
+.Right {
   width: 35%;
 }
 .Image1 {
@@ -121,7 +112,7 @@
   //object-fit: cover;
 }
 .Right1 {
-  width:35%;
+  width: 35%;
 }
 .Left1 {
   width: 55%;
@@ -129,7 +120,6 @@
 .Image2 {
   width: 400px;
 }
-
 
 .FeaturesContainer {
   //border: solid blue;
@@ -151,7 +141,7 @@
 }
 .FeaturesContainerOne,
 .FeaturesContainerTwo {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -160,7 +150,7 @@
 .Box2,
 .Box3,
 .Box4 {
-  width:22%;
+  width: 22%;
   height: 220px;
   border: 2px solid #fff8f0; //#ebebeb
   border-radius: 5px;
@@ -179,7 +169,6 @@
   font-size: 18px;
 }
 
-
 @media (max-width: 768px) {
   .Image1 {
     width: 240px;
@@ -190,7 +179,7 @@
   }
   .FeaturesContainerOne,
   .FeaturesContainerTwo {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,7 +192,7 @@
   .Box2,
   .Box3,
   .Box4 {
-    width:60%;
+    width: 60%;
     margin: 10px;
     text-align: center;
   }
@@ -221,7 +210,7 @@
     height: 45px;
     width: 100px;
   }
-  .Image{
+  .Image {
     width: 320px; //244
   }
   .TitleDescription {
@@ -271,7 +260,7 @@
   }
   .FeaturesContainerOne,
   .FeaturesContainerTwo {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -284,7 +273,7 @@
     text-align: center;
     font-size: 25px;
     margin-top: 10px;
-  margin-bottom: 10px;
+    margin-bottom: 10px;
   }
   .Box1,
   .Box2,

@@ -7,7 +7,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 .Wrapper {
   padding: 50px;
   //width: 100%;
@@ -89,7 +88,7 @@
 .Button {
   @include NewButton;
 
-  background-color: $sLogin;
+  background-color: $pCardOp;
   color: $sLoginT;
   margin-top: 25px;
 }
