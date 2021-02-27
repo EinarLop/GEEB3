@@ -3,13 +3,6 @@
   "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss",
   "../GlobalStyles/NewInput.scss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 18px;
-}
-
 .Wrapper {
   display: flex;
   font-family: $font;

@@ -1,9 +1,6 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
-* {
-  font-size: 18px;
-}
 
 .Global {
   display: flex;
@@ -140,8 +137,6 @@
   // border: 1px solid #e66d29;
 }
 
-
-
 .Button {
   @include Button;
   &.Reject {
@@ -196,7 +191,7 @@
   display: flex;
   justify-content: flex-end;
 }
-.Applications{
+.Applications {
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
@@ -204,11 +199,11 @@
   margin: 25px 0;
   padding: 25px;
 }
-.Application{
+.Application {
   width: 100%;
   margin: 10px;
 }
-.ButtonWrapper{
+.ButtonWrapper {
   width: 100%;
   display: flex;
   margin-top: 10px;
