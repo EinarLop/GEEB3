@@ -18,7 +18,7 @@ export default function EditProfile() {
     name: "",
     lastname: "",
     email: "",
-    major: "test",
+    major: "",
     college:"",
     semester: 1,
     tag_master: "",
@@ -80,13 +80,16 @@ export default function EditProfile() {
             name: fullname[0],
             lastname: fullname[1],
             bio: User.bio,
-            email: User.email
+            email: User.email,
+            major: User.major,
+            college: User.college,
+            semester: User.semester,
           })
           setMastered(User.mastered);
           setLearning(User.learning);
           setWant(User.want);
           setLinks(User.links);
-          console.log("Setting form... Form set.")
+          console.log("Setting form...");
         }).catch(err => {
           console.log("Error in Profile:", err);
       });
@@ -155,6 +158,8 @@ export default function EditProfile() {
   //onChange ***************************************************************************************************************************
   const handleOnChange = (e) => {
     // generic handler for our inputs
+    console.dir(form);
+    setStatus("");
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -164,7 +169,6 @@ export default function EditProfile() {
 
   // onSubmit ********************************************************
   const onSubmit = (e) => {
-    // Validation
     console.log("Submitting:");
     const User = {
       fullname: form.name + " " + form.lastname,
@@ -183,11 +187,23 @@ export default function EditProfile() {
     console.dir(validation);
     let msg;
     if (validation.ok) {
-
       msg = <p className={styles.SuccessMsg}>Updating Profile...</p>
-      console.log("Submitting post update request...");
-      /*axios.put(`/update/${userId}`)*/
-    } else {
+
+      console.log("Submitting post update request for", userId);
+      axios
+        .put(`http://localhost:3010/users/update/${userId}`, User, {
+          headers: {
+          "auth-token": window.localStorage.getItem("auth-token"),
+          },
+      })
+      .then(result => {
+        console.dir(result);
+        msg = <p className={styles.SuccessMsg}>Updated Successfully!</p>
+        setStatus(msg);
+      })
+      .catch(err => {console.log("Error updating:", err)});
+    } 
+    else {
       msg = <p className={styles.ErrorMsg}>Please check your inputs!</p>
     }
     setMessage(validation);
@@ -227,9 +243,9 @@ export default function EditProfile() {
 
       <div className={styles.EducationWrapper}>
         <label className={styles.Label}>College:</label>
-        <select className={styles.Input}>
+        <select className={styles.Input} name="college" value={form.college} onChange={handleOnChange}>
           {colleges.map((name, index) => {
-            return <option key={index} value={index}>{name}</option>; // we can use the index as logical key for db collection
+            return <option key={index} value={colleges[index]}>{name}</option>; // use the index as logical key for db collection
           })}
         </select>
         <label className={styles.Label}>Major:</label>
@@ -256,7 +272,7 @@ export default function EditProfile() {
         <label className={styles.Label}>Links:</label>
 
         <input
-          placeholder=" Links to my other sites..."
+          placeholder=" Link to my blog..."
           name="currentLink"
           autoComplete="off"
           className={styles.Input}
