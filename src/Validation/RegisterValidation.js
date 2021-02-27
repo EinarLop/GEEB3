@@ -95,7 +95,7 @@ const validateUsername = (userName) => {
 
 const validateEmail = (email) => {
   if (email === "") {
-    errorEmail = "Email can not be empty"
+    errorEmail = "Email can't be empty"
   }
   if (!validEmail(email)) {
     errorEmail = "Not a valid email"

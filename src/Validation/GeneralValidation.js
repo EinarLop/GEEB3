@@ -1,3 +1,5 @@
+/* GENERAL PROJECT VALIDATION: Title, Tag input, Description, Tag array*/
+
 var errorTag=""
 var errorTitle =""
 var errorDescription=""
@@ -37,7 +39,7 @@ export const validateTitle = (title) => {
       errorTitle = "Title must be at least 5 characters long"
     }
     if (title.length > limits.titleMaxChar) {
-      errorTitle = "Title can not have more than 50 char"
+      errorTitle = "Title can't have more than 50 char"
     }
     if (title.trim() == "") {
       errorTitle="Title cannot be empty."
