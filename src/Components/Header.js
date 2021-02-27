@@ -76,7 +76,9 @@ export default function Header() {
             <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
             <Link to="/create" className={styles.Links}>Create a Project</Link>
             <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+
             <Link to={`/myapplication/${visitor}`} className={styles.Links} onClick={handleClick}>Application</Link>
+
 
               <IoPersonCircleOutline className={styles.NavLinkIcon} />
             {/* <CgProfile className={styles.Profile} href="/" /> */}
