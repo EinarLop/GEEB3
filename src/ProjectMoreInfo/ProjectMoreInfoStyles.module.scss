@@ -185,15 +185,13 @@
   justify-content: flex-end;
 }
 
-
-.Applications{
+.Applications {
   width: 100%;
   margin: 10px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 }
-.Application{
-
+.Application {
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
@@ -203,97 +201,96 @@
 }
 
 .ButtonWrapper {
-
-.ButtonWrapper{
-
-  width: 100%;
-  display: flex;
-  margin-top: 10px;
-}
-
-@media (max-width: 1380px) {
-  .Wrapper {
-    align-items: center;
-  }
-  .Column0 {
-    //width: 45%;
-  }
-
-  .Column1 {
-    //width: 45%;
-  }
-
-  .ReasonForRequest {
+  .ButtonWrapper {
     width: 100%;
-  }
-
-  .RequestData {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
-
-.ColumnDivision {
-  //width: 100%;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-@media (max-width: 720px) {
-  .Title {
-    font-size: 25px;
+    margin-top: 10px;
   }
 
-  .TitleSubtitle {
-    font-size: 20px;
+  @media (max-width: 1380px) {
+    .Wrapper {
+      align-items: center;
+    }
+    .Column0 {
+      //width: 45%;
+    }
+
+    .Column1 {
+      //width: 45%;
+    }
+
+    .ReasonForRequest {
+      width: 100%;
+    }
+
+    .RequestData {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
-  .Paragraph {
-    font-size: 15px;
-  }
-  .Text {
-    font-size: 15px;
-  }
-
-  .ApplicationMsg {
-  }
-  .ReasonForRequest {
-    width: 100%;
-  }
-  .RequestData {
-    // width: auto;
-    display: flex;
-    flex-direction: column;
-    width: auto;
-  }
-  .Button {
-    font-size: 22px;
-  }
-  .Data {
-    // width: 40%;
-    // height: 20px;
-    // font-size: 10px;
-  }
-  .Global {
-    font-size: 13px;
-  }
-  .Wrapper {
-    // width: 90vw;
-  }
-  .Tags {
-    flex-direction: column;
-  }
   .ColumnDivision {
+    //width: 100%;
+    display: flex;
     flex-direction: column;
+    width: 100%;
     align-items: center;
   }
-  .Column0 {
-    width: 100%;
-  }
+  @media (max-width: 720px) {
+    .Title {
+      font-size: 25px;
+    }
 
-  .Column1 {
-    width: 100%;
+    .TitleSubtitle {
+      font-size: 20px;
+    }
+
+    .Paragraph {
+      font-size: 15px;
+    }
+    .Text {
+      font-size: 15px;
+    }
+
+    .ApplicationMsg {
+    }
+    .ReasonForRequest {
+      width: 100%;
+    }
+    .RequestData {
+      // width: auto;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+    }
+    .Button {
+      font-size: 22px;
+    }
+    .Data {
+      // width: 40%;
+      // height: 20px;
+      // font-size: 10px;
+    }
+    .Global {
+      font-size: 13px;
+    }
+    .Wrapper {
+      // width: 90vw;
+    }
+    .Tags {
+      flex-direction: column;
+    }
+    .ColumnDivision {
+      flex-direction: column;
+      align-items: center;
+    }
+    .Column0 {
+      width: 100%;
+    }
+
+    .Column1 {
+      width: 100%;
+    }
   }
 }
