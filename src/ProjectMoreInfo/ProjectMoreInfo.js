@@ -65,12 +65,12 @@ export default function ProjectMoreInfo(props) {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) => console.log("You Apply to this project!"));
+        .then((res) => setErrorInput("You Apply to this project!"));
     }
   };
   const hasARequest = (applications) =>{
     for(var a in applications){
-      if (applications[a].userid == localStorage.getItem("geebId")){
+      if (applications[a].userid._id == localStorage.getItem("geebId")){
         setAlreadySend(true);
       }
     }
@@ -80,7 +80,7 @@ export default function ProjectMoreInfo(props) {
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
         <div className={styles.TitleDesContainer}>
-          <h1>Is Owner: {isOwner.toString()}</h1>
+          {/*<h1>Is Owner: {isOwner.toString()}</h1>*/}
           <p className={styles.Title}>{project.title}</p>
           <p className={styles.Paragraph}>{project.description}</p>
         </div>
@@ -88,8 +88,8 @@ export default function ProjectMoreInfo(props) {
         <div className={styles.Highlights}>
           <p className={styles.TitleSubtitle}>Highlights</p>
           <ul className={styles.HList}>
-            {project.highlights.map((highlight) => (
-              <li className={styles.Text}>{highlight}</li>
+            {project.highlights.map((highlight,index) => (
+              <li className={styles.Text} key={index}>{highlight }</li>
             ))}
           </ul>
         </div>
@@ -97,21 +97,21 @@ export default function ProjectMoreInfo(props) {
         <div className={styles.ColumnDivision}>
           <div className={styles.Column0}>
             <h3 className={styles.TitleSubtitle}>Profile we are looking for</h3>
-            {project.desirables.map((t) => (
-              <p className={styles.Text}>{t}</p>
+            {project.desirables.map((t,index) => (
+              <p className={styles.Text} key={index}>{t}</p>
             ))}
           </div>
           <div className={styles.Column1}>
             <h3 className={styles.TitleSubtitle}>Tags</h3>
             <div className={styles.Knows}>
-              {project.tags.map((tag) => (
-                <div className={`${styles.Tag} ${styles.TopicTag}`}>{tag}</div>
+              {project.tags.map((tag,index) => (
+                <div key={index} className={`${styles.Tag} ${styles.TopicTag}`}>{tag}</div>
               ))}
             </div>
             <h3 className={styles.TitleSubtitle}>Skills </h3>
             <div className={styles.Needs}>
-              {project.skills.map((skill) => (
-                <div className={`${styles.Tag} ${styles.SkillTag}`}>
+              {project.skills.map((skill, index) => (
+                <div className={`${styles.Tag} ${styles.SkillTag}`} key={index}>
                   {skill}
                 </div>
               ))}
@@ -119,9 +119,10 @@ export default function ProjectMoreInfo(props) {
           </div>
         </div>
         {!isOwner? (
-          !alreadySend && <div className={styles.userInputs}>
+          project.status=="Open"?
+          (!alreadySend && <div className={styles.userInputs}>
             <p className={styles.TitleSubtitle}>Send a request</p>
-            <p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>
+            {/*<p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>*/}
             <div className={styles.ApplicationMsg}>
               <div className={styles.InputLabelContainer}>
                 <label className={styles.Label}>Description</label>
@@ -139,14 +140,16 @@ export default function ProjectMoreInfo(props) {
               value="Send Request"
               onClick={handleOnSubmit}
             />
-          </div>
+          </div>):
+          (<p className={styles.Title}>This project is closed</p>)
         ):(
           <div className={styles.Applications}> 
-            <p className={styles.TitleSubtitle}>Applications</p>
+            <p className={styles.Title}>Applications</p>
             {applications.map((applicant)=>
               (applicant.status !== "Unaccepted") && 
-                <div className={styles.Application}>
-                  <Link to= {`/profile/${applicant.userid}`} className={styles.TitleSubtitle}>{applicant.userid}</Link>
+                <div className={styles.Application} key={applicant._id}>
+                  {console.log(applicant.userid.username)}
+                  <Link to= {`/profile/${applicant.userid._id}`} className={styles.TitleSubtitle}>{applicant.userid.username}</Link>
                   <p className={styles.Text}>{applicant.motive}</p>
                   <p className={styles.Text}>Status: {applicant.status}</p>
                   <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>

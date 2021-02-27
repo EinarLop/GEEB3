@@ -52,15 +52,15 @@ export default function Header() {
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
-                <Link to="/oprojects" className={styles.Links}>Team Projects</Link>
-                <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
-                <Link to="/create" className={styles.Links}></Link>
-                <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+                <Link to="/oprojects" className={styles.Links} onClick={handleClick}>Team Projects</Link>
+                <Link to="/sprojects" className={styles.Links} onClick={handleClick}>Portfolio Projects</Link>
+                <Link to="/create" className={styles.Links} onClick={handleClick}></Link>
+                <Link to="/createsproject" className={styles.Links} onClick={handleClick}>Add to Portfolio</Link>
 
-                <a href={`/profile/${visitor}`} className={styles.Links}>My profile</a>
+                <a href={`/profile/${visitor}`} className={styles.Links} onClick={handleClick}>My profile</a>
 
-                <Link to={`/myapplication/${visitor}`} className={styles.Links}>Application</Link>
-                <Link to={`/profile/${visitor}`} className={styles.Links}>My profile</Link>
+                <Link to={`/myapplication/${visitor}`} className={styles.Links} onClick={handleClick}>Application</Link>
+                <Link to={`/profile/${visitor}`} className={styles.Links} onClick={handleClick}>My profile</Link>
 
                 {/* <a className={styles.Links} href="/login">
                   Logout
@@ -76,9 +76,9 @@ export default function Header() {
             <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
             <Link to="/create" className={styles.Links}>Create a Project</Link>
             <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+            <Link to={`/myapplication/${visitor}`} className={styles.Links} onClick={handleClick}>Application</Link>
 
               <IoPersonCircleOutline className={styles.NavLinkIcon} />
-            </a>
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
