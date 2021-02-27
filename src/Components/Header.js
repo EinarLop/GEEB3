@@ -53,24 +53,44 @@ export default function Header() {
                   Register
                 </a> */}
 
-                <Link to="/oprojects" className={styles.Links}>
+                <Link
+                  to="/oprojects"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
                   Team Projects
                 </Link>
-                <Link to="/sprojects" className={styles.Links}>
+                <Link
+                  to="/sprojects"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
                   Portfolio Projects
                 </Link>
 
-                <Link to="/createsproject" className={styles.Links}>
+                <Link
+                  to="/createsproject"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
                   Add to Portfolio
                 </Link>
 
-                <Link to={`/myapplication/${visitor}`} className={styles.Links}>
+                <Link
+                  to={`/myapplication/${visitor}`}
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
                   Application
                 </Link>
-                <Link to={`/profile/${visitor}`} className={styles.Links}>
+
+                <Link
+                  to={`/profile/${visitor}`}
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
                   My profile
                 </Link>
-
 
                 {/* <a className={styles.Links} href="/login">
                   Logout
@@ -82,7 +102,6 @@ export default function Header() {
       ) : (
         <div className={styles.ConditionalContainerNav}>
           <div className={styles.NavContainer}>
-
             <Link to="/oprojects" className={styles.Links}>
               Team Projects
             </Link>
@@ -95,9 +114,9 @@ export default function Header() {
             <Link to="/createsproject" className={styles.Links}>
               Add to Portfolio
             </Link>
-            <a href={`/profile/${visitor}`}>
+            <a href={`/profile/${visitor}`} />
 
-              <IoPersonCircleOutline className={styles.NavLinkIcon} />
+            <IoPersonCircleOutline className={styles.NavLinkIcon} />
             {/* <CgProfile className={styles.Profile} href="/" /> */}
             {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
