@@ -1,0 +1,13 @@
+@import "../global.scss";
+
+@mixin Link {
+    &:link, &:visited, &:active {
+        color: $clearGrey
+    }
+    &:hover {
+        color: $orangeAccent;
+        font-weight:700;
+    }
+
+    font-size: 1.8rem;
+}

@@ -1,4 +1,5 @@
-@import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss";
+@import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
+"../GlobalStyles/Link.scss";
 .Wrapper {
   display: flex;
   padding: 25px;
@@ -31,9 +32,12 @@
 
 .Name {
   font-size: 3.8rem;
+  color:lightsteelblue;
 }
+
 .Username {
   font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .ImageOneContainer {
@@ -60,12 +64,12 @@
 .LinksTitle,
 .StackTitle {
   font-size: 2.5rem;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   color: $orangeAccent;
 }
 
 .AboutMeContent,
-.CollegeContent {
+.CollegeContent, .InfoText {
   font-size: 1.8rem;
   text-align: justify;
   text-justify: inter-word;
@@ -82,14 +86,14 @@
 
 .MajorTitle {
   font-size: 2.5rem;
-  margin: 25px 0;
+  margin: 25px 0 10px 0;
   color: $orangeAccent;
 }
 .LinksContainer {
   display: flex;
   flex-direction: column;
   //align-items: flex-end;
-  margin-top: 50px;
+  margin-top: 25px;
   width: 33%;
   height: auto;
   padding: 0 50px 0 0;
@@ -101,6 +105,10 @@
   word-break: break-all;
   text-decoration: underline;
   // align-self: flex-end;
+}
+
+.Link {
+  @include Link;
 }
 
 .ImageTwoContainer {
@@ -119,7 +127,7 @@
   // border: 1px solid aqua;
 }
 
-.PortfolioContent {
+.PortfolioContent, .TeamContent {
   font-size: 2.2rem;
 }
 
@@ -136,9 +144,6 @@
   margin: 5px 0 0 0;
 }
 
-.TeamContent {
-  font-size: 2.2rem;
-}
 .StackContainer {
   margin-top: 50px;
   display: flex;
@@ -178,7 +183,7 @@
   display: flex;
   width: auto;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .Tag {
   @include Tag;
@@ -187,6 +192,7 @@
 
 .Button {
   @include Button;
+  width: 180px;
 }
 
 @media (max-width: 767px) {

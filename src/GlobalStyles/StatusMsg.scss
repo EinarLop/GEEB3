@@ -1,5 +1,7 @@
 @import "../global.scss";
 
+
+/*Deprecated in favor of other colors, local ErrorMsg and SuccessMsg classes*/
 @mixin StatusMsg {
     padding: 15px;
     font-style: italic;
