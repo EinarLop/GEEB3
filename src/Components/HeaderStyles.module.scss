@@ -19,19 +19,19 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 50%;
+  width: 30%;
   font-size: 22px;
 }
 
 .NavContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
 }
 .ConditionalContainerNav {
-  width: 50%;
+  width: 70%;
 }
 
 .NavLink {
@@ -44,7 +44,7 @@
 }
 
 .NavLinkIcon {
-  width: 45px;
+  width: auto;
   height: 45px;
 }
 

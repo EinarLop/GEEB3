@@ -3,7 +3,12 @@ import styles from "./HeaderStyles.module.scss";
 import { MdNaturePeople } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { IoPeopleCircleSharp } from "react-icons/io5";
+import { IoPeopleOutline } from "react-icons/io5";
+
 import { GiBurningTree } from "react-icons/gi";
+import { GiFruitTree } from "react-icons/gi";
+import { FaPeopleCarry } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
 import { Link } from "react-router-dom";
@@ -18,6 +23,7 @@ export default function Header() {
   const handleClick = (event) => {
     setIsOpen(!isOpen);
   };
+
   useEffect(() => {
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
@@ -35,8 +41,12 @@ export default function Header() {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconNameContainer}>
-        <GiBurningTree className={styles.Icon} />
-        <h2 className={styles.Logo}>Intecreate</h2>
+        {/* <GiFruitTree className={styles.Icon} /> */}
+        {/* <IoPeopleCircleSharp className={styles.Icon} /> */}
+        {/* <IoPeopleOutline className={styles.Icon} /> */}
+        <FaPeopleCarry className={styles.Icon} />
+
+        <h2 className={styles.Logo}>GEEB </h2>
       </div>
       {isMd ? (
         <div className={styles.PageWrap}>
