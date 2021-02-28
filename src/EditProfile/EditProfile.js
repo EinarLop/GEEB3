@@ -216,7 +216,10 @@ export default function EditProfile() {
     redirect ? <Redirect to="/login" /> :
     finished ? <Redirect to={`/profile/${userId}`}/> :
     <div className={styles.Wrapper}>
-      <div className={styles.NamesWrapper}>
+      <div className={styles.Box0}>
+        <h1 className={styles.PageTitle}>Edit Profile</h1>
+      </div>
+      <div className={styles.Box1}>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Name</label>
           <input className={styles.Input} name="name" type="text" value={form.name} onChange={handleOnChange}/>
@@ -226,12 +229,13 @@ export default function EditProfile() {
           <input className={styles.Input} name="lastname" type="text" value={form.lastname} onChange={handleOnChange}/>
         </div>
         <div className={styles.InputandLabelContainer}>
-          <label className={styles.Label}>My email</label>
+          <label className={styles.Label}>Email</label>
           <input className={styles.Input} name="email" type="email" value={form.email} onChange={handleOnChange}/>
           <p className={styles.ErrorMsg}>{message.errorEmail}</p>
         </div>
+        <p className={styles.ErrorMsg}>{message.errorName}</p>
       </div>
-      <p className={styles.ErrorMsg}>{message.errorName}</p>
+
       <div className={styles.AboutWrapper}>
         <p className={styles.Titles}>About me</p>
         <textarea
@@ -379,13 +383,15 @@ export default function EditProfile() {
             </div>
           ))}
         </div>
-        {status}
+      </div>
+      <div className={styles.Box9}>
         <input
           className={`${styles.Button} ${styles.Large}`}
           type="button"
           value="Update"
-          onClick={onSubmit}
+          //onClick={onSubmit}
         />
+        {status}
       </div>
     </div>
   );
