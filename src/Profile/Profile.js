@@ -64,7 +64,7 @@ function Profile(props) {
       </div>
       <div className={styles.EducationContainer}>
         <p className={styles.CollegeTitle}>University</p>
-        <p className={styles.CollegeContent}>{user.university}</p>
+        <p className={styles.CollegeContent}>{user.college}</p>
         <p className={styles.CollegeContent}>Semester: {user.semester}</p>
         <p className={styles.MajorTitle}>Major</p>
         <p className={styles.MajorContent}>{user.major}</p>
@@ -104,7 +104,7 @@ function Profile(props) {
         </div>
       </div>
 
-      <div className={styles.ProjectsContainer}>
+      {/*<div className={styles.ProjectsContainer}>
         <p className={styles.PortfolioContent}>My Portfolio</p>
         <a className={styles.PortfolioLink}>here</a>
         <p className={styles.TeamContent}>
@@ -114,7 +114,7 @@ function Profile(props) {
       </div>
       <div className={styles.ImageTwoContainer}>
         <img className={styles.ImageTwo} src={ImageTwo} />
-      </div>
+          </div>*/}
 
     </div>
   );
