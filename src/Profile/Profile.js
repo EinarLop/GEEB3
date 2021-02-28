@@ -3,6 +3,10 @@ import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
 import ImageTwo from "./Images/ImageTwo.svg";
+import {BsLink45Deg} from 'react-icons/bs';
+import {FaStar} from 'react-icons/fa';
+import { MdSchool } from "react-icons/md";
+import { GiGreekTemple } from 'react-icons/gi';
 import {Link, Redirect} from 'react-router-dom';
 
 function Profile(props) {
@@ -47,10 +51,7 @@ function Profile(props) {
   return (
     redirect ? <Redirect to="/login"/> :
     <div className={styles.Wrapper}>
-      {isOwner ?       
-      <div className={styles.EditBtnContainer}>
-        <Link to="/editprofile" className={styles.Button}>Edit Profile</Link>
-      </div> : <></>}
+      <div className={styles.Wrapper}>
       <div className={styles.NameContainer}>
         <p className={styles.Name}>{user.fullname}</p>
         <p className={styles.Username}>@{user.username}</p>
@@ -60,24 +61,31 @@ function Profile(props) {
       </div>
       <div className={styles.AboutMeContainer}>
         <p className={styles.AboutMeTitle}>About me</p>
-        <p className={styles.AboutMeContent}>{user.bio}</p>
+        <p className={styles.InfoText}>{user.bio}</p>
       </div>
       <div className={styles.EducationContainer}>
-        <p className={styles.CollegeTitle}>University</p>
-        <p className={styles.CollegeContent}>{user.college}</p>
+        <p className={styles.CollegeTitle}><GiGreekTemple/>  University</p>
+        <p className={styles.InfoText}>{user.college}</p>
         <p className={styles.CollegeContent}>Semester: {user.semester}</p>
-        <p className={styles.MajorTitle}>Major</p>
-        <p className={styles.MajorContent}>{user.major}</p>
+        <p className={styles.MajorTitle}><MdSchool/>  Major</p>
+        <p className={styles.InfoText}>{user.major}</p>
       </div>
+      {isOwner ?       
+      <div className={styles.EditBtnContainer}>
+        <Link to="/editprofile" className={styles.Button}>Edit Profile</Link>
+      </div> : <></>}
+      </div>
+
       <div className={styles.LinksContainer}>
-        <p className={styles.LinksTitle}>My Links</p>
-        {user.links.map((link) => (
-          <p className={styles.LinksContent}>{link}</p>
-        ))}
+        <p className={styles.LinksTitle}> <BsLink45Deg/> My Links</p>
+        {user.links.length ? user.links.map((link) => (
+          // Doble // para que el href sea absoluto
+          <a href={`//${link}`} target="_blank" className={styles.Link}>{link}</a>
+        ))  : <p className={styles.InfoText}>No links yet!</p> }
       </div>
 
       <div className={styles.StackContainer}>
-        <p className={styles.StackTitle}>My Stack</p>
+        <p className={styles.StackTitle}> <FaStar/> My Stack</p>
       </div>
       <div className={styles.MasterdContainer}>
         <p className={styles.MasterdTitle}>Mastered:</p>
@@ -104,7 +112,8 @@ function Profile(props) {
         </div>
       </div>
 
-      {/*<div className={styles.ProjectsContainer}>
+      {/* LINKS TO UNSUPPORTED SECTIONS
+      <div className={styles.ProjectsContainer}>
         <p className={styles.PortfolioContent}>My Portfolio</p>
         <a className={styles.PortfolioLink}>here</a>
         <p className={styles.TeamContent}>

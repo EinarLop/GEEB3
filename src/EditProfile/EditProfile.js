@@ -8,6 +8,7 @@ import pic1 from "./Images/pic3.svg";
 export default function EditProfile() {
   const [userId, setUserId] = useState(null);
   const [redirect, setRedirect] = useState(false);   // if user is not owner or user cannot edit, we redirect
+  const [finished, setFinished] = useState(false);
   const [learning, setLearning] = useState([]);
   const [mastered, setMastered] = useState([]);
   const [want, setWant] = useState([]);
@@ -200,6 +201,7 @@ export default function EditProfile() {
         console.dir(result);
         msg = <p className={styles.SuccessMsg}>Updated Successfully!</p>
         setStatus(msg);
+        setTimeout(()=>{setFinished(true)}, 1000);
       })
       .catch(err => {console.log("Error updating:", err)});
     } 
@@ -212,6 +214,7 @@ export default function EditProfile() {
 
   return (
     redirect ? <Redirect to="/login" /> :
+    finished ? <Redirect to={`/profile/${userId}`}/> :
     <div className={styles.Wrapper}>
       <div className={styles.NamesWrapper}>
         <div className={styles.InputandLabelContainer}>
