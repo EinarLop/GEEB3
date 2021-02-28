@@ -3,9 +3,9 @@ let errorBio="";
 let errorEmail="";
 let errorMajor="";
 let errorLinks="";
-let errorM="";
-let errorL="";
-let errorW="";
+let errorMastered="";
+let errorLearning="";
+let errorWants="";
 let ok=true;
 
 const limits ={
@@ -23,6 +23,20 @@ const limits ={
     link_max_chars: 30,
     links_max: 5,   // maximum of 5 links per profile
 }
+
+const validEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    console.log("validateEmail result: " + re.test(email));
+    return re.test(email);
+};
+
+const hasWhiteSpace = (str) => {
+    const index = str.indexOf(" ");
+    if (index == -1) {
+      return false;
+    }
+    return true;
+};
 
 const validateEmail = (email) => {
     if (email === "") {
@@ -42,27 +56,50 @@ const validateEmail = (email) => {
     }
 };
 
-export const validateTags = (tags) => {
+export const validateInputTag = (tag, number) => {
     let errorTag = "";
-    if (tags.length > limits.tags_max) {
-      errorTag="You may add up to 5 tags";
+    if (tag==="") {
+        errorTag="Tags can't be empty";
+    }
+    if (tag.length > limits.tag_max_chars) {
+        errorTag="Tag name is too long";
+    }
+    if (number> limits.tags_max) {
+        errorTag="You may add up to 5 tags";
     }
     return errorTag;
+}
+
+export const validateTags = (tags) => {     // sanity check, since validateInput tag would not allow more than 5
+    let errorTags = "";
+    if (tags.length > limits.tags_max) {
+      errorTags="You may add up to 5 tags";
+    }
+    return errorTags;
 };
 
 const validateStack = (m, l, w) => {
-    errorM = validateTags(m);
-    errorL = validateTags(l);
-    errorW = validateTags(w);
-    if (errorM !== "" || errorL!=="" || errorW!=="") {
+    errorMastered = validateTags(m);
+    errorLearning = validateTags(l);
+    errorWants = validateTags(w);
+    if (errorMastered !== "" || errorLearning!=="" || errorWants!=="") {
         ok = false;
     }
 }
 
 export const validateProfile = (User)=>{
+    errorName="";
+    errorBio="";
+    errorEmail="";
+    errorMajor="";
+    errorLinks="";
+    errorMastered="";
+    errorLearning="";
+    errorWants="";
+    ok=true;
     // fullname
     if (User.fullname.length > limits.fullname_max) {
-        errorName="Name or last name is too long.";
+        errorName="Name / Last name is too long.";
     }
     // email
     validateEmail(User.email);
@@ -74,10 +111,13 @@ export const validateProfile = (User)=>{
     }
 
     // major
-    if (User.major.length>limits.major_max ||
-         User.major.length<limits.major_min) {
-             errorMajor = "Use a shorter name for your major.";
-             ok = false;
+    if (User.major.length>limits.major_max) {
+        errorMajor = "Use a shorter name for your major.";
+        ok = false;
+    } 
+    if (User.major.length<limits.major_min) {
+        errorMajor = "Major is too short.";
+        ok = false;
     }
 
     // links
@@ -94,9 +134,9 @@ export const validateProfile = (User)=>{
         errorBio,
         errorMajor,
         errorLinks,
-        errorM,
-        errorL,
-        errorW,
+        errorMastered,
+        errorLearning,
+        errorWants,
         ok
     }
 

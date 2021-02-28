@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styles from "./EditProfileStyles.module.scss";
 import { Link, Redirect } from "react-router-dom";
-import {validateTag} from '../Validation/GeneralValidation';
-import { validateProfile, validateTags } from "../Validation/EditProfileValidation";
+import { validateProfile, validateTags, validateInputTag } from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 
 export default function EditProfile() {
@@ -35,8 +34,8 @@ export default function EditProfile() {
     errorBio: "",
     errorLinks: "",
     errorMajor: "",
-    errorLearning: "",
     errorMastered: "",
+    errorLearning: "",
     errorWants: "",
   });
   
@@ -114,13 +113,40 @@ export default function EditProfile() {
 
   //onADD ******************************************************************************************************************************
   const onAddTagMastered = (event) => {
-    setMastered((mastered) => [...mastered, form.tag_master]);
+    let err = validateInputTag(form.tag_master, mastered.length+1);
+    console.log("Add Tag err:", err);
+    if (err==="") {
+      setMastered((mastered) => [...mastered, form.tag_master]);
+    } 
+    setMessage({
+      ...message,
+      errorMastered: err,
+    })
+
   };
   const onAddTagLearning = (event) => {
-    setLearning((learning) => [...learning, form.tag_learn]);
+    let err = validateInputTag(form.tag_learn, learning.length+1);
+    console.log("Add Tag err:", err);
+    if (err==="") {
+      setLearning((learning) => [...learning, form.tag_learn]);
+    } 
+
+    setMessage({
+      ...message,
+      errorLearning: err,
+    })
   };
+
   const onAddTagWant = (event) => {
-    setWant((want) => [...want, form.tag_want]);
+    let err = validateInputTag(form.tag_want, want.length+1);
+    console.log("Add Tag err:", err);
+    if (err==="") {
+      setWant((want) => [...want, form.tag_want]);
+    } 
+    setMessage({
+      ...message,
+      errorWants: err,
+    })
   };
   const onAddLink = (event) => {
     setLinks((links) => [...links, form.currentLink]);
@@ -155,8 +181,17 @@ export default function EditProfile() {
     console.dir(User);
     const validation = validateProfile(User);
     console.dir(validation);
-    /*axios.put(`/update/${userId}`)*/
+    let msg;
+    if (validation.ok) {
 
+      msg = <p className={styles.SuccessMsg}>Updating Profile...</p>
+      console.log("Submitting post update request...");
+      /*axios.put(`/update/${userId}`)*/
+    } else {
+      msg = <p className={styles.ErrorMsg}>Please check your inputs!</p>
+    }
+    setMessage(validation);
+    setStatus(msg);
   }
 
   return (
@@ -205,6 +240,7 @@ export default function EditProfile() {
           value={form.major}
           onChange={handleOnChange}
         />
+        <p className={styles.ErrorMsg}>{message.errorMajor}</p>
         <label className={styles.Label}>Semester:</label>
         <input
           className={styles.Input}
@@ -257,7 +293,7 @@ export default function EditProfile() {
           className={styles.ButtonTags}
           onClick={onAddTagMastered}
         />
-
+        <p className={styles.ErrorMsg}>{message.errorMastered}</p>
         <div className={styles.MasteredTagContainer}>
           {mastered.map((masteredTag, index) => (
             <div 
@@ -285,6 +321,7 @@ export default function EditProfile() {
           className={styles.ButtonTags}
           onClick={onAddTagLearning}
         />
+        <p className={styles.ErrorMsg}>{message.errorLearning}</p>
         <div className={styles.LearningTagContainer}>
           {learning.map((learningTag, index) => (
             <div
@@ -311,6 +348,7 @@ export default function EditProfile() {
           className={styles.ButtonTags}
           onClick={onAddTagWant}
         />
+        <p className={styles.ErrorMsg}>{message.errorWants}</p>
         <div className={styles.WantTagContainer}>
           {want.map((wantTag, index) => (
             <div
@@ -322,6 +360,7 @@ export default function EditProfile() {
             </div>
           ))}
         </div>
+        {status}
         <input
           className={`${styles.Button} ${styles.Large}`}
           type="button"
