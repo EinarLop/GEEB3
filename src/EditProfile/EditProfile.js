@@ -22,7 +22,7 @@ export default function EditProfile() {
     lastname: "",
     email: "",
     major: "",
-    college:"",
+    college:"ITESM",
     semester: 1,
     tag_master: "",
     tag_learn: "",
