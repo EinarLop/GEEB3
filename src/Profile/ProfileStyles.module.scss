@@ -1,8 +1,8 @@
 @import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
-"../GlobalStyles/Link.scss";
+  "../GlobalStyles/Link.scss";
 .Wrapper {
   display: flex;
-  padding: 25px;
+  padding: 15px;
   width: 100%;
   max-width: 1024px;
   display: flex;
@@ -12,7 +12,6 @@
   margin: 0 auto;
   //border: 1px solid lavender;
 }
-
 
 .EditBtnContainer {
   width: 100%;
@@ -29,16 +28,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 25px;
 }
 
 .Name {
   font-size: 3.8rem;
-  color:$clearGrey;
+  color: $primary;
 }
 
 .Username {
   font-size: 2.5rem;
-  font-weight: 700;
+  color: white;
 }
 
 .ImageOneContainer {
@@ -66,11 +66,12 @@
 .StackTitle {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: $orangeAccent;
+  color: $primary;
 }
 
 .AboutMeContent,
-.CollegeContent, .InfoText {
+.CollegeContent,
+.InfoText {
   font-size: 1.8rem;
   text-align: justify;
   text-justify: inter-word;
@@ -88,7 +89,7 @@
 .MajorTitle {
   font-size: 2.5rem;
   margin: 25px 0 10px 0;
-  color: $orangeAccent;
+  color: $primary;
 }
 .LinksContainer {
   display: flex;
@@ -128,7 +129,8 @@
   // border: 1px solid aqua;
 }
 
-.PortfolioContent, .TeamContent {
+.PortfolioContent,
+.TeamContent {
   font-size: 2.2rem;
 }
 
@@ -193,10 +195,23 @@
 
 .Button {
   @include Button;
-  width: 180px;
+  width: 100%;
+  background-color: $primary;
+  color: $primaryText;
+  margin-top: 25px;
 }
 
 @media (max-width: 767px) {
+  .Button {
+    width: 50%;
+    max-width: 150px;
+  }
+  .EditBtnContainer {
+    padding: 25px 0 0 0;
+
+    justify-content: flex-start;
+  }
+
   .ImageOneContainer {
     width: 100%;
     padding: 0;
