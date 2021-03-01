@@ -2,7 +2,7 @@
 
 @mixin Link {
     &:link, &:visited, &:active {
-        color: $clearGrey
+        color: white;
     }
     &:hover {
         color: $orangeAccent;

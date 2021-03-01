@@ -1,5 +1,5 @@
 @import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
-  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss";
 
 .Wrapper {
   display: flex;
@@ -11,13 +11,13 @@
   font-family: $font;
   flex-wrap: wrap;
   margin: 0 auto;
-  border: 1px solid lavender;
+  //border: 1px solid lavender;
 }
 
 .Titles {
   font-size: 1.8rem;
   margin-bottom: 15px;
-  color: $orangeAccent;
+  color: $secundary;
 }
 
 .PageTitle {
@@ -39,18 +39,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: 1px solid red;
+  //border: 1px solid red;
 }
 
 .Box9 {
   width: 100%;
+  display:flex;
+  //border: 1px solid fuchsia;
+  text-align: center;
   justify-content: center;
 }
 
 .InputandLabelContainer {
   display: flex;
   flex-direction: column;
-  border: 1px solid grey;
+  //border: 1px solid grey;
 }
 
 .MasteredTagContainer,
@@ -59,39 +62,40 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  border: 1px solid lightblue;
+  //border: 1px solid lightblue;
 }
 
 .MasteredContainer, .LearningContainer, .WantContainer {
   width: 33%;
   height: 250px;
-  border: 1px solid blue;
+  //border: 1px solid blue;
 }
 
 .AboutWrapper {
   width: 50%;
   height: auto;
-  border: 1px solid whitesmoke;
+  //border: 1px solid whitesmoke;
 }
 .EducationWrapper {
   display: flex;
   flex-direction: column;
   width: 50%;
-  border: 1px solid green;
+  //border: 1px solid green;
 }
 .LinksWrapper {
   width: 50%;
   display: flex;
   flex-direction: column;
-  border: 1px solid salmon;
+  //border: 1px solid salmon;
 }
 .LinkListContainer {
   display: flex;
   flex-direction: column;
-  border: 1px solid royalblue;
+  //border: 1px solid royalblue;
 }
+
 .Link {
-  margin: 15px 0;
+  @include Link;
 }
 
 .Input {
@@ -109,6 +113,7 @@
   @include Label;
   font-size: 18px;
   margin-bottom: 0;
+  color: $secundary;
 }
 
 .Button {
@@ -155,6 +160,7 @@
 }
 
 .ErrorMsg {
+  font-style: italic;
   color: #f74f39;
   margin-top: 10px;
   width: 400px;
@@ -168,6 +174,29 @@
   width: 400px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.StatusMsg {
+  font-size: 1.8rem;
+  margin: 0 auto;
+  width: auto;
+
+  .ErrorMsg {
+    font-style: italic;
+    color: #f74f39;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .SuccessMsg {
+    color: $mediumSpringGreen;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 767px) {
