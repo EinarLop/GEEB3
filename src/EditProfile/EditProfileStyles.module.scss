@@ -1,5 +1,6 @@
 @import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
-  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss";
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss",
+  "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss";
 
 .Wrapper {
   display: flex;
@@ -15,9 +16,9 @@
 }
 
 .Titles {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   margin-bottom: 15px;
-  color: $secundary;
+  color: $primary;
 }
 
 .PageTitle {
@@ -25,6 +26,7 @@
   color: white;
   margin-top: 25px;
   font-size: 38px;
+  color: $secundary;
   //margin-bottom: 10px;
 }
 
@@ -44,7 +46,7 @@
 
 .Box9 {
   width: 100%;
-  display:flex;
+  display: flex;
   //border: 1px solid fuchsia;
   text-align: center;
   justify-content: center;
@@ -65,7 +67,9 @@
   //border: 1px solid lightblue;
 }
 
-.MasteredContainer, .LearningContainer, .WantContainer {
+.MasteredContainer,
+.LearningContainer,
+.WantContainer {
   width: 33%;
   height: 250px;
   //border: 1px solid blue;
@@ -111,18 +115,31 @@
 }
 .Label {
   @include Label;
-  font-size: 18px;
+  font-size: 25px;
   margin-bottom: 0;
-  color: $secundary;
+  color: $primary;
 }
 
 .Button {
   @include Button;
+  background-color: transparent;
+  border: 2px solid $primary;
+  color: $primary;
+
+  &.Large {
+    background-color: $secundary;
+    border: 1px solid transparent;
+    color: $secundaryText;
+    margin: 30px 0;
+  }
 }
 
 .ButtonTags {
   @include Button;
   width: 75px;
+  background-color: transparent;
+  border: 2px solid $primary;
+  color: $primary;
 }
 .TextArea {
   height: 80%;
@@ -189,7 +206,7 @@
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   .SuccessMsg {
     color: $mediumSpringGreen;
     margin-top: 10px;
