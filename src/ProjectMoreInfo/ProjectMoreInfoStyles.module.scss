@@ -1,16 +1,15 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss";
+  "../GlobalStyles/Button.scss", "../GlobalStyles/Link.scss";
 
 .Global {
   display: flex;
-
   font-family: $font;
   max-width: 1024px;
   width: 90%;
   height: auto;
   margin: 40px auto;
-  padding: 15px;
+  padding: 25px;
   flex-wrap: wrap;
   background-color: $box;
   border-radius: 10px;
@@ -31,6 +30,24 @@
   font-size: 18px;
 }
 
+.Author {
+  color: $otherGrey;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.Author a {
+  &:hover {
+    text-decoration: underline;
+    font-weight: 700;
+  }
+  &:link, &:visited, &:active {
+    color: $otherGrey;
+  }
+}
+
+
 .InputLabelContainer {
   @include InputLabelContainer;
   width: 100%;
@@ -45,20 +62,22 @@
   //margin-top: 15px;
 }
 
-.TitleDesContainer {
+.TitleContainer {
   border: 1px solid transparent;
   border-radius: 15px;
   width: 100%;
-  margin-bottom: 50px;
+  margin: 15px auto;
 }
 
 .Title {
   color: $secundary;
   font-size: 38px;
-
   width: 100%;
-  //word-break: break-all;
   text-align: center;
+}
+
+.DescContainer {
+  margin-bottom: 25px; 
 }
 
 .Paragraph {
@@ -77,7 +96,15 @@
 .Text {
   color: white;
   font-size: 1.8rem;
-  list-style: none;
+}
+
+.List {
+  margin-left: 30px;
+}
+
+.ListContainer {
+  padding: 10px;
+  margin-left: 20px;
 }
 
 .Wrapper {
@@ -94,14 +121,18 @@
 
 .Highlights {
   align-items: left;
-
   border-radius: 15px;
   width: 100%;
   margin-bottom: 50px;
 }
 
-.HList {
+.Hlist {
+  list-style-type: disc;
+}
 
+.SentMsg {
+  color: $mediumSpringGreen;
+  font-size: 1.8rem;
 }
 
 .ColumnDivision {
@@ -131,6 +162,7 @@
   @include Input;
   height: 200px;
   width: 100%;
+  background-color: $newBackground;
   //max-width: 800px;
   // align-self: center;
   // background-color: #2c2c34;
