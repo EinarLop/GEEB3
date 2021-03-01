@@ -121,6 +121,7 @@
 
 .StatusMsg {
   @include StatusMsg;
+
   //margin-top: 50px;
 }
 
@@ -150,6 +151,10 @@
 
   .Bullet {
     text-align: center;
+  }
+
+  .Button {
+    margin: 25px 0;
   }
 }
 
