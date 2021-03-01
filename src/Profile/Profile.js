@@ -3,7 +3,7 @@ import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
 import ImageTwo from "./Images/ImageTwo.svg";
-import {BsLink45Deg} from 'react-icons/bs';
+import {BsLink45Deg, BsFillFolderSymlinkFill} from 'react-icons/bs';
 import {FaStar} from 'react-icons/fa';
 import { MdSchool } from "react-icons/md";
 import { GiGreekTemple } from 'react-icons/gi';
@@ -77,10 +77,10 @@ function Profile(props) {
       </div>
 
       <div className={styles.LinksContainer}>
-        <p className={styles.LinksTitle}> <BsLink45Deg/> My Links</p>
+        <p className={styles.LinksTitle}> <BsFillFolderSymlinkFill/> My Links</p>
         {user.links.length ? user.links.map((link) => (
           // Doble // para que el href sea absoluto
-          <a href={`//${link}`} target="_blank" className={styles.Link}>{link}</a>
+          <a href={`//${link}`} target="_blank" className={styles.Link}><BsLink45Deg/> {link}</a>
         ))  : <p className={styles.InfoText}>No links yet!</p> }
       </div>
 

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styles from "./EditProfileStyles.module.scss";
 import { Link, Redirect } from "react-router-dom";
-import { validateProfile, validateTags, validateInputTag } from "../Validation/EditProfileValidation";
+import { validateProfile, validateTags, validateInputTag, validateLink } from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
+import {BsLink45Deg} from 'react-icons/bs';
+
 
 export default function EditProfile() {
   const [userId, setUserId] = useState(null);
@@ -25,7 +27,6 @@ export default function EditProfile() {
     tag_master: "",
     tag_learn: "",
     tag_want: "",
-    linkInput: "",
     currentLink: "",
   });
 
@@ -153,7 +154,19 @@ export default function EditProfile() {
     })
   };
   const onAddLink = (event) => {
-    setLinks((links) => [...links, form.currentLink]);
+    setMessage( {
+      ...message,
+      errorLinks: "",
+    })
+    let err = validateLink(form.currentLink, links.length+1);
+    if (err==="") {
+      setLinks((links) => [...links, form.currentLink]);
+    }
+    setMessage( {
+      ...message,
+      errorLinks: err,
+    })
+
   };
 
   //onChange ***************************************************************************************************************************
@@ -188,7 +201,7 @@ export default function EditProfile() {
     console.dir(validation);
     let msg;
     if (validation.ok) {
-      msg = <p className={styles.SuccessMsg}>Updating Profile...</p>
+      msg = <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>Updating Profile...</p>
 
       console.log("Submitting post update request for", userId);
       axios
@@ -199,14 +212,14 @@ export default function EditProfile() {
       })
       .then(result => {
         console.dir(result);
-        msg = <p className={styles.SuccessMsg}>Updated Successfully!</p>
+        msg = <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>Updated Successfully!</p>
         setStatus(msg);
         setTimeout(()=>{setFinished(true)}, 1000);
       })
       .catch(err => {console.log("Error updating:", err)});
     } 
     else {
-      msg = <p className={styles.ErrorMsg}>Please check your inputs!</p>
+      msg = <p className={`${styles.StatusMsg} ${styles.ErrorMsg}`}>Please check your inputs!</p>
     }
     setMessage(validation);
     setStatus(msg);
@@ -216,7 +229,10 @@ export default function EditProfile() {
     redirect ? <Redirect to="/login" /> :
     finished ? <Redirect to={`/profile/${userId}`}/> :
     <div className={styles.Wrapper}>
-      <div className={styles.NamesWrapper}>
+      <div className={styles.Box0}>
+        <h1 className={styles.PageTitle}>Edit Profile</h1>
+      </div>
+      <div className={styles.Box1}>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Name</label>
           <input className={styles.Input} name="name" type="text" value={form.name} onChange={handleOnChange}/>
@@ -226,12 +242,13 @@ export default function EditProfile() {
           <input className={styles.Input} name="lastname" type="text" value={form.lastname} onChange={handleOnChange}/>
         </div>
         <div className={styles.InputandLabelContainer}>
-          <label className={styles.Label}>My email</label>
+          <label className={styles.Label}>Email</label>
           <input className={styles.Input} name="email" type="email" value={form.email} onChange={handleOnChange}/>
           <p className={styles.ErrorMsg}>{message.errorEmail}</p>
         </div>
+        <p className={styles.ErrorMsg}>{message.errorName}</p>
       </div>
-      <p className={styles.ErrorMsg}>{message.errorName}</p>
+
       <div className={styles.AboutWrapper}>
         <p className={styles.Titles}>About me</p>
         <textarea
@@ -292,6 +309,7 @@ export default function EditProfile() {
         <div className={styles.LinkListContainer}>
           {links.map((link, index) => (
             <div key={index} className={styles.Link} onClick={() => onDeleteLink(index)}>
+              <BsLink45Deg/>
               {link}
             </div>
           ))}
@@ -379,14 +397,17 @@ export default function EditProfile() {
             </div>
           ))}
         </div>
-        {status}
+      </div>
+      <div className={styles.Box9}>
         <input
           className={`${styles.Button} ${styles.Large}`}
           type="button"
-          value="Update"
+          value="Update profile"
           onClick={onSubmit}
         />
       </div>
+      {status}
+
     </div>
   );
 }
