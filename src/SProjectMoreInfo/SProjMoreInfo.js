@@ -53,7 +53,6 @@ export default function SProjectMoreInfo(props) {
       <div className={styles.LinksContainer}>
         <label className={styles.Label}><BsFillFolderSymlinkFill/>   Project Links:</label>
         <ul className={styles.LinkList}>
-          {/*Mapping of projects.links*/}
           {project.links.map((link) => (
               <a href={`//${link}`} target="_blank" className={styles.Link}>
                 <BsLink45Deg/>
