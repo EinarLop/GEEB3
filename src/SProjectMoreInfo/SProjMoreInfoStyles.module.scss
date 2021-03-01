@@ -1,23 +1,20 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss";
+  "../GlobalStyles/Button.scss", "../GlobalStyles/Link.scss";
 
 .Wrapper {
   display: flex;
-
-  font-family: $font;
   max-width: 1024px;
   width: 90%;
   height: auto;
   margin: 40px auto;
-  padding: 15px;
+  padding: 25px;
   flex-wrap: wrap;
   background-color: $cardBgSp;
   border-radius: 10px;
 }
 
 .Heading {
-  font-family: $font;
   color: $pCardSp;
   font-size: 38px;
 
@@ -26,11 +23,15 @@
 .Author {
   color: $otherGrey;
   margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 .Author a {
   &:hover {
     text-decoration: underline;
     font-weight: 700;
+  }
+  &:link, &:visited, &:active {
+    color: $otherGrey;
   }
 }
 
@@ -110,7 +111,7 @@
   //padding: 20px;
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .ImagesSection h1 {
@@ -136,24 +137,10 @@
 
 .LinkList a {
   color: white;
+}
 
-  a:visited {
-    text-decoration: none;
-    color: red;
-  }
-  a:hover {
-    text-decoration: none;
-    color: blue;
-  }
-  a:focus {
-    text-decoration: none;
-    color: yellow;
-  }
-  a:hover,
-  a:active {
-    text-decoration: none;
-    color: black;
-  }
+.Link {
+  @include Link;
 }
 
 @media (max-width: 1023px) {

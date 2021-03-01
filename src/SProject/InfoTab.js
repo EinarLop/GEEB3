@@ -13,20 +13,18 @@ function InfoTab(props) {
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         {/* <p className={styles.Title}>{project.title}</p> */}
-        <p className={styles.Title}>Restaurant reviewer</p>
+        <p className={styles.Title}>{project.title}</p>
         {/* <p className={styles.Description}>{project.description}</p> */}
         <p className={styles.Description}>
-          Soy Pepe el Grillo jijij dolor sit amet consectetur adipiscing, elit
-          netus mollis vivamus torquent sollicitudin tincidunt, faucibus fusce
-          quis himenaeos semper.{" "}
+          {project.description}
         </p>
         <div className={styles.CreatorContainer}>
           <p className={styles.Subtitle}>Creator</p>
-          <p className={styles.Description}>@Einar</p>
+          <p className={styles.Description}>@{project.userid.username}</p>
         </div>
         <div className={styles.DateContainer}>
           <p className={styles.Subtitle}>Posted</p>
-          <p className={styles.Description}>25-10-2020</p>
+          <p className={styles.Description}>{project.createad}</p>
         </div>
       </div>
 
