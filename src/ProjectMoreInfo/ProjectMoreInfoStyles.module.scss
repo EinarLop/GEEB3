@@ -103,7 +103,7 @@
 }
 
 .ColumnDivision {
-  //width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -166,7 +166,7 @@
   padding: 25px;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 100%;
+  width: 45%;
   margin: 25px 0;
 }
 
@@ -174,7 +174,7 @@
   background-color: $dark;
   border: 1px solid transparent;
   border-radius: 15px;
-  width: 100%;
+  width: 45%;
   margin: 25px 0;
   padding: 25px;
 }
@@ -200,7 +200,7 @@
   padding: 25px;
 }
 
-.ButtonWrapper {
+
   .ButtonWrapper {
     width: 100%;
     display: flex;
@@ -208,28 +208,55 @@
   }
 
   @media (max-width: 1380px) {
-    .Wrapper {
-      align-items: center;
-    }
-    .Column0 {
-      //width: 45%;
-    }
-
-    .Column1 {
-      //width: 45%;
-    }
-
-    .ReasonForRequest {
-      width: 100%;
-    }
-
-    .RequestData {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
+  .Wrapper {
+    align-items: center;
   }
 
+  .ReasonForRequest {
+    width: 100%;
+  }
+
+  .RequestData {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  }
+
+@media (max-width: 720px) {
+  .Title {
+    font-size: 25px;
+  }
+
+  .TitleSubtitle {
+    font-size: 20px;
+  }
+
+  .Paragraph {
+    font-size: 15px;
+  }
+  .Text {
+    font-size: 15px;
+  }
+
+  .ReasonForRequest {
+    width: 100%;
+  }
+  .RequestData {
+    // width: auto;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+  .Button {
+    font-size: 22px;
+  }
+  .Global {
+    font-size: 13px;
+  }
+  .Tags {
+    flex-direction: column;
+  }
   .ColumnDivision {
     //width: 100%;
     display: flex;
@@ -237,60 +264,12 @@
     width: 100%;
     align-items: center;
   }
-  @media (max-width: 720px) {
-    .Title {
-      font-size: 25px;
-    }
+  .Column0 {
+    width: 100%;
+  }
 
-    .TitleSubtitle {
-      font-size: 20px;
-    }
-
-    .Paragraph {
-      font-size: 15px;
-    }
-    .Text {
-      font-size: 15px;
-    }
-
-    .ApplicationMsg {
-    }
-    .ReasonForRequest {
-      width: 100%;
-    }
-    .RequestData {
-      // width: auto;
-      display: flex;
-      flex-direction: column;
-      width: auto;
-    }
-    .Button {
-      font-size: 22px;
-    }
-    .Data {
-      // width: 40%;
-      // height: 20px;
-      // font-size: 10px;
-    }
-    .Global {
-      font-size: 13px;
-    }
-    .Wrapper {
-      // width: 90vw;
-    }
-    .Tags {
-      flex-direction: column;
-    }
-    .ColumnDivision {
-      flex-direction: column;
-      align-items: center;
-    }
-    .Column0 {
-      width: 100%;
-    }
-
-    .Column1 {
-      width: 100%;
-    }
+  .Column1 {
+    width: 100%;
   }
 }
+

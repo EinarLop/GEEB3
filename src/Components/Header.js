@@ -44,7 +44,7 @@ export default function Header() {
         {/* <GiFruitTree className={styles.Icon} /> */}
         {/* <IoPeopleCircleSharp className={styles.Icon} /> */}
         {/* <IoPeopleOutline className={styles.Icon} /> */}
-        <FaPeopleCarry className={styles.Icon} />
+        <Link to="/" className={styles.NavLink}><FaPeopleCarry className={styles.Icon}/></Link>
 
         <h2 className={styles.Logo}>GEEB </h2>
       </div>

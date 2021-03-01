@@ -7,8 +7,8 @@ import axios from "axios";
 function Registration() {
   const [user, setUser] = useState({
     // stores current inputs values
-    name: "",
-    lastName: "",
+    name: "Username",
+    lastName: "Lastname",
     userName: "",
     email: "",
     password: "",
