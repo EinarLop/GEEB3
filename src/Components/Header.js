@@ -44,9 +44,14 @@ export default function Header() {
         {/* <GiFruitTree className={styles.Icon} /> */}
         {/* <IoPeopleCircleSharp className={styles.Icon} /> */}
         {/* <IoPeopleOutline className={styles.Icon} /> */}
-        <Link to="/" className={styles.NavLink}><FaPeopleCarry className={styles.Icon}/></Link>
 
-        <h2 className={styles.Logo}>GEEB </h2>
+        <Link to="/" className={styles.HomeLink}>
+          <FaPeopleCarry className={styles.Icon} />
+        </Link>
+        <Link className={styles.HomeLink} to="/">
+          <h2 className={styles.Logo}>GEEB </h2>
+        </Link>
+
       </div>
       {isMd ? (
         <div className={styles.PageWrap}>
@@ -58,7 +63,15 @@ export default function Header() {
                   className={styles.ClosingIcon}
                   onClick={handleClick}
                 />
-                <a className={`${styles.Links} ${styles.Title}`}> GEEB </a>
+
+                <Link
+                  to="/"
+                  onClick={handleClick}
+                  className={`${styles.Links} ${styles.Title}`}
+                >
+                  {" "}
+                  GEEB{" "}
+                </Link>
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
@@ -110,28 +123,27 @@ export default function Header() {
           )}
         </div>
       ) : (
-        <div className={styles.ConditionalContainerNav}>
-          <div className={styles.NavContainer}>
-            <Link to="/oprojects" className={styles.Links}>
-              Team Projects
-            </Link>
-            <Link to="/sprojects" className={styles.Links}>
-              Portfolio Projects
-            </Link>
-            <Link to="/create" className={styles.Links}>
-              Create a Project
-            </Link>
-            <Link to="/createsproject" className={styles.Links}>
-              Add to Portfolio
-            </Link>
-            <a href={`/profile/${visitor}`} />
-
+        <div className={styles.NavContainer}>
+          <Link to="/oprojects" className={styles.Links}>
+            Team Projects
+          </Link>
+          <Link to="/sprojects" className={styles.Links}>
+            Portfolio Projects
+          </Link>
+          <Link to="/create" className={styles.Links}>
+            Create a Project
+          </Link>
+          <Link to="/createsproject" className={styles.Links}>
+            Add to Portfolio
+          </Link>
+          <a href={`/profile/${visitor}`}>
             <IoPersonCircleOutline className={styles.NavLinkIcon} />
-            {/* <CgProfile className={styles.Profile} href="/" /> */}
-            {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
+          </a>
+
+          {/* <CgProfile className={styles.Profile} href="/" /> */}
+          {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
               Log Out
             </button> */}
-          </div>
         </div>
       )}
     </div>

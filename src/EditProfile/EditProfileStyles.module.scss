@@ -1,5 +1,5 @@
 @import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
-  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
+  "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss";
 
 .Wrapper {
   display: flex;
@@ -13,71 +13,89 @@
   margin: 0 auto;
   //border: 1px solid lavender;
 }
+
 .Titles {
   font-size: 1.8rem;
   margin-bottom: 15px;
-  color: $orangeAccent;
+  color: $secundary;
 }
 
-.NamesWrapper {
+.PageTitle {
+  font-family: $font;
+  color: white;
+  margin-top: 25px;
+  font-size: 38px;
+  //margin-bottom: 10px;
+}
+
+.Box0 {
   width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.Box1 {
+  width: 50%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
+  //border: 1px solid red;
+}
+
+.Box9 {
+  width: 100%;
+  display:flex;
+  //border: 1px solid fuchsia;
+  text-align: center;
+  justify-content: center;
 }
 
 .InputandLabelContainer {
   display: flex;
   flex-direction: column;
+  //border: 1px solid grey;
 }
 
-.MasteredContainer {
-  width: 33%;
-  height: 250px;
-  // border: 1px solid orange;
-}
-
-.LearningContainer {
-  width: 33%;
-  height: 250px;
-  // border: 1px solid blue;
-}
 .MasteredTagContainer,
 .WantTagContainer,
 .LearningTagContainer {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  //border: 1px solid lightblue;
 }
-.WantContainer {
+
+.MasteredContainer, .LearningContainer, .WantContainer {
   width: 33%;
   height: 250px;
-  // border: 1px solid blue;
+  //border: 1px solid blue;
 }
+
 .AboutWrapper {
   width: 50%;
-  margin-bottom: 50px;
-  // border: 1px solid white;
+  height: auto;
+  //border: 1px solid whitesmoke;
 }
 .EducationWrapper {
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin-bottom: 50px;
+  //border: 1px solid green;
 }
 .LinksWrapper {
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
-  padding-left: 14%;
+  //border: 1px solid salmon;
 }
 .LinkListContainer {
   display: flex;
   flex-direction: column;
+  //border: 1px solid royalblue;
 }
+
 .Link {
-  margin: 15px 0;
+  @include Link;
 }
 
 .Input {
@@ -95,6 +113,7 @@
   @include Label;
   font-size: 18px;
   margin-bottom: 0;
+  color: $secundary;
 }
 
 .Button {
@@ -106,10 +125,26 @@
   width: 75px;
 }
 .TextArea {
-  @include Input;
-  height: 200px;
-  width: 100%;
-  max-width: 500px;
+  height: 80%;
+  width: 80%;
+
+  font-family: $font;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: $box;
+  color: white;
+  font-size: 18px;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $orangeAccent;
+    //background-color: #545463;
+  }
+  &::placeholder {
+    color: #ffffff60;
+    font-size: 18px;
+  }
 }
 
 .Tag {
@@ -125,6 +160,7 @@
 }
 
 .ErrorMsg {
+  font-style: italic;
   color: #f74f39;
   margin-top: 10px;
   width: 400px;
@@ -138,6 +174,29 @@
   width: 400px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.StatusMsg {
+  font-size: 1.8rem;
+  margin: 0 auto;
+  width: auto;
+
+  .ErrorMsg {
+    font-style: italic;
+    color: #f74f39;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .SuccessMsg {
+    color: $mediumSpringGreen;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 767px) {

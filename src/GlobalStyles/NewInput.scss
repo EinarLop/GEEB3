@@ -1,6 +1,8 @@
 @import "../global.scss";
 
 @mixin NewInput {
+  font-family: $font;
+  font-size: 18px;
   width: 100%;
   max-width: 700px;
   min-width: 250px;
@@ -8,4 +10,9 @@
   background-color: $box;
   border: 1px solid transparent;
   border-radius: 5px;
+  color: white;
+
+  &:focus {
+    outline: none;
+  }
 }

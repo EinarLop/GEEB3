@@ -19,8 +19,8 @@ const limits ={
     tags_min: 1,
     tags_max: 5,    // maximum of 5 tags per array, 15 total
 
-    link_min_chars: 15,
-    link_max_chars: 30,
+    link_min_chars: 8,
+    link_max_chars: 45,
     links_max: 5,   // maximum of 5 links per profile
 }
 
@@ -77,6 +77,24 @@ export const validateTags = (tags) => {     // sanity check, since validateInput
     }
     return errorTags;
 };
+
+export const validateLink = (link, number) => {
+    let errLink = "";
+    if (link==="") {
+        errLink="Links can't be empty";
+    }
+    else if (link.length < limits.link_min_chars) {
+        errLink = "Link address is too short"
+    }
+    if (link.length > limits.link_max_chars) {
+        errLink="Link address is too long";
+    }
+    if (number> limits.links_max) {
+        errLink="You may add up to 5 links";
+    }
+    return errLink;
+};
+  
 
 const validateStack = (m, l, w) => {
     errorMastered = validateTags(m);

@@ -14,7 +14,7 @@ var limits={
     maxTags: 6,
     tagMinChar: 1,
     tagMaxChar: 30,
-  }
+}
 export const validateTag = (tags,currentTag) => {
     if (currentTag.length >= limits.tagMinChar) {
         if (currentTag.length <= limits.tagMaxChar) {

@@ -8,4 +8,8 @@
   border: 1px solid transparent;
   border-radius: 5px;
   -webkit-appearance: none;
+
+  &:focus {
+    outline: none;
+  }
 }
