@@ -44,12 +44,14 @@ export default function Header() {
         {/* <GiFruitTree className={styles.Icon} /> */}
         {/* <IoPeopleCircleSharp className={styles.Icon} /> */}
         {/* <IoPeopleOutline className={styles.Icon} /> */}
+
         <Link to="/" className={styles.HomeLink}>
           <FaPeopleCarry className={styles.Icon} />
         </Link>
         <Link className={styles.HomeLink} to="/">
           <h2 className={styles.Logo}>GEEB </h2>
         </Link>
+
       </div>
       {isMd ? (
         <div className={styles.PageWrap}>

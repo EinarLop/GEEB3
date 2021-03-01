@@ -65,11 +65,15 @@ export default function ProjectMoreInfo(props) {
           },
         })
         .then((res) => setErrorInput("You Apply to this project!"));
+        location.reload();
     }
   };
-  const hasARequest = (applications) => {
-    for (var a in applications) {
-      if (applications[a].userid._id == localStorage.getItem("geebId")) {
+
+  const hasARequest = (applications) =>{
+    for(var a in applications){
+      console.log(applications[a].userid._id);
+      if (applications[a].userid._id == localStorage.getItem("geebId")){
+
         setAlreadySend(true);
       }
     }

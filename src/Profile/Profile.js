@@ -115,7 +115,7 @@ function Profile(props) {
       {/* LINKS TO UNSUPPORTED SECTIONS
       <div className={styles.ProjectsContainer}>
         <p className={styles.PortfolioContent}>My Portfolio</p>
-        <a className={styles.PortfolioLink}>here</a>
+        <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>here</Link>
         <p className={styles.TeamContent}>
           Collaborating in X Team Projects:
         </p>

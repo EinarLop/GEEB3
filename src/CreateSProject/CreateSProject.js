@@ -262,8 +262,8 @@ function CreateSProject() {
             {/* Image Uploader starts here */}
             <p className={styles.Label}>File Uploader</p>
             <form onSubmit={onFileSubmit}>
-              {/* <input  type="file" name="file"/>
-              <input className={styles.Button} type="submit" value="Add image"/> */}
+              <input  type="file" name="file"/>
+              <input className={styles.Button} type="submit" value="Add image"/>
             </form>
             {uploadMsg}
           </div>

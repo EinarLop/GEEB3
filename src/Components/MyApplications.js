@@ -35,7 +35,6 @@ export default function MyApplication(props) {
                 {applications.map((applicant)=>
                   applicant.status === "Accepted" &&
                   <div className={styles.Applications}>
-                    <p>{applicant.oprojectid.toString()}</p>
                     <Link to= {`/oproject/${applicant.oprojectid._id}`} className={styles.TitleSubtitle}>{applicant.oprojectid.title}</Link>
                     <p className={styles.Text}>{applicant.motive}</p>
                     <p className={styles.Text}>Status: {applicant.status}</p>

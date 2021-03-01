@@ -4,7 +4,7 @@ var errorPassword = ""
 var errorConfPass = ""
 var errorName = ""
 var errorLastName = ""
-var success = true
+var success = false
 
 var limits = {
   //no white spaces
@@ -26,7 +26,7 @@ const validEmail = (email) => {
   return re.test(email);
 };
 const onlyAlphanumeric = (str) => {
-  const re = /^[a-z0-9]+$/; // only lowercase alphanumeric
+  const re = /^[a-z0-9A-Z]+$/; // only lowercase alphanumeric
   console.log("alphanumeric result: " + re.test(str));
   return re.test(str);
 };
@@ -56,8 +56,8 @@ const validateName = (name) => {
   if (hasWhiteSpace(name)) {
     errorName="Your name cannot contain any spaces"
   }
-  if(errorName != ""){
-    success = false;
+  if(errorName === ""){
+    success = true;
   }
 };
 const validateLastName = (lastName) => {
@@ -70,8 +70,8 @@ const validateLastName = (lastName) => {
   if (!onlyAlphabetic(lastName)) {
     errorLastName="Your name can only have lowercase letters"
   }
-  if(errorLastName != ""){
-    success = false;
+  if(errorLastName === ""){
+    success = true;
   }
 };
 
@@ -88,8 +88,8 @@ const validateUsername = (userName) => {
   if (hasWhiteSpace(userName)) {
     errorUsername ="Username cannot contain any spaces"
   }
-  if(errorUsername != ""){
-    success = false;
+  if(errorUsername === ""){
+    success = true;
   }
 };
 
@@ -109,8 +109,8 @@ const validateEmail = (email) => {
   /*if (noWhiteSpace(user.email)) {
     setErrorEmail("Your email cannot have white spaces");
   }*/
-  if(errorEmail != ""){
-    success = false;
+  if(errorEmail === ""){
+    success = true;
   }
 };
 
@@ -131,9 +131,8 @@ const validatePassword = (password, confirmPassword) => {
   } else if (password !== confirmPassword) {
     errorPassword = "Your password and confirm password are different"
   }
-
-  if(errorPassword != ""){
-    success = false;
+  if(errorPassword === ""){
+    success = true;
   }
 };
 
