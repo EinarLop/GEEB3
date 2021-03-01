@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import styles from "./homeStyles.module.scss";
-import image from "../Media/home-idea.png"; 
-import key from "../Media/key.png"; 
-import plus from "../Media/plus.png"; 
-import search from "../Media/search.png"; 
-import binoculars from "../Media/binoculars.png"; 
-import checkmark from "../Media/checkmark.png"; 
-import cross from "../Media/cross.png"; 
-import file from "../Media/file.png"; 
-import services from "../Media/services.png"; 
-import folder from "../Media/folder.png"; 
-import business from "../Media/business-meeting1.png"; 
-import support from "../Media/support2.png"; 
-import web1 from "../Media/web1.png";
+import styles from "./homeStyles.module.scss"; 
+import business from "../Media/Business-Meeting-Colors.png"; 
+import support from "../Media/Support-Colors.png"; 
+import web1 from "../Media/Web-Colors.png";
+import {IoCheckmark} from "react-icons/io5";
+import {IoClose} from "react-icons/io5";
+import {IoSearch} from "react-icons/io5";
+import {IoKey} from "react-icons/io5";
+import {GiBinoculars} from "react-icons/gi";
+import {GoGear} from "react-icons/go";
+import {FiFile} from "react-icons/fi";
+import {FiFolder} from "react-icons/fi";
 
 export default function home() {
     const [errorInput, setErrorInput] = useState("");
@@ -42,7 +40,7 @@ export default function home() {
                     />
                 </div>
                 <div className={styles.InfoImage}>
-                    <img className={styles.Image} src={web1} alt="girl in computer"/>
+                    <img className={styles.Image} src={web1} alt="person in computer"/>
                 </div>
             </div>
             <div className={styles.DescriptionContainer}>
@@ -53,7 +51,7 @@ export default function home() {
                     <div className={styles.Left}>
                         <p className={styles.SmallSubtitle}>Team</p>
                         <p className={styles.Subtitle}>Oproject.</p>
-                        <p className={styles.Information}><b className={styles.Bold}>Lorem ipsum dolor.</b> Lorem ipsum dolor sit amet consectetur adipiscing elit, nec at id vestibulum torquent malesuada, ad nostra dui posuere accumsan enim.</p>
+                        <p className={styles.Information}><b>Lorem ipsum dolor.</b> Lorem ipsum dolor sit amet consectetur adipiscing elit, nec at id vestibulum torquent malesuada, ad nostra dui posuere accumsan enim.</p>
                     </div>
                     <div className={styles.Right}>
                         <img className={styles.Image1} src={business} alt="A business metting"/>
@@ -79,22 +77,22 @@ export default function home() {
                 </div>
                 <div className={styles.FeaturesContainerOne}>
                     <div className={styles.Box1}>
-                        <img className={styles.Icon} src={checkmark} alt="ckeckmark"/>
+                        <IoCheckmark className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Tags</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box2}>
-                        <img className={styles.Icon} src={cross} alt="ckeckmark"/>
+                        <IoClose className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Tags</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box3}>
-                        <img className={styles.Icon} src={search} alt="ckeckmark"/>
+                        <IoSearch className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Tags</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box4}>
-                        <img className={styles.Icon} src={key} alt="ckeckmark"/>
+                        <IoKey className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Tags</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
@@ -104,22 +102,22 @@ export default function home() {
                 </div>
                 <div className={styles.FeaturesContainerTwo}>
                     <div className={styles.Box1}>
-                        <img className={styles.Icon} src={binoculars} alt="ckeckmark"/>
+                        <GiBinoculars className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Links</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box2}>
-                        <img className={styles.Icon} src={services} alt="ckeckmark"/>
+                        <GoGear className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Links</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box3}>
-                        <img className={styles.Icon} src={file} alt="ckeckmark"/>
+                        <FiFile className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Links</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
                     <div className={styles.Box4}>
-                        <img className={styles.Icon} src={folder} alt="ckeckmark"/>
+                        <FiFolder className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Links</p>
                         <p className={styles.BoxDescription}>Lorem ipsum dolor sit amet consectetur, adipiscing elit urna penatibus commodo, quam a vel potenti.</p>
                     </div>
