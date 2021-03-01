@@ -65,7 +65,11 @@ function Registration() {
           setStatus(msg);
         });
     } else {
-      let msg = <p style={{ color: "red" }}>Please check your inputs!</p>;
+      let msg = (
+        <p className={styles.ErrorMsg} style={{ color: "red" }}>
+          Please check your inputs!
+        </p>
+      );
       setStatus(msg);
     }
   };
@@ -139,7 +143,7 @@ function Registration() {
             placeholder="cooluser21"
             required="True"
           ></input>
-          <p className={styles.ErrorMsg} style={{ width: "85%" }}>
+          <p className={styles.ErrorMsg} style={{ width: "100%" }}>
             {errorsMessage.errorUsername}
           </p>
         </div>

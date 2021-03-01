@@ -3,14 +3,15 @@
 
 /*Deprecated in favor of other colors, local ErrorMsg and SuccessMsg classes*/
 @mixin StatusMsg {
-    padding: 15px;
-    font-style: italic;
+  padding: 15px;
+  //   font-style: italic;
+  font-size: 18px;
 
-    &.Ok {
-        color: $mediumSpringGreen
-    }
+  &.Ok {
+    color: $mediumSpringGreen;
+  }
 
-    &.Err {
-        color: red;
-    }
+  &.Err {
+    color: red;
+  }
 }

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import styles from "./ProjectCreateStyles.module.scss";
-import {Redirect} from 'react-router-dom';
-import {validateAll, validateHighlight, validateProfile, validateSkill} from '../Validation/ProjectCreateValidation.js';
-import {validateTag} from '../Validation/GeneralValidation';
+import { Redirect } from "react-router-dom";
+import {
+  validateAll,
+  validateHighlight,
+  validateProfile,
+  validateSkill,
+} from "../Validation/ProjectCreateValidation.js";
+import { validateTag } from "../Validation/GeneralValidation";
 import axios from "axios";
 
 function ProjectCreate() {
@@ -22,15 +27,15 @@ function ProjectCreate() {
   const [redirect, setRedirect] = useState(false);
   const [newId, setNewId] = useState("");
   const [message, setMessage] = useState({
-    errorTitle : "",
-    errorDescription:"",
-    errorHighlight:"",
-    errorTag:"",
-    errorSkill:"",
-    errorProfile:"",
-    success:"",
-    redirect: false
-    });
+    errorTitle: "",
+    errorDescription: "",
+    errorHighlight: "",
+    errorTag: "",
+    errorSkill: "",
+    errorProfile: "",
+    success: "",
+    redirect: false,
+  });
 
   const handleOnChange = (event) => {
     setProject({
@@ -40,20 +45,21 @@ function ProjectCreate() {
   };
   //onAdd ******************************************************************************************************************************
   const onAddTag = (event) => {
-      setMessage({...message, errorTag: validateTag(tags, project.currentTag,)})
-      if(validateTag(tags, project.currentTag,) == "" ){
-        setTags((t) => [...t, project.currentTag]);
-        setProject({
-          ...project,
-          currentTag: "",
-        });
-      }
-    
-    
+    setMessage({ ...message, errorTag: validateTag(tags, project.currentTag) });
+    if (validateTag(tags, project.currentTag) == "") {
+      setTags((t) => [...t, project.currentTag]);
+      setProject({
+        ...project,
+        currentTag: "",
+      });
+    }
   };
   const onAddSkill = (event) => {
-    setMessage({...message, errorSkill: validateSkill(skills, project.currentSkill,)})
-    if(validateSkill(skills, project.currentSkill,)===""){
+    setMessage({
+      ...message,
+      errorSkill: validateSkill(skills, project.currentSkill),
+    });
+    if (validateSkill(skills, project.currentSkill) === "") {
       setSkills((t) => [...t, project.currentSkill]);
       setProject({
         ...project,
@@ -62,8 +68,11 @@ function ProjectCreate() {
     }
   };
   const onAddHighlight = (event) => {
-    setMessage({...message, errorHighlight: validateHighlight(tags, project.currentHighlight,)})
-    if(validateHighlight(tags, project.currentHighlight,)===""){
+    setMessage({
+      ...message,
+      errorHighlight: validateHighlight(tags, project.currentHighlight),
+    });
+    if (validateHighlight(tags, project.currentHighlight) === "") {
       setHighlights((t) => [...t, project.currentHighlight]);
       setProject({
         ...project,
@@ -72,8 +81,11 @@ function ProjectCreate() {
     }
   };
   const onAddProfile = (event) => {
-    setMessage({...message, errorProfile: validateProfile(tags, project.currentProfile,)})
-    if(validateProfile(tags, project.currentProfile,)===""){
+    setMessage({
+      ...message,
+      errorProfile: validateProfile(tags, project.currentProfile),
+    });
+    if (validateProfile(tags, project.currentProfile) === "") {
       setProfiles((t) => [...t, project.currentProfile]);
       setProject({
         ...project,
@@ -96,20 +108,26 @@ function ProjectCreate() {
   };
   //onSubmit ******************************************************************************************************************************
   const handleOnSubmit = (event) => {
-    let finalmessages = validateAll(project, tags, skills, highlights, profiles)
+    let finalmessages = validateAll(
+      project,
+      tags,
+      skills,
+      highlights,
+      profiles
+    );
     setMessage({
-      errorTitle : finalmessages.errorTitle,
+      errorTitle: finalmessages.errorTitle,
       errorDescription: finalmessages.errorDescription,
       errorHighlight: finalmessages.errorHighlight,
       errorTag: finalmessages.errorTag,
       errorSkill: finalmessages.errorSkill,
       errorProfile: finalmessages.errorProfile,
-      redirect:finalmessages.redirect,
-      success : finalmessages.success
-    })
-    
-  if (message.success=="") {
-        const Project = {
+      redirect: finalmessages.redirect,
+      success: finalmessages.success,
+    });
+
+    if (message.success == "") {
+      const Project = {
         title: project.title,
         description: project.description,
         status: project.status,
@@ -117,27 +135,32 @@ function ProjectCreate() {
         highlights: highlights,
         desirables: profiles,
         skills: skills,
-        };
+      };
 
-        axios
+      axios
         .post("http://localhost:3010/oprojects/create", Project, {
-            headers: {
+          headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
-            },
+          },
         })
-        .then((resp) => {     // the backend responds with the new project's _id
-            setNewId(resp.data);
-            setMessage({...message, success: "Project created succesfully!"}) 
-            setTimeout(()=>setRedirect(true), 2000)
+        .then((resp) => {
+          // the backend responds with the new project's _id
+          setNewId(resp.data);
+          setMessage({ ...message, success: "Project created succesfully!" });
+          setTimeout(() => setRedirect(true), 2000);
         });
-    }else{
-      setMessage({...message, success: "Something went wrong with your registration"}) 
+    } else {
+      setMessage({
+        ...message,
+        success: "Something went wrong with your registration",
+      });
     }
-  }
+  };
 
-  return (
-    redirect ? <Redirect to={`/oproject/${newId}`}/> :
+  return redirect ? (
+    <Redirect to={`/oproject/${newId}`} />
+  ) : (
     <div>
       {/* <Header /> */}
       <div className={styles.Global}>
@@ -318,10 +341,10 @@ function ProjectCreate() {
             </div>
           </div>
         </div>
-          <p style={{color:'#00FA9A'}}>{message.success}</p>
+        <p style={{ color: "#00FA9A" }}>{message.success}</p>
         <div>
           <input
-            className={styles.Button}
+            className={`${styles.Button} ${styles.Create} `}
             type="button"
             value="Create!"
             onClick={handleOnSubmit}
