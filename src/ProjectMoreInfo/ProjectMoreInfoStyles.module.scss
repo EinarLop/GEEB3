@@ -179,7 +179,7 @@
   }
 }
 
-.Knows {
+.TagsContainer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -189,10 +189,10 @@
   margin-bottom: 25px;
 }
 
-.Needs {
+.SkillsContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   color: #ff0080;
   width: 100%;
   flex-wrap: wrap;
@@ -316,9 +316,6 @@
       font-size: 15px;
     }
 
-    .ApplicationMsg {
-    }
-
     .ReasonForRequest {
       width: 100%;
     }
@@ -331,17 +328,14 @@
     .Button {
       font-size: 22px;
     }
-    .Data {
-      // width: 40%;
-      // height: 20px;
-      // font-size: 10px;
+    
+    .TagsContainer, .SkillsContainer {
+      justify-content: space-around;
     }
     .Global {
       font-size: 13px;
     }
-    .Wrapper {
-      // width: 90vw;
-    }
+
     .Tags {
       flex-direction: column;
     }

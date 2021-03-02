@@ -83,7 +83,6 @@ export default function ProjectMoreInfo(props) {
     for(var a in applications){
       console.log(applications[a].userid._id);
       if (applications[a].userid._id == localStorage.getItem("geebId")){
-
         setAlreadySend(true);
       }
     }
@@ -127,7 +126,7 @@ export default function ProjectMoreInfo(props) {
         </div>
         <div className={styles.Column1}>
           <h3 className={styles.TitleSubtitle}>Tags</h3>
-          <div className={styles.Knows}>
+          <div className={styles.TagsContainer}>
             {project.tags.map((tag, index) => (
               <div key={index} className={`${styles.Tag} ${styles.TopicTag}`}>
                 {tag}
@@ -135,7 +134,7 @@ export default function ProjectMoreInfo(props) {
             ))}
           </div>
           <h3 className={styles.TitleSubtitle}>Skills </h3>
-          <div className={styles.Needs}>
+          <div className={styles.SkillsContainer}>
             {project.skills.map((skill, index) => (
               <div className={`${styles.Tag} ${styles.SkillTag}`} key={index}>
                 {skill}
