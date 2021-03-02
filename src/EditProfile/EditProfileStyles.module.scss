@@ -12,7 +12,7 @@
   font-family: $font;
   flex-wrap: wrap;
   margin: 0 auto;
-  //border: 1px solid lavender;
+  border: 1px solid lavender;
 }
 
 .Titles {
@@ -217,11 +217,18 @@
 }
 
 @media (max-width: 767px) {
+
+  .Box1 {
+    width: 100%;
+  }
+
   .Wrapper {
     justify-content: center;
   }
   .AboutWrapper {
     width: 100%;
+    height: 275px;
+    margin-bottom: 20px;
   }
 
   .TextArea {
