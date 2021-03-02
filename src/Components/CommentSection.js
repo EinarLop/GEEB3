@@ -26,7 +26,7 @@ function CommentSection() {
             const feedback = {
                 content: text,
             }
-            axios.post("http://localhost:3010/feedback/submit", feedback)
+            axios.post("https://geeb.herokuapp.com/feedback/submit", feedback)
             .then(resp => {
                 msg = <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>Thanks for submitting your feedback!</p>
                 console.log(resp);

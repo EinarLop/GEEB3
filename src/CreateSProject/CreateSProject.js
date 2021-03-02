@@ -108,7 +108,7 @@ function CreateSProject() {
       console.log("Attempt to save sproject:");
       console.log(JSON.stringify(Project));
       axios
-        .post("http://localhost:3010/sprojects/create", Project, {
+        .post("https://geeb.herokuapp.com/sprojects/create", Project, {
           headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),

@@ -138,7 +138,7 @@ function ProjectCreate() {
       };
 
       axios
-        .post("http://localhost:3010/oprojects/create", Project, {
+        .post("https://geeb.herokuapp.com/oprojects/create", Project, {
           headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
