@@ -25,11 +25,12 @@ export default function Oproject(props) {
               <div className={styles[project.status]}>
                 <p>
                   {" "}
-                  Status: <b>{project.status}</b>
+                  Status<br/>
+                   <b>{project.status}</b>
                 </p>
               </div>
               <p>
-                Creator:
+                Creator <br/>
                 <b>
                   {" "}
                   @{project.userid
@@ -38,7 +39,8 @@ export default function Oproject(props) {
                 </b>
               </p>
               <p>
-                Posted:<b> {project.created.slice(0, 10)} </b>
+                Posted<br/>
+                <b> {project.created.slice(0, 10)} </b>
               </p>
             </div>
           </div>
