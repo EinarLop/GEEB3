@@ -1,7 +1,7 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
-  "../GlobalStyles/NewInput.scss", "../GlobalStyles/Select.scss",
-  "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
-  "../GlobalStyles/StatusMsg.scss";
+  "../GlobalStyles/NewInput.scss", "../GlobalStyles/NewInput.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss";
 
 .Global {
   display: flex;
@@ -30,12 +30,12 @@
 }
 
 .Select {
-  @include Select;
+  @include NewInput;
   background-color: $box;
 }
 
 .TextArea {
-  @include Input;
+  @include NewInput;
   height: 200px;
 }
 
