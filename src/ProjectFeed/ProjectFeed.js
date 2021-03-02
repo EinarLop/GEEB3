@@ -30,13 +30,14 @@ function ProjectFeed() {
 
   return (
     <div className={styles.Global}>
-      {/*---Tag Filter Bar component here---*/}
-      <input
+      {/*---Tag Filter Bar component here---*
+            <input
         type="button"
         value="My projects"
         className={styles.Button}
         onClick={myProjects}
-      />
+      />*/}
+
       {oprojects.map((project, index) => (
         <Oproject project={project} />
       ))}

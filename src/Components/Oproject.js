@@ -30,7 +30,7 @@ export default function Oproject(props) {
           </div>
           <div className={styles.ButtonDiv}>
             <Link to={"/oproject/" + project._id} className={styles.Button}>
-              Apply
+              More Info
             </Link>
           </div>
         </div>

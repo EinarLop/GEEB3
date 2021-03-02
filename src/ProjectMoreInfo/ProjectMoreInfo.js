@@ -3,6 +3,11 @@ import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
 import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
 import { Link } from "react-router-dom";
+import {FaTrophy} from 'react-icons/fa';
+import {MdPersonPin} from 'react-icons/md';
+import {BiCheckSquare} from 'react-icons/bi';
+import {AiFillCheckSquare, AiFillStar} from 'react-icons/ai';
+
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -13,6 +18,10 @@ export default function ProjectMoreInfo(props) {
     skills: ["Skill"],
     highlights: ["Loading Highlights..."],
     desirables: ["Loading Preferences..."],
+    userid: {
+      username: "Leader",
+      userid: 0,
+    },
   });
   const [isOwner, setIsOwner] = useState(false);
   const [applications, setApplications] = useState([]);
@@ -34,6 +43,7 @@ export default function ProjectMoreInfo(props) {
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
+        console.log(response.data.project);
       });
     axios
       .get("http://localhost:3010/applicants/project/" + props.match.params.id)
@@ -64,7 +74,7 @@ export default function ProjectMoreInfo(props) {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) => setErrorInput("You Apply to this project!"));
+        .then((res) => setErrorInput("You already applied to this project!"));
         location.reload();
     }
   };
@@ -73,7 +83,6 @@ export default function ProjectMoreInfo(props) {
     for(var a in applications){
       console.log(applications[a].userid._id);
       if (applications[a].userid._id == localStorage.getItem("geebId")){
-
         setAlreadySend(true);
       }
     }
@@ -82,34 +91,42 @@ export default function ProjectMoreInfo(props) {
   return (
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
-        <div className={styles.TitleDesContainer}>
+        <div className={styles.TitleContainer}>
           {/*<h1>Is Owner: {isOwner.toString()}</h1>*/}
           <p className={styles.Title}>{project.title}</p>
+          <p className={styles.Author}>
+            Posted by:{" "}
+            <Link to={`/profile/${project.userid._id}`}>@{project.userid.username ? project.userid.username : "Not found"}</Link>
+          </p>
+        </div>
+        <div className={styles.DescContainer}>
           <p className={styles.Paragraph}>{project.description}</p>
         </div>
 
         <div className={styles.Highlights}>
-          <p className={styles.TitleSubtitle}>Highlights</p>
-          <ul className={styles.HList}>
+          <p className={styles.TitleSubtitle}><FaTrophy/> Highlights</p>
+          <div className={styles.ListContainer}>
             {project.highlights.map((highlight, index) => (
-              <li className={styles.Text} key={index}>
-                {highlight}
-              </li>
+              <p className={styles.Text} key={index}>
+                <AiFillStar/>  {highlight}
+              </p>
             ))}
-          </ul>
+          </div>
         </div>
 
         <div className={styles.Column0}>
-          <h3 className={styles.TitleSubtitle}>Profile we are looking for</h3>
-          {project.desirables.map((t, index) => (
-            <p className={styles.Text} key={index}>
-              {t}
-            </p>
-          ))}
+          <h3 className={styles.TitleSubtitle}><MdPersonPin/>  Profile we are looking for</h3>
+          <div className={styles.ListContainer}>
+            {project.desirables.map((t, index) => (
+              <p className={styles.Text} key={index}>
+                <BiCheckSquare/>  {t}
+              </p>
+            ))}
+          </div>
         </div>
         <div className={styles.Column1}>
           <h3 className={styles.TitleSubtitle}>Tags</h3>
-          <div className={styles.Knows}>
+          <div className={styles.TagsContainer}>
             {project.tags.map((tag, index) => (
               <div key={index} className={`${styles.Tag} ${styles.TopicTag}`}>
                 {tag}
@@ -117,7 +134,7 @@ export default function ProjectMoreInfo(props) {
             ))}
           </div>
           <h3 className={styles.TitleSubtitle}>Skills </h3>
-          <div className={styles.Needs}>
+          <div className={styles.SkillsContainer}>
             {project.skills.map((skill, index) => (
               <div className={`${styles.Tag} ${styles.SkillTag}`} key={index}>
                 {skill}
@@ -128,7 +145,11 @@ export default function ProjectMoreInfo(props) {
 
         {!isOwner ? (
           project.status == "Open" ? (
-            !alreadySend && (
+            alreadySend ?  
+            <div className={styles.SentMsgContainer}>
+                <p className={styles.SentMsg}>You've submitted an application to this project!</p>
+            </div>
+            : (
               <div className={styles.userInputs}>
                 <p className={styles.TitleSubtitle}>Send a request</p>
                 {/*<p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>*/}
