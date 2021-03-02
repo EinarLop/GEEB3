@@ -1,0 +1,71 @@
+@import "../global", "../GlobalStyles/Button.scss", "../GlobalStyles/Input.scss",
+"../GlobalStyles/StatusMsg.scss";
+
+.Wrapper {
+    display:flex;
+    flex-direction: column;
+    margin: 30px auto;
+    width: 100%;
+    padding: 10px;
+    //border: 1px solid lavender;
+
+}
+
+.TitleSubtitle {
+    color: $primary;
+    font-size: 3.2rem;
+    font-weight: 501;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+.TextArea {
+    height: 200px;
+    width: 100%;
+    font-family: $font;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: $box;
+    color: white;
+    font-size: 2.2rem;
+  
+    &:focus {
+      outline: none;
+      border: 2px solid $secundary;
+      //background-color: #545463;
+    }
+    &::placeholder {
+      color: #ffffff60;
+      font-size: 2.2rem;
+    }
+}
+
+.Button {
+    @include Button;
+    max-width: 300px;
+    min-width: 100px;
+    margin: 0 auto;
+    background-color: $secundary;
+    color: $clearGrey;
+    font-weight: 700;
+    font-size: 2rem;
+
+    &:active {
+        color:$secundary;
+        background-color: $clearGrey;
+    }
+}
+
+.StatusMsg {
+    @include StatusMsg;
+    width:100%;
+    margin: 10px auto;
+    text-align: center;
+    &.ErrorMsg {
+        color: #f74f39;
+      }
+    &.SuccessMsg {
+        color: $mediumSpringGreen;
+    }
+}

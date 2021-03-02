@@ -34,7 +34,7 @@ function Profile(props) {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
           },
-        }) //  https://geeb.herokuapp.com/oprojects
+        }) //  http://localhost:3010oprojects
         .then((response) => {
           setUser(response.data.user);
           setIsOwner(response.data.isOwner);

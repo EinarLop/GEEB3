@@ -20,14 +20,24 @@
 .Title {
   //color: #ff5e5b; //#e8645c
   color: $primary;//#ff5e5b
-  font-size: 80px;
+  font-size: 75px;
   text-align: center;
-  margin: 25px;
+  margin: 25px 0;
   font-weight: bold;
   text-shadow: 3px 3px $primaryText;
 }
+
+.Title2 {
+  color: $primary;//#ff5e5b
+  font-size: 45px;
+  text-align: center;
+  margin: 25px 0;
+  font-weight: bold;
+  text-shadow: 3px 3px $primaryText;
+}
+
 .Description {
-  font-size: 18px;
+  font-size: 2.5rem;
   text-align: center;
   padding: 15px;
 }
@@ -289,6 +299,13 @@ b {
 }
 
 @media(max-width: 704px) {
+  .Wrapper {
+    padding: 25px;
+  }
+
+  .Title2 {
+    font-size: 30px;
+  }
   .Subtitle {
     margin-bottom: 15px;
   }
@@ -299,7 +316,7 @@ b {
   }
   .Left {
     width: 100%;
-    margin: 30px;
+    margin: 10px;
   }
   .Right {
     width: 100%;
@@ -322,7 +339,7 @@ b {
   }
   .Image2 {
     width: 260px;
-    margin-right: 20px;
+    //margin-right: 20px;
   }
   .FeaturesContainerOne,
   .FeaturesContainerTwo {
@@ -389,6 +406,10 @@ b {
   }
   .Information {
     font-size: 16px;
+    b {
+      font-size: 16px;
+
+    }
   }
   .Image1 {
     width: 240px;
@@ -403,10 +424,7 @@ b {
     width: 100%;
     order: 2;
   }
-  .Image2 {
-    width: 260px;
-    margin-right: 20px;
-  }
+
   .FeaturesContainerOne,
   .FeaturesContainerTwo {
     width: 100%;

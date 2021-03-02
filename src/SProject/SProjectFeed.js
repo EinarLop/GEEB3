@@ -12,7 +12,7 @@ function SProjectFeed() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" https://geeb.herokuapp.com/sprojects
+      .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" http://localhost:3010sprojects
       .then((response) => setProjects(response.data));
   }, []);
 
