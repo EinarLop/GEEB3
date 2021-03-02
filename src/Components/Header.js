@@ -88,14 +88,14 @@ export default function Header() {
                 >
                   Add to Portfolio <BsFolderPlus/> 
                 </Link>
-
+                {/*
                 <Link
                   to={`/myapplication/${visitor}`}
                   onClick={handleClick}
                   className={styles.Links}
                 >
                   My Applications <MdContactMail/>
-                </Link>
+                </Link>*/}
 
                 <Link
                   to={`/profile/${visitor}`}
