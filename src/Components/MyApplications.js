@@ -57,7 +57,7 @@ export default function MyApplication(props) {
                   )}
                 </div>
               ):(
-                <p className={styles.Title}>You haven´t apply to any project</p>
+                <p className={styles.Title}>You haven´t applied to any project</p>
               ) 
             )
           ):(

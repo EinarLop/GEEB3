@@ -132,11 +132,7 @@ function Profile(props) {
         </div>
       </div>
       <div className={styles.ProjectsContainer}>
-        <p className={styles.TeamContent}>
-          Collaborating in X Team Projects:
-        </p>
-        <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>here</Link>
-
+        <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>Projects I am Applying to</Link>
       </div>
       {/* LINKS TO UNSUPPORTED SECTIONS
       <div className={styles.ProjectsContainer}>
