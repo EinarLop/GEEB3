@@ -10,18 +10,18 @@ function ProjectFeed() {
 
   useEffect(() => {
     axios
-      .get("https://geeb.herokuapp.com/oprojects") ///"https://geeb.herokuapp.com/oprojects" https://geeb.herokuapp.comoprojects
+      .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
       .then((response) => setOprojects(response.data));
   }, []);
   const [isLogged, setIsLogged] = useState(true);
 
   const myProjects = () => {
     axios
-      .get("https://geeb.herokuapp.com/oprojects/mine", {
+      .get("http://localhost:3010/oprojects/mine", {
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
         },
-      }) //https://geeb.herokuapp.com/oprojects" https://geeb.herokuapp.comoprojects
+      }) //http://localhost:3010/oprojects" http://localhost:3010oprojects
       .then((response) => {
         setOprojects(response.data);
         console.log(response.data);

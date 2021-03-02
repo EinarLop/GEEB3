@@ -66,7 +66,7 @@ export default function EditProfile() {
     if (geebId) {
       console.log("Getting user with id:", geebId);
       axios
-        .get("https://geeb.herokuapp.com/users/" + geebId, {
+        .get("http://localhost:3010/users/" + geebId, {
           headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
@@ -211,7 +211,7 @@ export default function EditProfile() {
 
       console.log("Submitting post update request for", userId);
       axios
-        .put(`https://geeb.herokuapp.com/users/update/${userId}`, User, {
+        .put(`http://localhost:3010/users/update/${userId}`, User, {
           headers: {
             "auth-token": window.localStorage.getItem("auth-token"),
           },

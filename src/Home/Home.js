@@ -13,6 +13,7 @@ import {GoGear} from "react-icons/go";
 import {FiFile} from "react-icons/fi";
 import {FiFolder} from "react-icons/fi";
 import {Redirect } from "react-router-dom";
+import CommentSection from '../Components/CommentSection'
 
 
 export default function home() {
@@ -155,6 +156,7 @@ export default function home() {
                     </div>
                 </div>
             </div>
+            <CommentSection/>
         </div>
     );
 }

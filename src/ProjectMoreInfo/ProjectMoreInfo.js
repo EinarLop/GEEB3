@@ -34,7 +34,7 @@ export default function ProjectMoreInfo(props) {
 
   useEffect(() => {
     axios
-      .get("https://geeb.herokuapp.com/oprojects/" + props.match.params.id, {
+      .get("http://localhost:3010/oprojects/" + props.match.params.id, {
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
         },
@@ -45,7 +45,7 @@ export default function ProjectMoreInfo(props) {
         console.log(response.data.project);
       });
     axios
-      .get("https://geeb.herokuapp.com/applicants/project/" + props.match.params.id)
+      .get("http://localhost:3010/applicants/project/" + props.match.params.id)
       .then((response) => {
         setApplications(response.data);
         hasARequest(response.data);
@@ -68,7 +68,7 @@ export default function ProjectMoreInfo(props) {
       };
       console.log(Array.isArray(project.highlights));
       axios
-        .post("https://geeb.herokuapp.com/applicants/create", applicant, {
+        .post("http://localhost:3010/applicants/create", applicant, {
           headers: {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
@@ -214,7 +214,7 @@ export default function ProjectMoreInfo(props) {
                           onClick={() =>
                             axios
                               .patch(
-                                "https://geeb.herokuapp.com/applicants/update/status/" +
+                                "http://localhost:3010/applicants/update/status/" +
                                   applicant._id,
                                 {
                                   status: "Unaccepted",
@@ -231,7 +231,7 @@ export default function ProjectMoreInfo(props) {
                           onClick={() =>
                             axios
                               .patch(
-                                "https://geeb.herokuapp.com/applicants/update/status/" +
+                                "http://localhost:3010/applicants/update/status/" +
                                   applicant._id,
                                 {
                                   status: "Accepted",

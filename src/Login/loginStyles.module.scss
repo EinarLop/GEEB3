@@ -122,7 +122,13 @@
 
 .StatusMsg {
   @include StatusMsg;
+  &.Ok {
+    color: $mediumSpringGreen
+  }
 
+  &.Err {
+    color:#f74f39;
+  }
   //margin-top: 50px;
 }
 

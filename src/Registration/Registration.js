@@ -40,7 +40,7 @@ function Registration() {
         fullname: user.name + " " + user.lastName,
       };
       axios
-        .post("https://geeb.herokuapp.com/users/register", User, {
+        .post("http://localhost:3010/users/register", User, {
           withCredentials: true,
         })
         .then((RegisteredUser) => {

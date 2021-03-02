@@ -108,7 +108,7 @@ function CreateSProject() {
       console.log("Attempt to save sproject:");
       console.log(JSON.stringify(Project));
       axios
-        .post("https://geeb.herokuapp.com/sprojects/create", Project, {
+        .post("http://localhost:3010/sprojects/create", Project, {
           headers: {
             // Send the JWT along in the request header
             "auth-token": window.localStorage.getItem("auth-token"),
@@ -173,7 +173,7 @@ function CreateSProject() {
   ) : (
     <div>
       <div className={styles.WrapperTitle}>
-        <p className={styles.Title}>Add to Portfolio</p>
+        <p className={styles.Title}>New Portfolio Project</p>
       </div>
       <div className={styles.Wrapper}>
         <div className={styles.Box1}>

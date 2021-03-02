@@ -15,15 +15,9 @@
   -webkit-appearance: none;
 
   &.Large {
-    width: 400px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    @media (max-width: 500px) {
-      width: 300px;
-    }
-    @media (max-width: 1024px) {
-      width: 300px;
-    }
+    margin: 20px auto;
+    max-width: 400px;
+    min-width: 250px;
   }
 
   &:focus {
@@ -31,8 +25,7 @@
   }
 
   &:active {
-
     margin-top: 1em;
-
   }
+
 }
