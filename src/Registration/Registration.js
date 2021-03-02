@@ -45,7 +45,7 @@ function Registration() {
         })
         .then((RegisteredUser) => {
           let msg = (
-            <p style={{ color: "green" }}>
+            <p style={{ color: "green", fontSize: "1.8rem" }}>
               You are now registered! <br /> Redirecting you to Login...
             </p>
           );
@@ -58,7 +58,7 @@ function Registration() {
           // Set error message: "something went wrong"
           console.log("Server error", err);
           let msg = (
-            <p style={{ color: "red" }}>
+            <p style={{ color: "#f74f39", fontSize: "1.8rem" }}>
               Something went wrong. Please try again.
             </p>
           );

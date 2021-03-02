@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
-import {BsLink45Deg, BsFillFolderSymlinkFill} from 'react-icons/bs';
-import {IoMdPeople, IoMdImages} from 'react-icons/io';
-import {FaSlackHash} from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
+import { IoMdPeople, IoMdImages } from "react-icons/io";
+import { FaSlackHash } from "react-icons/fa";
 import styles from "./SProjMoreInfoStyles.module.scss";
 import axios from "axios";
 
@@ -36,33 +36,39 @@ export default function SProjectMoreInfo(props) {
         <p className={styles.Heading}>{project.title}</p>
         <p className={styles.Author}>
           <Link to={`/profile/${project.userid._id}`}>
-            {project.userid.username ? project.userid.username : "Not found"}</Link>'s portfolio
+            {project.userid.username ? project.userid.username : "Not found"}
+          </Link>
+          's portfolio
         </p>
-        <p className={styles.Description}>
-          {project.description}
-        </p>
+        <p className={styles.Description}>{project.description}</p>
       </div>
       <div className={styles.TagsSection}>
-        <label className={styles.Label}><FaSlackHash/>  Tags:</label>
+        <label className={styles.Label}>
+          <FaSlackHash /> Tags:
+        </label>
         <div className={styles.TagsContainer}>
           {project.tags.map((tag) => (
-            <div className={`${styles.Tag} ${styles.Want}`}>{tag}</div>
+            <div className={`${styles.Tag} ${styles.TopicTag}`}>{tag}</div>
           ))}
         </div>
       </div>
       <div className={styles.LinksContainer}>
-        <label className={styles.Label}><BsFillFolderSymlinkFill/>   Project Links:</label>
+        <label className={styles.Label}>
+          <BsFillFolderSymlinkFill /> Project Links:
+        </label>
         <ul className={styles.LinkList}>
           {project.links.map((link) => (
-              <a href={`//${link}`} target="_blank" className={styles.Link}>
-                <BsLink45Deg/>
-                {link.replace(/^https?:\/\//, "")}
-              </a>
+            <a href={`//${link}`} target="_blank" className={styles.Link}>
+              <BsLink45Deg />
+              {link.replace(/^https?:\/\//, "")}
+            </a>
           ))}
         </ul>
       </div>
       <div className={styles.Collaborators}>
-        <label className={styles.Label}><IoMdPeople/> Collaborators:</label>
+        <label className={styles.Label}>
+          <IoMdPeople /> Collaborators:
+        </label>
         <div
           /*style={{display:'flex', padding:'10px'}}*/ className={
             styles.NamesContainer
@@ -74,7 +80,9 @@ export default function SProjectMoreInfo(props) {
           ))}
         </div>
       </div>
-      <label className={styles.Label}><IoMdImages/>  Images:</label>
+      <label className={styles.Label}>
+        <IoMdImages /> Images:
+      </label>
       <div className={styles.ImagesSection}>
         {project.imageurls.map((img) => (
           <img src={img} />

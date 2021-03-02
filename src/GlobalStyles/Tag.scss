@@ -8,32 +8,32 @@
   margin: 15px 25px 0px 0;
 
   &.TopicTag {
-    background-color: $tagBlue;
-    border: 2px solid $tagBlue;
-
-    &:hover {
-      background-color: #fff;
-      color: $tagBlue;
-    }
-  }
-
-  &.SkillTag {
-    background-color: $tagPurple;
-    border: 2px solid $tagPurple;
-
-    &:hover {
-      background-color: #fff;
-      color: $tagPurple;
-    }
-  }
-
-  &.Mastered {
     background-color: #ff7043;
     border: 2px solid #ff7043;
 
     &:hover {
       background-color: transparent;
       color: #ff7043;
+    }
+  }
+
+  &.SkillTag {
+    background-color: #ba68c8;
+    border: 2px solid #ba68c8;
+
+    &:hover {
+      background-color: transparent;
+      color: #ba68c8;
+    }
+  }
+  //#ff7043;
+  &.Mastered {
+    background-color: #f3b700;
+    border: 2px solid #f3b700;
+
+    &:hover {
+      background-color: transparent;
+      color: #f3b700;
     }
   }
 
@@ -44,6 +44,17 @@
     &:hover {
       background-color: transparent;
       color: #ff479a;
+    }
+  }
+
+  // #ba68c8;
+  &.Want {
+    background-color: #80c74c;
+    border: 2px solid #80c74c;
+
+    &:hover {
+      background-color: transparent;
+      color: #80c74c;
     }
   }
 
@@ -83,16 +94,6 @@
     &:hover {
       background-color: #fff;
       color: $tagPurple;
-    }
-  }
-
-  &.Want {
-    background-color: #ba68c8;
-    border: 2px solid #ba68c8;
-
-    &:hover {
-      background-color: transparent;
-      color: #ba68c8;
     }
   }
 }
