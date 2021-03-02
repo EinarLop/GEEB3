@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./OprojectStyles.module.scss";
+import {AiFillCheckSquare, AiFillStar} from 'react-icons/ai';
+
 
 /*Component for an Oproject Card*/
 
@@ -42,7 +44,7 @@ export default function Oproject(props) {
             {/* <p className={styles.TitleCard}> {project.title}</p> */}
             <ul className={styles.Hlist}>
               {project.highlights.map((h) => (
-                <li>{h}</li>
+                <li><AiFillStar/>{h}</li>
               ))}
             </ul>
           </div>
