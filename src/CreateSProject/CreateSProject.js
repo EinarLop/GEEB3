@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CreateSProjectStyles.module.scss";
 import { Redirect } from "react-router-dom";
+import { AiOutlineUpload } from "react-icons/ai";
 import {
   sprojectValidation,
   validateLink,
@@ -41,7 +42,7 @@ function CreateSProject() {
     setPreviews((previews) => [...previews, fpreview]);
     console.log("Added", f);
     setFiles((files) => [...files, f]);
-    setUploadMsg(<p style={{ color: "green" }}>Added file: {f.name}</p>);
+    setUploadMsg(<p style={{ color: "#9ccc65" }}>Added file: {f.name}</p>);
     e.target.file.value = null; // reset the input
   };
 
@@ -80,7 +81,8 @@ function CreateSProject() {
     setTags(tags.filter((tag, i) => i !== index));
   };
   const onDeleteImage = (index) => {
-    setPreviews(images.filter((image, i) => i !== index));
+    setPreviews(previews.filter((image, i) => i !== index));
+    setUploadMsg("");
   };
   const onDeleteLink = (index) => {
     setLinks(links.filter((link, i) => i !== index));
@@ -262,10 +264,20 @@ function CreateSProject() {
             {/* Image Uploader starts here */}
             <p className={styles.Label}>File Uploader</p>
             <form onSubmit={onFileSubmit}>
-              <input  type="file" name="file"/>
-              <input className={styles.Button} type="submit" value="Add image"/>
+              <label className={styles.ChooseImg}>
+                Choose an image
+                <AiOutlineUpload className={styles.IconUpload} />
+                <input type="file" name="file" />
+              </label>
+
+              <input
+                className={styles.Button}
+                style={{ width: "170px" }}
+                type="submit"
+                value="Add and preview"
+              />
             </form>
-            {uploadMsg}
+            <p className={styles.UploadMsg}>{uploadMsg}</p>
           </div>
 
           <div className={styles.TContainer}>
