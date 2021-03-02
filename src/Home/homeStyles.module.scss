@@ -112,15 +112,17 @@
   //color: rgb(31, 30, 30); //;
   font-weight: bold;
 }
-b {
-  color: $secundary;//#00cc66
-  font-size: 20px;
-  font-weight: bold;
-}
+
+
 .Information {
-  //color: rgb(31, 30, 30);
-  //font-weight: bold;
+  font-size: 2.5rem;
+  b {
+    color: $secundary;//#00cc66
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
 }
+
 .Right {
   width: 35%;
 }
@@ -323,6 +325,10 @@ b {
   }
   .Information {
     font-size: 16px;
+    b {
+      color: $secundary;
+      font-size: 16px;
+    }
   }
   .Image1 {
     width: 240px;
@@ -404,13 +410,7 @@ b {
   .Bold {
     font-size: 16px;
   }
-  .Information {
-    font-size: 16px;
-    b {
-      font-size: 16px;
 
-    }
-  }
   .Image1 {
     width: 240px;
   }
