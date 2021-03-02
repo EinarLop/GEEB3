@@ -30,7 +30,8 @@ export default function home() {
         <div className={styles.Wrapper}>
             <div className={styles.InfoContainer}>
                 <div className={styles.InfoTitle}>
-                    <p className={styles.Title}>GO-AHEAD. EXPLORE. ENTERPRISE. BOND</p>
+                    <p className={styles.Title}>This is GEEB.</p>
+                    <p className={styles.Title2}>The place where creators meet.</p>
                 </div>
                 <div className={styles.InfoDescription}>
                     <p className={styles.Description}>
@@ -57,7 +58,7 @@ export default function home() {
                     <div className={styles.Left}>
                         <p className={styles.SmallSubtitle}>Team</p>
                         <p className={styles.Subtitle}>Project.</p>
-                        <p className={styles.Information}>Upload a description of what you want to do, add <b>tags</b> and <b>skills</b> so that people can see what you are looking for,<b> find your dream team!</b></p>
+                        <p className={styles.Information}>Upload a description of what you want to do, add <b>tags</b> and <b>skills</b> so that people can see what you're looking for,<b> find your dream team!</b></p>
                     </div>
                     <div className={styles.Right}>
                         <img className={styles.Image1} src={business} alt="A business metting"/>
@@ -70,7 +71,7 @@ export default function home() {
                     <div className={styles.Left1}>
                         <p className={styles.SmallSubtitle}>Personal</p>
                         <p className={styles.Subtitle}>Project.</p>
-                        <p className={styles.Information}>Upload your project to your portfolio in the application, add images and <b className={styles.Bold}>do not forget to mention the collaborators.</b></p>
+                        <p className={styles.Information}>Upload your project to your portfolio in the application, add images and <b className={styles.Bold}>don't forget to mention your collaborators!</b></p>
                     </div>
                 </div>
             </div>
@@ -115,7 +116,7 @@ export default function home() {
                     <div className={styles.Box2}>
                         <GoGear className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Tags</p>
-                        <p className={styles.BoxDescription}>What technologies does your app use?</p>
+                        <p className={styles.BoxDescription}>What tools, skills or frameworks were involved in the making of your project?</p>
                     </div>
                     <div className={styles.Box3}>
                         <FiFile className={styles.Icon}/>
@@ -150,7 +151,7 @@ export default function home() {
                     <div className={styles.Box4}>
                         <IoSearch className={styles.Icon}/>
                         <p className={styles.BoxTitle}>Want to learn</p>
-                        <p className={styles.BoxDescription}>Tell people what you want to learn! You may work with someone that has mastered that skill</p>
+                        <p className={styles.BoxDescription}>Tell about your areas of interest and what you'd like to learn! You may work with someone who has mastered that skill.</p>
                     </div>
                 </div>
             </div>

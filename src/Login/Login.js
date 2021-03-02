@@ -26,7 +26,7 @@ export default function login() {
     console.log(JSON.stringify(validation));
     if (validation.ok) {
       axios
-        .post("http://localhost:3010/users/login", user)
+        .post("https://geeb.herokuapp.com/users/login", user)
         .then((response) => {
           console.log("Succesful login POST");
           let msg = (

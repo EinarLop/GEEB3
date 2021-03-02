@@ -28,15 +28,16 @@ function TagsLinksTab(props) {
         </p>
         <div className={styles.LinksSpace}>
           <label className={styles.Label}></label>
+          <ul className={styles.LList}>
           {project.links.map((link) => (
-            <a href={`${link}`} target="_blank" className={styles.Link}>
-              <BsLink45Deg />
-              {link}
-            </a>
-
-            // <BsLink45Deg/>
-            // <li className={styles.Link}>poppop</li>
+          <li>
+          <a href={`${link}`} target="_blank" className={styles.Link}>
+                        <BsLink45Deg />
+                        {link}
+          </a>
+          </li>
           ))}
+          </ul>
         </div>
       </div>
     </div>
