@@ -7,7 +7,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 .Wrapper {
   padding: 50px;
   //width: 100%;
@@ -89,7 +88,7 @@
 .Button {
   @include NewButton;
 
-  background-color: $sLogin;
+  background-color: $pCardOp;
   color: $sLoginT;
   margin-top: 25px;
 }
@@ -118,10 +117,12 @@
   display: flex;
   flex-wrap: wrap;
   width: 45%;
+  font-size: 1.8rem;
 }
 
 .StatusMsg {
   @include StatusMsg;
+
   //margin-top: 50px;
 }
 
@@ -151,6 +152,10 @@
 
   .Bullet {
     text-align: center;
+  }
+
+  .Button {
+    margin: 25px 0;
   }
 }
 

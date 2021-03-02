@@ -1,0 +1,15 @@
+@import "../global.scss";
+
+@mixin Link {
+  &:link,
+  &:visited,
+  &:active {
+    color: white;
+  }
+  &:hover {
+    color: $primary;
+  }
+
+  font-size: 1.8rem;
+  margin-top: 25px;
+}

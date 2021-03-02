@@ -45,24 +45,35 @@ $tagPink: #ff0080;
 $newHeader: #2c2c2c;
 $newBackground: #1d1d1d;
 $cardBgSp: #2c2c2c;
-// $pCardSp: #81d4fa;
-// $pCardSpT: #0288d1;
-// $sCardSp: #b39ddb;
-// $sCardSpT: #512da8;
+
+$pCardOp: #81d4fa;
+$pCardSOT: #0288d1;
+$sCardOp: #b39ddb;
+$sCardOpT: #512da8;
 
 //P titulo y buton
 //S Labels Input Button (Tags, Skills)
-$inputBg: #2c2c2c;
+
 $pCardSp: #80cbc4;
 $pCardSpT: #004d40; //Changed to 900
 $sCardSp: #90caf9;
 $sCardSpT: #0d47a1; //Changed to 900
 
+$inputBg: #2c2c2c;
 $pLogin: #90caf9;
 $sLogin: #7fdeea;
 $sLoginT: #006064; /*FONTS*/
+
+////////////////////
+$background: #1d1d1d;
+$box: #2c2c2c;
+$primary: #90caf9;
+$primaryText: #0d47a1;
+$secundary: #80cbc4;
+$secundaryText: #004d40;
+
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $font;
   padding: 0;
   margin: 0;
   box-sizing: border-box;

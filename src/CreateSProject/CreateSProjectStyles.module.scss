@@ -1,14 +1,7 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss", "../GlobalStyles/StatusMsg.scss",
-  "../GlobalStyles/NewInput.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 18px;
-}
+  "../GlobalStyles/NewInput.scss", "../GlobalStyles/NewButton.scss";
 
 .Wrapper {
   display: flex;
@@ -79,10 +72,34 @@
   display: flex;
 }
 .TextArea {
-  @include Input;
+  @include NewInput;
+  max-width: 415px;
   height: 225px;
   display: flex;
   flex-direction: column;
+}
+.ChooseImg {
+  font-size: 1.8rem;
+  color: $primary;
+  width: 250px;
+  border: 2px solid $primary;
+  padding: 9px;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+.UploadMsg {
+  font-size: 1.8rem;
+  color: #9ccc65;
+}
+.IconUpload {
+  width: 35px;
+  height: 30px;
+  margin: -7px 0;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .Box3 {
@@ -97,7 +114,7 @@
   flex-wrap: wrap;
 }
 .TagInput {
-  @include Input;
+  @include NewInput;
   width: 300px;
 }
 .Tag {
@@ -111,23 +128,23 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 400px;
+  width: 100%;
 }
 
 .Preview {
-  border: 2px solid $blueAccent;
+  border: 1px solid transparent;
   border-radius: 10px;
   padding: 10px;
   margin: 15px 25px 0px 0;
-  background-color: none;
+  background-color: $box;
 
   &:hover {
-    background-color: $otherGrey;
+    background-color: #ef5350;
     border: none;
   }
 }
 img {
-  width: 100px;
+  width: 200px;
 }
 
 .Box4 {
@@ -168,9 +185,10 @@ img {
   width: 300px;
 }
 .ErrorMsg {
+  font-size: 18px;
   color: #f74f39;
   margin-top: 10px;
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -196,6 +214,9 @@ img {
 }
 
 @media (max-width: 767px) {
+  .TextArea {
+    max-width: 800px;
+  }
   .Box1,
   .Box2,
   .Box3,

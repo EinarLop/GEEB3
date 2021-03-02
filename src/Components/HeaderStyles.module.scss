@@ -3,9 +3,9 @@
 .Wrapper {
   display: flex;
   flex-direction: row;
-  height: 120px;
+  height: 75px;
   color: #fff;
-  background-color: $newHeader;
+  background-color: $box;
   margin: 0px;
   justify-content: space-between;
 
@@ -15,23 +15,24 @@
   font-size: 25px;
 }
 
+.HomeLink {
+  color: white;
+  text-decoration: none;
+}
+
 .IconNameContainer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 50%;
-  font-size: 22px;
+  width: 30%;
 }
 
 .NavContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: 70%;
   height: 100%;
-}
-.ConditionalContainerNav {
-  width: 50%;
 }
 
 .NavLink {
@@ -44,8 +45,12 @@
 }
 
 .NavLinkIcon {
-  width: 45px;
-  height: 45px;
+
+  width: 50px;
+  height: 50px;
+  margin: 0 15px;
+  color: white;
+
 }
 
 .LogOut {
@@ -57,8 +62,8 @@
 }
 
 .Icon {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   margin: 0 30px;
 }
 
@@ -75,17 +80,17 @@
 .Links {
   color: azure;
   text-decoration: none;
-  width: 100vw;
-  margin-bottom: 25px;
-
-  font-size: 25px;
+  width: auto;
+  font-size: 20px;
   text-align: center;
+
+  margin-left: 15px;
   &:hover {
     font-weight: 500;
   }
 
   &.Title {
-    color: $orangeAccent;
+    color: $primary;
     font-size: 38px;
     font-weight: 500;
   }
@@ -94,7 +99,7 @@
   position: absolute;
   width: 100%;
   height: auto;
-  background-color: $dark;
+  background-color: $box;
   display: flex;
   flex-direction: column;
 
@@ -104,11 +109,13 @@
 
 .MenuIcon {
   //margin-top: 25px;
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
+  justify-self: center;
+  margin: auto 15px auto 0;
   //margin-left: 20px;
   //margin-bottom: 25px;
-  margin: 25px 35px 25px 20px;
+  //margin: 25px 35px 25px 20px;
 }
 
 .ClosingIcon {
@@ -116,13 +123,30 @@
   width: 30px;
   height: 30px;
 }
+@media (max-width: 767px) {
+  .Links {
+    margin-bottom: 25px;
+    width: auto;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+}
 
 @media (max-width: 600px) {
-  .Icon {
-    min-height: 100px;
-    min-width: 100px;
-  }
   .Logo {
     display: none;
+  }
+
+  .Icon {
+    height: 50px;
+    width: 50px;
+    margin: 0 0 0 15px;
+  }
+
+  .Links {
+    margin-bottom: 25px;
+    width: auto;
+    text-align: center;
+    margin-bottom: 25px;
   }
 }

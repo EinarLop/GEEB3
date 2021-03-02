@@ -1,9 +1,6 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
   "../GlobalStyles/Button.scss";
-* {
-  font-size: 18px;
-}
 
 li {
   margin: 10px 0px;
@@ -15,11 +12,11 @@ li {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 25px;
+  padding: 10px;
 }
 .TitleCard {
-  font-size: 25px;
-  color: #e66d29;
+  font-size: 38px;
+  color: $secundary;
   margin-bottom: 25px;
 }
 .TagsSubtitle {
@@ -27,7 +24,6 @@ li {
 }
 .Wrapper {
   display: flex;
-
   flex-direction: column;
   justify-content: space-between;
   height: auto;
@@ -35,7 +31,7 @@ li {
 
 .Card {
   width: 100%;
-  background-color: #2c2c34;
+  background-color: $box;
   // border: 1px solid white;
   color: white;
   max-width: 1024px;
@@ -46,15 +42,16 @@ li {
 }
 .TabsUnselected {
   width: auto;
-  height: auto;
+  height: 75px;
   font-size: 20px;
   margin: 0px;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
 }
 .TabSelected {
-  background-color: #e66d29;
+  background-color: $secundary;
+  color: $secundaryText;
   &:focus {
     outline: none;
   }
@@ -68,7 +65,7 @@ li {
   padding: 0px;
   margin: 0;
   list-style-type: none;
-  border-bottom: 2px solid #e66d29;
+  border-bottom: 2px solid $secundary;
 }
 
 .Row0 {
@@ -87,19 +84,26 @@ li {
 }
 
 .Info {
-  font-style: italic;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5px;
   height: 45px;
   font-weight: 501;
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 25px;
+  color: $secundary;
+}
+
+.Description {
+  font-size: 1.8rem;
 }
 
 .Button {
   @include Button;
+  background-color: $primary;
+  color: $primaryText;
+  margin-bottom: 15px;
   &.Large {
     width: auto;
     height: auto;
@@ -136,24 +140,24 @@ li {
 }
 
 .Open {
-  color: rgb(73, 211, 130);
+  //color: rgb(73, 211, 130);
 }
 
 .Closed {
-  color: rgb(196, 9, 9);
+  //color: rgb(196, 9, 9);
 }
 
 .Hlist {
   font-weight: 500;
   font-size: 20px;
-  list-style: circle;
+  list-style: none;
   padding-left: 2em;
 }
 
 @media (max-width: 1380px) {
-  .ButtonDiv {
-    padding: 5px 15px 15px 15px;
-  }
+  // .ButtonDiv {
+  //   padding: 5px 15px 15px 15px;
+  // }
   .Global {
     font-size: 13px;
   }
@@ -165,7 +169,7 @@ li {
   .Info {
     flex-direction: column;
     height: auto;
-    font-size: 16px;
+
     font-weight: 500;
 
     p {
@@ -184,7 +188,7 @@ li {
   }
 
   .TabsUnselected {
-    font-size: 16px;
+    font-size: 20px;
     &:focus {
       outline: none;
     }
@@ -196,13 +200,13 @@ li {
     width: 250px;
     height: auto;
     align-self: center;
-    margin-top: 25px;
+    margin: 15px 0;
   }
   .ButtonDiv {
     display: flex;
     justify-content: center;
     height: auto;
-    padding: 0 0 15px 0;
+    //padding: 0 0 15px 0;
     font-size: 10px;
   }
 

@@ -1,12 +1,6 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  "../GlobalStyles/Link.scss", "../GlobalStyles/Button.scss";
 
 .Wrapper {
   display: flex;
@@ -24,7 +18,9 @@
 .TagsContainer {
   width: 45%;
 }
-
+.Tag {
+  @include Tag;
+}
 .TagsTitle,
 .LinksTitle {
   font-size: 25px;
@@ -34,6 +30,17 @@
 
 .LinksContainer {
   width: 40%;
+}
+
+.Link {
+  @include Link;
+  // font-size: 1.8rem;
+  // list-style: none;
+  // color: white;
+
+  // &:hover {
+  //   color: $primary;
+  // }
 }
 
 .ButtonContainer {
@@ -71,6 +78,13 @@
 
   .LinksSpace {
     font-size: 14px;
+  }
+
+  .LList {
+    list-style: none;
+    li {
+      list-style: none;
+    }
   }
 
   .ButtonContainer {

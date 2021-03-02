@@ -3,7 +3,11 @@ import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
 import ImageTwo from "./Images/ImageTwo.svg";
-import {Link, Redirect} from 'react-router-dom';
+import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
+import { MdSchool } from "react-icons/md";
+import { GiGreekTemple } from "react-icons/gi";
+import { Link, Redirect } from "react-router-dom";
 
 function Profile(props) {
   const [user, setUser] = useState({
@@ -13,7 +17,7 @@ function Profile(props) {
     mastered: ["Loading..."],
     learning: ["Loading..."],
     want: ["Loading..."],
-    bio: "Loading my cool description..."
+    bio: "Loading my cool description...",
     // university:
     // semester:
     // major:
@@ -25,32 +29,31 @@ function Profile(props) {
     console.log("Getting user with id:", props.match.params.id);
     if (props.match.params.id !== "null") {
       axios
-      .get("https://geeb.herokuapp.com/users/" + props.match.params.id, {
-        headers: {
-          // Send the JWT along in the request header
-          "auth-token": window.localStorage.getItem("auth-token"),
-        },
-      }) //  https://geeb.herokuapp.com/oprojects
-      .then((response) => {
-        setUser(response.data.user);
-        setIsOwner(response.data.isOwner);
-
-      }).catch(err => {
-        console.log("Error in Profile:", err);
-      });
+        .get("https://geeb.herokuapp.com/users/" + props.match.params.id, {
+          headers: {
+            // Send the JWT along in the request header
+            "auth-token": window.localStorage.getItem("auth-token"),
+          },
+        }) //  https://geeb.herokuapp.comoprojects
+        .then((response) => {
+          setUser(response.data.user);
+          setIsOwner(response.data.isOwner);
+        })
+        .catch((err) => {
+          console.log("Error in Profile:", err);
+        });
     } else {
       console.log("Warning: /:id is null");
-      setTimeout(()=>{setRedirect(true)}, 1000);
+      setTimeout(() => {
+        setRedirect(true);
+      }, 1000);
     }
   }, []);
 
-  return (
-    redirect ? <Redirect to="/login"/> :
+  return redirect ? (
+    <Redirect to="/login" />
+  ) : (
     <div className={styles.Wrapper}>
-      {isOwner ?       
-      <div className={styles.EditBtnContainer}>
-        <Link to="/editprofile" className={styles.Button}>Edit Profile</Link>
-      </div> : <></>}
       <div className={styles.NameContainer}>
         <p className={styles.Name}>{user.fullname}</p>
         <p className={styles.Username}>@{user.username}</p>
@@ -60,24 +63,49 @@ function Profile(props) {
       </div>
       <div className={styles.AboutMeContainer}>
         <p className={styles.AboutMeTitle}>About me</p>
-        <p className={styles.AboutMeContent}>{user.bio}</p>
+        <p className={styles.InfoText}>{user.bio}</p>
       </div>
       <div className={styles.EducationContainer}>
-        <p className={styles.CollegeTitle}>University</p>
-        <p className={styles.CollegeContent}>{user.university}</p>
+        <p className={styles.CollegeTitle}>
+          <GiGreekTemple /> University
+        </p>
+        <p className={styles.InfoText}>{user.college}</p>
         <p className={styles.CollegeContent}>Semester: {user.semester}</p>
-        <p className={styles.MajorTitle}>Major</p>
-        <p className={styles.MajorContent}>{user.major}</p>
+        <p className={styles.MajorTitle}>
+          <MdSchool /> Major
+        </p>
+        <p className={styles.InfoText}>{user.major}</p>
+        {isOwner ? (
+          <Link to="/editprofile" className={styles.Button}>
+            Edit Profile
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
+
       <div className={styles.LinksContainer}>
-        <p className={styles.LinksTitle}>My Links</p>
-        {user.links.map((link) => (
-          <p className={styles.LinksContent}>{link}</p>
-        ))}
+        <p className={styles.LinksTitle}>
+          {" "}
+          <BsFillFolderSymlinkFill /> My Links
+        </p>
+        {user.links.length ? (
+          user.links.map((link) => (
+            // Doble // para que el href sea absoluto
+            <a href={`//${link}`} target="_blank" className={styles.Link}>
+              <BsLink45Deg /> {link}
+            </a>
+          ))
+        ) : (
+          <p className={styles.InfoText}>No links yet!</p>
+        )}
       </div>
 
       <div className={styles.StackContainer}>
-        <p className={styles.StackTitle}>My Stack</p>
+        <p className={styles.StackTitle}>
+          {" "}
+          <FaStar /> My Stack
+        </p>
       </div>
       <div className={styles.MasterdContainer}>
         <p className={styles.MasterdTitle}>Mastered:</p>
@@ -104,9 +132,10 @@ function Profile(props) {
         </div>
       </div>
 
+      {/* LINKS TO UNSUPPORTED SECTIONS
       <div className={styles.ProjectsContainer}>
         <p className={styles.PortfolioContent}>My Portfolio</p>
-        <a className={styles.PortfolioLink}>here</a>
+        <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>here</Link>
         <p className={styles.TeamContent}>
           Collaborating in X Team Projects:
         </p>
@@ -114,8 +143,7 @@ function Profile(props) {
       </div>
       <div className={styles.ImageTwoContainer}>
         <img className={styles.ImageTwo} src={ImageTwo} />
-      </div>
-
+          </div>*/}
     </div>
   );
 }

@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeaderStyles.module.scss";
-import { MdNaturePeople } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import {IoPersonCircleOutline} from 'react-icons/io5';
-import { GiBurningTree } from "react-icons/gi";
+import {HiOutlineViewGridAdd} from 'react-icons/hi';
+import { IoPersonCircleOutline } from "react-icons/io5";
+import {FiBox} from 'react-icons/fi';
+import {BsFolderPlus} from 'react-icons/bs';
+import {ImBooks} from 'react-icons/im';
+import {MdContactMail} from 'react-icons/md';
+
+
+import { FaPeopleCarry } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 /* Header layout:  Icon, Logo, 'Create', 'Explore', Header is visible to anyone who is logged in.*/
 
@@ -18,25 +23,25 @@ export default function Header() {
   const handleClick = (event) => {
     setIsOpen(!isOpen);
   };
+
   useEffect(() => {
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
     setVisitor(geebId);
   });
 
-  const onLogButton = (event) => {
-    /*How to delete a session using LocalStorage? */
-    if (isLogged) {
-      location.href = "/oproject/:id";
-    } else {
-      location.href = "/login";
-    }
-  };
+
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconNameContainer}>
-        <GiBurningTree className={styles.Icon} />
-        <h2 className={styles.Logo}>Intecreate</h2>
+
+        <Link to="/" className={styles.HomeLink}>
+          <FaPeopleCarry className={styles.Icon} />
+        </Link>
+        <Link className={styles.HomeLink} to="/">
+          <h2 className={styles.Logo}>GEEB </h2>
+        </Link>
+
       </div>
       {isMd ? (
         <div className={styles.PageWrap}>
@@ -48,19 +53,57 @@ export default function Header() {
                   className={styles.ClosingIcon}
                   onClick={handleClick}
                 />
-                <a className={`${styles.Links} ${styles.Title}`}> GEEB </a>
+
+                <Link
+                  to="/"
+                  onClick={handleClick}
+                  className={`${styles.Links} ${styles.Title}`}
+                >
+                  {" "}
+                  GEEB{" "}
+                </Link>
                 {/* <a className={styles.Links} href="/register">
                   Register
                 </a> */}
-                <Link to="/oprojects" className={styles.Links}>Team Projects</Link>
-                <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
-                <Link to="/create" className={styles.Links}></Link>
-                <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
 
-                <a href={`/profile/${visitor}`} className={styles.Links}>My profile</a>
+                <Link
+                  to="/oprojects"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
+                  Find Team Projects <HiOutlineViewGridAdd/>
+                </Link>
+                <Link
+                  to="/sprojects"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
+                  View Portfolio Projects <ImBooks/>
+                </Link>
 
-                <Link to={`/myapplication/${visitor}`} className={styles.Links}>Application</Link>
-                <Link to={`/profile/${visitor}`} className={styles.Links}>My profile</Link>
+                <Link
+                  to="/createsproject"
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
+                  Add to Portfolio <BsFolderPlus/> 
+                </Link>
+
+                <Link
+                  to={`/myapplication/${visitor}`}
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
+                  My Applications <MdContactMail/>
+                </Link>
+
+                <Link
+                  to={`/profile/${visitor}`}
+                  onClick={handleClick}
+                  className={styles.Links}
+                >
+                  My profile <IoPersonCircleOutline/>
+                </Link>
 
                 {/* <a className={styles.Links} href="/login">
                   Logout
@@ -70,21 +113,23 @@ export default function Header() {
           )}
         </div>
       ) : (
-        <div className={styles.ConditionalContainerNav}>
           <div className={styles.NavContainer}>
-            <Link to="/oprojects" className={styles.Links}>Team Projects</Link>
-            <Link to="/sprojects" className={styles.Links}>Portfolio Projects</Link>
-            <Link to="/create" className={styles.Links}>Create a Project</Link>
-            <Link to="/createsproject" className={styles.Links}>Add to Portfolio</Link>
+            <Link to="/oprojects" className={styles.Links}>
+              Find Projects <HiOutlineViewGridAdd/>
+            </Link>
+            <Link to="/sprojects" className={styles.Links}>
+              View Portfolios <ImBooks/>
+            </Link>
+            <Link to="/create" className={styles.Links}>
+              Create Project <FiBox/>
+            </Link>
+            <Link to="/createsproject" className={styles.Links}>
+              Add to Portfolio <BsFolderPlus/>
+            </Link>
             <a href={`/profile/${visitor}`}>
               <IoPersonCircleOutline className={styles.NavLinkIcon} />
             </a>
-            {/* <CgProfile className={styles.Profile} href="/" /> */}
-            {/* <button className={styles.LogOut} onClick={() => onLogButton()}>
-              Log Out
-            </button> */}
           </div>
-        </div>
       )}
     </div>
   );

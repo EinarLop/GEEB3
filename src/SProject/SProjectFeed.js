@@ -12,7 +12,7 @@ function SProjectFeed() {
 
   useEffect(() => {
     axios
-      .get("https://geeb.herokuapp.com/sprojects") ///"https://geeb.herokuapp.com/sprojects" https://geeb.herokuapp.com/sprojects
+      .get("https://geeb.herokuapp.com/sprojects") ///"https://geeb.herokuapp.com/sprojects" https://geeb.herokuapp.comsprojects
       .then((response) => setProjects(response.data));
   }, []);
 
