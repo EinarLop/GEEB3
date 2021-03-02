@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./OprojectStyles.module.scss";
-import {AiFillCheckSquare, AiFillStar} from 'react-icons/ai';
-
+import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
 
 /*Component for an Oproject Card*/
 
@@ -24,10 +23,23 @@ export default function Oproject(props) {
             <p className={styles.Description}>{project.description}</p>
             <div className={styles.Info}>
               <div className={styles[project.status]}>
-                <p>Status: {project.status}</p>
+                <p>
+                  {" "}
+                  Status: <b>{project.status}</b>
+                </p>
               </div>
-              <p>Creator: @{project.userid.username}</p>
-              <p>Posted: {project.created.slice(0, 10)}</p>
+              <p>
+                Creator:
+                <b>
+                  {" "}
+                  @{project.userid
+                    ? project.userid.username
+                    : "Loading..."}{" "}
+                </b>
+              </p>
+              <p>
+                Posted:<b> {project.created.slice(0, 10)} </b>
+              </p>
             </div>
           </div>
           <div className={styles.ButtonDiv}>
@@ -44,7 +56,10 @@ export default function Oproject(props) {
             {/* <p className={styles.TitleCard}> {project.title}</p> */}
             <ul className={styles.Hlist}>
               {project.highlights.map((h) => (
-                <li><AiFillStar/>{h}</li>
+                <li>
+                  <AiFillStar />
+                  {h}
+                </li>
               ))}
             </ul>
           </div>

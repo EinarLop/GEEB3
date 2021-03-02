@@ -1,6 +1,7 @@
 @import "../global", "../GlobalStyles/Tag.scss", "../GlobalStyles/Button.scss",
   "../GlobalStyles/Input.scss", "../GlobalStyles/Button.scss",
-  "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss";
+  "../GlobalStyles/StatusMsg.scss", "../GlobalStyles/Link.scss",
+  "../GlobalStyles/NewInput.scss", "../GlobalStyles/NewButton.scss";
 
 .Wrapper {
   display: flex;
@@ -40,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-right: 30px;
   //border: 1px solid red;
 }
 
@@ -54,6 +56,7 @@
 .InputandLabelContainer {
   display: flex;
   flex-direction: column;
+
   //border: 1px solid grey;
 }
 
@@ -63,6 +66,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+
   //border: 1px solid lightblue;
 }
 
@@ -71,6 +75,7 @@
 .WantContainer {
   width: 33%;
   height: 250px;
+
   //border: 1px solid blue;
 }
 
@@ -83,6 +88,9 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+  padding-right: 30px;
+  margin-bottom: 50px;
+
   //border: 1px solid green;
 }
 .LinksWrapper {
@@ -102,21 +110,22 @@
 }
 
 .Input {
-  @include Input;
+  @include NewInput;
   margin: 15px 0;
-  max-width: 250px;
+  max-width: 400px;
 }
 .InputSmall {
-  @include Input;
+  @include NewInput;
   width: 250px;
   max-width: 200px;
-  margin: 15px 15px 15px 0;
+  margin: 15px 0;
 }
 .Label {
   @include Label;
   font-size: 25px;
   margin-bottom: 0;
   color: $primary;
+  width: 100%;
 }
 
 .Button {
@@ -141,26 +150,30 @@
   color: $primary;
 }
 .TextArea {
-  height: 80%;
-  width: 80%;
+  @include NewInput;
+  height: 250px;
+  max-width: 400px;
 
-  font-family: $font;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: $box;
-  color: white;
-  font-size: 18px;
-  box-sizing: border-box;
+  // height: 80%;
+  // width: 80%;
 
-  &:focus {
-    outline: none;
-    border: 2px solid $orangeAccent;
-    //background-color: #545463;
-  }
-  &::placeholder {
-    color: #ffffff60;
-    font-size: 18px;
-  }
+  // font-family: $font;
+  // border: 1px solid transparent;
+  // border-radius: 5px;
+  // background-color: $box;
+  // color: white;
+  // font-size: 18px;
+  // box-sizing: border-box;
+
+  // &:focus {
+  //   outline: none;
+  //   border: 2px solid $orangeAccent;
+  //   //background-color: #545463;
+  // }
+  // &::placeholder {
+  //   color: #ffffff60;
+  //   font-size: 18px;
+  // }
 }
 
 .Tag {
@@ -216,9 +229,9 @@
 }
 
 @media (max-width: 767px) {
-
   .Box1 {
     width: 100%;
+    padding-right: 0;
   }
 
   .Wrapper {
@@ -247,6 +260,8 @@
 
   .EducationWrapper {
     width: 100%;
+    padding-right: 0;
+    margin-top: 25px;
   }
 
   .LinksWrapper {
@@ -263,25 +278,30 @@
   }
 
   .Input {
-    margin: 15px auto;
+    margin: 15px 0 25px 0;
+    max-width: 700px;
   }
 
   .Label {
     width: 250px;
-    align-self: center;
+    //align-self: center;
   }
   .Button {
+    @include NewButton;
+    border: 2px solid $primary;
     align-self: center;
-    width: 250px;
   }
 
   .InputSmall {
+    @include NewInput;
     margin: 15px auto;
-    max-width: 250px;
+
+    // max-width: 250px;
   }
 
   .ButtonTags {
-    width: 250px;
+    @include NewButton;
+    border: 2px solid $primary;
     align-self: center;
   }
 }

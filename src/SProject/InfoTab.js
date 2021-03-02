@@ -15,16 +15,14 @@ function InfoTab(props) {
         {/* <p className={styles.Title}>{project.title}</p> */}
         <p className={styles.Title}>{project.title}</p>
         {/* <p className={styles.Description}>{project.description}</p> */}
-        <p className={styles.Description}>
-          {project.description}
-        </p>
+        <p className={styles.Description}>{project.description}</p>
         <div className={styles.CreatorContainer}>
           <p className={styles.Subtitle}>Creator</p>
           <p className={styles.Description}>@{project.userid.username}</p>
         </div>
         <div className={styles.DateContainer}>
           <p className={styles.Subtitle}>Posted</p>
-          <p className={styles.Description}>{project.createad}</p>
+          <p className={styles.Description}>{project.created.slice(0, 10)}</p>
         </div>
       </div>
 
