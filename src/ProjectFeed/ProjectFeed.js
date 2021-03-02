@@ -30,6 +30,7 @@ function ProjectFeed() {
 
   return (
     <div className={styles.Global}>
+      <p className={styles.Title}> Explore Team Projects</p>
       {/*---Tag Filter Bar component here---*
             <input
         type="button"

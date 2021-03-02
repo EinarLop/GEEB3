@@ -18,10 +18,10 @@ function SProjectFeed() {
 
   return (
     <div className={styles.Global}>
+      <p className={styles.Title}> Explore Portfolio Projects</p>
       {projects.map((project, index) => (
         //<Sproject project={project}/>
         <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
-
           <TabList className={styles.TabsList}>
             <Tab className={styles.TabsUnselected}>Overview</Tab>
             <Tab className={styles.TabsUnselected}>Tags & Links</Tab>
@@ -37,7 +37,6 @@ function SProjectFeed() {
             <ImagesTab project={project} />
           </TabPanel>
         </Tabs>
-
       ))}
     </div>
   );
