@@ -3,11 +3,10 @@ import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
 import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
 import { Link } from "react-router-dom";
-import {FaTrophy} from 'react-icons/fa';
-import {MdPersonPin} from 'react-icons/md';
-import {BiCheckSquare} from 'react-icons/bi';
-import {AiFillCheckSquare, AiFillStar} from 'react-icons/ai';
-
+import { FaTrophy } from "react-icons/fa";
+import { MdPersonPin } from "react-icons/md";
+import { BiCheckSquare } from "react-icons/bi";
+import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -75,14 +74,14 @@ export default function ProjectMoreInfo(props) {
           },
         })
         .then((res) => setErrorInput("You already applied to this project!"));
-        location.reload();
+      location.reload();
     }
   };
 
-  const hasARequest = (applications) =>{
-    for(var a in applications){
+  const hasARequest = (applications) => {
+    for (var a in applications) {
       console.log(applications[a].userid._id);
-      if (applications[a].userid._id == localStorage.getItem("geebId")){
+      if (applications[a].userid._id == localStorage.getItem("geebId")) {
         setAlreadySend(true);
       }
     }
@@ -96,7 +95,9 @@ export default function ProjectMoreInfo(props) {
           <p className={styles.Title}>{project.title}</p>
           <p className={styles.Author}>
             Posted by:{" "}
-            <Link to={`/profile/${project.userid._id}`}>@{project.userid.username ? project.userid.username : "Not found"}</Link>
+            <Link to={`/profile/${project.userid._id}`}>
+              @{project.userid.username ? project.userid.username : "Not found"}
+            </Link>
           </p>
         </div>
         <div className={styles.DescContainer}>
@@ -104,22 +105,26 @@ export default function ProjectMoreInfo(props) {
         </div>
 
         <div className={styles.Highlights}>
-          <p className={styles.TitleSubtitle}><FaTrophy/> Highlights</p>
+          <p className={styles.TitleSubtitle}>
+            <FaTrophy /> Highlights
+          </p>
           <div className={styles.ListContainer}>
             {project.highlights.map((highlight, index) => (
               <p className={styles.Text} key={index}>
-                <AiFillStar/>  {highlight}
+                <AiFillStar /> {highlight}
               </p>
             ))}
           </div>
         </div>
 
         <div className={styles.Column0}>
-          <h3 className={styles.TitleSubtitle}><MdPersonPin/>  Profile we are looking for</h3>
+          <h3 className={styles.TitleSubtitle}>
+            <MdPersonPin /> Profile we are looking for
+          </h3>
           <div className={styles.ListContainer}>
             {project.desirables.map((t, index) => (
               <p className={styles.Text} key={index}>
-                <BiCheckSquare/>  {t}
+                <BiCheckSquare /> {t}
               </p>
             ))}
           </div>
@@ -145,17 +150,21 @@ export default function ProjectMoreInfo(props) {
 
         {!isOwner ? (
           project.status == "Open" ? (
-            alreadySend ?  
-            <div className={styles.SentMsgContainer}>
-                <p className={styles.SentMsg}>You've submitted an application to this project!</p>
-            </div>
-            : (
+            alreadySend ? (
+              <div className={styles.SentMsgContainer}>
+                <p className={styles.SentMsg}>
+                  You've submitted an application to this project!
+                </p>
+              </div>
+            ) : (
               <div className={styles.userInputs}>
                 <p className={styles.TitleSubtitle}>Send a request</p>
                 {/*<p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>*/}
                 <div className={styles.ApplicationMsg}>
                   <div className={styles.InputLabelContainer}>
-                    <label className={styles.Label}>Description</label>
+                    <label className={styles.Label}>
+                      Why are you a great fit for this project?
+                    </label>
                     <textarea
                       className={styles.ReasonForRequest}
                       name="motive"
@@ -163,7 +172,7 @@ export default function ProjectMoreInfo(props) {
                     ></textarea>
                   </div>
                 </div>
-                <p>{errorInput}</p>
+                <p className={styles.ErrorMsg}>{errorInput}</p>
                 <input
                   type="button"
                   className={`${styles.Button} ${styles.Large} `}

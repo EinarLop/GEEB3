@@ -1,6 +1,6 @@
 @import "../_global.scss", "../GlobalStyles/Input.scss",
   "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
-  "../GlobalStyles/Button.scss";
+  "../GlobalStyles/Link.scss", "../GlobalStyles/Button.scss";
 
 .Wrapper {
   display: flex;
@@ -18,7 +18,9 @@
 .TagsContainer {
   width: 45%;
 }
-
+.Tag {
+  @include Tag;
+}
 .TagsTitle,
 .LinksTitle {
   font-size: 25px;
@@ -28,6 +30,17 @@
 
 .LinksContainer {
   width: 40%;
+}
+
+.Link {
+  @include Link;
+  // font-size: 1.8rem;
+  // list-style: none;
+  // color: white;
+
+  // &:hover {
+  //   color: $primary;
+  // }
 }
 
 .ButtonContainer {
