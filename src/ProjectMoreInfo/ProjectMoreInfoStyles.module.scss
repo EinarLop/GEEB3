@@ -178,11 +178,18 @@
 
 .Button {
   @include NewButton;
-  background-color: $secundary;
+  //background-color: #80c74c;
+  background-color: $primary;
   color: $secundaryText;
   font-size: 1.8rem;
+  margin-right: 10px;
   &.Reject {
-    background-color: #2c2c34;
+    border: 2px solid $primary;
+    color: $primary;
+    background-color: transparent;
+    //border: 2px solid $primary;
+    //background-color: #f74f39;
+    //color:#7b170a;
   }
 }
 
@@ -236,18 +243,21 @@
   flex-direction: column;
 }
 .Application {
-  background-color: $dark;
-  border: 1px solid transparent;
+  border: 3px solid $primary;
   border-radius: 15px;
   width: 100%;
   margin: 25px 0;
   padding: 25px;
+  .Text{
+    margin:10px 0px ;
+  }
 }
 
 .ButtonWrapper {
   width: 100%;
   display: flex;
   margin-top: 10px;
+  padding: 5px;
 }
 
 @media (max-width: 1380px) {

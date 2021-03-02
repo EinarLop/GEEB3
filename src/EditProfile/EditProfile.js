@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import styles from "./EditProfileStyles.module.scss";
 import { Link, Redirect } from "react-router-dom";
-import { validateProfile, validateTags, validateInputTag, validateLink } from "../Validation/EditProfileValidation";
+import {
+  validateProfile,
+  validateTags,
+  validateInputTag,
+  validateLink,
+} from "../Validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
-import {BsLink45Deg} from 'react-icons/bs';
-
+import { BsLink45Deg } from "react-icons/bs";
 
 export default function EditProfile() {
   const [userId, setUserId] = useState(null);
-  const [redirect, setRedirect] = useState(false);   // if user is not owner or user cannot edit, we redirect
+  const [redirect, setRedirect] = useState(false); // if user is not owner or user cannot edit, we redirect
   const [finished, setFinished] = useState(false);
   const [learning, setLearning] = useState([]);
   const [mastered, setMastered] = useState([]);
   const [want, setWant] = useState([]);
   const [links, setLinks] = useState([]);
-  const [status, setStatus] = useState();   // for validation status msg
+  const [status, setStatus] = useState(); // for validation status msg
   const [form, setForm] = useState({
     bio: "",
     name: "",
     lastname: "",
     email: "",
     major: "",
-    college:"ITESM",
+    college: "ITESM",
     semester: 1,
     tag_master: "",
     tag_learn: "",
@@ -32,7 +36,7 @@ export default function EditProfile() {
 
   const [message, setMessage] = useState({
     errorName: "",
-    errorEmail:"",
+    errorEmail: "",
     errorBio: "",
     errorLinks: "",
     errorMajor: "",
@@ -40,7 +44,7 @@ export default function EditProfile() {
     errorLearning: "",
     errorWants: "",
   });
-  
+
   const [colleges, setColleges] = useState([
     // retrieve from database "colleges" collection
     "ITESM",
@@ -54,7 +58,7 @@ export default function EditProfile() {
     "LA SALLE",
   ]);
 
-  useEffect(() => {   
+  useEffect(() => {
     // get information of logged in user
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
@@ -77,7 +81,7 @@ export default function EditProfile() {
 
           const User = response.data.user;
           let fullname = User.fullname.split(" ");
-          setForm( {
+          setForm({
             ...form,
             name: fullname[0],
             lastname: fullname[1],
@@ -86,21 +90,21 @@ export default function EditProfile() {
             major: User.major,
             college: User.college,
             semester: User.semester,
-          })
+          });
           setMastered(User.mastered);
           setLearning(User.learning);
           setWant(User.want);
           setLinks(User.links);
           console.log("Setting form...");
-        }).catch(err => {
+        })
+        .catch((err) => {
           console.log("Error in Profile:", err);
-      });
-
+        });
     } else {
       console.log("No user logged in");
       setRedirect(true);
     }
-  }, [])    // empty array so it is only called on mount
+  }, []); // empty array so it is only called on mount
 
   //onDelete ******************************************************************************************************************************
   const onDeleteLink = (index) => {
@@ -118,55 +122,53 @@ export default function EditProfile() {
 
   //onADD ******************************************************************************************************************************
   const onAddTagMastered = (event) => {
-    let err = validateInputTag(form.tag_master, mastered.length+1);
+    let err = validateInputTag(form.tag_master, mastered.length + 1);
     console.log("Add Tag err:", err);
-    if (err==="") {
+    if (err === "") {
       setMastered((mastered) => [...mastered, form.tag_master]);
-    } 
+    }
     setMessage({
       ...message,
       errorMastered: err,
-    })
-
+    });
   };
   const onAddTagLearning = (event) => {
-    let err = validateInputTag(form.tag_learn, learning.length+1);
+    let err = validateInputTag(form.tag_learn, learning.length + 1);
     console.log("Add Tag err:", err);
-    if (err==="") {
+    if (err === "") {
       setLearning((learning) => [...learning, form.tag_learn]);
-    } 
+    }
 
     setMessage({
       ...message,
       errorLearning: err,
-    })
+    });
   };
 
   const onAddTagWant = (event) => {
-    let err = validateInputTag(form.tag_want, want.length+1);
+    let err = validateInputTag(form.tag_want, want.length + 1);
     console.log("Add Tag err:", err);
-    if (err==="") {
+    if (err === "") {
       setWant((want) => [...want, form.tag_want]);
-    } 
+    }
     setMessage({
       ...message,
       errorWants: err,
-    })
+    });
   };
   const onAddLink = (event) => {
-    setMessage( {
+    setMessage({
       ...message,
       errorLinks: "",
-    })
-    let err = validateLink(form.currentLink, links.length+1);
-    if (err==="") {
+    });
+    let err = validateLink(form.currentLink, links.length + 1);
+    if (err === "") {
       setLinks((links) => [...links, form.currentLink]);
     }
-    setMessage( {
+    setMessage({
       ...message,
       errorLinks: err,
-    })
-
+    });
   };
 
   //onChange ***************************************************************************************************************************
@@ -195,39 +197,56 @@ export default function EditProfile() {
       mastered,
       learning,
       want,
-    }
+    };
     console.dir(User);
     const validation = validateProfile(User);
     console.dir(validation);
     let msg;
     if (validation.ok) {
-      msg = <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>Updating Profile...</p>
+      msg = (
+        <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>
+          Updating Profile...
+        </p>
+      );
 
       console.log("Submitting post update request for", userId);
       axios
         .put(`http://localhost:3010/users/update/${userId}`, User, {
           headers: {
-          "auth-token": window.localStorage.getItem("auth-token"),
+            "auth-token": window.localStorage.getItem("auth-token"),
           },
-      })
-      .then(result => {
-        console.dir(result);
-        msg = <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>Updated Successfully!</p>
-        setStatus(msg);
-        setTimeout(()=>{setFinished(true)}, 1000);
-      })
-      .catch(err => {console.log("Error updating:", err)});
-    } 
-    else {
-      msg = <p className={`${styles.StatusMsg} ${styles.ErrorMsg}`}>Please check your inputs!</p>
+        })
+        .then((result) => {
+          console.dir(result);
+          msg = (
+            <p className={`${styles.StatusMsg} ${styles.SuccessMsg}`}>
+              Updated Successfully!
+            </p>
+          );
+          setStatus(msg);
+          setTimeout(() => {
+            setFinished(true);
+          }, 1000);
+        })
+        .catch((err) => {
+          console.log("Error updating:", err);
+        });
+    } else {
+      msg = (
+        <p className={`${styles.StatusMsg} ${styles.ErrorMsg}`}>
+          Please check your inputs!
+        </p>
+      );
     }
     setMessage(validation);
     setStatus(msg);
-  }
+  };
 
-  return (
-    redirect ? <Redirect to="/login" /> :
-    finished ? <Redirect to={`/profile/${userId}`}/> :
+  return redirect ? (
+    <Redirect to="/login" />
+  ) : finished ? (
+    <Redirect to={`/profile/${userId}`} />
+  ) : (
     <div className={styles.Wrapper}>
       <div className={styles.Box0}>
         <h1 className={styles.PageTitle}>Edit Profile</h1>
@@ -235,15 +254,33 @@ export default function EditProfile() {
       <div className={styles.Box1}>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Name</label>
-          <input className={styles.Input} name="name" type="text" value={form.name} onChange={handleOnChange}/>
+          <input
+            className={styles.Input}
+            name="name"
+            type="text"
+            value={form.name}
+            onChange={handleOnChange}
+          />
         </div>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Last name</label>
-          <input className={styles.Input} name="lastname" type="text" value={form.lastname} onChange={handleOnChange}/>
+          <input
+            className={styles.Input}
+            name="lastname"
+            type="text"
+            value={form.lastname}
+            onChange={handleOnChange}
+          />
         </div>
         <div className={styles.InputandLabelContainer}>
           <label className={styles.Label}>Email</label>
-          <input className={styles.Input} name="email" type="email" value={form.email} onChange={handleOnChange}/>
+          <input
+            className={styles.Input}
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleOnChange}
+          />
           <p className={styles.ErrorMsg}>{message.errorEmail}</p>
         </div>
         <p className={styles.ErrorMsg}>{message.errorName}</p>
@@ -263,9 +300,18 @@ export default function EditProfile() {
 
       <div className={styles.EducationWrapper}>
         <label className={styles.Label}>College:</label>
-        <select className={styles.Input} name="college" value={form.college} onChange={handleOnChange}>
+        <select
+          className={styles.Input}
+          name="college"
+          value={form.college}
+          onChange={handleOnChange}
+        >
           {colleges.map((name, index) => {
-            return <option key={index} value={colleges[index]}>{name}</option>; // use the index as logical key for db collection
+            return (
+              <option key={index} value={colleges[index]}>
+                {name}
+              </option>
+            ); // use the index as logical key for db collection
           })}
         </select>
         <label className={styles.Label}>Major:</label>
@@ -308,8 +354,12 @@ export default function EditProfile() {
         <p className={styles.ErrorMsg}>{message.errorLinks}</p>
         <div className={styles.LinkListContainer}>
           {links.map((link, index) => (
-            <div key={index} className={styles.Link} onClick={() => onDeleteLink(index)}>
-              <BsLink45Deg/>
+            <div
+              key={index}
+              className={styles.Link}
+              onClick={() => onDeleteLink(index)}
+            >
+              <BsLink45Deg />
               {link}
             </div>
           ))}
@@ -333,7 +383,7 @@ export default function EditProfile() {
         <p className={styles.ErrorMsg}>{message.errorMastered}</p>
         <div className={styles.MasteredTagContainer}>
           {mastered.map((masteredTag, index) => (
-            <div 
+            <div
               key={index}
               onClick={() => onDeleteMastered(index)}
               className={`${styles.Tag} ${styles.Mastered}`}
@@ -372,7 +422,7 @@ export default function EditProfile() {
         </div>
       </div>
       <div className={styles.WantContainer}>
-        <label className={styles.Label}> Skills I Want to Learn </label>
+        <label className={styles.Label}> Want to learn skills </label>
         <input
           className={styles.InputSmall}
           onChange={handleOnChange}
@@ -407,7 +457,6 @@ export default function EditProfile() {
         />
       </div>
       {status}
-
     </div>
   );
 }

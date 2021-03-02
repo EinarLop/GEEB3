@@ -88,14 +88,14 @@ export default function Header() {
                 >
                   Add to Portfolio <BsFolderPlus/> 
                 </Link>
-
+                {/*
                 <Link
                   to={`/myapplication/${visitor}`}
                   onClick={handleClick}
                   className={styles.Links}
                 >
                   My Applications <MdContactMail/>
-                </Link>
+                </Link>*/}
 
                 <Link
                   to={`/profile/${visitor}`}
@@ -113,24 +113,23 @@ export default function Header() {
           )}
         </div>
       ) : (
-        <div className={styles.NavContainer}>
-          <Link to="/oprojects" className={styles.Links}>
-            Find Projects <HiOutlineViewGridAdd/>
-          </Link>
-          <Link to="/sprojects" className={styles.Links}>
-            View Portfolios <ImBooks/>
-          </Link>
-          <Link to="/create" className={styles.Links}>
-            Create Project <FiBox/>
-          </Link>
-          <Link to="/createsproject" className={styles.Links}>
-            Add to Portfolio <BsFolderPlus/>
-          </Link>
-          <a href={`/profile/${visitor}`}>
-            <IoPersonCircleOutline className={styles.NavLinkIcon} />
-          </a>
-
-        </div>
+          <div className={styles.NavContainer}>
+            <Link to="/oprojects" className={styles.Links}>
+              Find Projects <HiOutlineViewGridAdd/>
+            </Link>
+            <Link to="/sprojects" className={styles.Links}>
+              View Portfolios <ImBooks/>
+            </Link>
+            <Link to="/create" className={styles.Links}>
+              Create Project <FiBox/>
+            </Link>
+            <Link to="/createsproject" className={styles.Links}>
+              Add to Portfolio <BsFolderPlus/>
+            </Link>
+            <a href={`/profile/${visitor}`}>
+              <IoPersonCircleOutline className={styles.NavLinkIcon} />
+            </a>
+          </div>
       )}
     </div>
   );
