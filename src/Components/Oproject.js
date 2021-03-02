@@ -26,7 +26,7 @@ export default function Oproject(props) {
               <div className={styles[project.status]}>
                 <p>Status: {project.status}</p>
               </div>
-              <p>Creator: @{project.userid.username}</p>
+              <p>Creator: @{project.userid? project.userid.username : "Loading..."}</p>
               <p>Posted: {project.created.slice(0, 10)}</p>
             </div>
           </div>
