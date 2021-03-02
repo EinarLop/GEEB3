@@ -19,7 +19,7 @@ export default function SProjectMoreInfo(props) {
   const [isOwner, setIsOwner] = useState(false);
   useEffect(() => {
     axios
-      .get("https://geeb.herokuapp.com/sprojects/" + props.match.params.id, {
+      .get("http://localhost:3010/sprojects/" + props.match.params.id, {
         headers: {
           "auth-token": window.localStorage.getItem("auth-token"),
         },

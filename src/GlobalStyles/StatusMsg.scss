@@ -3,15 +3,27 @@
 
 /*Deprecated in favor of other colors, local ErrorMsg and SuccessMsg classes*/
 @mixin StatusMsg {
-  padding: 15px;
-  //   font-style: italic;
-  font-size: 18px;
 
-  &.Ok {
+
+  font-size: 1.8rem;
+  margin: 0 auto;
+  width: auto;
+
+  .ErrorMsg {
+    font-style: italic;
+    color: #f74f39;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .SuccessMsg {
     color: $mediumSpringGreen;
+    margin-top: 10px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  &.Err {
-    color: red;
-  }
 }

@@ -11,7 +11,7 @@ export default function MyApplication(props) {
   
     useEffect(() => {
       axios
-      .get("https://geeb.herokuapp.com/applicants/" + props.match.params.id, {
+      .get("http://localhost:3010/applicants/" + props.match.params.id, {
         headers: {
           // Send the JWT along in the request header
           "auth-token": window.localStorage.getItem("auth-token"),
