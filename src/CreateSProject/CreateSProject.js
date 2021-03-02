@@ -173,7 +173,7 @@ function CreateSProject() {
   ) : (
     <div>
       <div className={styles.WrapperTitle}>
-        <p className={styles.Title}>Create SProject</p>
+        <p className={styles.Title}>Add to Portfolio</p>
       </div>
       <div className={styles.Wrapper}>
         <div className={styles.Box1}>

@@ -48,7 +48,8 @@ export default function MyApplication(props) {
                   <p className={styles.Title}>Applications</p>
                   {applications.map((applicant)=>
                     <div className={styles.Applications}>
-                      <Link to= {`/oproject/${applicant.oprojectid._id}`} className={styles.TitleSubtitle}>{applicant.oprojectid.title}</Link>
+                      {applicant.oprojectid!=null &&
+                      <Link to= {`/oproject/${applicant.oprojectid._id}`} className={styles.TitleSubtitle}>{applicant.oprojectid.title}</Link>}
                       <p className={styles.Text}>{applicant.motive}</p>
                       <p className={styles.Text}>Status: {applicant.status}</p>
                       <p className={styles.Text}>Date: {applicant.created.slice(0,10)}</p>

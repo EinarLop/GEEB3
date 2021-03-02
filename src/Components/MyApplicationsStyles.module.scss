@@ -20,7 +20,7 @@
 }
 
 .Title {
-  color: #e66d29;
+  color: $primary;
   font-size: 38px;
   font-weight: 601;
   margin: 10px 0 0 0;
@@ -35,7 +35,7 @@
 }
 
 .TitleSubtitle {
-  color: #e66d29;
+  color: $secundary;
   font-size: 25px;
   font-weight: 501;
   margin: 0;
@@ -43,6 +43,8 @@
 
 .Text {
   color: white;
+  font-size: 18px;
+  margin: 10px 0px;
 }
 
 .Wrapper {
@@ -65,8 +67,7 @@
 }
 
 .Applications {
-  background-color: $dark;
-  border: 1px solid transparent;
+  border: 3px solid $secundary;
   border-radius: 15px;
   display: flex;
   flex-direction: column;

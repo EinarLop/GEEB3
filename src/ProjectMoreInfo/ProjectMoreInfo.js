@@ -73,18 +73,19 @@ export default function ProjectMoreInfo(props) {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) => setErrorInput("You already applied to this project!"));
-      location.reload();
+        .then((res) => 
+        location.reload());
     }
   };
 
   const hasARequest = (applications) => {
     for (var a in applications) {
-      console.log(applications[a].userid._id);
-      if (applications[a].userid._id == localStorage.getItem("geebId")) {
-        setAlreadySend(true);
+      if(applications[a].userid!=null){
+        if (applications[a].userid._id == localStorage.getItem("geebId")) {
+          setAlreadySend(true);
+        }
       }
-    }
+    } 
   };
 
   return (
