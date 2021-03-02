@@ -66,7 +66,7 @@ export const validateProfile = (profiles, currentProfile) => {
             } else if (profiles.length < limits.maxProfiles) {
                 errorProfile = ""
             } else {
-                errorProfile = "You should add at least 1 profile"
+                errorProfile = "Please add at least 1 characteristic"
             }
         } else {
             errorProfile = "Profiles can't have more than 60 char"

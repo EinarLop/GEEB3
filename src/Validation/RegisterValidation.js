@@ -130,6 +130,8 @@ const validatePassword = (password, confirmPassword) => {
     errorPassword = "You must confirm your password"
   } else if (password !== confirmPassword) {
     errorPassword = "Your password and confirm password are different"
+    success = false;
+    return;
   }
   if(errorPassword === ""){
     success = true;

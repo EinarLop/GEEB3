@@ -70,10 +70,10 @@ function ProjectCreate() {
   const onAddHighlight = (event) => {
     setMessage({
       ...message,
-      errorHighlight: validateHighlight(tags, project.currentHighlight),
+      errorHighlight: validateHighlight(highlights, project.currentHighlight),
     });
-    if (validateHighlight(tags, project.currentHighlight) === "") {
-      setHighlights((t) => [...t, project.currentHighlight]);
+    if (validateHighlight(highlights, project.currentHighlight) === "") {
+      setHighlights((h) => [...h, project.currentHighlight]);
       setProject({
         ...project,
         currentHighlight: "",
@@ -83,10 +83,10 @@ function ProjectCreate() {
   const onAddProfile = (event) => {
     setMessage({
       ...message,
-      errorProfile: validateProfile(tags, project.currentProfile),
+      errorProfile: validateProfile(profiles, project.currentProfile),
     });
-    if (validateProfile(tags, project.currentProfile) === "") {
-      setProfiles((t) => [...t, project.currentProfile]);
+    if (validateProfile(profiles, project.currentProfile) === "") {
+      setProfiles((p) => [...p, project.currentProfile]);
       setProject({
         ...project,
         currentProfile: "",
