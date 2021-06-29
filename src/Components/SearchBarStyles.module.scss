@@ -1,0 +1,26 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+.SearchWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px;
+}
+input, select, textarea{
+    color: white;
+}
+.Bar{
+    width: 50%;
+    border: none;
+    border-bottom: 3px solid $otherGrey;
+    background-color: transparent;
+    height: 40px;
+
+}
+@media (max-width: 767px) {
+    .Bar{
+        width: 80%;
+    }
+}
