@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 import { Redirect, Link } from "react-router-dom";
-import { registerValidation } from "../Validation/RegisterValidation";
+import { registerValidation } from "../validation/RegisterValidation";
 import axios from "axios";
-// TODO ERIC&EINAR configurar boton para visualizar las passwords
-function Registration() {
+
+
+const Registration = () => {
   const [user, setUser] = useState({
-    // stores current inputs values
     name: "Username",
     lastName: "Lastname",
     userName: "",
@@ -14,24 +14,31 @@ function Registration() {
     password: "",
     confirmPassword: "",
   });
+
   const [errorsMessage, setErrors] = useState({});
   const [redirect, setRedirect] = useState(false);
-  const [status, setStatus] = useState(); // final success message
-  //onChange ******************************************************************************************************************************
+  const [status, setStatus] = useState();
+
+  // update user state
   const handleOnChange = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   };
-  //onSubmit ******************************************************************************************************************************
+
+
+
   const handleOnSubmit = () => {
-    console.log("Current inputs:");
-    console.log(JSON.stringify(user));
+
+    console.log("user = \n", JSON.stringify(user));
+
+    // get validation error messages if any
     let validation = registerValidation(user);
     setErrors(validation);
-    console.log("Validation returned:");
-    console.log(JSON.stringify(validation));
+
+    console.log("validation = \n", JSON.stringify(validation));
+
     if (validation.success) {
       const User = {
         username: user.userName,
@@ -39,6 +46,8 @@ function Registration() {
         password: user.password,
         fullname: user.name + " " + user.lastName,
       };
+
+      // Send post request to create a User and Login simultaneously
       axios
         .post("http://localhost:3010/users/register", User, {
           withCredentials: true,
@@ -50,33 +59,33 @@ function Registration() {
             </p>
           );
           setStatus(msg);
-          console.log(RegisteredUser);
+          console.log("New registered user:", RegisteredUser);
+          // redirect to login
           setTimeout(() => setRedirect(true), 2000);
-          // to redirect to /login
         })
         .catch((err) => {
-          // Set error message: "something went wrong"
           console.log("Server error", err);
           let msg = (
-            <p style={{ color: "#f74f39", fontSize: "1.8rem" }}>
+            <p className={styles.ErrorMsg}>
               Something went wrong. Please try again.
             </p>
           );
           setStatus(msg);
         });
+
     } else {
       let msg = (
-        <p className={styles.ErrorMsg} style={{ color: "red" }}>
-          Please check your inputs!
+        <p className={styles.ErrorMsg} style={{ textAlign: 'center' }}>
+          Oops. Please check your inputs!
         </p>
       );
       setStatus(msg);
     }
   };
 
-  return redirect ? (
-    <Redirect to="/login" />
-  ) : (
+  if (redirect) return (<Redirect to="/login" />);
+
+  return (
     <div className={styles.Global}>
       <div className={styles.Information}>
         <p id={styles.Title}>What is GEEB?</p>
@@ -186,7 +195,9 @@ function Registration() {
           ></input>
           <p className={styles.ErrorMsg}>{errorsMessage.errorConfPass}</p>
         </div>
-        {status}
+        <div className={styles.statusContainer}>
+          {status}
+        </div>
         <input
           className={`${styles.Button} ${styles.Large}`}
           type="button"

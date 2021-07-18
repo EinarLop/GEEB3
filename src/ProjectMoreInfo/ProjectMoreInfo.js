@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
-import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
+import { validateRequest } from "../validation/ProjectMoreInfoValidation";
 import { Link } from "react-router-dom";
 import { FaTrophy } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
@@ -73,19 +73,19 @@ export default function ProjectMoreInfo(props) {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) => 
-        location.reload());
+        .then((res) =>
+          location.reload());
     }
   };
 
   const hasARequest = (applications) => {
     for (var a in applications) {
-      if(applications[a].userid!=null){
+      if (applications[a].userid != null) {
         if (applications[a].userid._id == localStorage.getItem("geebId")) {
           setAlreadySend(true);
         }
       }
-    } 
+    }
   };
 
   return (
@@ -215,7 +215,7 @@ export default function ProjectMoreInfo(props) {
                             axios
                               .patch(
                                 "http://localhost:3010/applicants/update/status/" +
-                                  applicant._id,
+                                applicant._id,
                                 {
                                   status: "Unaccepted",
                                 }
@@ -232,7 +232,7 @@ export default function ProjectMoreInfo(props) {
                             axios
                               .patch(
                                 "http://localhost:3010/applicants/update/status/" +
-                                  applicant._id,
+                                applicant._id,
                                 {
                                   status: "Accepted",
                                 }

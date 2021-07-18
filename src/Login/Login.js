@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
-import { loginValidation } from "../Validation/LoginValidation";
+import { loginValidation } from "../validation/LoginValidation";
 
 export default function login() {
   const [user, setUser] = useState({

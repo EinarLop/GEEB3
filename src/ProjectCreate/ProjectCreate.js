@@ -6,8 +6,8 @@ import {
   validateHighlight,
   validateProfile,
   validateSkill,
-} from "../Validation/ProjectCreateValidation.js";
-import { validateTag } from "../Validation/GeneralValidation";
+} from "../validation/ProjectCreateValidation.js";
+import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
 
 function ProjectCreate() {

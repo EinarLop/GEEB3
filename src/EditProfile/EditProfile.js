@@ -7,7 +7,7 @@ import {
   validateTags,
   validateInputTag,
   validateLink,
-} from "../Validation/EditProfileValidation";
+} from "../validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 import { BsLink45Deg } from "react-icons/bs";
 

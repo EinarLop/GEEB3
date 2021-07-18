@@ -4,11 +4,13 @@
 div {
   display: inline;
 }
+
 #Title {
   color: $pLogin;
   font-size: 56px;
   text-align: left;
 }
+
 #Msg,
 #WhatIs {
   font-size: 2.5rem;
@@ -84,6 +86,11 @@ div .Information {
   width: 100%;
 }
 
+.statusContainer {
+  display: flex;
+  justify-content: center;
+}
+
 div .Inputs {
   max-width: 700px;
   font-family: $font;
@@ -95,7 +102,7 @@ div .Inputs {
   display: flex;
   flex-direction: column;
   align-items: center;
-  //background-color: gray;
+
   h1 {
     color: white;
     text-align: center;

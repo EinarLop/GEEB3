@@ -3,7 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
 
-import Oproject from "../Components/Oproject";
+import Oproject from "../components/Oproject";
 
 function ProjectFeed() {
   const [oprojects, setOprojects] = useState([]);
@@ -40,11 +40,10 @@ function ProjectFeed() {
       />*/}
 
       {oprojects.map((project, index) => (
-        <Oproject project={project} />
+        <Oproject key={index} project={project} />
       ))}
     </div>
   );
 }
 
 export default ProjectFeed;
-//<Link to={"/edit/" + watch._id}>Retirar Stock</Link>

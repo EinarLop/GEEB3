@@ -5,8 +5,8 @@ import { AiOutlineUpload } from "react-icons/ai";
 import {
   sprojectValidation,
   validateLink,
-} from "../Validation/CreateSProjectValidation";
-import { validateTag } from "../Validation/GeneralValidation";
+} from "../validation/CreateSProjectValidation";
+import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
 import { base } from "../base";
 

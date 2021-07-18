@@ -5,7 +5,7 @@ import InfoTab from "./InfoTab";
 import TagsLinksTab from "./TagsLinksTab";
 import ImagesTab from "./ImagesTab";
 import axios from "axios";
-import Sproject from "../Components/Sproject";
+import Sproject from "../components/Sproject";
 
 function SProjectFeed() {
   const [projects, setProjects] = useState([]);

@@ -1,25 +1,17 @@
-var errorUsername = ""
-var errorEmail = ""
-var errorPassword = ""
-var errorConfPass = ""
-var errorName = ""
-var errorLastName = ""
-var success = false
-
-var limits = {
-  //no white spaces
-  nameCharMin:2,
-  nameCharMax:15,
-  lastNameCharMin:2,
-  lastNameCharMax:15,
+const limits = {
+  nameCharMin: 2,
+  nameCharMax: 15,
+  lastNameCharMin: 2,
+  lastNameCharMax: 15,
   userCharMin: 4,
   userCharMax: 20,
   emailCharMin: 6,
   emailCharMax: 50,
-  //no white spaces
   passwordCharMin: 8,
   passwordCharMax: 40,
 }
+
+/* HELPER FUNCTIONS */
 const validEmail = (email) => {
   const re = /\S+@\S+\.\S+/;
   console.log("validateEmail result: " + re.test(email));
@@ -27,15 +19,14 @@ const validEmail = (email) => {
 };
 const onlyAlphanumeric = (str) => {
   const re = /^[a-z0-9A-Z]+$/; // only lowercase alphanumeric
-  console.log("alphanumeric result: " + re.test(str));
+  console.log("is Alphanumeric result: " + re.test(str));
   return re.test(str);
 };
 const onlyAlphabetic = (str) => {
   const re = /^[A-Za-z]+$/;
-  console.log("Alphabetic(",str.toLowerCase(),") ?", re.test(str))
+  console.log("Alphabetic(", str.toLowerCase(), ") ?", re.test(str))
   return re.test(str);
 }
-
 const hasWhiteSpace = (str) => {
   const index = str.indexOf(" ");
   if (index == -1) {
@@ -43,122 +34,123 @@ const hasWhiteSpace = (str) => {
   }
   return true;
 };
+
+
+/* VALIDATOR FUNCTIONS */
 const validateName = (name) => {
   if (name.length < limits.nameCharMin) {
-    errorName="Name must have at least 2 characters"
+    return "Name must have at least 2 characters"
   }
   if (name.length > limits.nameCharMax) {
-    errorName="Your name must be 15 characters long or less"
+    return "Your name must be 15 characters long or less"
   }
   if (!onlyAlphabetic(name)) {
-    errorName="Your name can only have alphabetic characters"
+    return "Your name can only have alphabetic characters"
   }
   if (hasWhiteSpace(name)) {
-    errorName="Your name cannot contain any spaces"
+    return "Your name cannot contain any spaces"
   }
-  if(errorName === ""){
-    success = true;
-  }
+
+  // no errors
+  return "";
 };
+
+
 const validateLastName = (lastName) => {
   if (lastName.length < limits.lastNameCharMin) {
-    errorLastName = "Last name must have at least 2 characters"
+    return "Last name must have at least 2 characters"
   }
   if (lastName.length > limits.lastNameCharMax) {
-    errorLastName = "Your last name can't have more than 15 characters"
+    return "Your last name can't have more than 15 characters"
   }
   if (!onlyAlphabetic(lastName)) {
-    errorLastName="Your name can only have lowercase letters"
+    return "Your name can only use letters from A to Z"
   }
-  if(errorLastName === ""){
-    success = true;
-  }
+
+  // no errors
+  return "";
 };
+
 
 const validateUsername = (userName) => {
   if (userName.length < limits.userCharMin) {
-    errorUsername = "Username must have at least 4 characters"
+    return "Username must have at least 4 characters"
   }
   if (userName.length > limits.userCharMax) {
-    errorUsername = "Username must be 20 characters or less"
+    return "Username must be 20 characters or less"
   }
   if (!onlyAlphanumeric(userName)) {
-    errorUsername ="Username can only have lowercase letters and numbers"
+    return "Username can only have lowercase letters and numbers"
   }
   if (hasWhiteSpace(userName)) {
-    errorUsername ="Username cannot contain any spaces"
+    return "Username cannot contain any spaces"
   }
-  if(errorUsername === ""){
-    success = true;
-  }
+
+  // no errors
+  return "";
 };
 
 const validateEmail = (email) => {
   if (email === "") {
-    errorEmail = "Email can't be empty"
+    return "Email can't be empty"
   }
   if (!validEmail(email)) {
-    errorEmail = "Not a valid email"
+    return "Not a valid email"
   }
   if (email.length < limits.emailCharMin) {
-    errorEmail = "not a valid email"
+    return "not a valid email"
   }
   if (email.length > limits.emailCharMax) {
-    errorEmail = "Email is too long"
+    return "Email is too long"
   }
-  /*if (noWhiteSpace(user.email)) {
-    setErrorEmail("Your email cannot have white spaces");
-  }*/
-  if(errorEmail === ""){
-    success = true;
-  }
+
+  // no errors
+  return "";
 };
 
 const validatePassword = (password, confirmPassword) => {
   if (password === "") {
-    errorPassword = "Password cannot be empty"
-  } else if (password.length < limits.passwordCharMin) {
-    errorPassword = "Your password must have at least 8 characters"
-  } else if (password.length > limits.passwordCharMax) {
-    errorPassword = "Your password cannot have more than 40 characters"
+    return "Password cannot be empty";
+  }
+  if (password.length < limits.passwordCharMin) {
+    return "Your password must have at least 8 characters";
+  }
+  if (password.length > limits.passwordCharMax) {
+    return "Your password cannot have more than 40 characters";
   }
   if (hasWhiteSpace(password)) {
-    // password cannot contain whitespaces
-    errorPassword = "Your password cannot contain spaces"
+    return "Your password cannot contain spaces";
   }
   if (confirmPassword === "") {
-    errorPassword = "You must confirm your password"
-  } else if (password !== confirmPassword) {
-    errorPassword = "Your password and confirm password are different"
+    return "You must confirm your password";
   }
-  if(errorPassword === ""){
-    success = true;
+  if (password !== confirmPassword) {
+    return "Your password and confirm password are different"
   }
+
+  // no errors
+  return "";
 };
 
 export const registerValidation = (user) => {
-  success = true;
-  errorUsername = "";
-  errorEmail = "";
-  errorPassword = "";
-  errorConfPass = "";
-  errorName = "";
-  errorLastName = "";
-  validateName(user.name);
-  validateLastName(user.lastName);
-  validateUsername(user.userName);
-  validateEmail(user.email);
-  validatePassword(user.password, user.confirmPassword);
 
-  var errorsMessage = {
+  const errorUsername = validateUsername(user.userName);
+  const errorEmail = validateEmail(user.email);
+  const errorPassword = validatePassword(user.password, user.confirmPassword);
+  const errorName = validateName(user.name);
+  const errorLastName = validateLastName(user.lastName);
+
+  const success = (errorUsername === "" && errorEmail === "" && errorPassword === "" && errorName === "" && errorLastName === "")
+
+  const validation = {
     success,
+    errorName,
+    errorLastName,
     errorUsername,
     errorEmail,
     errorPassword,
-    errorConfPass,
-    errorName,
-    errorLastName,
   }
-  return errorsMessage
-  
+
+  return validation
+
 };

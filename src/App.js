@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Login/Login";
 
-import Header from "./Components/Header";
+import Header from "./components/Header";
 
 import Home from "./Home/Home";
 import Registration from "./Registration/Registration";
@@ -13,10 +13,10 @@ import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 import SProjectFeed from "./SProject/SProjectFeed.js";
 import CreateSProject from "./CreateSProject/CreateSProject.js";
 import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
-import ImageUploader from "./Components/ImageUploader";
+import ImageUploader from "./components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
-import MyApplication from "./Components/MyApplications.js";
+import MyApplication from "./components/MyApplications.js";
 //350x34
 //404x44
 
@@ -34,8 +34,8 @@ function App() {
           <Route path="/create" component={ProjectCreate} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
-          <Route path="/upload" component={ImageUploader}/>
+          <Route path="/sproject/:id" component={SProjectMoreInfo} /> {/*change route to /portfolio/:id*/}
+          <Route path="/upload" component={ImageUploader} />
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
