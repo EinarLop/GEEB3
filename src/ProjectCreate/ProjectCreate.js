@@ -8,6 +8,7 @@ import {
   validateSkill,
 } from "../Validation/ProjectCreateValidation.js";
 import { validateTag } from "../Validation/GeneralValidation";
+import { AiOutlineUpload } from "react-icons/ai";
 import axios from "axios";
 
 function ProjectCreate() {
@@ -36,6 +37,21 @@ function ProjectCreate() {
     success: "",
     redirect: false,
   });
+  const [files, setFiles] = useState([]); // array of file objects for uploading
+  const [previews, setPreviews] = useState([]); // array for local URL Objects for previewing an image
+  const [uploadMsg, setUploadMsg] = useState(); // feedback for image uploader input
+
+  const onFileSubmit = (e) => {
+    // adds the selected file to the files array for preloading
+    e.preventDefault();
+    let f = e.target.file.files[0];
+    let fpreview = URL.createObjectURL(f);
+    setPreviews((previews) => [...previews, fpreview]);
+    console.log("Added", f);
+    setFiles((files) => [...files, f]);
+    setUploadMsg(<p style={{ color: "#9ccc65" }}>Added file: {f.name}</p>);
+    e.target.file.value = null; // reset the input
+  };
 
   const handleOnChange = (event) => {
     setProject({
@@ -97,6 +113,12 @@ function ProjectCreate() {
   const onDeleteHighlight = (index) => {
     setHighlights(highlights.filter((highlight, i) => i !== index));
   };
+
+  const onDeleteImage = (index) => {
+    setPreviews(previews.filter((image, i) => i !== index));
+    setUploadMsg("");
+  };
+
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
@@ -341,6 +363,40 @@ function ProjectCreate() {
             </div>
           </div>
         </div>
+        <div className={styles.Box5}>
+          <div>
+            {" "}
+            {/* Image Uploader starts here */}
+            <p className={styles.Label}>File Uploader</p>
+            <form onSubmit={onFileSubmit}>
+              <label className={styles.ChooseImg}>
+                Choose an image
+                <AiOutlineUpload className={styles.IconUpload} />
+                <input type="file" name="file" />
+              </label>
+
+              <input
+                className={styles.Button}
+                style={{ width: "170px" }}
+                type="submit"
+                value="Add and preview"
+              />
+            </form>
+            <p className={styles.UploadMsg}>{uploadMsg}</p>
+          </div>
+
+          <div className={styles.TContainer}>
+            {previews.map((url, index) => (
+              <div
+                className={styles.Preview}
+                onClick={() => onDeleteImage(index)}
+              >
+                <img src={url} />
+              </div>
+            ))}
+          </div>
+        </div>
+
         <p style={{ color: "#00FA9A" }}>{message.success}</p>
         <div>
           <input
