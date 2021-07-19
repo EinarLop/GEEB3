@@ -158,201 +158,214 @@ function ProjectCreate() {
     }
   };
 
-  return redirect ? (
-    <Redirect to={`/oproject/${newId}`} />
-  ) : (
-    <div>
-      {/* <Header /> */}
-      <div className={styles.Global}>
-        <h1 className={styles.Title}>Create Project</h1>
-        <div className={styles.Wrapper}>
-          <div className={styles.Column1}>
-            <div className={styles.TitleStatusContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Title</label>
-                <input
-                  className={styles.Input}
-                  placeholder="Awesome Project"
-                  onChange={handleOnChange}
-                  name="title"
-                  autoComplete="off"
-                />
-                <p className={styles.ErrorMsg}>{message.errorTitle}</p>
-              </div>
 
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Status</label>
-                <select
-                  className={styles.Select}
-                  onChange={handleOnChange}
-                  name="status"
-                  value={project.status}
-                >
-                  <option className={styles.Option}>Open</option>
-                  <option>Closed</option>
-                </select>
-              </div>
-            </div>
-            <div className={styles.InputLabelContainer}>
-              <label className={styles.Label}>Description</label>
-              <textarea
-                className={styles.TextArea}
-                placeholder="Describe your project in X characters or less!"
-                onChange={handleOnChange}
-                name="description"
-              />
-              <p className={styles.ErrorMsg}>{message.errorDescription}</p>
-            </div>
-          </div>
+  if (tutorial) {
+    return (
+      <div> Estás en modo tutorial</div>
+    )
+  }
+  else {
+    return redirect ? (
+      <Redirect to={`/oproject/${newId}`} />
+    ) : (
+      <div>
+        {/* <Header /> */}
+        <div className={styles.Global}>
+          <h1 className={styles.Title}>Create Project</h1>
 
-          <div className={styles.Column2}>
-            <div className={styles.TagsContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Tags</label>
-                <div className={styles.TagsInputWrapper}>
+
+          {nombre === "Karen" ? <p>{mensajeDeError}</p> : <></>}
+
+          <div className={styles.Wrapper}>
+            <div className={styles.Column1}>
+              <div className={styles.TitleStatusContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Title</label>
                   <input
-                    className={styles.TagsInput}
-                    placeholder="Programming, Marketing, etc..."
+                    className={styles.Input}
+                    placeholder="Awesome Project"
                     onChange={handleOnChange}
-                    name="currentTag"
-                    value={project.currentTag}
+                    name="title"
                     autoComplete="off"
                   />
-                  <input
-                    className={`${styles.Button} ${styles.Special}`}
-                    type="button"
-                    value="Add"
-                    onClick={onAddTag}
-                  />
+                  <p className={styles.ErrorMsg}>{message.errorTitle}</p>
                 </div>
-                <p className={styles.ErrorMsg}>{message.errorTag}</p>
-              </div>
 
-              <div className={styles.TContainer}>
-                {tags.map((tag, index) => (
-                  <div
-                    className={`${styles.Tag} ${styles.TopicTag}`}
-                    onClick={() => onDeleteTag(index)}
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Status</label>
+                  <select
+                    className={styles.Select}
+                    onChange={handleOnChange}
+                    name="status"
+                    value={project.status}
                   >
-                    {tag}
-                  </div>
-                ))}
+                    <option className={styles.Option}>Open</option>
+                    <option>Closed</option>
+                  </select>
+                </div>
+              </div>
+              <div className={styles.InputLabelContainer}>
+                <label className={styles.Label}>Description</label>
+                <textarea
+                  className={styles.TextArea}
+                  placeholder="Describe your project in X characters or less!"
+                  onChange={handleOnChange}
+                  name="description"
+                />
+                {tutorial && <p style={{ color: '#fff' }}>ESTÁS EN MODO TUTORIAL</p>}
+                <p className={styles.ErrorMsg}>{message.errorDescription}</p>
               </div>
             </div>
 
-            <div className={styles.SkillsContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Skills</label>
-                <div className={styles.TagsInputWrapper}>
+            <div className={styles.Column2}>
+              <div className={styles.TagsContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Tags</label>
+                  <div className={styles.TagsInputWrapper}>
+                    <input
+                      className={styles.TagsInput}
+                      placeholder="Programming, Marketing, etc..."
+                      onChange={handleOnChange}
+                      name="currentTag"
+                      value={project.currentTag}
+                      autoComplete="off"
+                    />
+                    <input
+                      className={`${styles.Button} ${styles.Special}`}
+                      type="button"
+                      value="Add"
+                      onClick={onAddTag}
+                    />
+                  </div>
+                  <p className={styles.ErrorMsg}>{message.errorTag}</p>
+                </div>
+
+                <div className={styles.TContainer}>
+                  {tags.map((tag, index) => (
+                    <div
+                      className={`${styles.Tag} ${styles.TopicTag}`}
+                      onClick={() => onDeleteTag(index)}
+                    >
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.SkillsContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Skills</label>
+                  <div className={styles.TagsInputWrapper}>
+                    <input
+                      className={styles.TagsInput}
+                      placeholder="Excel, Photoshop, etc..."
+                      onChange={handleOnChange}
+                      name="currentSkill"
+                      value={project.currentSkill}
+                      autoComplete="off"
+                    />
+                    <input
+                      className={`${styles.Button} ${styles.Special}`}
+                      type="button"
+                      value="Add"
+                      onClick={onAddSkill}
+                    />
+                  </div>
+                  <p className={styles.ErrorMsg}>{message.errorSkill}</p>
+                </div>
+
+                <div className={styles.TContainer}>
+                  {skills.map((skill, index) => (
+                    <div
+                      className={`${styles.Tag} ${styles.SkillTag}`}
+                      onClick={() => onDeleteSkill(index)}
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.Column3}>
+              <div className={styles.HInputContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Profile</label>
                   <input
-                    className={styles.TagsInput}
-                    placeholder="Excel, Photoshop, etc..."
+                    placeholder="Describe the traits of your ideal collaborator..."
+                    className={styles.Input}
                     onChange={handleOnChange}
-                    name="currentSkill"
-                    value={project.currentSkill}
+                    name="currentProfile"
+                    value={project.currentProfile}
                     autoComplete="off"
                   />
+                  <p className={styles.ErrorMsg}>{message.errorProfile}</p>
                   <input
-                    className={`${styles.Button} ${styles.Special}`}
+                    className={styles.Button}
+                    onClick={onAddProfile}
                     type="button"
                     value="Add"
-                    onClick={onAddSkill}
                   />
                 </div>
-                <p className={styles.ErrorMsg}>{message.errorSkill}</p>
+
+                <div className={styles.HContainer}>
+                  {profiles.map((prof, index) => (
+                    <p
+                      className={styles.Highlight}
+                      onClick={() => onDeleteProfile(index)}
+                    >
+                      {index + 1 + "."} {" " + prof}
+                    </p>
+                  ))}
+                </div>
               </div>
 
-              <div className={styles.TContainer}>
-                {skills.map((skill, index) => (
-                  <div
-                    className={`${styles.Tag} ${styles.SkillTag}`}
-                    onClick={() => onDeleteSkill(index)}
-                  >
-                    {skill}
-                  </div>
-                ))}
+              <div className={styles.HInputContainer}>
+                <div className={styles.InputLabelContainer}>
+                  <label className={styles.Label}>Highlights</label>
+                  <input
+                    placeholder="What makes your project awesome for collaborators?"
+                    className={styles.Input}
+                    onChange={handleOnChange}
+                    name="currentHighlight"
+                    value={project.currentHighlight}
+                    autoComplete="off"
+                  />
+                  <p className={styles.ErrorMsg}>{message.errorHighlight}</p>
+                  <input
+                    className={styles.Button}
+                    onClick={onAddHighlight}
+                    type="button"
+                    value="Add"
+                  />
+                </div>
+
+                <div className={styles.HContainer}>
+                  {highlights.map((highlight, index) => (
+                    <p
+                      className={styles.Highlight}
+                      onClick={() => onDeleteHighlight(index)}
+                    >
+                      {index + 1 + "."} {" " + highlight}
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-
-          <div className={styles.Column3}>
-            <div className={styles.HInputContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Profile</label>
-                <input
-                  placeholder="Describe the traits of your ideal collaborator..."
-                  className={styles.Input}
-                  onChange={handleOnChange}
-                  name="currentProfile"
-                  value={project.currentProfile}
-                  autoComplete="off"
-                />
-                <p className={styles.ErrorMsg}>{message.errorProfile}</p>
-                <input
-                  className={styles.Button}
-                  onClick={onAddProfile}
-                  type="button"
-                  value="Add"
-                />
-              </div>
-
-              <div className={styles.HContainer}>
-                {profiles.map((prof, index) => (
-                  <p
-                    className={styles.Highlight}
-                    onClick={() => onDeleteProfile(index)}
-                  >
-                    {index + 1 + "."} {" " + prof}
-                  </p>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.HInputContainer}>
-              <div className={styles.InputLabelContainer}>
-                <label className={styles.Label}>Highlights</label>
-                <input
-                  placeholder="What makes your project awesome for collaborators?"
-                  className={styles.Input}
-                  onChange={handleOnChange}
-                  name="currentHighlight"
-                  value={project.currentHighlight}
-                  autoComplete="off"
-                />
-                <p className={styles.ErrorMsg}>{message.errorHighlight}</p>
-                <input
-                  className={styles.Button}
-                  onClick={onAddHighlight}
-                  type="button"
-                  value="Add"
-                />
-              </div>
-
-              <div className={styles.HContainer}>
-                {highlights.map((highlight, index) => (
-                  <p
-                    className={styles.Highlight}
-                    onClick={() => onDeleteHighlight(index)}
-                  >
-                    {index + 1 + "."} {" " + highlight}
-                  </p>
-                ))}
-              </div>
-            </div>
+          <p style={{ color: "#00FA9A" }}>{message.success}</p>
+          <div>
+            <input
+              className={`${styles.Button} ${styles.Create} `}
+              type="button"
+              value="Create!"
+              onClick={handleOnSubmit}
+            />
           </div>
-        </div>
-        <p style={{ color: "#00FA9A" }}>{message.success}</p>
-        <div>
-          <input
-            className={`${styles.Button} ${styles.Create} `}
-            type="button"
-            value="Create!"
-            onClick={handleOnSubmit}
-          />
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default ProjectCreate;

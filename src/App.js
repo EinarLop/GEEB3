@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Login/Login";
@@ -17,31 +17,40 @@ import ImageUploader from "./Components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./Components/MyApplications.js";
-//350x34
-//404x44
+import ContextConsumer from './ContextConsumer/ContextConsumer'
+
+export const ExampleContext = React.createContext();   // ya viene con un Provider incluido
 
 function App() {
+
+
+  const [tutorial, setTutorial] = useState(false);
+
   return (
-    <div>
-      {
-        <Router>
-          <Header />
-          <Route exact path="/" component={Home} />
-          <Route path="/register" component={Registration} />
-          <Route path="/login" component={Login} />
-          <Route path="/oprojects" component={ProjectFeed} />
-          <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
-          <Route path="/create" component={ProjectCreate} />
-          <Route path="/sprojects" component={SProjectFeed} />
-          <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
-          <Route path="/upload" component={ImageUploader}/>
-          <Route path="/profile/:id" component={Profile} />
-          <Route path="/editprofile" component={EditProfile} />
-          <Route path="/myapplication/:id" component={MyApplication} />
-        </Router>
-      }
-    </div>
+
+    <ExampleContext.Provider value={[tutorial, setTutorial]}>
+      <div>
+        {
+          <Router>
+            <Header />
+            <Route exact path="/" component={Home} />
+            <Route path="/register" component={Registration} />
+            <Route path="/login" component={Login} />
+            <Route path="/oprojects" component={ProjectFeed} />
+            <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
+            <Route path="/create" component={ProjectCreate} />
+            <Route path="/sprojects" component={SProjectFeed} />
+            <Route path="/createsproject" component={CreateSProject} />
+            <Route path="/sproject/:id" component={SProjectMoreInfo} /> {/*change route to /portfolio/:id*/}
+            <Route path="/upload" component={ImageUploader} />
+            <Route path="/profile/:id" component={Profile} />
+            <Route path="/editprofile" component={EditProfile} />
+            <Route path="/myapplication/:id" component={MyApplication} />
+            <Route path="/karen" component={ContextConsumer} />
+          </Router>
+        }
+      </div>
+    </ExampleContext.Provider>
   );
 }
 
