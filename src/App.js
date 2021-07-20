@@ -17,6 +17,7 @@ import ImageUploader from "./components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./components/MyApplications.js";
+import TestAuth from './TestAuth'
 //350x34
 //404x44
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
+          <Route path="/test" component={TestAuth} />
         </Router>
       }
     </div>

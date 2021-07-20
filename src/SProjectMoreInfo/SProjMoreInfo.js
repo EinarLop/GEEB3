@@ -70,11 +70,10 @@ export default function SProjectMoreInfo(props) {
           <IoMdPeople /> Collaborators:
         </label>
         <div
-          /*style={{display:'flex', padding:'10px'}}*/ className={
+          className={
             styles.NamesContainer
           }
         >
-          {/* Mapping of project.collaborators here, with Link to their profile id*/}
           {project.collaborators.map((collaborator) => (
             <p>{collaborator}</p>
           ))}

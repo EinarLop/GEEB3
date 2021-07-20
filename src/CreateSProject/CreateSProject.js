@@ -18,6 +18,7 @@ function CreateSProject() {
     currentLink: "",
     currentImage: "",
   });
+
   const [links, setLinks] = useState([]);
   const [tags, setTags] = useState([]);
   const [files, setFiles] = useState([]); // array of file objects for uploading
@@ -87,14 +88,15 @@ function CreateSProject() {
   const onDeleteLink = (index) => {
     setLinks(links.filter((link, i) => i !== index));
   };
-  //On submit ******************************************************************************************************************************
+
+
   const handleOnSubmit = async () => {
     console.log("Creating an Sproject...");
     let validation = sprojectValidation(project, tags, links);
 
     if (validation.ok) {
-      // No validation errors. Process files, then send create Sproject post request
-      let imageurls = await processFiles(); // returns array of image URLs obtained to render as source and save to DB
+      // Process files, then send create Sproject POST request. ** should save sproject first, then images??
+      let imageurls = await processFiles(); // get array of image URLs from saving to Storage
       if (imageurls.length == 0) imageurls = undefined;
 
       const Project = {
@@ -105,6 +107,7 @@ function CreateSProject() {
         links,
         imageurls,
       };
+
       console.log("Attempt to save sproject:");
       console.log(JSON.stringify(Project));
       axios
@@ -153,18 +156,23 @@ function CreateSProject() {
   };
 
   const processFiles = async () => {
-    // save images to Firebase Storage and retrieve Download URLs of each
-    console.log("Processing files:");
-    let aux = Array();
+    // Saves images to Firebase Storage and returns the Download URLs in an Array
+    console.log("Processing image files:");
+
+    let aux = [];
     const storageRef = base.storage().ref();
+
     for (let i = 0; i < files.length; i++) {
-      console.log(files[i].name);
+      console.log("Storing:", files[i].name);
+
       let fileRef = storageRef.child(files[i].name);
       await fileRef.put(files[i]);
       let url = await fileRef.getDownloadURL();
       aux.push(url);
+
     }
-    console.log(aux);
+
+    console.log("Total stored files = ", aux);
     return aux;
   };
 
@@ -261,7 +269,6 @@ function CreateSProject() {
         <div className={styles.Box5}>
           <div>
             {" "}
-            {/* Image Uploader starts here */}
             <p className={styles.Label}>File Uploader</p>
             <form onSubmit={onFileSubmit}>
               <label className={styles.ChooseImg}>
