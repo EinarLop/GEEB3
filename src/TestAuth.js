@@ -14,8 +14,8 @@ export default function TestAuth() {
         setPassword(e.target.value);
     }
 
-    const onSubmit = () => {
-        console.log(email, ": ", password);
+    const onSubmit = async () => {
+        const res = await auth.createUserWithEmailAndPassword(email, password);
     }
 
     return (

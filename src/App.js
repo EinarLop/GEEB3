@@ -7,7 +7,7 @@ import Header from "./components/Header";
 
 import Home from "./Home/Home";
 import Registration from "./Registration/Registration";
-import ProjectCreate from "./ProjectCreate/ProjectCreate";
+import CreateOProject from "./CreateOProject/CreateOProject";
 import ProjectFeed from "./ProjectFeed/ProjectFeed";
 import ProjectMoreInfo from "./ProjectMoreInfo/ProjectMoreInfo";
 import SProjectFeed from "./SProject/SProjectFeed.js";
@@ -18,8 +18,6 @@ import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./components/MyApplications.js";
 import TestAuth from './TestAuth'
-//350x34
-//404x44
 
 function App() {
   return (
@@ -32,7 +30,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeed} />
           <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
-          <Route path="/create" component={ProjectCreate} />
+          <Route path="/create" component={CreateOProject} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
           <Route path="/sproject/:id" component={SProjectMoreInfo} /> {/*change route to /portfolio/:id*/}
@@ -40,7 +38,7 @@ function App() {
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
-          <Route path="/test" component={TestAuth} />
+          <Route path="/dev" component={TestAuth} />
         </Router>
       }
     </div>

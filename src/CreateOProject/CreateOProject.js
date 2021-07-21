@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import styles from "./ProjectCreateStyles.module.scss";
+import styles from "./CreateOProject.module.scss";
 import { Redirect } from "react-router-dom";
 import {
   validateAll,
   validateHighlight,
   validateProfile,
   validateSkill,
-} from "../validation/ProjectCreateValidation.js";
+} from "../validation/CreateOProjectValidation.js";
 import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
 
-function ProjectCreate() {
+function CreateOProject() {
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -355,4 +355,4 @@ function ProjectCreate() {
   );
 }
 
-export default ProjectCreate;
+export default CreateOProject;
