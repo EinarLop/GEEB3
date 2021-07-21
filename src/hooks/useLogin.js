@@ -18,7 +18,6 @@ const useLogin = () => {
             }
         });
     }, []);
-
     return { loginStatus };
 };
 
