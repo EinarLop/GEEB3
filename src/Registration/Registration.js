@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./RegistrationStyles.module.scss";
 import { Redirect, Link } from "react-router-dom";
 import { registerValidation } from "../validation/RegisterValidation";
+import { auth } from '../base';
 import axios from "axios";
 
 
@@ -31,7 +32,7 @@ const Registration = () => {
 
   const handleOnSubmit = () => {
 
-    console.log("user = \n", JSON.stringify(user));
+    console.log("Submitted user \n", JSON.stringify(user));
 
     // get validation error messages if any
     let validation = registerValidation(user);
@@ -47,7 +48,8 @@ const Registration = () => {
         fullname: user.name + " " + user.lastName,
       };
 
-      // Send post request to create a User and Login simultaneously
+
+
       axios
         .post("http://localhost:3010/users/register", User, {
           withCredentials: true,
@@ -58,9 +60,14 @@ const Registration = () => {
               You are now registered! <br /> Redirecting you to Login...
             </p>
           );
+
+          // Register new Firebase user
+          auth.createUserwithEmailAndPassword(User.username, User.password);
+
           setStatus(msg);
           console.log("New registered user:", RegisteredUser);
-          // redirect to login
+
+          // Login redirect
           setTimeout(() => setRedirect(true), 2000);
         })
         .catch((err) => {
@@ -83,6 +90,7 @@ const Registration = () => {
     }
   };
 
+  // TODO --- test redirect
   if (redirect) return (<Redirect to="/login" />);
 
   return (
@@ -116,30 +124,6 @@ const Registration = () => {
 
       <div className={styles.Inputs}>
         <p id={styles.InputMsg}>Register now</p>
-        {/* <div className={styles.InputLabelContainer}>
-          <label className={styles.Label}>Name</label>
-          <input
-            autoComplete="off"
-            className={styles.Input}
-            name="name"
-            onChange={handleOnChange}
-            placeholder="Name"
-            required="True"
-          ></input>
-          <p className={styles.ErrorMsg}>{errorsMessage.errorName}</p>
-        </div> */}
-        {/* <div className={styles.InputLabelContainer}>
-          <label className={styles.Label}>Last Name</label>
-          <input  
-            autoComplete="off"
-            className={styles.Input}
-            name="lastName"
-            onChange={handleOnChange}
-            placeholder="LastName"
-            required="True"
-          ></input>
-          <p className={styles.ErrorMsg}>{errorsMessage.errorLastName}</p>
-        </div> */}
         <div className={styles.InputLabelContainer}>
           <label className={styles.Label} style={{ width: "85%" }}>
             Username

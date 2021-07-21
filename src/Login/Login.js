@@ -3,6 +3,8 @@ import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import { loginValidation } from "../validation/LoginValidation";
+import { auth } from '../base'
+import useLogin from '../hooks/useLogin'
 
 export default function login() {
   const [user, setUser] = useState({
@@ -11,6 +13,8 @@ export default function login() {
   });
   const [status, setStatus] = useState();
   const [redirect, setRedirect] = useState(false);
+
+  const loginStatus = useLogin();
 
   const handleOnChange = (event) => {
     setUser({
@@ -28,7 +32,11 @@ export default function login() {
       axios
         .post("http://localhost:3010/users/login", user)
         .then((response) => {
-          console.log("Succesful login POST");
+          console.log("Succesful login!");
+
+          //const loginCredentials = auth.signInWithEmailAndPassword(user.username, user.password)
+          //console.log("Firebase credentials:", loginCredentials)
+
           let msg = (
             <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>
           );

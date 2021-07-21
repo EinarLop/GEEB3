@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 f930c9d548d78743ac37e7e5b3b94a591b72322d Eric Chao <ericjardon@hotmail.com> 1613850634 -0600	branch: Created from HEAD
+f930c9d548d78743ac37e7e5b3b94a591b72322d d2cd4e8f35d8c4d538c3b069daa952864d9caea7 Eric Chao <ericjardon@hotmail.com> 1614389185 -0600	commit: Vercel branch: requests to heroku
+d2cd4e8f35d8c4d538c3b069daa952864d9caea7 4155bb179ed583e3a7169775b572b753adadca28 Eric Chao <ericjardon@hotmail.com> 1614662016 -0600	commit (merge): Fixed all conflicts, ready to push to Vercel for Nuestros Proyectos pitch
+4155bb179ed583e3a7169775b572b753adadca28 c3ecd0a532051f9416c13cbdd04fc51fae6ba905 Eric Chao <ericjardon@hotmail.com> 1614663801 -0600	commit: Safe commit for vercel branch
+c3ecd0a532051f9416c13cbdd04fc51fae6ba905 ac28d96a7ce399fc356305151cf9e3dc6e6f2f59 Eric Chao <ericjardon@hotmail.com> 1614709178 -0600	pull origin VercelBranch: Fast-forward
+ac28d96a7ce399fc356305151cf9e3dc6e6f2f59 a24a0c92313c9566adcdb5cf1831da38b58404d4 Eric Chao <ericjardon@hotmail.com> 1614710159 -0600	commit: Fixed bold and information text sizes on Home
+a24a0c92313c9566adcdb5cf1831da38b58404d4 a6faaeb49ebff646241ac0adb34ccc22fd4b15f6 Eric Chao <ericjardon@hotmail.com> 1614710634 -0600	commit: IMPORTANT replaced all requests from localhost to heroku app
+a6faaeb49ebff646241ac0adb34ccc22fd4b15f6 4b13977d81d04ee910bda9b35aecfcc9fda56f2f Eric Chao <ericjardon@hotmail.com> 1614711615 -0600	commit: Fixed Oproject card information styles. Changing Document title and icon
+4b13977d81d04ee910bda9b35aecfcc9fda56f2f bc695f6ea4138f91ad0253e5dfbde8a73c916967 Eric Chao <ericjardon@hotmail.com> 1614712075 -0600	commit: Added icons
+bc695f6ea4138f91ad0253e5dfbde8a73c916967 e21060c47bb2a5771d1b9270c61660ac8160cf96 Eric Chao <ericjardon@hotmail.com> 1614713880 -0600	commit: Last fixes, tags container, my applications link, and erased legacy interfaces
+e21060c47bb2a5771d1b9270c61660ac8160cf96 13f64c38be58a0144f56ea79f16bb3596980d09c Eric Chao <ericjardon@hotmail.com> 1614715062 -0600	commit: fixed validation mistakes creat project and register
