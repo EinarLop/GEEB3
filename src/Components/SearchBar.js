@@ -10,7 +10,9 @@ export const SearchBar = props => (
             type="text" 
             placeholder="Search" 
             className={styles.Bar}
-            onKeyDown={props.addTag}/>
+            onKeyDown={props.addTag}
+            id="searchBar"
+            />
         <input 
             type="Button"  
             className={styles.Button}
