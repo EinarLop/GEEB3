@@ -4,17 +4,21 @@ import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
 
 import Oproject from "../Components/Oproject";
+import {SearchBar} from "../Components/SearchBar";
 
 function ProjectFeed() {
   const [oprojects, setOprojects] = useState([]);
-
+  const [filteredPro, setFilteredProjects]=useState([]);
+  const [tagsA,setTags]=useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
-      .then((response) => setOprojects(response.data));
+      .then((response) => {
+        setFilteredProjects(response.data)
+        setOprojects(response.data);
+      });
   }, []);
   const [isLogged, setIsLogged] = useState(true);
-
   const myProjects = () => {
     axios
       .get("http://localhost:3010/oprojects/mine", {
@@ -23,23 +27,40 @@ function ProjectFeed() {
         },
       }) //http://localhost:3010/oprojects" http://localhost:3010oprojects
       .then((response) => {
-        setOprojects(response.data);
+        setFilteredProjects(responde.data);
         console.log(response.data);
       });
   };
 
+  const addTag = event =>{
+    const val = event.target.value;
+    if (event.key === 'Enter' && val){
+      setTags([
+        ...tagsA,
+        val
+      ]);
+    }
+  };
+  const onDeleteTag = (index) => {
+    setTags(tagsA.filter((tag, i) => i !== index));
+  };
+
+
   return (
     <div className={styles.Global}>
       <p className={styles.Title}> Explore Team Projects</p>
-      {/*---Tag Filter Bar component here---*
-            <input
-        type="button"
-        value="My projects"
-        className={styles.Button}
-        onClick={myProjects}
-      />*/}
-
-      {oprojects.map((project, index) => (
+      <SearchBar addTag={addTag}/>
+      <div className={styles.TContainer}>
+        {tagsA.map((tag, index) => (
+          <div
+            className={`${styles.Tag} ${styles.TopicTag}`}
+            onClick={() => onDeleteTag(index)}
+          >
+            {tag}
+          </div>
+        ))}
+      </div>
+      {filteredPro.map((project, index) => (
         <Oproject project={project} />
       ))}
     </div>
