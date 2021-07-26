@@ -39,17 +39,40 @@ function ProjectFeed() {
         ...tagsA,
         val
       ]);
+      document.getElementById('searchBar').value = ''
     }
   };
   const onDeleteTag = (index) => {
     setTags(tagsA.filter((tag, i) => i !== index));
+  };
+  const searchTag = (index) => {
+    if (tagsA.length == 0){
+      axios
+      .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
+      .then((response) => {
+        setFilteredProjects(response.data)
+        setOprojects(response.data);
+      });
+    }else{
+      axios
+      .get("http://localhost:3010/tags/oprojects",{
+        params:{
+          tagNames: tagsA
+        }
+      })
+      .then((response) => {
+        setFilteredProjects(response.data);
+        console.log(response.data);
+      });
+    }
+    
   };
 
 
   return (
     <div className={styles.Global}>
       <p className={styles.Title}> Explore Team Projects</p>
-      <SearchBar addTag={addTag}/>
+      <SearchBar addTag={addTag} searchTags={searchTag}/>
       <div className={styles.TContainer}>
         {tagsA.map((tag, index) => (
           <div
