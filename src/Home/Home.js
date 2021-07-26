@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./homeStyles.module.scss";
-import business from "../Media/Business-Meeting-Colors.png";
-import support from "../Media/Support-Colors.png";
-import web1 from "../Media/Web-Colors.png";
+import business from "./media/Business-Meeting-Colors.png";
+import support from "./media/Support-Colors.png";
+import web1 from "./media/Web-Colors.png";
 import { IoCheckmark } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
