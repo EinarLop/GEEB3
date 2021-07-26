@@ -4,6 +4,7 @@ import { Redirect, Link } from "react-router-dom";
 import { registerValidation } from "../validation/RegisterValidation";
 import { auth } from '../base';
 import axios from "axios";
+import useLogin from "../hooks/useLogin";
 
 
 const Registration = () => {
@@ -20,7 +21,8 @@ const Registration = () => {
   const [redirect, setRedirect] = useState(false);
   const [status, setStatus] = useState();
 
-  // update user state
+  const loginStatus = useLogin();
+
   const handleOnChange = (event) => {
     setUser({
       ...user,
@@ -29,14 +31,12 @@ const Registration = () => {
   };
 
 
-
   const handleOnSubmit = () => {
 
     console.log("Submitted user \n", JSON.stringify(user));
 
-    // get validation error messages if any
     let validation = registerValidation(user);
-    setErrors(validation);
+    setErrors(validation);  // show any validation errors
 
     console.log("validation = \n", JSON.stringify(validation));
 
@@ -49,28 +49,32 @@ const Registration = () => {
       };
 
 
-
       axios
         .post("http://localhost:3010/users/register", User, {
           withCredentials: true,
         })
-        .then((RegisteredUser) => {
+        .then(async (RegisteredUser) => {
+
+          // Register new Firebase user
+          try {
+            const resp = await auth.createUserwithEmailAndPassword(User.username, User.password);
+            console.log("Firebase response", resp);
+          } catch (err) {
+            console.log("Firebase Auth error", err.code, err.message);
+          }
+
           let msg = (
             <p style={{ color: "green", fontSize: "1.8rem" }}>
               You are now registered! <br /> Redirecting you to Login...
             </p>
           );
 
-          // Register new Firebase user
-          auth.createUserwithEmailAndPassword(User.username, User.password);
-
           setStatus(msg);
           console.log("New registered user:", RegisteredUser);
 
-          // Login redirect
           setTimeout(() => setRedirect(true), 2000);
         })
-        .catch((err) => {
+        .catch( err => {
           console.log("Server error", err);
           let msg = (
             <p className={styles.ErrorMsg}>
@@ -90,7 +94,6 @@ const Registration = () => {
     }
   };
 
-  // TODO --- test redirect
   if (redirect) return (<Redirect to="/login" />);
 
   return (

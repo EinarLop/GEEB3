@@ -34,8 +34,8 @@ export default function login() {
         .then((response) => {
           console.log("Succesful login!");
 
-          //const loginCredentials = auth.signInWithEmailAndPassword(user.username, user.password)
-          //console.log("Firebase credentials:", loginCredentials)
+          const loginCredentials = auth.signInWithEmailAndPassword(user.username, user.password);
+          console.log("Firebase credentials:", loginCredentials);
 
           let msg = (
             <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>
