@@ -7,15 +7,13 @@ import Oproject from "../Components/Oproject";
 import {SearchBar} from "../Components/SearchBar";
 
 function ProjectFeed() {
-  const [oprojects, setOprojects] = useState([]);
   const [filteredPro, setFilteredProjects]=useState([]);
   const [tagsA,setTags]=useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
       .then((response) => {
-        setFilteredProjects(response.data)
-        setOprojects(response.data);
+        setFilteredProjects(response.data);
       });
   }, []);
   const [isLogged, setIsLogged] = useState(true);
@@ -51,7 +49,6 @@ function ProjectFeed() {
       .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
       .then((response) => {
         setFilteredProjects(response.data)
-        setOprojects(response.data);
       });
     }else{
       axios
