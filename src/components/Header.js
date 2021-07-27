@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeaderStyles.module.scss";
-import {HiOutlineViewGridAdd} from 'react-icons/hi';
+import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { IoPersonCircleOutline } from "react-icons/io5";
-import {FiBox} from 'react-icons/fi';
-import {BsFolderPlus} from 'react-icons/bs';
-import {ImBooks} from 'react-icons/im';
-import {MdContactMail} from 'react-icons/md';
-
-
+import { FiBox } from 'react-icons/fi';
+import { BsFolderPlus } from 'react-icons/bs';
+import { ImBooks } from 'react-icons/im';
+import { MdContactMail } from 'react-icons/md';
 import { FaPeopleCarry } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
 import { Link } from "react-router-dom";
+import useLogin from '../hooks/useLogin'
 
 /* Header layout:  Icon, Logo, 'Create', 'Explore', Header is visible to anyone who is logged in.*/
 
@@ -30,6 +29,8 @@ export default function Header() {
     setVisitor(geebId);
   });
 
+  const { loginStatus } = useLogin();
+  console.log("loginStatus", loginStatus);
 
   return (
     <div className={styles.Wrapper}>
@@ -62,23 +63,20 @@ export default function Header() {
                   {" "}
                   GEEB{" "}
                 </Link>
-                {/* <a className={styles.Links} href="/register">
-                  Register
-                </a> */}
 
                 <Link
                   to="/oprojects"
                   onClick={handleClick}
                   className={styles.Links}
                 >
-                  Find Team Projects <HiOutlineViewGridAdd/>
+                  Find Team Projects <HiOutlineViewGridAdd />
                 </Link>
                 <Link
                   to="/sprojects"
                   onClick={handleClick}
                   className={styles.Links}
                 >
-                  View Portfolio Projects <ImBooks/>
+                  View Portfolio Projects <ImBooks />
                 </Link>
 
                 <Link
@@ -86,50 +84,39 @@ export default function Header() {
                   onClick={handleClick}
                   className={styles.Links}
                 >
-                  Add to Portfolio <BsFolderPlus/> 
+                  Add to Portfolio <BsFolderPlus />
                 </Link>
-                {/*
+
                 <Link
-                  to={`/myapplication/${visitor}`}
+                  to={loginStatus ? `/profile/${visitor}` : '/login'}
                   onClick={handleClick}
                   className={styles.Links}
                 >
-                  My Applications <MdContactMail/>
-                </Link>*/}
-
-                <Link
-                  to={`/profile/${visitor}`}
-                  onClick={handleClick}
-                  className={styles.Links}
-                >
-                  My profile <IoPersonCircleOutline/>
+                  My profile <IoPersonCircleOutline />
                 </Link>
 
-                {/* <a className={styles.Links} href="/login">
-                  Logout
-                </a> */}
               </div>
             </div>
           )}
         </div>
       ) : (
-          <div className={styles.NavContainer}>
-            <Link to="/oprojects" className={styles.Links}>
-              Find Projects <HiOutlineViewGridAdd/>
-            </Link>
-            <Link to="/sprojects" className={styles.Links}>
-              View Portfolios <ImBooks/>
-            </Link>
-            <Link to="/create" className={styles.Links}>
-              Create Project <FiBox/>
-            </Link>
-            <Link to="/createsproject" className={styles.Links}>
-              Add to Portfolio <BsFolderPlus/>
-            </Link>
-            <a href={`/profile/${visitor}`}>
-              <IoPersonCircleOutline className={styles.NavLinkIcon} />
-            </a>
-          </div>
+        <div className={styles.NavContainer}>
+          <Link to="/oprojects" className={styles.Links}>
+            Find Projects <HiOutlineViewGridAdd />
+          </Link>
+          <Link to="/sprojects" className={styles.Links}>
+            View Portfolios <ImBooks />
+          </Link>
+          <Link to="/create" className={styles.Links}>
+            Create Project <FiBox />
+          </Link>
+          <Link to="/createsproject" className={styles.Links}>
+            Add to Portfolio <BsFolderPlus />
+          </Link>
+          <Link to={loginStatus ? `/profile/${visitor}` : '/login'}>
+            <IoPersonCircleOutline className={styles.NavLinkIcon} />
+          </Link>
+        </div>
       )}
     </div>
   );

@@ -14,6 +14,7 @@ import { FiFile } from "react-icons/fi";
 import { FiFolder } from "react-icons/fi";
 import { Redirect } from "react-router-dom";
 import CommentSection from '../components/CommentSection'
+import useLogin from "../hooks/useLogin";
 
 
 export default function home() {
@@ -23,9 +24,11 @@ export default function home() {
         username: "",
         password: "",
     });
-    const onClickStart = () => (
+
+    const onClickStart = () => {
         setRedirect(true)
-    )
+    }
+
     return (
         redirect ? <Redirect to="/register" /> :
             <div className={styles.Wrapper}>

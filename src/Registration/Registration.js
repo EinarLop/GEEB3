@@ -55,7 +55,6 @@ const Registration = () => {
         })
         .then(async (RegisteredUser) => {
 
-          // Register new Firebase user
           try {
             const resp = await auth.createUserwithEmailAndPassword(User.username, User.password);
             console.log("Firebase response", resp);
@@ -70,11 +69,11 @@ const Registration = () => {
           );
 
           setStatus(msg);
-          console.log("New registered user:", RegisteredUser);
+          console.log("New registered user MongoDB:", RegisteredUser);
 
-          setTimeout(() => setRedirect(true), 2000);
+          setTimeout(() => setRedirect(false), 2000);
         })
-        .catch( err => {
+        .catch(err => {
           console.log("Server error", err);
           let msg = (
             <p className={styles.ErrorMsg}>

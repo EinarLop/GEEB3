@@ -2,9 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Login/Login";
-
 import Header from "./components/Header";
-
 import Home from "./Home/Home";
 import Registration from "./Registration/Registration";
 import CreateOProject from "./CreateOProject/CreateOProject";
@@ -17,17 +15,26 @@ import ImageUploader from "./components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./components/MyApplications.js";
-import TestAuth from './TestAuth'
+import Testing from './Testing'
+import useLogin from './hooks/useLogin'
+
+const BACKEND_DEV = 'http://localhost:3010';
+const BACKEND_PROD = 'https://geeb.herokuapp.com/';
 
 function App() {
+
+  const { loginStatus } = useLogin();
+
   return (
     <div>
       {
         <Router>
-          <Header />
-          <Route exact path="/" component={Home} />
-          <Route path="/register" component={Registration} />
-          <Route path="/login" component={Login} />
+          <Header loginStatus={loginStatus} />
+          <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
+          <Route path="/register" render={() => <Registration loginStatus={loginStatus} />} />
+          <Route path="/login" render={() => <Login loginStatus={loginStatus} />} />
+          <Route path="/profile/:id" component={Profile} />
+          <Route path="/editprofile" component={EditProfile} />
           <Route path="/oprojects" component={ProjectFeed} />
           <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
           <Route path="/create" component={CreateOProject} />
@@ -35,10 +42,8 @@ function App() {
           <Route path="/createsproject" component={CreateSProject} />
           <Route path="/sproject/:id" component={SProjectMoreInfo} /> {/*change route to /portfolio/:id*/}
           <Route path="/upload" component={ImageUploader} />
-          <Route path="/profile/:id" component={Profile} />
-          <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
-          <Route path="/dev" component={TestAuth} />
+          <Route path="/dev" component={Testing} />
         </Router>
       }
     </div>

@@ -6,7 +6,7 @@ import { loginValidation } from "../validation/LoginValidation";
 import { auth } from '../base'
 import useLogin from '../hooks/useLogin'
 
-export default function login() {
+const Login = ({ loginStatus }) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -14,7 +14,7 @@ export default function login() {
   const [status, setStatus] = useState();
   const [redirect, setRedirect] = useState(false);
 
-  const loginStatus = useLogin();
+  console.log("LoginStatus from Props", loginStatus);
 
   const handleOnChange = (event) => {
     setUser({
@@ -23,18 +23,27 @@ export default function login() {
     });
   };
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     setStatus("");
     let validation = loginValidation(user); // returns message and ok flag
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
     if (validation.ok) {
+      console.log("Firebase login...");
+      try {
+        const loginCredentials = await auth.signInWithEmailAndPassword(user.username, user.password);
+        console.log("Response:", loginCredentials);
+      } catch (err) {
+        console.log("Firebase error", err.code, err.message);
+      }
+
+
+      console.log("Mongo login...");
       axios
         .post("http://localhost:3010/users/login", user)
         .then((response) => {
           console.log("Succesful login!");
 
-          const loginCredentials = auth.signInWithEmailAndPassword(user.username, user.password);
           console.log("Firebase credentials:", loginCredentials);
 
           let msg = (
@@ -47,7 +56,7 @@ export default function login() {
           );
           console.log("Login response is:", response.data);
           window.localStorage.setItem("geebId", response.data.userId); // save the user's _id to localstorage
-          setTimeout(() => setRedirect(true), 2000);
+          setTimeout(() => setRedirect(false), 2000);
         })
         .catch((err) => {
           console.log("Login POST failed");
@@ -143,3 +152,5 @@ export default function login() {
     </div>
   );
 }
+
+export default Login;
