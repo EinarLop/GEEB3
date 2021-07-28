@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { base, auth } from './base'
 import useLogin from './hooks/useLogin'
+import { BACKEND_DEV, BACKEND_PROD } from './constants';
+import axios from 'axios';
 
 export default function Testing() {
 
@@ -41,25 +43,27 @@ export default function Testing() {
     }
 
     const clientRequestToFB = async () => {
-        try {
-            const idToken = auth.currentUser.getIdToken(/*Force refresh?*/ true);
-            // Send an https request with a token to validate in backend
+        const idToken = await auth.currentUser?.getIdToken(/*Force refresh?*/ true);
+        console.log("current idtoken", idToken);
+        // Send an https request with a token to validate in backend
 
-            // Token should be present in an 'Authorization' header, using Bearer schema
-            /*
-            e.g.
-            Authorization : Bearer <token-here>
-            CORS is not a problem since the auth header does not use cookies.
-            */
-            const payload = { a: a };
-            const authTokenHeader = {
-                'Authorization': `Bearer ${idToken}`,
-            }
+        // Token should be present in an 'Authorization' header, using Bearer schema
+        /*
+        e.g.
+        Authorization : Bearer <token-here>
+        CORS is not a problem since the auth header does not use cookies.
+        */
+        if (!idToken) return;
 
-            axios.get('url',)
-        } catch (error) {
-            console.log("Error", error, { headers: authTokenHeader });
-        }
+        const authTokenHeader = {
+            'authorization': `Bearer ${idToken}`,
+        };
+
+        axios.get(BACKEND_DEV + '/users/private', { headers: authTokenHeader }).then(res => {
+            console.log(res);
+        }).catch(error => {
+            console.log("Error", error);
+        })
     }
 
     return (
@@ -69,6 +73,7 @@ export default function Testing() {
             <button onClick={registerUser} style={{ width: '56', height: '32px' }}>Create User</button>
             <button onClick={loginUser} style={{ width: '56', height: '32px' }}>Submit</button>
             <button onClick={logOut} style={{ width: '56', height: '32px' }}>Logout</button>
+            <button onClick={clientRequestToFB} style={{ width: '56', height: '32px' }}>Test Backend</button>
         </div>
     )
 }

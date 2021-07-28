@@ -8,8 +8,11 @@ import { FaStar } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { GiGreekTemple } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
+import { BACKEND_DEV } from '../constants';
+import useLogin from "../hooks/useLogin";
 
-function Profile(props) {
+const Profile = (props) => {
+
   const [user, setUser] = useState({
     fullname: "Loading name...",
     username: "username",
@@ -18,34 +21,46 @@ function Profile(props) {
     learning: ["Loading..."],
     want: ["Loading..."],
     bio: "Loading my cool description...",
-    // university:
-    // semester:
-    // major:
   });
+
   const [isOwner, setIsOwner] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const loginStatus = useLogin();
+  const { id } = props.match.params;  // if id==="me", fetch current user uid
 
-  useEffect(() => {
-    console.log("Getting user with id:", props.match.params.id);
-    if (props.match.params.id !== "null") {
+  useEffect(async () => {
+    console.log("Getting user with Mongo id:", id);
+
+    if (id !== "null") {
+
+      if (!loginStatus) return;
+
+      const idToken = await auth.currentUser?.getIdToken(true);
+      console.log("current idtoken", idToken);
+
+      const authHeader = {
+        "authorization": `Bearer ${idToken}`,
+      };
+
       axios
-        .get("http://localhost:3010/users/" + props.match.params.id, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
-        }) //  http://localhost:3010oprojects
+        .get(BACKEND_DEV + "/users/" + props.match.params.id, {
+          headers: authHeader,
+        })
         .then((response) => {
+
           setUser(response.data.user);
           setIsOwner(response.data.isOwner);
+
         })
         .catch((err) => {
           console.log("Error in Profile:", err);
         });
-    } else {
-      console.log("Warning: /:id is null");
+    }
+
+    else {
+      console.log("User Mongo id is null");
       setTimeout(() => {
-        setRedirect(true);
+        setRedirect(false);
       }, 1000);
     }
   }, []);

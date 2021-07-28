@@ -17,9 +17,7 @@ import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./components/MyApplications.js";
 import Testing from './Testing'
 import useLogin from './hooks/useLogin'
-
-const BACKEND_DEV = 'http://localhost:3010';
-const BACKEND_PROD = 'https://geeb.herokuapp.com/';
+import { auth } from './base'
 
 function App() {
 
@@ -34,6 +32,7 @@ function App() {
           <Route path="/register" render={() => <Registration loginStatus={loginStatus} />} />
           <Route path="/login" render={() => <Login loginStatus={loginStatus} />} />
           <Route path="/profile/:id" component={Profile} />
+          <Route path="/profile/me" render={() => <Profile loginStatus={loginStatus} />} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/oprojects" component={ProjectFeed} />
           <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
