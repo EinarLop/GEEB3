@@ -35,11 +35,11 @@ function App() {
           <Route path="/profile/me" render={() => <Profile loginStatus={loginStatus} />} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/oprojects" component={ProjectFeed} />
-          <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
+          <Route path="/project/:id" component={ProjectMoreInfo} />
           <Route path="/create" component={CreateOProject} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo} /> {/*change route to /portfolio/:id*/}
+          <Route path="/portfolio/:id" component={SProjectMoreInfo} />
           <Route path="/upload" component={ImageUploader} />
           <Route path="/myapplication/:id" component={MyApplication} />
           <Route path="/dev" component={Testing} />

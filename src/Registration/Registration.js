@@ -7,7 +7,7 @@ import axios from "axios";
 import useLogin from "../hooks/useLogin";
 
 
-const Registration = () => {
+const Registration = ({ loginStatus }) => {
   const [user, setUser] = useState({
     name: "Username",
     lastName: "Lastname",
@@ -18,7 +18,7 @@ const Registration = () => {
   });
 
   const [errorsMessage, setErrors] = useState({});
-  const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(loginStatus);
   const [status, setStatus] = useState();
 
   const loginStatus = useLogin();
@@ -190,7 +190,6 @@ const Registration = () => {
           value="Submit"
           onClick={handleOnSubmit}
         />
-
         <p className={styles.Msg}>Already have an account?</p>
         <Link to="/login" className={styles.LoginLink}>
           Login

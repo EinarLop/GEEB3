@@ -12,9 +12,7 @@ const Login = ({ loginStatus }) => {
     password: "",
   });
   const [status, setStatus] = useState();
-  const [redirect, setRedirect] = useState(false);
-
-  console.log("LoginStatus from Props", loginStatus);
+  const [redirect, setRedirect] = useState(loginStatus);
 
   const handleOnChange = (event) => {
     setUser({
