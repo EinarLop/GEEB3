@@ -10,7 +10,6 @@ import {SearchBar} from "../Components/SearchBar";
 
 
 function SProjectFeed() {
-  const [projects, setProjects] = useState([]);
   const [filteredPro, setFilteredProjects]=useState([]);
   const [tagsA,setTags]=useState([]);
   useEffect(()=>{
@@ -24,7 +23,6 @@ function SProjectFeed() {
       .get("http://localhost:3010/sprojects") ///"http://localhost:3010/sprojects" http://localhost:3010sprojects
       .then(
         (response) => {
-          setProjects(response.data);
           setFilteredProjects(response.data);
         }
       );
@@ -36,22 +34,38 @@ function SProjectFeed() {
         ...tagsA,
         val
       ]);
+      document.getElementById('searchBar').value = ''
     }
   };
-  const filterTags = ()=>{
-    if(tagsA.length!=0){
-      console.log(tagsA.map((t)=>setFilteredProjects(filteredPro.filter(project => project.tags.includes(t)))));
-    }
-  }
   const onDeleteTag = (index) => {
     setTags(tagsA.filter((tag, i) => i !== index));
-    setFilteredProjects(projects);
+  };
+  const searchTag = (index) => {
+    if (tagsA.length == 0){
+      axios
+      .get("http://localhost:3010/sprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
+      .then((response) => {
+        setFilteredProjects(response.data)
+      });
+    }else{
+      axios
+      .get("http://localhost:3010/tags/sprojects",{
+        params:{
+          tagNames: tagsA
+        }
+      })
+      .then((response) => {
+        setFilteredProjects(response.data);
+        console.log(response.data);
+      });
+    }
+    
   };
   return (
     <div className={styles.Global}>
 
       <p className={styles.Title}> Explore Portfolio Projects</p>
-      <SearchBar  addTag={addTag}/>
+      <SearchBar  addTag={addTag} searchTags={searchTag}/>
       <div className={styles.TContainer}>
         {tagsA.map((tag, index) => (
           <div
