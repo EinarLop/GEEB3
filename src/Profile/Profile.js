@@ -30,8 +30,10 @@ const Profile = (props) => {
   const { id } = props.match.params;
 
   useEffect(() => {
-    console.log("Profile.js useEffect")
+
     if (!loginStatus) return;
+    console.log("Logged in!");
+
     if (id === "null") {
       console.log("Username id not found");
       return;
@@ -39,7 +41,7 @@ const Profile = (props) => {
 
     if (id === "me") {
       // Get currentUser Data, isOwner=true
-      console.log("Fetching my profile...");
+      console.log("Fetching my own profile...");
       (async () => {
         const user_email = auth.currentUser.email;
 
@@ -54,10 +56,9 @@ const Profile = (props) => {
 
           axios.post(BACKEND_DEV + "/users/by-email/", { email: user_email }, { headers: authTokenHeader })
             .then(response => {
-              const { user } = response.data;
+              const user = response.data;
               setUser(user);
               setIsOwner(true);
-
             })
             .catch(error => {
               console.error(error);
@@ -68,11 +69,11 @@ const Profile = (props) => {
           return;
         }
 
-
       })();
 
       return;
     }
+
     console.log("Normal user id query");
     // Get Profile Data and determine isOwner
     (async () => {
@@ -89,6 +90,7 @@ const Profile = (props) => {
         .then((response) => {
 
           const { user } = response.data;
+          console.dir(user)
           setUser(user);
           setIsOwner(user.username === id);
 
@@ -98,11 +100,9 @@ const Profile = (props) => {
         });
 
     })();
-
-
   }, []);
 
-  return redirect ? (
+  return redirect == "hah" ? (
     <Redirect to="/login" />
   ) : (
     <div className={styles.Wrapper}>

@@ -23,7 +23,7 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  /*   useEffect(() => {
+  /* useEffect(() => {
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
     setVisitor(geebId);

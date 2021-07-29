@@ -29,18 +29,18 @@ function App() {
         <Router>
           <Header loginStatus={loginStatus} />
           <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
-          <Route path="/register" render={() => <Registration loginStatus={loginStatus} />} />
-          <Route path="/login" render={() => <Login loginStatus={loginStatus} />} />
+          <Route exact path="/register" render={() => <Registration loginStatus={loginStatus} />} />
+          <Route exact path="/login" render={() => <Login loginStatus={loginStatus} />} />
           <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
-          <Route path="/editprofile" component={EditProfile} />
-          <Route path="/oprojects" component={ProjectFeed} />
+          <Route exact path="/editprofile" component={EditProfile} />
+          <Route exact path="/oprojects" component={ProjectFeed} />
           <Route path="/project/:id" component={ProjectMoreInfo} />
-          <Route path="/create" component={CreateOProject} />
-          <Route path="/sprojects" component={SProjectFeed} />
-          <Route path="/createsproject" component={CreateSProject} />
+          <Route exact path="/create" component={CreateOProject} />
+          <Route exact path="/sprojects" component={SProjectFeed} />
+          <Route exact path="/createsproject" component={CreateSProject} />
           <Route path="/portfolio/:id" component={SProjectMoreInfo} />
-          <Route path="/upload" component={ImageUploader} />
-          <Route path="/myapplication/:id" component={MyApplication} />
+          <Route exact path="/upload" component={ImageUploader} />
+          <Route exact path="/myapplication/:id" component={MyApplication} />
           <Route path="/dev" component={Testing} />
         </Router>
       }
