@@ -2,26 +2,34 @@ import React, { useState, useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
+import { auth } from '../base'
+import { BACKEND_DEV, BACKEND_PROD } from "../constants";
 
 import Oproject from "../components/Oproject";
 
-function ProjectFeed() {
+function ProjectFeed({ loginStatus }) {
   const [oprojects, setOprojects] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects") ///"http://localhost:3010/oprojects" http://localhost:3010oprojects
+      .get(BACKEND_DEV + "/oprojects")
       .then((response) => setOprojects(response.data));
   }, []);
-  const [isLogged, setIsLogged] = useState(true);
 
-  const myProjects = () => {
+
+  const myProjects = async () => {
+    if (!loginStatus) return;
+
+    const idToken = await auth.currentUser?.getIdToken(true);
+
+    if (!idToken) return;
+
+    const authTokenHeader = {
+      "authorization": `Bearer ${idToken}`,
+    };
+
     axios
-      .get("http://localhost:3010/oprojects/mine", {
-        headers: {
-          "auth-token": window.localStorage.getItem("auth-token"),
-        },
-      }) //http://localhost:3010/oprojects" http://localhost:3010oprojects
+      .get(BACKEND_DEV + "/oprojects/mine", { headers: authTokenHeader })
       .then((response) => {
         setOprojects(response.data);
         console.log(response.data);
@@ -30,7 +38,7 @@ function ProjectFeed() {
 
   return (
     <div className={styles.Global}>
-      <p className={styles.Title}> Explore Team Projects</p>
+      <p className={styles.Title}>Explore Team Projects</p>
       {/*---Tag Filter Bar component here---*
             <input
         type="button"

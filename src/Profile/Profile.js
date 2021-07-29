@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
-import ImageTwo from "./Images/ImageTwo.svg";
 import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { GiGreekTemple } from "react-icons/gi";
 import { Link, Redirect } from "react-router-dom";
 import { BACKEND_DEV } from '../constants';
-import useLogin from "../hooks/useLogin";
+import { auth } from '../base'
 
 const Profile = (props) => {
 
@@ -23,46 +22,84 @@ const Profile = (props) => {
     bio: "Loading my cool description...",
   });
 
+  const { loginStatus } = props;
+
   const [isOwner, setIsOwner] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-  const loginStatus = useLogin();
-  const { id } = props.match.params;  // if id==="me", fetch current user uid
+  const [redirect, setRedirect] = useState(loginStatus);
 
-  useEffect(async () => {
-    console.log("Getting user with Mongo id:", id);
+  const { id } = props.match.params;
 
-    if (id !== "null") {
+  useEffect(() => {
+    console.log("Profile.js useEffect")
+    if (!loginStatus) return;
+    if (id === "null") {
+      console.log("Username id not found");
+      return;
+    }
 
-      if (!loginStatus) return;
+    if (id === "me") {
+      // Get currentUser Data, isOwner=true
+      console.log("Fetching my profile...");
+      (async () => {
+        const user_email = auth.currentUser.email;
 
+        try {
+          const idToken = await auth.currentUser?.getIdToken(true);
+          console.log("idToken fetched");
+          const authTokenHeader = {
+            "authorization": `Bearer ${idToken}`,
+          };
+
+          console.log("idToken created")
+
+          axios.post(BACKEND_DEV + "/users/by-email/", { email: user_email }, { headers: authTokenHeader })
+            .then(response => {
+              const { user } = response.data;
+              setUser(user);
+              setIsOwner(true);
+
+            })
+            .catch(error => {
+              console.error(error);
+            })
+        } catch (error) {
+          console.log("Something happened", error);
+          console.error(error)
+          return;
+        }
+
+
+      })();
+
+      return;
+    }
+    console.log("Normal user id query");
+    // Get Profile Data and determine isOwner
+    (async () => {
       const idToken = await auth.currentUser?.getIdToken(true);
-      console.log("current idtoken", idToken);
 
-      const authHeader = {
+      const authTokenHeader = {
         "authorization": `Bearer ${idToken}`,
       };
 
       axios
-        .get(BACKEND_DEV + "/users/" + props.match.params.id, {
-          headers: authHeader,
+        .get(BACKEND_DEV + "/users/" + id, {
+          headers: authTokenHeader,
         })
         .then((response) => {
 
-          setUser(response.data.user);
-          setIsOwner(response.data.isOwner);
+          const { user } = response.data;
+          setUser(user);
+          setIsOwner(user.username === id);
 
         })
         .catch((err) => {
-          console.log("Error in Profile:", err);
+          console.log("Error in getting Profile:", err);
         });
-    }
 
-    else {
-      console.log("User Mongo id is null");
-      setTimeout(() => {
-        setRedirect(false);
-      }, 1000);
-    }
+    })();
+
+
   }, []);
 
   return redirect ? (
@@ -105,9 +142,9 @@ const Profile = (props) => {
           <BsFillFolderSymlinkFill /> My Links
         </p>
         {user.links.length ? (
-          user.links.map((link) => (
+          user.links.map((link, i) => (
             // Doble // para que el href sea absoluto
-            <a href={`//${link}`} target="_blank" className={styles.Link}>
+            <a key={i} href={`//${link}`} target="_blank" className={styles.Link}>
               <BsLink45Deg /> {link}
             </a>
           ))
@@ -125,24 +162,24 @@ const Profile = (props) => {
       <div className={styles.MasterdContainer}>
         <p className={styles.MasterdTitle}>Mastered:</p>
         <div className={styles.MasterdTagsContanier}>
-          {user.mastered.map((tag) => (
-            <div className={`${styles.Tag} ${styles.Mastered}`}> {tag}</div>
+          {user.mastered.map((tag, i) => (
+            <div key={i} className={`${styles.Tag} ${styles.Mastered}`}> {tag}</div>
           ))}
         </div>
       </div>
       <div className={styles.LearningContainer}>
         <p className={styles.LearningTitle}>Learning:</p>
         <div className={styles.LearningTagsContanier}>
-          {user.learning.map((tag) => (
-            <div className={`${styles.Tag} ${styles.Learning}`}> {tag}</div>
+          {user.learning.map((tag, i) => (
+            <div key={i} className={`${styles.Tag} ${styles.Learning}`}> {tag}</div>
           ))}
         </div>
       </div>
       <div className={styles.WantContainer}>
         <p className={styles.WantTitle}>Want to learn:</p>
         <div className={styles.MasterdTagsContanier}>
-          {user.want.map((tag) => (
-            <div className={`${styles.Tag} ${styles.Want}`}> {tag}</div>
+          {user.want.map((tag, i) => (
+            <div key={i} className={`${styles.Tag} ${styles.Want}`}> {tag}</div>
           ))}
         </div>
       </div>

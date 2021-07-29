@@ -23,14 +23,13 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     let geebId = localStorage.getItem("geebId");
     console.log("geebId:", geebId);
     setVisitor(geebId);
-  });
+  }); */
 
   const { loginStatus } = useLogin();
-  console.log("loginStatus", loginStatus);
 
   return (
     <div className={styles.Wrapper}>
@@ -88,7 +87,7 @@ export default function Header() {
                 </Link>
 
                 <Link
-                  to={loginStatus ? `/profile/${visitor}` : '/login'}
+                  to={loginStatus ? `/profile/me` : '/login'}
                   onClick={handleClick}
                   className={styles.Links}
                 >
@@ -113,7 +112,7 @@ export default function Header() {
           <Link to="/createsproject" className={styles.Links}>
             Add to Portfolio <BsFolderPlus />
           </Link>
-          <Link to={loginStatus ? `/profile/${visitor}` : '/login'}>
+          <Link to={loginStatus ? `/profile/me` : '/login'}>
             <IoPersonCircleOutline className={styles.NavLinkIcon} />
           </Link>
         </div>

@@ -21,8 +21,6 @@ const Registration = ({ loginStatus }) => {
   const [redirect, setRedirect] = useState(loginStatus);
   const [status, setStatus] = useState();
 
-  const loginStatus = useLogin();
-
   const handleOnChange = (event) => {
     setUser({
       ...user,

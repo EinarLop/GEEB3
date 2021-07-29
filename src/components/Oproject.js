@@ -9,6 +9,8 @@ import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
 
 export default function Oproject(props) {
   const project = props.project;
+  const ownerUsername = project.userid.username;
+
   return (
     <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
       <TabList className={styles.TabsList}>
@@ -30,12 +32,14 @@ export default function Oproject(props) {
               </div>
               <p>
                 Creator:
-                <b>
-                  {" "}
-                  @{project.userid
-                    ? project.userid.username
-                    : "Loading..."}{" "}
-                </b>
+                <Link to={`/profile/${ownerUsername}`}>
+                  <b>
+                    {" "}
+                    @{project.userid
+                      ? ownerUsername
+                      : "Loading..."}{" "}
+                  </b>
+                </Link>
               </p>
               <p>
                 Posted:<b> {project.created.slice(0, 10)} </b>

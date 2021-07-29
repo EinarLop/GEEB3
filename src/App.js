@@ -24,15 +24,14 @@ function App() {
   const { loginStatus } = useLogin();
 
   return (
-    <div>
+    <>
       {
         <Router>
           <Header loginStatus={loginStatus} />
           <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
           <Route path="/register" render={() => <Registration loginStatus={loginStatus} />} />
           <Route path="/login" render={() => <Login loginStatus={loginStatus} />} />
-          <Route path="/profile/:id" component={Profile} />
-          <Route path="/profile/me" render={() => <Profile loginStatus={loginStatus} />} />
+          <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/oprojects" component={ProjectFeed} />
           <Route path="/project/:id" component={ProjectMoreInfo} />
@@ -45,7 +44,7 @@ function App() {
           <Route path="/dev" component={Testing} />
         </Router>
       }
-    </div>
+    </>
   );
 }
 
