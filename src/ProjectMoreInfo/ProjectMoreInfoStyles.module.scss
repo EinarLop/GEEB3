@@ -248,8 +248,8 @@
   width: 100%;
   margin: 25px 0;
   padding: 25px;
-  .Text{
-    margin:10px 0px ;
+  .Text {
+    margin: 10px 0px;
   }
 }
 
@@ -258,6 +258,28 @@
   display: flex;
   margin-top: 10px;
   padding: 5px;
+}
+
+.ImagesSection {
+  // border: 2px white solid;
+  width: 100%;
+  //padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.ImagesSection h1 {
+  color: gainsboro;
+}
+
+.Image {
+  width: 100%;
+  max-width: 768px;
 }
 
 @media (max-width: 1380px) {
