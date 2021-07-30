@@ -83,6 +83,7 @@ function ProjectCreate() {
       });
     }
   };
+
   const onAddHighlight = (event) => {
     setMessage({
       ...message,
