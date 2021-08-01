@@ -46,10 +46,17 @@ const Registration = ({ loginStatus }) => {
 
       console.log("Creating Firebase User");
       try {
-        const resp = await auth.createUserwithEmailAndPassword(User.username, User.password);
+        // creates and automatically signs in
+        const resp = await auth.createUserWithEmailAndPassword(User.email, User.password);
         console.log("Firebase response", resp);
       } catch (err) {
         console.log("Firebase Auth error", err.code, err.message);
+        const errorMsg = (
+          <p className={styles.ErrorMsg} style={{ textAlign: 'center' }}>
+            {err.message}
+          </p>
+        );
+        setStatus(errorMsg);
         return;
       }
 
@@ -82,7 +89,7 @@ const Registration = ({ loginStatus }) => {
       }
 
     } else {
-      let errorMsg = (
+      const errorMsg = (
         <p className={styles.ErrorMsg} style={{ textAlign: 'center' }}>
           Oops. Please check your inputs!
         </p>
@@ -92,7 +99,7 @@ const Registration = ({ loginStatus }) => {
   };
 
 
-  if (redirect) return (<Redirect to="/login" />);
+  if (redirect) return (<Redirect to="/oprojects" />);
 
   return (
     <div className={styles.Global}>
