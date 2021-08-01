@@ -137,15 +137,11 @@ export const registerValidation = (user) => {
   const errorUsername = validateUsername(user.userName);
   const errorEmail = validateEmail(user.email);
   const errorPassword = validatePassword(user.password, user.confirmPassword);
-  const errorName = validateName(user.name);
-  const errorLastName = validateLastName(user.lastName);
 
-  const success = (errorUsername === "" && errorEmail === "" && errorPassword === "" && errorName === "" && errorLastName === "")
+  const success = (errorUsername === "" && errorEmail === "" && errorPassword === "")
 
   const validation = {
     success,
-    errorName,
-    errorLastName,
     errorUsername,
     errorEmail,
     errorPassword,

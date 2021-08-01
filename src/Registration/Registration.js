@@ -5,12 +5,11 @@ import { registerValidation } from "../validation/RegisterValidation";
 import { auth } from '../base';
 import axios from "axios";
 import useLogin from "../hooks/useLogin";
+import { BACKEND_DEV } from "../constants";
 
 
 const Registration = ({ loginStatus }) => {
   const [user, setUser] = useState({
-    name: "Username",
-    lastName: "Lastname",
     userName: "",
     email: "",
     password: "",
@@ -29,7 +28,7 @@ const Registration = ({ loginStatus }) => {
   };
 
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
 
     console.log("Submitted user \n", JSON.stringify(user));
 
@@ -43,53 +42,55 @@ const Registration = ({ loginStatus }) => {
         username: user.userName,
         email: user.email,
         password: user.password,
-        fullname: user.name + " " + user.lastName,
       };
 
+      console.log("Creating Firebase User");
+      try {
+        const resp = await auth.createUserwithEmailAndPassword(User.username, User.password);
+        console.log("Firebase response", resp);
+      } catch (err) {
+        console.log("Firebase Auth error", err.code, err.message);
+        return;
+      }
 
-      axios
-        .post("http://localhost:3010/users/register", User, {
-          withCredentials: true,
-        })
-        .then(async (RegisteredUser) => {
+      console.log("Register User in MongoDB");
 
-          try {
-            const resp = await auth.createUserwithEmailAndPassword(User.username, User.password);
-            console.log("Firebase response", resp);
-          } catch (err) {
-            console.log("Firebase Auth error", err.code, err.message);
-          }
+      try {
+        const registeredUser = await axios.post(BACKEND_DEV + "/users/register", User);
 
-          let msg = (
-            <p style={{ color: "green", fontSize: "1.8rem" }}>
-              You are now registered! <br /> Redirecting you to Login...
-            </p>
-          );
+        const msg = (
+          <p style={{ color: "green", fontSize: "1.8rem" }}>
+            You are now registered! <br /> Redirecting you to Login...
+          </p>
+        );
 
-          setStatus(msg);
-          console.log("New registered user MongoDB:", RegisteredUser);
+        setStatus(msg);
+        console.log("New registered user MongoDB:", registeredUser);
 
-          setTimeout(() => setRedirect(false), 2000);
-        })
-        .catch(err => {
-          console.log("Server error", err);
-          let msg = (
-            <p className={styles.ErrorMsg}>
-              Something went wrong. Please try again.
-            </p>
-          );
-          setStatus(msg);
-        });
+        setTimeout(() => setRedirect(false), 2000);
+
+      } catch (error) {
+        console.log("Server error", error);
+
+        const errorMsg = (
+          <p className={styles.ErrorMsg}>
+            Something went wrong. Please try again.
+          </p>
+        );
+
+        setStatus(errorMsg);
+      }
 
     } else {
-      let msg = (
+      let errorMsg = (
         <p className={styles.ErrorMsg} style={{ textAlign: 'center' }}>
           Oops. Please check your inputs!
         </p>
       );
-      setStatus(msg);
+      setStatus(errorMsg);
     }
   };
+
 
   if (redirect) return (<Redirect to="/login" />);
 
