@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import { loginValidation } from "../validation/LoginValidation";
 import { auth } from '../base'
 import useLogin from '../hooks/useLogin'
+import { BACKEND_DEV } from "../constants";
 
-const Login = ({ loginStatus }) => {
+const Login = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+  const { loginStatus } = useLogin();
+  console.log("loginstatus", loginStatus);
+
   const [status, setStatus] = useState();
-  const [redirect, setRedirect] = useState(loginStatus);
+  const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    setRedirect(loginStatus);
+  }, [loginStatus]);
 
   const handleOnChange = (event) => {
     setUser({
@@ -27,8 +35,9 @@ const Login = ({ loginStatus }) => {
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
     if (validation.ok) {
-      console.log("Firebase login...");
+      console.log("Firebase login:", user.username, user.password);
       try {
+        /* E-MAIL SIGN IN */
         const loginCredentials = await auth.signInWithEmailAndPassword(user.username, user.password);
         console.log("Response:", loginCredentials);
       } catch (err) {
@@ -38,7 +47,7 @@ const Login = ({ loginStatus }) => {
 
       console.log("Mongo login...");
       axios
-        .post("http://localhost:3010/users/login", user)
+        .post(BACKEND_DEV + "/users/login", user)
         .then((response) => {
           console.log("Succesful login!");
 
@@ -65,6 +74,7 @@ const Login = ({ loginStatus }) => {
           );
           setStatus(msg);
         });
+
     } else {
       let msg = (
         <p className={`${styles.StatusMsg} ${styles.Err}`}>{validation.msg}</p>
@@ -73,9 +83,9 @@ const Login = ({ loginStatus }) => {
     }
   };
 
-  return redirect ? (
-    <Redirect to="/oprojects" />
-  ) : (
+  if (redirect) return (<Redirect to="/oprojects" />)
+
+  return (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
@@ -107,12 +117,12 @@ const Login = ({ loginStatus }) => {
           </div>
 
           <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Username</label>
+            <label className={styles.Label}>Username/Email</label>
             <input
               autoComplete="off"
               className={styles.Input}
               name="username"
-              placeholder="user@cool"
+              placeholder="cool21user"
               onChange={handleOnChange}
               required="True"
             ></input>

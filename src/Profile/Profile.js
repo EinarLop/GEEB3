@@ -25,7 +25,7 @@ const Profile = (props) => {
   const { loginStatus } = props;
 
   const [isOwner, setIsOwner] = useState(false);
-  const [redirect, setRedirect] = useState(loginStatus);
+  const [redirect, setRedirect] = useState(!loginStatus);
 
   const { id } = props.match.params;
 
@@ -102,9 +102,23 @@ const Profile = (props) => {
     })();
   }, []);
 
-  return redirect == "hah" ? (
-    <Redirect to="/login" />
-  ) : (
+
+
+  const logOut = async () => {
+    try {
+      const res = await auth.signOut();
+      console.log("Signed out:", res);
+      setRedirect(true);
+
+    } catch (error) {
+      console.log("Error:", error.code, error.message);
+    }
+  }
+
+
+  if (redirect) return (<Redirect to="/login" />)
+
+  return (
     <div className={styles.Wrapper}>
       <div className={styles.NameContainer}>
         <p className={styles.Name}>{user.fullname}</p>
@@ -190,18 +204,12 @@ const Profile = (props) => {
         <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>here</Link>
 
       </div>
-      {/* LINKS TO UNSUPPORTED SECTIONS
-      <div className={styles.ProjectsContainer}>
-        <p className={styles.PortfolioContent}>My Portfolio</p>
-        <Link to={`/myapplication/${props.match.params.id}`} className={styles.PortfolioLink}>here</Link>
-        <p className={styles.TeamContent}>
-          Collaborating in X Team Projects:
-        </p>
-        <a className={styles.TeamLink}>here</a>
+      <div style={{ display: 'block', width: '100%' }}>
+        {isOwner && (
+          <button onClick={logOut}>Log Out</button>
+        )}
       </div>
-      <div className={styles.ImageTwoContainer}>
-        <img className={styles.ImageTwo} src={ImageTwo} />
-          </div>*/}
+
     </div>
   );
 }

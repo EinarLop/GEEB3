@@ -30,7 +30,7 @@ function App() {
           <Header loginStatus={loginStatus} />
           <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
           <Route exact path="/register" render={() => <Registration loginStatus={loginStatus} />} />
-          <Route exact path="/login" render={() => <Login loginStatus={loginStatus} />} />
+          <Route exact path="/login" render={() => <Login />} />
           <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
           <Route exact path="/editprofile" component={EditProfile} />
           <Route exact path="/oprojects" component={ProjectFeed} />

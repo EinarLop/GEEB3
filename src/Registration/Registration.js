@@ -67,17 +67,20 @@ const Registration = ({ loginStatus }) => {
 
         const msg = (
           <p style={{ color: "green", fontSize: "1.8rem" }}>
-            You are now registered! <br /> Redirecting you to Login...
+            You are now registered! <br /> Redirecting you to your feed...
           </p>
         );
 
         setStatus(msg);
         console.log("New registered user MongoDB:", registeredUser);
 
-        setTimeout(() => setRedirect(false), 2000);
+        setTimeout(() => setRedirect(true), 2000);
 
       } catch (error) {
-        console.log("Server error", error);
+        console.log("Server error: ", error);
+
+        const deleteResp = await auth.currentUser.delete();
+        console.log("Deleted fb user:", deleteResp);
 
         const errorMsg = (
           <p className={styles.ErrorMsg}>
