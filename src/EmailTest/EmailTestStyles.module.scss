@@ -1,0 +1,47 @@
+@import "../GlobalStyles/NewInput.scss", "../GlobalStyles/Input.scss",
+  "../global", "../GlobalStyles/NewButton.scss";
+
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1024px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+.InputLabelContainer {
+  @include InputLabelContainer;
+  min-width: 51%;
+}
+.Input {
+  @include NewInput;
+}
+.TextArea {
+  @include NewInput;
+  height: 300px;
+}
+
+.Label {
+  @include Label;
+  color: $sCardSp;
+  width: 100%;
+  &.Transparent {
+    color: transparent;
+  }
+}
+
+.Title {
+  color: $primary;
+  font-size: 3.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.ButtonContainer {
+  margin-top: 25px;
+  width: 51%;
+}
+.Button {
+  @include NewButton;
+  background-color: $primary;
+}

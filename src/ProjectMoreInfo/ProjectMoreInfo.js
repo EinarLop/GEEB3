@@ -264,6 +264,11 @@ export default function ProjectMoreInfo(props) {
           </div>
         )}
       </div>
+      <div className={styles.EmailButtonContainer}>
+        <Link to={"/email/" + project._id}>
+          <button className={styles.Button}>Hello</button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -20,6 +20,9 @@ import MyApplication from "./Components/MyApplications.js";
 //350x34
 //404x44
 
+//Email Test Component
+import EmailTest from "./EmailTest/EmailTest";
+
 function App() {
   return (
     <div>
@@ -30,12 +33,15 @@ function App() {
           <Route path="/register" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/oprojects" component={ProjectFeed} />
-          <Route path="/oproject/:id" component={ProjectMoreInfo} /> {/*change route to /project/:id*/}
+          <Route path="/oproject/:id" component={ProjectMoreInfo} />{" "}
+          <Route path="/email/:id" component={EmailTest} />
+          {/*change route to /project/:id*/}
           <Route path="/create" component={ProjectCreate} />
           <Route path="/sprojects" component={SProjectFeed} />
           <Route path="/createsproject" component={CreateSProject} />
-          <Route path="/sproject/:id" component={SProjectMoreInfo}/> {/*change route to /portfolio/:id*/}
-          <Route path="/upload" component={ImageUploader}/>
+          <Route path="/sproject/:id" component={SProjectMoreInfo} />{" "}
+          {/*change route to /portfolio/:id*/}
+          <Route path="/upload" component={ImageUploader} />
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
@@ -44,5 +50,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
