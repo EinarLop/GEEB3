@@ -33,11 +33,26 @@ const Login = () => {
     let validation = loginValidation(user); // returns message and ok flag
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
+
     if (validation.ok) {
+
       console.log("Firebase login:", user.username, user.password);
+
+      let email = user.username;
+
+      if (validation.isUsername) {
+        console.log("Username Login")
+        try {
+          const response = await axios.get(BACKEND_DEV + '/users/mail-query/' + user.username);
+          email = response.data.email;
+        } catch (error) {
+          console.log("Error on email request", error);
+          return;
+        }
+      }
+
       try {
-        /* E-MAIL SIGN IN */
-        const loginCredentials = await auth.signInWithEmailAndPassword(user.username, user.password);
+        const loginCredentials = await auth.signInWithEmailAndPassword(email, user.password);
         console.log("Response:", loginCredentials);
         let msg = (
           <p className={styles.StatusMsg}>Logging in...</p>
@@ -59,6 +74,8 @@ const Login = () => {
         );
         setStatus(errorMsg);
       }
+
+
 
     } else {
       let msg = (

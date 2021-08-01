@@ -12,22 +12,22 @@ const limits = {
 }
 
 /* HELPER FUNCTIONS */
-const validEmail = (email) => {
+export const validEmail = (email) => {
   const re = /\S+@\S+\.\S+/;
   console.log("validateEmail result: " + re.test(email));
   return re.test(email);
 };
-const onlyAlphanumeric = (str) => {
+export const onlyAlphanumeric = (str) => {
   const re = /^[a-z0-9A-Z]+$/; // only lowercase alphanumeric
   console.log("is Alphanumeric result: " + re.test(str));
   return re.test(str);
 };
-const onlyAlphabetic = (str) => {
+export const onlyAlphabetic = (str) => {
   const re = /^[A-Za-z]+$/;
   console.log("Alphabetic(", str.toLowerCase(), ") ?", re.test(str))
   return re.test(str);
 }
-const hasWhiteSpace = (str) => {
+export const hasWhiteSpace = (str) => {
   const index = str.indexOf(" ");
   if (index == -1) {
     return false;
