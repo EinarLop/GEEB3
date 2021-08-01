@@ -13,7 +13,6 @@ const Login = () => {
     password: "",
   });
   const { loginStatus } = useLogin();
-  console.log("loginstatus", loginStatus);
 
   const [status, setStatus] = useState();
   const [redirect, setRedirect] = useState(false);
@@ -40,40 +39,26 @@ const Login = () => {
         /* E-MAIL SIGN IN */
         const loginCredentials = await auth.signInWithEmailAndPassword(user.username, user.password);
         console.log("Response:", loginCredentials);
+        let msg = (
+          <p className={styles.StatusMsg}>Logging in...</p>
+        )
+        setStatus(msg);
+
+        setTimeout(() => {
+          setRedirect(true)
+        }, 200);
+
       } catch (err) {
         console.log("Firebase error", err.code, err.message);
+
+        console.log("Login POST failed");
+        let errorMsg = (
+          <p className={styles.ErrorMsg}>
+            Username/Password is wrong
+          </p>
+        );
+        setStatus(errorMsg);
       }
-
-
-      console.log("Mongo login...");
-      axios
-        .post(BACKEND_DEV + "/users/login", user)
-        .then((response) => {
-          console.log("Succesful login!");
-
-          console.log("Firebase credentials:", loginCredentials);
-
-          let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>
-          );
-          setStatus(msg);
-          window.localStorage.setItem(
-            "auth-token",
-            response.headers["auth-token"]
-          );
-          console.log("Login response is:", response.data);
-          window.localStorage.setItem("geebId", response.data.userId); // save the user's _id to localstorage
-          setTimeout(() => setRedirect(false), 2000);
-        })
-        .catch((err) => {
-          console.log("Login POST failed");
-          let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Err}`}>
-              Username/Password is wrong
-            </p>
-          );
-          setStatus(msg);
-        });
 
     } else {
       let msg = (

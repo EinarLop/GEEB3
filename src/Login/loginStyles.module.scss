@@ -116,7 +116,6 @@
   color: #f74f39;
   display: flex;
   flex-wrap: wrap;
-  width: 45%;
   font-size: 1.8rem;
 }
 
@@ -125,11 +124,6 @@
   &.Ok {
     color: $mediumSpringGreen
   }
-
-  &.Err {
-    color:#f74f39;
-  }
-  //margin-top: 50px;
 }
 
 @media (max-width: 767px) {
