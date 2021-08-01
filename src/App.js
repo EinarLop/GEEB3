@@ -32,7 +32,7 @@ function App() {
           <Route exact path="/register" render={() => <Registration loginStatus={loginStatus} />} />
           <Route exact path="/login" render={() => <Login />} />
           <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
-          <Route exact path="/editprofile" component={EditProfile} />
+          <Route exact path="/editprofile" render={() => <EditProfile loginStatus={loginStatus} />} />
           <Route exact path="/oprojects" component={ProjectFeed} />
           <Route path="/project/:id" component={ProjectMoreInfo} />
           <Route exact path="/create" component={CreateOProject} />
