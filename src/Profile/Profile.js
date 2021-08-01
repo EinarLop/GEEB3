@@ -27,7 +27,7 @@ const Profile = (props) => {
   const [isOwner, setIsOwner] = useState(false);
   const [redirect, setRedirect] = useState(!loginStatus);
 
-  const { id } = props.match.params;
+  const { id } = props.match.params; // Mongo ObjectID
 
   useEffect(() => {
 
@@ -92,8 +92,8 @@ const Profile = (props) => {
           const { user } = response.data;
           console.dir(user)
           setUser(user);
-          setIsOwner(user.username === id);
-
+          console.log("Is Owner?", user.email === auth.currentUser.email)
+          setIsOwner(user.email === auth.currentUser.email);
         })
         .catch((err) => {
           console.log("Error in getting Profile:", err);

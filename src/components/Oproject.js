@@ -32,7 +32,7 @@ export default function Oproject(props) {
               </div>
               <p>
                 Creator:
-                <Link to={`/profile/${ownerUsername}`}>
+                <Link to={`/profile/${project.userid._id}`}>
                   <b>
                     {" "}
                     @{project.userid
