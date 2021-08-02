@@ -23,7 +23,9 @@ function AcceptRequest(){
             </div>
             <div className="Wrapper">
                 <RequestInfo person={person} request={request}/>
-                
+                                  
+              
+           <div><p>hey</p></div>                
             </div>
         </div>
     
