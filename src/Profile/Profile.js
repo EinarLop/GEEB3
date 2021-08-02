@@ -46,7 +46,7 @@ const Profile = (props) => {
         const user_email = auth.currentUser.email;
 
         try {
-          const idToken = await auth.currentUser?.getIdToken(true);
+          const idToken = await auth.currentUser?.getIdToken(true); // genera un JWT
           console.log("idToken fetched");
           const authTokenHeader = {
             "authorization": `Bearer ${idToken}`,
