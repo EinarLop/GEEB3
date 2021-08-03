@@ -60,3 +60,17 @@
   list-style-type: none;
   border-bottom: 2px solid $pCardSp;
 }
+.TContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+  margin-bottom: 10px;
+}
+.Tag {
+  @include Tag;
+  &:hover {
+    background-color: #e64949;
+    // No funciona** o agregar un tachecito?
+  }
+}
