@@ -159,7 +159,7 @@ function CreateOProject() {
   };
 
   return redirect ? (
-    <Redirect to={`/oproject/${newId}`} />
+    <Redirect to={`/project/${newId}`} />
   ) : (
     <div>
       {/* <Header /> */}

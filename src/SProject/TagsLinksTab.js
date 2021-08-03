@@ -9,7 +9,7 @@ function TagsLinksTab(props) {
     setRedirect(true);
   };
   return redirect ? (
-    <Redirect to={"/sproject/" + project._id} />
+    <Redirect to={"/portfolio/" + project._id} />
   ) : (
     <div className={styles.Wrapper}>
       <div className={styles.TagsContainer}>
@@ -29,14 +29,14 @@ function TagsLinksTab(props) {
         <div className={styles.LinksSpace}>
           <label className={styles.Label}></label>
           <ul className={styles.LList}>
-          {project.links.map((link) => (
-          <li>
-          <a href={`${link}`} target="_blank" className={styles.Link}>
-                        <BsLink45Deg />
-                        {link}
-          </a>
-          </li>
-          ))}
+            {project.links.map((link) => (
+              <li>
+                <a href={`${link}`} target="_blank" className={styles.Link}>
+                  <BsLink45Deg />
+                  {link}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

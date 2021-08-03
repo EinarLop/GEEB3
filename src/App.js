@@ -36,7 +36,7 @@ function App() {
             <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
             <Route exact path="/editprofile" render={() => <EditProfile loginStatus={loginStatus} />} />
             <Route exact path="/oprojects" render={(props) => <ProjectFeed {...props} loginStatus={loginStatus} />} />
-            <Route path="/oproject/:id" render={(props) => <ProjectMoreInfo {...props} loginStatus={loginStatus} />} />
+            <Route path="/project/:id" render={(props) => <ProjectMoreInfo {...props} loginStatus={loginStatus} />} />
             <Route exact path="/create" render={(props) => <CreateOProject {...props} loginStatus={loginStatus} />} />
             <Route exact path="/sprojects" render={(props) => <SProjectFeed {...props} loginStatus={loginStatus} />} />
             <Route exact path="/createsproject" render={(props) => <CreateSProject {...props} loginStatus={loginStatus} />} />

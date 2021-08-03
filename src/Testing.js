@@ -49,7 +49,6 @@ export default function Testing() {
 
     const clientRequestToFB = async () => {
         const idToken = await auth.currentUser?.getIdToken(/*Force refresh?*/ true);
-        console.log("current idtoken", idToken);
         // Send an https request with a token to validate in backend
         if (!idToken) return;
 
@@ -59,8 +58,10 @@ export default function Testing() {
 
         axios.get(BACKEND_DEV + '/users/private', { headers: authTokenHeader }).then(res => {
             console.log(res);
+            setMessage(res.toString());
         }).catch(error => {
             console.log("Error", error);
+            setMessage(error.toString());
         })
     }
 

@@ -12,7 +12,7 @@ export default function Sproject(props) {
     setRedirect(true);
   };
   return redirect ? (
-    <Redirect to={`/sproject/${project._id}`} />
+    <Redirect to={`/portfolio/${project._id}`} />
   ) : (
     <Tabs className={styles.Card} selectedTabClassName={styles.TabSelected}>
       <TabList className={styles.TabsList}>
