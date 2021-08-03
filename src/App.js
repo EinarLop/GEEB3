@@ -14,10 +14,11 @@ import SProjectMoreInfo from "./SProjectMoreInfo/SProjMoreInfo.js";
 import ImageUploader from "./components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
+import NotFound404 from "./NotFound404/NotFound404";
 import MyApplication from "./components/MyApplications.js";
 import Testing from './Testing'
 import useLogin from './hooks/useLogin'
-import { auth } from './base'
+import { auth } from './base';
 
 function App() {
 
@@ -28,20 +29,26 @@ function App() {
       {
         <Router>
           <Header loginStatus={loginStatus} />
-          <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
-          <Route exact path="/register" render={() => <Registration loginStatus={loginStatus} />} />
-          <Route exact path="/login" render={() => <Login />} />
-          <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
-          <Route exact path="/editprofile" render={() => <EditProfile loginStatus={loginStatus} />} />
-          <Route exact path="/oprojects" component={ProjectFeed} />
-          <Route path="/project/:id" component={ProjectMoreInfo} />
-          <Route exact path="/create" component={CreateOProject} />
-          <Route exact path="/sprojects" component={SProjectFeed} />
-          <Route exact path="/createsproject" component={CreateSProject} />
-          <Route path="/portfolio/:id" component={SProjectMoreInfo} />
-          <Route exact path="/upload" component={ImageUploader} />
-          <Route exact path="/myapplication/:id" component={MyApplication} />
-          <Route path="/dev" component={Testing} />
+          <Switch>
+            <Route exact path="/" render={() => <Home loginStatus={loginStatus} />} />
+            <Route exact path="/register" render={() => <Registration loginStatus={loginStatus} />} />
+            <Route exact path="/login" render={() => <Login />} />
+            <Route path="/profile/:id" render={(props) => <Profile {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/editprofile" render={() => <EditProfile loginStatus={loginStatus} />} />
+            <Route exact path="/oprojects" render={(props) => <ProjectFeed {...props} loginStatus={loginStatus} />} />
+            <Route path="/oproject/:id" render={(props) => <ProjectMoreInfo {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/create" render={(props) => <CreateOProject {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/sprojects" render={(props) => <SProjectFeed {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/createsproject" render={(props) => <CreateSProject {...props} loginStatus={loginStatus} />} />
+            <Route path="/portfolio/:id" render={(props) => <SProjectMoreInfo {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/upload" render={(props) => <ImageUploader {...props} loginStatus={loginStatus} />} />
+            <Route exact path="/myapplication/:id" render={(props) => <MyApplication {...props} loginStatus={loginStatus} />} />
+            <Route path="/dev" component={Testing} />
+            <Route path='*'>
+              <NotFound404 />
+            </Route>
+          </Switch>
+
         </Router>
       }
     </>
