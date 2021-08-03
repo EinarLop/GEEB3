@@ -230,6 +230,46 @@
     width: 300px;
   }
 }
+
+.Box1,
+.Box2,
+.Box3,
+.Box4,
+.Box5 {
+  height: auto;
+  width: 50%;
+  margin-bottom: 50px;
+}
+.Box5 {
+  //border: 1px solid #4cc9f0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+.ChooseImg {
+  font-size: 1.8rem;
+  color: $primary;
+  width: 250px;
+  border: 2px solid $primary;
+  padding: 9px;
+  background-color: transparent;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+.UploadMsg {
+  font-size: 1.8rem;
+  color: #9ccc65;
+}
+.IconUpload {
+  width: 35px;
+  height: 30px;
+  margin: -7px 0;
+}
+
+input[type="file"] {
+  display: none;
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @media (max-width: 600px) {
   .Global {

@@ -30,7 +30,9 @@
     text-decoration: underline;
     font-weight: 700;
   }
-  &:link, &:visited, &:active {
+  &:link,
+  &:visited,
+  &:active {
     color: $otherGrey;
   }
 }
@@ -112,16 +114,23 @@
   text-align: center;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .ImagesSection h1 {
   color: gainsboro;
 }
 
+.Image {
+  width: 100%;
+  max-width: 768px;
+}
+
 .Label {
   @include Label;
   font-size: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   width: 100%;
   color: $sCardSp;
 }

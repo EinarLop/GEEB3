@@ -84,7 +84,7 @@ export default function SProjectMoreInfo(props) {
       </label>
       <div className={styles.ImagesSection}>
         {project.imageurls.map((img) => (
-          <img src={img} />
+          <img className={styles.Image} src={img} />
         ))}
       </div>
     </div>

@@ -7,6 +7,7 @@ import { FaTrophy } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
 import { BiCheckSquare } from "react-icons/bi";
 import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
+import { IoMdPeople, IoMdImages } from "react-icons/io";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -17,11 +18,17 @@ export default function ProjectMoreInfo(props) {
     skills: ["Skill"],
     highlights: ["Loading Highlights..."],
     desirables: ["Loading Preferences..."],
+    // imageurls: ["Loading Images..."],
     userid: {
       username: "Leader",
       userid: 0,
     },
   });
+
+  let imageurls = [
+    "https://dummyimage.com/600x400/000/fff",
+    "https://dummyimage.com/600x400/000/fff",
+  ];
   const [isOwner, setIsOwner] = useState(false);
   const [applications, setApplications] = useState([]);
   const [errorInput, setErrorInput] = useState("");
@@ -42,6 +49,7 @@ export default function ProjectMoreInfo(props) {
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
+
         console.log(response.data.project);
       });
     axios
@@ -73,8 +81,7 @@ export default function ProjectMoreInfo(props) {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
         })
-        .then((res) =>
-          location.reload());
+        .then((res) => location.reload());
     }
   };
 
@@ -145,6 +152,15 @@ export default function ProjectMoreInfo(props) {
               <div className={`${styles.Tag} ${styles.SkillTag}`} key={index}>
                 {skill}
               </div>
+            ))}
+          </div>
+
+          <h3 className={styles.TitleSubtitle}>
+            <IoMdImages /> Images:
+          </h3>
+          <div className={styles.ImagesSection}>
+            {imageurls.map((img) => (
+              <img className={styles.Image} src={img} />
             ))}
           </div>
         </div>
