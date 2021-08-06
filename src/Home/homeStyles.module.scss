@@ -46,7 +46,7 @@
 }
 .Button {
   @include Button;
-  background-color: $primary; //#ff5e5b
+  background-color: $primary; 
   height: 60px;
   width: 150px;
   font-size: 25px;

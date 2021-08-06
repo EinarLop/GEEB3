@@ -176,7 +176,6 @@ export default function ProjectMoreInfo(props) {
             ) : (
               <div className={styles.userInputs}>
                 <p className={styles.TitleSubtitle}>Send a request</p>
-                {/*<p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>*/}
                 <div className={styles.ApplicationMsg}>
                   <div className={styles.InputLabelContainer}>
                     <label className={styles.Label}>

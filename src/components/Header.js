@@ -91,7 +91,7 @@ export default function Header() {
                   onClick={handleClick}
                   className={styles.Links}
                 >
-                  My profile <IoPersonCircleOutline />
+                  {loginStatus ? "My Profile" : "Log In"} <IoPersonCircleOutline />
                 </Link>
 
               </div>
@@ -106,14 +106,26 @@ export default function Header() {
           <Link to="/sprojects" className={styles.Links}>
             View Portfolios <ImBooks />
           </Link>
-          <Link to="/create" className={styles.Links}>
-            Create Project <FiBox />
-          </Link>
-          <Link to="/createsproject" className={styles.Links}>
-            Add to Portfolio <BsFolderPlus />
-          </Link>
+          {loginStatus && (
+            <>
+              <Link to="/create" className={styles.Links}>
+                Create Project <FiBox />
+              </Link>
+              <Link to="/createsproject" className={styles.Links}>
+                Add to Portfolio <BsFolderPlus />
+              </Link>
+            </>
+          )}
           <Link to={loginStatus ? `/profile/me` : '/login'}>
-            <IoPersonCircleOutline className={styles.NavLinkIcon} />
+            {loginStatus ? (
+              <IoPersonCircleOutline className={styles.NavLinkIcon} />
+            ) : (
+              <input
+                value="Log In"
+                className={styles.LogIn}
+                type="button"
+              />
+            )}
           </Link>
         </div>
       )}
