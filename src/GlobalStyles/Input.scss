@@ -6,12 +6,6 @@
   flex-direction: column;
   font-family: $font;
   margin: 20px 0;
-  @media (max-width: 1024px) {
-    @media (min-width: 600px) {
-      //width: 300px;
-      //margin: 0px;
-    }
-  }
 }
 
 //Possible
@@ -46,11 +40,11 @@
   color: white;
   font-size: 18px;
   box-sizing: border-box;
+  padding: 0 8px;
 
   &:focus {
     outline: none;
     border: 2px solid $orangeAccent;
-    //background-color: #545463;
   }
 
   &::placeholder {

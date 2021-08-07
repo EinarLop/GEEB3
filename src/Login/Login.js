@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./loginStyles.module.scss";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
-import { loginValidation } from "../Validation/LoginValidation";
+import { loginValidation } from "../validation/LoginValidation";
+import { auth } from '../base'
+import useLogin from '../hooks/useLogin'
+import { BACKEND_DEV } from "../constants";
 
-export default function login() {
+const Login = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+  const { loginStatus } = useLogin();
+
   const [status, setStatus] = useState();
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    setRedirect(loginStatus);
+  }, [loginStatus]);
 
   const handleOnChange = (event) => {
     setUser({
@@ -19,37 +28,55 @@ export default function login() {
     });
   };
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     setStatus("");
     let validation = loginValidation(user); // returns message and ok flag
     console.log("validation returned:");
     console.log(JSON.stringify(validation));
+
     if (validation.ok) {
-      axios
-        .post("http://localhost:3010/users/login", user)
-        .then((response) => {
-          console.log("Succesful login POST");
-          let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Ok}`}>Logging in...</p>
-          );
-          setStatus(msg);
-          window.localStorage.setItem(
-            "auth-token",
-            response.headers["auth-token"]
-          );
-          console.log("Login response is:", response.data);
-          window.localStorage.setItem("geebId", response.data.userId); // save the user's _id to localstorage
-          setTimeout(() => setRedirect(true), 2000);
-        })
-        .catch((err) => {
-          console.log("Login POST failed");
-          let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Err}`}>
-              Username/Password is wrong
-            </p>
-          );
-          setStatus(msg);
-        });
+
+      console.log("Firebase login:", user.username, user.password);
+
+      let email = user.username;
+
+      if (validation.isUsername) {
+        console.log("Username Login")
+        try {
+          const response = await axios.get(BACKEND_DEV + '/users/mail-query/' + user.username);
+          email = response.data.email;
+        } catch (error) {
+          console.log("Error on email request", error);
+          return;
+        }
+      }
+
+      try {
+        const loginCredentials = await auth.signInWithEmailAndPassword(email, user.password);
+        console.log("Response:", loginCredentials);
+        let msg = (
+          <p className={styles.StatusMsg}>Logging in...</p>
+        )
+        setStatus(msg);
+
+        setTimeout(() => {
+          setRedirect(true)
+        }, 200);
+
+      } catch (err) {
+        console.log("Firebase error", err.code, err.message);
+
+        console.log("Login POST failed");
+        let errorMsg = (
+          <p className={styles.ErrorMsg}>
+            Username/Password is wrong
+          </p>
+        );
+        setStatus(errorMsg);
+      }
+
+
+
     } else {
       let msg = (
         <p className={`${styles.StatusMsg} ${styles.Err}`}>{validation.msg}</p>
@@ -58,9 +85,9 @@ export default function login() {
     }
   };
 
-  return redirect ? (
-    <Redirect to="/oprojects" />
-  ) : (
+  if (redirect) return (<Redirect to="/oprojects" />)
+
+  return (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>
         <div className={styles.InfoSubtitleBox}>
@@ -92,12 +119,12 @@ export default function login() {
           </div>
 
           <div className={styles.InputLabelContainer}>
-            <label className={styles.Label}>Username</label>
+            <label className={styles.Label}>Username/Email</label>
             <input
               autoComplete="off"
               className={styles.Input}
               name="username"
-              placeholder="user@cool"
+              placeholder="cool21user"
               onChange={handleOnChange}
               required="True"
             ></input>
@@ -135,3 +162,10 @@ export default function login() {
     </div>
   );
 }
+
+export default Login;
+
+/*
+SMALL TODOS:
+- Fix "Unmounted Component Update" Warning (useEffect cleanup)
+*/

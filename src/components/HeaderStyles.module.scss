@@ -53,6 +53,14 @@
 
 }
 
+.LogIn {
+  @include Button;
+  background-color: #fff;
+  color: $otherGrey;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
 .LogOut {
   @include Button;
   color: black;

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import styles from "./ProjectCreateStyles.module.scss";
+import styles from "./CreateOProject.module.scss";
 import { Redirect } from "react-router-dom";
 import {
   validateAll,
   validateHighlight,
   validateProfile,
   validateSkill,
-} from "../Validation/ProjectCreateValidation.js";
-import { validateTag } from "../Validation/GeneralValidation";
-import { AiOutlineUpload } from "react-icons/ai";
+} from "../validation/CreateOProjectValidation.js";
+import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
+import { AiOutlineUpload } from "react-icons/ai";
 
-function ProjectCreate() {
+function CreateOProject() {
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -182,7 +182,7 @@ function ProjectCreate() {
   };
 
   return redirect ? (
-    <Redirect to={`/oproject/${newId}`} />
+    <Redirect to={`/project/${newId}`} />
   ) : (
     <div>
       {/* <Header /> */}
@@ -412,4 +412,4 @@ function ProjectCreate() {
   );
 }
 
-export default ProjectCreate;
+export default CreateOProject;

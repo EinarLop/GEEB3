@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ProjectMoreInfoStyles.module.scss";
 import axios from "axios";
-import { validateRequest } from "../Validation/ProjectMoreInfoValidation";
+import { validateRequest } from "../validation/ProjectMoreInfoValidation";
 import { Link } from "react-router-dom";
 import { FaTrophy } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
@@ -176,7 +176,6 @@ export default function ProjectMoreInfo(props) {
             ) : (
               <div className={styles.userInputs}>
                 <p className={styles.TitleSubtitle}>Send a request</p>
-                {/*<p className={styles.TitleSubtitle}>Send: {alreadySend.toString()}</p>*/}
                 <div className={styles.ApplicationMsg}>
                   <div className={styles.InputLabelContainer}>
                     <label className={styles.Label}>
@@ -231,7 +230,7 @@ export default function ProjectMoreInfo(props) {
                             axios
                               .patch(
                                 "http://localhost:3010/applicants/update/status/" +
-                                  applicant._id,
+                                applicant._id,
                                 {
                                   status: "Unaccepted",
                                 }
@@ -248,7 +247,7 @@ export default function ProjectMoreInfo(props) {
                             axios
                               .patch(
                                 "http://localhost:3010/applicants/update/status/" +
-                                  applicant._id,
+                                applicant._id,
                                 {
                                   status: "Accepted",
                                 }

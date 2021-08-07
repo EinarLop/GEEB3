@@ -2,7 +2,6 @@
 
 .Wrapper {
   padding: 50px;
-  //width: 100%;
   max-width: 1024px;
   display: flex;
   justify-content: space-between;
@@ -14,12 +13,10 @@
 }
 
 .InfoContainer {
-  //border: solid red;
   width: 100%;
 }
 .Title {
-  //color: #ff5e5b; //#e8645c
-  color: $primary;//#ff5e5b
+  color: $primary;
   font-size: 75px;
   text-align: center;
   margin: 25px 0;
@@ -49,7 +46,7 @@
 }
 .Button {
   @include Button;
-  background-color: $primary; //#ff5e5b
+  background-color: $primary; 
   height: 60px;
   width: 150px;
   font-size: 25px;

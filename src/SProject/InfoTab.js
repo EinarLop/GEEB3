@@ -8,7 +8,7 @@ function InfoTab(props) {
     setRedirect(true);
   };
   return redirect ? (
-    <Redirect to={"/sproject/" + project._id} />
+    <Redirect to={"/portfolio/" + project._id} />
   ) : (
     <div className={styles.Wrapper}>
       <div className={styles.InfoContainer}>

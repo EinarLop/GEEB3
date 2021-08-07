@@ -2,24 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./EditProfileStyles.module.scss";
 import { Link, Redirect } from "react-router-dom";
+import { auth } from '../base';
 import {
   validateProfile,
   validateTags,
   validateInputTag,
   validateLink,
-} from "../Validation/EditProfileValidation";
+} from "../validation/EditProfileValidation";
 import pic1 from "./Images/pic3.svg";
 import { BsLink45Deg } from "react-icons/bs";
+import { BACKEND_DEV } from "../constants";
 
-export default function EditProfile() {
+export default function EditProfile({ loginStatus }) {
   const [userId, setUserId] = useState(null);
-  const [redirect, setRedirect] = useState(false); // if user is not owner or user cannot edit, we redirect
+  const [redirect, setRedirect] = useState(false);
   const [finished, setFinished] = useState(false);
   const [learning, setLearning] = useState([]);
   const [mastered, setMastered] = useState([]);
   const [want, setWant] = useState([]);
   const [links, setLinks] = useState([]);
-  const [status, setStatus] = useState(); // for validation status msg
+  const [status, setStatus] = useState();
   const [form, setForm] = useState({
     bio: "",
     name: "",
@@ -27,7 +29,7 @@ export default function EditProfile() {
     email: "",
     major: "",
     college: "ITESM",
-    semester: 1,
+    semester: 0,
     tag_master: "",
     tag_learn: "",
     tag_want: "",
@@ -46,7 +48,6 @@ export default function EditProfile() {
   });
 
   const [colleges, setColleges] = useState([
-    // retrieve from database "colleges" collection
     "ITESM",
     "UNAM",
     "IPN",
@@ -58,55 +59,51 @@ export default function EditProfile() {
     "LA SALLE",
   ]);
 
-  useEffect(() => {
-    // get information of logged in user
-    let geebId = localStorage.getItem("geebId");
-    console.log("geebId:", geebId);
-    setUserId(geebId);
-    if (geebId) {
-      console.log("Getting user with id:", geebId);
-      axios
-        .get("http://localhost:3010/users/" + geebId, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
-        })
-        .then((response) => {
-          console.log("Retrieved!");
-          if (!response.data.isOwner) {
-            setRedirect(false);
-          }
-          console.log(response.data);
+  const fetchUserData = async (email) => {
 
-          const User = response.data.user;
-          let fullname = User.fullname.split(" ");
-          setForm({
-            ...form,
-            name: fullname[0],
-            lastname: fullname[1],
-            bio: User.bio,
-            email: User.email,
-            major: User.major,
-            college: User.college,
-            semester: User.semester,
-          });
-          setMastered(User.mastered);
-          setLearning(User.learning);
-          setWant(User.want);
-          setLinks(User.links);
-          console.log("Setting form...");
-        })
-        .catch((err) => {
-          console.log("Error in Profile:", err);
+    const idToken = await auth.currentUser?.getIdToken(true);
+    const authTokenHeader = {
+      "authorization": `Bearer ${idToken}`,
+    };
+
+    axios.post(BACKEND_DEV + "/users/by-email/", { email: email }, { headers: authTokenHeader })
+      .then(response => {
+        const user = response.data;
+        console.dir(user);
+        console.log("Setting form...");
+
+        setForm({
+          ...form,
+          name: fullname[0],
+          lastname: fullname[1],
+          bio: user.bio,
+          email: user.email,
+          major: user.major,
+          college: user.college,
+          semester: user.semester,
         });
+        setMastered(user.mastered);
+        setLearning(user.learning);
+        setWant(user.want);
+        setLinks(user.links);
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
+
+  useEffect(() => {
+    if (loginStatus) {
+      (async () => {
+        await fetchUserData(auth.currentUser.email);
+      })()
     } else {
       console.log("No user logged in");
       setRedirect(true);
     }
-  }, []); // empty array so it is only called on mount
+  }, []);
 
-  //onDelete ******************************************************************************************************************************
   const onDeleteLink = (index) => {
     setLinks(links.filter((link, i) => i !== index));
   };
@@ -120,7 +117,6 @@ export default function EditProfile() {
     setLearning(learning.filter((l, i) => i !== index));
   };
 
-  //onADD ******************************************************************************************************************************
   const onAddTagMastered = (event) => {
     let err = validateInputTag(form.tag_master, mastered.length + 1);
     console.log("Add Tag err:", err);
@@ -171,7 +167,6 @@ export default function EditProfile() {
     });
   };
 
-  //onChange ***************************************************************************************************************************
   const handleOnChange = (e) => {
     // generic handler for our inputs
     console.dir(form);
@@ -183,7 +178,6 @@ export default function EditProfile() {
     console.log(e.target.value);
   };
 
-  // onSubmit ********************************************************
   const onSubmit = (e) => {
     console.log("Submitting:");
     const User = {
@@ -209,6 +203,9 @@ export default function EditProfile() {
         </p>
       );
 
+      console.log("IMPLEMENT UPDATE BY EMAIL");
+
+      return;
       console.log("Submitting post update request for", userId);
       axios
         .put(`http://localhost:3010/users/update/${userId}`, User, {
@@ -245,7 +242,7 @@ export default function EditProfile() {
   return redirect ? (
     <Redirect to="/login" />
   ) : finished ? (
-    <Redirect to={`/profile/${userId}`} />
+    <Redirect to={`/profile/me`} />
   ) : (
     <div className={styles.Wrapper}>
       <div className={styles.Box0}>
