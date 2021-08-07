@@ -25,6 +25,13 @@ li {
   color: #e66d29;
   margin-bottom: 25px;
 }
+.TContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 400px;
+  margin-bottom: 10px;
+}
 .TagsSubtitle {
   font-size: 25px;
 }
