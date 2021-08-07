@@ -5,8 +5,8 @@ import InfoTab from "./InfoTab";
 import TagsLinksTab from "./TagsLinksTab";
 import ImagesTab from "./ImagesTab";
 import axios from "axios";
-import Sproject from "../Components/Sproject";
-import { SearchBar } from "../Components/SearchBar";
+import Sproject from "../components/Sproject";
+import { SearchBar } from "../components/SearchBar";
 import { BACKEND_DEV } from "../constants";
 
 

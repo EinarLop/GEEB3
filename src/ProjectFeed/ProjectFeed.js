@@ -5,8 +5,8 @@ import axios from "axios";
 import { auth } from '../base'
 import { BACKEND_DEV, BACKEND_PROD } from "../constants";
 
-import Oproject from "../Components/Oproject";
-import { SearchBar } from "../Components/SearchBar";
+import Oproject from "../components/Oproject";
+import { SearchBar } from "../components/SearchBar";
 
 function ProjectFeed({ loginStatus }) {
   const [oprojects, setOprojects] = useState([]);
@@ -32,7 +32,7 @@ function ProjectFeed({ loginStatus }) {
 
 
 
-  const myProjects = () => {
+  const myProjects = async () => {
     if (!loginStatus) return;
 
     const idToken = await auth.currentUser?.getIdToken(true);
