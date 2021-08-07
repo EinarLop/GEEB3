@@ -40,8 +40,8 @@ const Profile = (props) => {
     }
 
     if (id === "me") {
-      // Get currentUser Data, isOwner=true
-      console.log("Fetching my own profile...");
+
+      console.log("Fetching your own profile...");
       (async () => {
         const user_email = auth.currentUser.email;
 
@@ -74,7 +74,6 @@ const Profile = (props) => {
       return;
     }
 
-    console.log("Normal user id query");
     // Get Profile Data and determine isOwner
     (async () => {
       const idToken = await auth.currentUser?.getIdToken(true);
@@ -89,7 +88,7 @@ const Profile = (props) => {
         })
         .then((response) => {
 
-          const { user } = response.data;
+          const user = response.data;
           console.dir(user)
           setUser(user);
           console.log("Is Owner?", user.email === auth.currentUser.email)
