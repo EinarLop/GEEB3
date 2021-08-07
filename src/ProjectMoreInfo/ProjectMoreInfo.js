@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import { FaTrophy } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
 import { BiCheckSquare } from "react-icons/bi";
-import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
-import { IoMdPeople, IoMdImages } from "react-icons/io";
+import { AiFillStar } from "react-icons/ai";
+import { IoMdImages } from "react-icons/io";
+import { BACKEND_DEV } from "../constants";
 
 export default function ProjectMoreInfo(props) {
   const [project, setProject] = useState({
@@ -18,7 +19,6 @@ export default function ProjectMoreInfo(props) {
     skills: ["Skill"],
     highlights: ["Loading Highlights..."],
     desirables: ["Loading Preferences..."],
-    // imageurls: ["Loading Images..."],
     userid: {
       username: "Leader",
       userid: 0,
@@ -32,7 +32,6 @@ export default function ProjectMoreInfo(props) {
   const [isOwner, setIsOwner] = useState(false);
   const [applications, setApplications] = useState([]);
   const [errorInput, setErrorInput] = useState("");
-  const [visitor, setVisitor] = useState("");
   const [request, setRequest] = useState({
     user: "",
     motive: "",
@@ -41,11 +40,7 @@ export default function ProjectMoreInfo(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3010/oprojects/" + props.match.params.id, {
-        headers: {
-          "auth-token": window.localStorage.getItem("auth-token"),
-        },
-      })
+      .get(BACKEND_DEV + "/oprojects/" + props.match.params.id)
       .then((response) => {
         setIsOwner(response.data.isOwner);
         setProject(response.data.project);
@@ -53,12 +48,12 @@ export default function ProjectMoreInfo(props) {
         console.log(response.data.project);
       });
     axios
-      .get("http://localhost:3010/applicants/project/" + props.match.params.id)
+      .get(BACKEND_DEV + "/applicants/project/" + props.match.params.id)
       .then((response) => {
         setApplications(response.data);
         hasARequest(response.data);
       });
-  }, []);
+  }, []); // use id as dependency?
 
   const handleOnChange = (event) => {
     setRequest({
@@ -76,7 +71,7 @@ export default function ProjectMoreInfo(props) {
       };
       console.log(Array.isArray(project.highlights));
       axios
-        .post("http://localhost:3010/applicants/create", applicant, {
+        .post(BACKEND_DEV + "/applicants/create", applicant, {
           headers: {
             "auth-token": window.localStorage.getItem("auth-token"),
           },
@@ -99,7 +94,6 @@ export default function ProjectMoreInfo(props) {
     <div className={styles.Global}>
       <div className={styles.Wrapper}>
         <div className={styles.TitleContainer}>
-          {/*<h1>Is Owner: {isOwner.toString()}</h1>*/}
           <p className={styles.Title}>{project.title}</p>
           <p className={styles.Author}>
             Posted by:{" "}
