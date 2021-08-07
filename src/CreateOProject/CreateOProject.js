@@ -11,7 +11,7 @@ import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
 import { AiOutlineUpload } from "react-icons/ai";
 
-function CreateOProject() {
+function CreateOProject({ loginStatus }) {
   const [project, setProject] = useState({
     title: "",
     description: "",

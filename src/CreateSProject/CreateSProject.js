@@ -6,11 +6,12 @@ import {
   sprojectValidation,
   validateLink,
 } from "../validation/CreateSProjectValidation";
+import { BACKEND_DEV } from '../constants'
 import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
-import { base } from "../base";
+import { auth, base } from "../base";
 
-function CreateSProject() {
+function CreateSProject({ loginStatus }) {
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -47,13 +48,15 @@ function CreateSProject() {
     e.target.file.value = null; // reset the input
   };
 
+
   const handleOnChange = (event) => {
     setProject({
       ...project,
       [event.target.name]: event.target.value,
     });
   };
-  //onADD ******************************************************************************************************************************
+
+
   const onAddTag = (e) => {
     let validTag = validateTag(tags, project.currentTag);
     setMessages({ ...messages, errorTags: validTag });
@@ -66,6 +69,7 @@ function CreateSProject() {
     }
   };
 
+
   const onAddLink = (e) => {
     let validLinks = validateLink(links, project.currentLink);
     setMessages({ ...messages, errorLinks: validLinks });
@@ -77,7 +81,8 @@ function CreateSProject() {
       });
     }
   };
-  //On delete ******************************************************************************************************************************
+
+
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
@@ -92,30 +97,44 @@ function CreateSProject() {
 
   const handleOnSubmit = async () => {
     console.log("Creating an Sproject...");
+    let userid;
+
+    const idToken = await auth.currentUser?.getIdToken(true);
+    if (!idToken) return;
+    const authTokenHeader = {
+      'authorization': `Bearer ${idToken}`,
+    };
+
+    try {
+      const response = await axios.get(BACKEND_DEV + '/users/get-my-id', { headers: authTokenHeader });
+
+      userid = response.data._id;
+
+    } catch (error) {
+      console.error(error);
+    }
+
     let validation = sprojectValidation(project, tags, links);
 
     if (validation.ok) {
-      // Process files, then send create Sproject POST request. ** should save sproject first, then images??
+
       let imageurls = await processFiles(); // get array of image URLs from saving to Storage
       if (imageurls.length == 0) imageurls = undefined;
 
       const Project = {
         title: project.title,
         description: project.description,
-        // collaborators:[],
         tags,
         links,
         imageurls,
+        userid,
       };
 
       console.log("Attempt to save sproject:");
       console.log(JSON.stringify(Project));
       axios
         .post("http://localhost:3010/sprojects/create", Project, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
+          headers: authTokenHeader
         })
         .then((resp) => {
           let msg = (
