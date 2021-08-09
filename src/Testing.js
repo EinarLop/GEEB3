@@ -3,6 +3,7 @@ import { base, auth } from './base'
 import useLogin from './hooks/useLogin'
 import { BACKEND_DEV, BACKEND_PROD } from './constants';
 import axios from 'axios';
+import SlideToggle from './components/SlideToggle';
 
 export default function Testing() {
 
@@ -67,6 +68,7 @@ export default function Testing() {
 
     return (
         <div style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'left' }}>
+            <SlideToggle onClick={() => console.log("Clicked slidetoggle")} />
             <input placeholder="email" onChange={handleEmail} style={{ height: '48px', fontSize: '22px', maxWidth: '400px' }} />
             <input placeholder="password" onChange={handlePassword} style={{ height: '48px', fontSize: '22px', maxWidth: '400px' }} />
             <button onClick={registerUser} style={{ width: '56', height: '32px' }}>Create User</button>
