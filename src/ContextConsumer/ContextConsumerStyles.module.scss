@@ -1,0 +1,47 @@
+@import "../_global.scss", "../GlobalStyles/Input.scss",
+  "../GlobalStyles/Select.scss", "../GlobalStyles/Tag.scss",
+  "../GlobalStyles/Button.scss";
+
+.Title {
+    font-size: 4rem;
+    color: $primary; //$primaryT
+    margin: 25px 0;
+    text-align: center;
+}
+
+.SubtitleT {
+    font-size: 18px;
+    color: $secundaryT;
+    letter-spacing: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.SubtitleH {
+    font-size: 18px;
+    color: $secundaryH;
+    letter-spacing: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.SubtitleJ {
+    font-size: 18px;
+    color: $secundaryJ;
+    letter-spacing: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.Global {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 25px;
+    background-color: #1d1d1d;
+}

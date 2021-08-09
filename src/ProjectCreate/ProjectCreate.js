@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import styles from "./ProjectCreateStyles.module.scss";
 import { Redirect } from "react-router-dom";
 import {
@@ -10,6 +10,7 @@ import {
 import { validateTag } from "../Validation/GeneralValidation";
 import { AiOutlineUpload } from "react-icons/ai";
 import axios from "axios";
+import { TutorialContext } from '../App';
 
 function ProjectCreate() {
   const [project, setProject] = useState({
@@ -40,6 +41,7 @@ function ProjectCreate() {
   const [files, setFiles] = useState([]); // array of file objects for uploading
   const [previews, setPreviews] = useState([]); // array for local URL Objects for previewing an image
   const [uploadMsg, setUploadMsg] = useState(); // feedback for image uploader input
+  const [tutorial, setTutorial] = useContext(TutorialContext);
 
   const onFileSubmit = (e) => {
     // adds the selected file to the files array for preloading
@@ -188,6 +190,13 @@ function ProjectCreate() {
       {/* <Header /> */}
       <div className={styles.Global}>
         <h1 className={styles.Title}>Create Project</h1>
+        {tutorial && (
+        <div className={styles.TutorialMood}>
+          <div className={styles.About}>
+            <p className={styles.Subtitle}> Tutorial Mood</p>
+            <p className={styles.Text}> En este apartado podrás crear un proyecto para encontrar un equipo.</p>
+          </div>
+        </div>)}
         <div className={styles.Wrapper}>
           <div className={styles.Column1}>
             <div className={styles.TitleStatusContainer}>

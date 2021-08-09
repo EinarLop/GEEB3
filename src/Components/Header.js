@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./HeaderStyles.module.scss";
 import {HiOutlineViewGridAdd} from 'react-icons/hi';
 import { IoPersonCircleOutline } from "react-icons/io5";
@@ -6,12 +6,14 @@ import {FiBox} from 'react-icons/fi';
 import {BsFolderPlus} from 'react-icons/bs';
 import {ImBooks} from 'react-icons/im';
 import {MdContactMail} from 'react-icons/md';
+import {AiOutlineQuestionCircle} from 'react-icons/ai';
 
 
 import { FaPeopleCarry } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useMediaSize } from "use-media-size";
 import { Link } from "react-router-dom";
+import { TutorialContext } from "../App";
 
 /* Header layout:  Icon, Logo, 'Create', 'Explore', Header is visible to anyone who is logged in.*/
 
@@ -20,6 +22,14 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [visitor, setVisitor] = useState("");
+  const [tutorial, setTutorial] = useContext(TutorialContext); //The variable of the provider context we previously made at app.js
+  console.log(tutorial, setTutorial); // you have to delete this
+
+  const toggleTutorial = (event) => {
+      // change variable to the opposite
+      console.log("Toggle tutorial de", tutorial.toString(), " a: ", (!tutorial).toString()) //delete this
+      setTutorial(tutorial => !tutorial);
+  };
   const handleClick = (event) => {
     setIsOpen(!isOpen);
   };
@@ -105,6 +115,10 @@ export default function Header() {
                   My profile <IoPersonCircleOutline/>
                 </Link>
 
+                <Link  onClick={toggleTutorial} className={styles.TutorialLink}>
+                  About this page <AiOutlineQuestionCircle/>
+                </Link>
+
                 {/* <a className={styles.Links} href="/login">
                   Logout
                 </a> */}
@@ -114,6 +128,9 @@ export default function Header() {
         </div>
       ) : (
           <div className={styles.NavContainer}>
+            <Link  onClick={toggleTutorial} className={styles.TutorialLink}>
+              About <AiOutlineQuestionCircle/>
+            </Link>
             <Link to="/oprojects" className={styles.Links}>
               Find Projects <HiOutlineViewGridAdd/>
             </Link>

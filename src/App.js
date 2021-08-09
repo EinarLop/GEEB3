@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";  //Se añadió el useState para el context
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Login/Login";
@@ -17,11 +17,19 @@ import ImageUploader from "./Components/ImageUploader";
 import Profile from "./Profile/Profile";
 import EditProfile from "./EditProfile/EditProfile.js";
 import MyApplication from "./Components/MyApplications.js";
+import ContextConsumer from './ContextConsumer/ContextConsumer'; //Añadimos la ruta
+
 //350x34
 //404x44
 
+export const TutorialContext = React.createContext();   // ya viene con un provider incluido
+
 function App() {
+
+  const [tutorial, setTutorial] = useState(false);
+
   return (
+    <TutorialContext.Provider value={[tutorial, setTutorial]}>
     <div>
       {
         <Router>
@@ -39,9 +47,11 @@ function App() {
           <Route path="/profile/:id" component={Profile} />
           <Route path="/editprofile" component={EditProfile} />
           <Route path="/myapplication/:id" component={MyApplication} />
+          <Route path="/karen" component={ContextConsumer} /> {/*Creamos la ruta*/}
         </Router>
       }
     </div>
+    </TutorialContext.Provider>
   );
 }
 

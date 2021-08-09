@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./CreateSProjectStyles.module.scss";
 import { Redirect } from "react-router-dom";
 import { AiOutlineUpload } from "react-icons/ai";
@@ -9,6 +9,7 @@ import {
 import { validateTag } from "../Validation/GeneralValidation";
 import axios from "axios";
 import { base } from "../base";
+import { TutorialContext } from '../App';
 
 function CreateSProject() {
   const [project, setProject] = useState({
@@ -26,6 +27,7 @@ function CreateSProject() {
   const [status, setStatus] = useState();
   const [redirect, setRedirect] = useState(false);
   const [newId, setNewId] = useState("");
+  const [tutorial, setTutorial] = useContext(TutorialContext);
 
   const [messages, setMessages] = useState({
     errorTitle: "",
@@ -175,6 +177,13 @@ function CreateSProject() {
       <div className={styles.WrapperTitle}>
         <p className={styles.Title}>New Portfolio Project</p>
       </div>
+      {tutorial && (
+        <div className={styles.TutorialMood}>
+          <div className={styles.About}>
+            <p className={styles.Subtitle}> Tutorial Mood</p>
+            <p className={styles.Text}> En este apartado podrás crear un proyecto para encontrar un equipo.</p>
+          </div>
+        </div>)}
       <div className={styles.Wrapper}>
         <div className={styles.Box1}>
           <label className={styles.Label}>Title</label>

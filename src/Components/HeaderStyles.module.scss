@@ -95,6 +95,25 @@
     font-weight: 500;
   }
 }
+.TutorialLink {
+  color: azure;
+  text-decoration: none;
+  width: auto;
+  font-size: 20px;
+  text-align: center;
+
+  margin-left: 15px;
+  &:hover {
+    font-weight: 500;
+    //color: $secundaryH;
+  }
+
+  &.Title {
+    color: $primary;
+    font-size: 38px;
+    font-weight: 500;
+  }
+}
 .Menu {
   position: absolute;
   width: 100%;
@@ -130,6 +149,12 @@
     text-align: center;
     margin-bottom: 25px;
   }
+  .TutotrialLink {
+    margin-bottom: 25px;
+    width: auto;
+    text-align: center;
+    margin-bottom: 25px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -144,6 +169,12 @@
   }
 
   .Links {
+    margin-bottom: 25px;
+    width: auto;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .TutotrialLink {
     margin-bottom: 25px;
     width: auto;
     text-align: center;

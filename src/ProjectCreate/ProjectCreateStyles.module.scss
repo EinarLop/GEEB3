@@ -10,6 +10,70 @@
   align-items: center;
   //padding: 25px;
 }
+.Subtitle {
+  font-size: 18px;
+  color: $secundaryH;
+  letter-spacing: 5px;
+  margin: 15px 0px 15px 0px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+.Text{
+  font-size: 1.8rem;
+  color: $secundaryJ;
+  text-align: center;
+}
+.TutorialMood {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.About {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid $secundaryH;
+  border-radius: 15px;
+  padding: 0px 0px 15px 0px;
+  margin: 30px 0px 30px 0px;
+}
+.MainPoints {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  //border: 2px solid red;
+  //border-radius: 15px;
+  //padding: 0px 0px 15px 0px;
+  //margin: 0px 0px 30px 0px;
+}
+.Point {
+  width: 30%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  //align-items: center;
+  border: 2px solid $secundaryH;
+  border-radius: 15px;
+  padding: 1px 1px 1px 1px;
+  margin: 0px 0px 30px 0px;
+}
+.Arrow {
+  position: absolute;
+  width: 70px;
+  height: auto;
+  color: $secundaryH;
+  transform: rotate(180deg);
+  top: 820px;
+  right: 150px;
+}
+
 
 .Input {
   @include NewInput;

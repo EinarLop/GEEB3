@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "react-tabs/style/react-tabs.css";
 import styles from "./ProjectFeedStyles.module.scss";
 import axios from "axios";
+
+import { TutorialContext } from '../App';
+import {BsArrow90DegRight} from "react-icons/bs";
 
 import Oproject from "../Components/Oproject";
 
 function ProjectFeed() {
   const [oprojects, setOprojects] = useState([]);
+  const [tutorial, setTutorial] = useContext(TutorialContext);
 
   useEffect(() => {
     axios
@@ -31,6 +35,29 @@ function ProjectFeed() {
   return (
     <div className={styles.Global}>
       <p className={styles.Title}> Explore Team Projects</p>
+      {tutorial && (
+      <div className={styles.TutorialMood}>
+        <div className={styles.About}>
+          <p className={styles.Subtitle}> Tutorial Mood</p>
+          <p className={styles.Text}> En este espacio encontrarás proyectos de muchas áreas a los que puedes aplicar.</p>
+        </div>
+        <div className={styles.MainPoints}>
+          <div className={styles.Point}>
+            <p className={styles.Subtitle}>1 Overview</p>
+            <p className={styles.Text}>Conoce sobre el proyecto, si estás interesadx da click en el botón de more info.</p>
+          </div>
+          <div className={styles.Point}>
+            <p className={styles.Subtitle}>2 Highlights</p>
+            <p className={styles.Text}>Lo más importate que debes saber del proyecto.</p>
+          </div>
+          <div className={styles.Point}>
+            <p className={styles.Subtitle}>3 Tags & Skills</p>
+            <p className={styles.Text}>Cuáles son los temas del proycto y que cualidades o conocimientos debes tener para trabajar en él.</p>
+          </div>
+        </div>
+        {/*<BsArrow90DegRight className={styles.Arrow}/>*/}
+
+      </div>)}
       {/*---Tag Filter Bar component here---*
             <input
         type="button"
@@ -38,10 +65,9 @@ function ProjectFeed() {
         className={styles.Button}
         onClick={myProjects}
       />*/}
-
-      {oprojects.map((project, index) => (
-        <Oproject project={project} />
-      ))}
+        {oprojects.map((project, index) => (
+          <Oproject project={project} />
+        ))}
     </div>
   );
 }
