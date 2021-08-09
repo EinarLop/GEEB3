@@ -97,13 +97,15 @@ function CreateSProject({ loginStatus }) {
 
   const handleOnSubmit = async () => {
     console.log("Creating an Sproject...");
-    let userid;
 
     const idToken = await auth.currentUser?.getIdToken(true);
     if (!idToken) return;
+
     const authTokenHeader = {
       'authorization': `Bearer ${idToken}`,
     };
+
+    let userid;
 
     try {
       const response = await axios.get(BACKEND_DEV + '/users/get-my-id', { headers: authTokenHeader });
@@ -112,13 +114,20 @@ function CreateSProject({ loginStatus }) {
 
     } catch (error) {
       console.error(error);
+      let msg = (
+        <p className={`${styles.ErrorMsg}`}>
+          Error: user was not found.
+        </p>
+      );
+      setStatus(msg);
     }
+
 
     let validation = sprojectValidation(project, tags, links);
 
     if (validation.ok) {
 
-      let imageurls = await processFiles(); // get array of image URLs from saving to Storage
+      let imageurls = await processFiles();
       if (imageurls.length == 0) imageurls = undefined;
 
       const Project = {
@@ -175,25 +184,34 @@ function CreateSProject({ loginStatus }) {
   };
 
   const processFiles = async () => {
-    // Saves images to Firebase Storage and returns the Download URLs in an Array
-    console.log("Processing image files:");
+    // Uploads images to Firebase Storage and returns the Download URLs in an Array
+    console.log("Uploading files to storage...");
 
     let aux = [];
     const storageRef = base.storage().ref();
 
+    // Loop over state's files array
     for (let i = 0; i < files.length; i++) {
       console.log("Storing:", files[i].name);
 
       let fileRef = storageRef.child(files[i].name);
-      await fileRef.put(files[i]);
-      let url = await fileRef.getDownloadURL();
-      aux.push(url);
+      try {
+        await fileRef.put(files[i]);
+        let url = await fileRef.getDownloadURL();
+        aux.push(url);
+
+      } catch (error) {
+        console.error(error);
+        console.error("Uploaded:", aux.length, "Failed: ", files.length - aux.length);
+        return aux;
+      }
 
     }
 
-    console.log("Total stored files = ", aux);
+    console.log("Total stored files = ", aux.length);
     return aux;
   };
+
 
   return redirect ? (
     <Redirect to={`/sprojects/${newId}`} />
