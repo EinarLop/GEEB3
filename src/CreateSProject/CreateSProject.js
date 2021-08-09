@@ -37,7 +37,7 @@ function CreateSProject({ loginStatus }) {
   });
 
   const onFileSubmit = (e) => {
-    // adds the selected file to the files array for preloading
+    // Adds the selected file to the files array for preloading
     e.preventDefault();
     let f = e.target.file.files[0];
     let fpreview = URL.createObjectURL(f);
@@ -105,28 +105,9 @@ function CreateSProject({ loginStatus }) {
       'authorization': `Bearer ${idToken}`,
     };
 
-    let userid;
-
-    try {
-      const response = await axios.get(BACKEND_DEV + '/users/get-my-id', { headers: authTokenHeader });
-
-      userid = response.data._id;
-
-    } catch (error) {
-      console.error(error);
-      let msg = (
-        <p className={`${styles.ErrorMsg}`}>
-          Error: user was not found.
-        </p>
-      );
-      setStatus(msg);
-    }
-
-
     let validation = sprojectValidation(project, tags, links);
-
     if (validation.ok) {
-
+      console.log("Input Validation returned OK")
       let imageurls = await processFiles();
       if (imageurls.length == 0) imageurls = undefined;
 
@@ -136,11 +117,11 @@ function CreateSProject({ loginStatus }) {
         tags,
         links,
         imageurls,
-        userid,
       };
 
-      console.log("Attempt to save sproject:");
+      console.log("Saving new sproject:")
       console.log(JSON.stringify(Project));
+
       axios
         .post("http://localhost:3010/sprojects/create", Project, {
           headers: authTokenHeader
@@ -153,33 +134,34 @@ function CreateSProject({ loginStatus }) {
           );
           setStatus(msg);
           console.log("Saved oproject and images succesfully", resp);
-          //setNewId(newDoc._id);
           setTimeout(() => setRedirect(true), 2000);
         })
         .catch((err) => {
           let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Err}`}>
-              Something went wrong. Please try again
+            <p className={styles.ErrorMsg}>
+              Something went wrong: {err.message}
             </p>
           );
           setStatus(msg);
-          console.log("Could not save sproject");
-          console.log(err);
+          console.error(err);
         });
-      // else there are Errors in Validation
+
     } else {
+      console.log("Validation not OK");
       setMessages({
         errorTitle: validation.errorTitle,
         errorDescription: validation.errorDescription,
         errorTags: validation.errorTags,
         errorLinks: validation.errorLinks,
       });
+
       let msg = (
-        <p className={`${styles.StatusMsg} ${styles.Err}`}>
+        <p className={styles.ErrorMsg}>
           Please check your inputs!
         </p>
       );
       setStatus(msg);
+
     }
   };
 
