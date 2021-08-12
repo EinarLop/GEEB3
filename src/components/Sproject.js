@@ -1,3 +1,4 @@
+/* SProject Card */
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -5,12 +6,16 @@ import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
 import "react-tabs/style/react-tabs.css";
 import styles from "./SprojectStyles.module.scss";
 
-export default function Sproject(props) {
+const Sproject = (props) => {
+
   const project = props.project;
   const [redirect, setRedirect] = useState(false);
+
   const onClickInfo = () => {
     setRedirect(true);
   };
+
+
   return redirect ? (
     <Redirect to={`/portfolio/${project._id}`} />
   ) : (
@@ -36,7 +41,7 @@ export default function Sproject(props) {
             <div className={styles.LinksSpace}>
               {project.links.map((link) => (
                 <li>{link}</li>
-                //<p>ooko</p>
+
               ))}
             </div>
           </div>
@@ -94,3 +99,6 @@ export default function Sproject(props) {
     </Tabs>
   );
 }
+
+
+export default Sproject

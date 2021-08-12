@@ -1,7 +1,9 @@
+// TODO: FIX DIRECT GET REQUEST TO PROFILE/ME
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileStyles.module.scss";
 import axios from "axios";
 import ImageOne from "./Images/ImageOne.svg";
+import useLogin from '../hooks/useLogin'
 import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
@@ -22,17 +24,14 @@ const Profile = (props) => {
     bio: "Loading my cool description...",
   });
 
-  const { loginStatus } = props;
 
   const [isOwner, setIsOwner] = useState(false);
-  const [redirect, setRedirect] = useState(!loginStatus);
+  const [redirect, setRedirect] = useState(false);
 
   const { id } = props.match.params; // Mongo ObjectID
+  const { loginStatus } = props;
 
   useEffect(() => {
-
-    if (!loginStatus) return;
-    console.log("Logged in!");
 
     if (id === "null") {
       console.log("Username id not found");
@@ -40,17 +39,18 @@ const Profile = (props) => {
     }
 
     if (id === "me") {
-
+      console.log("Id is 'me'");
       console.log("Fetching your own profile...");
       (async () => {
-        const user_email = auth.currentUser.email;
 
         try {
           const idToken = await auth.currentUser?.getIdToken(true); // genera un JWT
-          console.log("idToken fetched");
+
           const authTokenHeader = {
             "authorization": `Bearer ${idToken}`,
           };
+
+          const user_email = auth.currentUser.email;
 
           console.log("idToken created")
 
@@ -99,9 +99,7 @@ const Profile = (props) => {
         });
 
     })();
-  }, [id]);
-
-
+  }, [id, loginStatus]);
 
   const logOut = async () => {
     try {
