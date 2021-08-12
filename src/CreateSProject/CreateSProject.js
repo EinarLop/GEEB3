@@ -98,13 +98,6 @@ function CreateSProject({ loginStatus }) {
   const handleOnSubmit = async () => {
     console.log("Creating an Sproject...");
 
-    const idToken = await auth.currentUser?.getIdToken(true);
-    if (!idToken) return;
-
-    const authTokenHeader = {
-      'authorization': `Bearer ${idToken}`,
-    };
-
     let validation = sprojectValidation(project, tags, links);
     if (validation.ok) {
       console.log("Input Validation returned OK")
@@ -117,6 +110,13 @@ function CreateSProject({ loginStatus }) {
         tags,
         links,
         imageurls,
+      };
+
+      const idToken = await auth.currentUser?.getIdToken(true);
+      if (!idToken) return;
+
+      const authTokenHeader = {
+        'authorization': `Bearer ${idToken}`,
       };
 
       console.log("Saving new sproject:")

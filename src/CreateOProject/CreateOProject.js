@@ -10,8 +10,11 @@ import {
 import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
 import { AiOutlineUpload } from "react-icons/ai";
+import { BACKEND_DEV } from '../constants'
+import { auth } from '../base'
 
 function CreateOProject({ loginStatus }) {
+
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -21,12 +24,14 @@ function CreateOProject({ loginStatus }) {
     currentSkill: "",
     currentProfile: "",
   });
+
   const [highlights, setHighlights] = useState([]);
   const [tags, setTags] = useState([]);
   const [profiles, setProfiles] = useState([]);
   const [skills, setSkills] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [newId, setNewId] = useState("");
+
   const [message, setMessage] = useState({
     errorTitle: "",
     errorDescription: "",
@@ -37,6 +42,7 @@ function CreateOProject({ loginStatus }) {
     success: "",
     redirect: false,
   });
+
   const [files, setFiles] = useState([]); // array of file objects for uploading
   const [previews, setPreviews] = useState([]); // array for local URL Objects for previewing an image
   const [uploadMsg, setUploadMsg] = useState(); // feedback for image uploader input
@@ -49,8 +55,8 @@ function CreateOProject({ loginStatus }) {
     setPreviews((previews) => [...previews, fpreview]);
     console.log("Added", f);
     setFiles((files) => [...files, f]);
-    setUploadMsg(<p style={{ color: "#9ccc65" }}>Added file: {f.name}</p>);
-    e.target.file.value = null; // reset the input
+    setUploadMsg(`Added file: ${f.name}`);
+    e.target.file.value = null;
   };
 
   const handleOnChange = (event) => {
@@ -59,7 +65,7 @@ function CreateOProject({ loginStatus }) {
       [event.target.name]: event.target.value,
     });
   };
-  //onAdd ******************************************************************************************************************************
+
   const onAddTag = (event) => {
     setMessage({ ...message, errorTag: validateTag(tags, project.currentTag) });
     if (validateTag(tags, project.currentTag) == "") {
@@ -70,6 +76,7 @@ function CreateOProject({ loginStatus }) {
       });
     }
   };
+
   const onAddSkill = (event) => {
     setMessage({
       ...message,
@@ -97,6 +104,7 @@ function CreateOProject({ loginStatus }) {
       });
     }
   };
+
   const onAddProfile = (event) => {
     setMessage({
       ...message,
@@ -110,7 +118,7 @@ function CreateOProject({ loginStatus }) {
       });
     }
   };
-  //onDelete ******************************************************************************************************************************
+
   const onDeleteHighlight = (index) => {
     setHighlights(highlights.filter((highlight, i) => i !== index));
   };
@@ -129,8 +137,9 @@ function CreateOProject({ loginStatus }) {
   const onDeleteProfile = (index) => {
     setProfiles(profiles.filter((profile, i) => i !== index));
   };
-  //onSubmit ******************************************************************************************************************************
-  const handleOnSubmit = (event) => {
+
+  const handleOnSubmit = async (event) => {
+
     let finalmessages = validateAll(
       project,
       tags,
@@ -138,6 +147,7 @@ function CreateOProject({ loginStatus }) {
       highlights,
       profiles
     );
+
     setMessage({
       errorTitle: finalmessages.errorTitle,
       errorDescription: finalmessages.errorDescription,
@@ -149,7 +159,9 @@ function CreateOProject({ loginStatus }) {
       success: finalmessages.success,
     });
 
+
     if (message.success == "") {
+      // Validation Ok
       const Project = {
         title: project.title,
         description: project.description,
@@ -160,19 +172,26 @@ function CreateOProject({ loginStatus }) {
         skills: skills,
       };
 
+      const idToken = await auth.currentUser?.getIdToken(true);
+      if (!idToken) return;
+
+      const authTokenHeader = {
+        'authorization': `Bearer ${idToken}`,
+      };
+
       axios
-        .post("http://localhost:3010/oprojects/create", Project, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
+        .post(BACKEND_DEV + "/oprojects/create", Project, {
+          headers: authTokenHeader,
         })
         .then((resp) => {
           // the backend responds with the new project's _id
-          setNewId(resp.data);
+          const oprojectid = resp.data._id;
+          console.log("New oproject id",oprojectid);
+          setNewId(oprojectid);
           setMessage({ ...message, success: "Project created succesfully!" });
           setTimeout(() => setRedirect(true), 2000);
         });
+
     } else {
       setMessage({
         ...message,
