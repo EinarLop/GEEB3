@@ -123,7 +123,7 @@ function CreateSProject({ loginStatus }) {
       console.log(JSON.stringify(Project));
 
       axios
-        .post("http://localhost:3010/sprojects/create", Project, {
+        .post(BACKEND_DEV + "/sprojects/create", Project, {
           headers: authTokenHeader
         })
         .then((resp) => {
@@ -261,7 +261,7 @@ function CreateSProject({ loginStatus }) {
           <div className={styles.TagButtonContainer}>
             <input
               className={styles.TagInput}
-              placeholder="Programming, Marketing, etc..."
+              placeholder="https://yourproject.com/awesome"
               name="currentLink"
               autoComplete="off"
               onChange={handleOnChange}
