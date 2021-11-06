@@ -167,3 +167,6 @@ Once you have it you can repeat this steps.
 3. Make a pull request
 
 Node version 12.18.4
+
+Lines of Code
+![Lines of code](https://tokei.rs/b1/github/EinarLop/GEEB3?category=code)
