@@ -23,11 +23,6 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  /* useEffect(() => {
-    let geebId = localStorage.getItem("geebId");
-    console.log("geebId:", geebId);
-    setVisitor(geebId);
-  }); */
 
   const { loginStatus } = useLogin();
 

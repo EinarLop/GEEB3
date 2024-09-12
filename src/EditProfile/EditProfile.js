@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./EditProfileStyles.module.scss";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { auth } from '../base';
 import {
   validateProfile,
-  validateTags,
   validateInputTag,
   validateLink,
 } from "../validation/EditProfileValidation";
-import pic1 from "./Images/pic3.svg";
 import { BsLink45Deg } from "react-icons/bs";
 import { BACKEND_DEV } from "../constants";
 
@@ -69,23 +67,28 @@ export default function EditProfile({ loginStatus }) {
     axios.post(BACKEND_DEV + "/users/by-email/", { email: email }, { headers: authTokenHeader })
       .then(response => {
         const user = response.data;
+        const { name, lastname, bio, email, college, semester, major } = user;
+
+        console.log("Name and lastname", name, lastname);
         console.dir(user);
         console.log("Setting form...");
 
         setForm({
           ...form,
-          name: fullname[0],
-          lastname: fullname[1],
-          bio: user.bio,
-          email: user.email,
-          major: user.major,
-          college: user.college,
-          semester: user.semester,
+          name,
+          lastname,
+          bio,
+          email,
+          college,
+          major: major ? major : '',
+          semester: semester ? semester : 1,
         });
         setMastered(user.mastered);
         setLearning(user.learning);
         setWant(user.want);
         setLinks(user.links);
+
+        setUserId(user._id);
 
       })
       .catch(error => {
@@ -168,20 +171,19 @@ export default function EditProfile({ loginStatus }) {
   };
 
   const handleOnChange = (e) => {
-    // generic handler for our inputs
-    console.dir(form);
     setStatus("");
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value);
+    console.log(e.target.name, ":", e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     console.log("Submitting:");
     const User = {
-      fullname: form.name + " " + form.lastname,
+      name: form.name,
+      lastname: form.lastname,
       email: form.email,
       bio: form.bio,
       college: form.college,
@@ -205,13 +207,18 @@ export default function EditProfile({ loginStatus }) {
 
       console.log("IMPLEMENT UPDATE BY EMAIL");
 
-      return;
       console.log("Submitting post update request for", userId);
+
+      const idToken = await auth.currentUser?.getIdToken(true);
+
+      const authTokenHeader = {
+        "authorization": `Bearer ${idToken}`,
+      };
+
+
       axios
-        .put(`http://localhost:3010/users/update/${userId}`, User, {
-          headers: {
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
+        .put(BACKEND_DEV + '/users/update/' + userId, User, {
+          headers: authTokenHeader,
         })
         .then((result) => {
           console.dir(result);

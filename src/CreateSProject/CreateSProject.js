@@ -6,11 +6,12 @@ import {
   sprojectValidation,
   validateLink,
 } from "../validation/CreateSProjectValidation";
+import { BACKEND_DEV } from '../constants'
 import { validateTag } from "../validation/GeneralValidation";
 import axios from "axios";
-import { base } from "../base";
+import { auth, base } from "../base";
 
-function CreateSProject() {
+function CreateSProject({ loginStatus }) {
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -36,7 +37,7 @@ function CreateSProject() {
   });
 
   const onFileSubmit = (e) => {
-    // adds the selected file to the files array for preloading
+    // Adds the selected file to the files array for preloading
     e.preventDefault();
     let f = e.target.file.files[0];
     let fpreview = URL.createObjectURL(f);
@@ -47,13 +48,15 @@ function CreateSProject() {
     e.target.file.value = null; // reset the input
   };
 
+
   const handleOnChange = (event) => {
     setProject({
       ...project,
       [event.target.name]: event.target.value,
     });
   };
-  //onADD ******************************************************************************************************************************
+
+
   const onAddTag = (e) => {
     let validTag = validateTag(tags, project.currentTag);
     setMessages({ ...messages, errorTags: validTag });
@@ -66,6 +69,7 @@ function CreateSProject() {
     }
   };
 
+
   const onAddLink = (e) => {
     let validLinks = validateLink(links, project.currentLink);
     setMessages({ ...messages, errorLinks: validLinks });
@@ -77,7 +81,8 @@ function CreateSProject() {
       });
     }
   };
-  //On delete ******************************************************************************************************************************
+
+
   const onDeleteTag = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
@@ -92,30 +97,34 @@ function CreateSProject() {
 
   const handleOnSubmit = async () => {
     console.log("Creating an Sproject...");
-    let validation = sprojectValidation(project, tags, links);
 
+    let validation = sprojectValidation(project, tags, links);
     if (validation.ok) {
-      // Process files, then send create Sproject POST request. ** should save sproject first, then images??
-      let imageurls = await processFiles(); // get array of image URLs from saving to Storage
+      console.log("Input Validation returned OK")
+      let imageurls = await processFiles();
       if (imageurls.length == 0) imageurls = undefined;
 
       const Project = {
         title: project.title,
         description: project.description,
-        // collaborators:[],
         tags,
         links,
         imageurls,
       };
 
-      console.log("Attempt to save sproject:");
+      const idToken = await auth.currentUser?.getIdToken(true);
+      if (!idToken) return;
+
+      const authTokenHeader = {
+        'authorization': `Bearer ${idToken}`,
+      };
+
+      console.log("Saving new sproject:")
       console.log(JSON.stringify(Project));
+
       axios
-        .post("http://localhost:3010/sprojects/create", Project, {
-          headers: {
-            // Send the JWT along in the request header
-            "auth-token": window.localStorage.getItem("auth-token"),
-          },
+        .post(BACKEND_DEV + "/sprojects/create", Project, {
+          headers: authTokenHeader
         })
         .then((resp) => {
           let msg = (
@@ -125,56 +134,66 @@ function CreateSProject() {
           );
           setStatus(msg);
           console.log("Saved oproject and images succesfully", resp);
-          //setNewId(newDoc._id);
           setTimeout(() => setRedirect(true), 2000);
         })
         .catch((err) => {
           let msg = (
-            <p className={`${styles.StatusMsg} ${styles.Err}`}>
-              Something went wrong. Please try again
+            <p className={styles.ErrorMsg}>
+              Something went wrong: {err.message}
             </p>
           );
           setStatus(msg);
-          console.log("Could not save sproject");
-          console.log(err);
+          console.error(err);
         });
-      // else there are Errors in Validation
+
     } else {
+      console.log("Validation not OK");
       setMessages({
         errorTitle: validation.errorTitle,
         errorDescription: validation.errorDescription,
         errorTags: validation.errorTags,
         errorLinks: validation.errorLinks,
       });
+
       let msg = (
-        <p className={`${styles.StatusMsg} ${styles.Err}`}>
+        <p className={styles.ErrorMsg}>
           Please check your inputs!
         </p>
       );
       setStatus(msg);
+
     }
   };
 
   const processFiles = async () => {
-    // Saves images to Firebase Storage and returns the Download URLs in an Array
-    console.log("Processing image files:");
+    // Uploads images to Firebase Storage and returns the Download URLs in an Array
+    console.log("Uploading files to storage...");
 
     let aux = [];
     const storageRef = base.storage().ref();
 
+    // Loop over state's files array
     for (let i = 0; i < files.length; i++) {
       console.log("Storing:", files[i].name);
 
       let fileRef = storageRef.child(files[i].name);
-      await fileRef.put(files[i]);
-      let url = await fileRef.getDownloadURL();
-      aux.push(url);
+      try {
+        await fileRef.put(files[i]);
+        let url = await fileRef.getDownloadURL();
+        aux.push(url);
+
+      } catch (error) {
+        console.error(error);
+        console.error("Uploaded:", aux.length, "Failed: ", files.length - aux.length);
+        return aux;
+      }
 
     }
 
-    console.log("Total stored files = ", aux);
+    console.log("Total stored files = ", aux.length);
     return aux;
   };
+
 
   return redirect ? (
     <Redirect to={`/sprojects/${newId}`} />
@@ -242,7 +261,7 @@ function CreateSProject() {
           <div className={styles.TagButtonContainer}>
             <input
               className={styles.TagInput}
-              placeholder="Programming, Marketing, etc..."
+              placeholder="https://yourproject.com/awesome"
               name="currentLink"
               autoComplete="off"
               onChange={handleOnChange}

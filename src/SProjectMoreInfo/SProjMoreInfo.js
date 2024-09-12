@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BsLink45Deg, BsFillFolderSymlinkFill } from "react-icons/bs";
 import { IoMdPeople, IoMdImages } from "react-icons/io";
 import { FaSlackHash } from "react-icons/fa";
+import { BACKEND_DEV } from '../constants';
 import styles from "./SProjMoreInfoStyles.module.scss";
 import axios from "axios";
 
@@ -16,17 +17,13 @@ export default function SProjectMoreInfo(props) {
     links: ["Link"],
     imageurls: ["Loading Images..."],
   });
-  const [isOwner, setIsOwner] = useState(false);
+
   useEffect(() => {
     axios
-      .get("http://localhost:3010/sprojects/" + props.match.params.id, {
-        headers: {
-          "auth-token": window.localStorage.getItem("auth-token"),
-        },
-      })
+      .get(BACKEND_DEV + '/sprojects/' + props.match.params.id)
       .then((response) => {
-        setIsOwner(response.data.isOwner);
-        setProject(response.data.project);
+        const project = response.data;
+        setProject(project);
       });
   }, []);
 

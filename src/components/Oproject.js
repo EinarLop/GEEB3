@@ -1,3 +1,4 @@
+/* OProject Card */
 import React from "react";
 import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -7,7 +8,7 @@ import { AiFillCheckSquare, AiFillStar } from "react-icons/ai";
 
 /*Component for an Oproject Card*/
 
-export default function Oproject(props) {
+const Oproject = (props) => {
   const project = props.project;
   const ownerUsername = project.userid.username;
 
@@ -96,3 +97,6 @@ export default function Oproject(props) {
     </Tabs>
   );
 }
+
+
+export default Oproject
